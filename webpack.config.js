@@ -1,5 +1,8 @@
+'use strict'
 var webpack = require('webpack');
 
+//enviroment variable
+process.env.NODE_ENV = process.env.NODE_ENV || 'development';
 
 module.exports  ={
   //webpack reads our raw source from here
@@ -20,7 +23,8 @@ module.exports  ={
         use: [{
           loader: 'babel-loader',
           options: {presets: ['react', 'es2015', 'stage-0']}
-        }]
+        }],
+        exclude: /(node_modules)/
       },
       {
         test: /\.(sass|scss)$/, //check for all sass files
@@ -38,9 +42,15 @@ module.exports  ={
       "node_modules",
       "./src/components"
     ],
+    alias: {
+      src:'src',
+      applicationStyles: "src/styles/app.scss"
+    },
     extensions: [".js", ".jsx"],
   },
   devServer: {
     contentBase: __dirname + '/src',
-  }
+  },
+  /*only load the source maps if not production*/
+ devtool: process.env.NODE_ENV === 'production' ? undefined : 'cheap-module-eval-source-map'
 };
