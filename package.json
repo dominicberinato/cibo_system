@@ -20,5 +20,8 @@
   "bugs": {
     "url": "https://github.com/zacck/cibo_system/issues"
   },
-  "homepage": "https://github.com/zacck/cibo_system#readme"
+  "homepage": "https://github.com/zacck/cibo_system#readme",
+  "dependencies": {
+    "webpack": "2.1.0-beta.25"
+  }
 }
