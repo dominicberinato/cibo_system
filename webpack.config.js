@@ -9,7 +9,7 @@ module.exports  ={
   },
   //the transpiled output is here
   output: {
-    path: __dirname + '/dist',
+    path: __dirname + '/dist/assets',
     filename: '[name].bundle.js',
     publicPath: '/assets', // for the dev server
   },
@@ -19,7 +19,7 @@ module.exports  ={
         test: /\.(js|jsx)$/, //check for all js files
         use: [{
           loader: 'babel-loader',
-          options: {presets: ['es2015', 'react', 'stage-0']}
+          options: {presets: ['react', 'es2015', 'stage-0']}
         }]
       },
       {
@@ -32,12 +32,13 @@ module.exports  ={
       },
     ]
   },
-  //add resolve clause
+  //finding app modules
   resolve: {
     modules: [
-      'node_modules',
-      '.src/components',
-    ]
+      "node_modules",
+      "./src/components"
+    ],
+    extensions: [".js", ".jsx"],
   },
   devServer: {
     contentBase: __dirname + '/src',
