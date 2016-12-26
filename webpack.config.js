@@ -2,13 +2,16 @@ var webpack = require('webpack');
 
 
 module.exports  ={
+  //webpack reads our raw source from here
   context: __dirname + '/src', //root of our code files
   entry : {
-    app: './app.js',
+    app: './app.jsx',
   },
+  //the transpiled output is here
   output: {
     path: __dirname + '/dist',
     filename: '[name].bundle.js',
+    publicPath: '/assets', // for the dev server
   },
   module: {
     rules: [
@@ -27,6 +30,13 @@ module.exports  ={
           'sass-loader'
         ]
       },
+    ]
+  },
+  //add resolve clause
+  resolve: {
+    modules: [
+      'node_modules',
+      '.src/components',
     ]
   },
   devServer: {
