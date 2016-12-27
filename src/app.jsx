@@ -12,15 +12,17 @@ import 'script!jquery'
 import 'script!what-input'
 import 'script!foundation-sites'
 
+require('style!css!sass!./styles/app.scss')
+
  ReactDOM.render(
-   <div>
-     <div>
+   <div className="row">
+     <div className="columns large-4 medium-4 small-12">
         <p>Cibo through jsx</p>
     </div>
-     <div>
+     <div  className="columns large-4 medium-4 small-12">
        <p>Cibo through jsx</p>
      </div>
-     <div>
+     <div  className="columns large-4 medium-4 small-12">
        <p>Cibo through jsx</p>
      </div>
    </div>,

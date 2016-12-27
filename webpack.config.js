@@ -7,8 +7,9 @@ process.env.NODE_ENV = process.env.NODE_ENV || 'development';
 module.exports  ={
   //webpack reads our raw source from here
   context: __dirname + '/src', //root of our code files
-  entry : {
-    jquery: 'jquery',
+  entry: {
+    jquery: 'script!jquery/dist/jquery.min.js',
+    foundation: 'script!foundation-sites/dist/foundation.min.js',
     app: './app.jsx'
   },
   externals: {
@@ -38,14 +39,6 @@ module.exports  ={
         }],
         exclude: /(node_modules)/
       },
-      {
-        test: /\.(sass|scss)$/, //check for all sass files
-        use: [
-          'style-loader',
-          'css-loader',
-          'sass-loader'
-        ]
-      },
     ]
   },
   //finding app modules
@@ -56,7 +49,6 @@ module.exports  ={
     ],
     alias: {
       src:'src',
-      applicationStyles: "src/styles/app.scss",
     },
     extensions: [".js", ".jsx"],
   },
