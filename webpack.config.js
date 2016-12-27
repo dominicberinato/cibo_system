@@ -8,8 +8,25 @@ module.exports  ={
   //webpack reads our raw source from here
   context: __dirname + '/src', //root of our code files
   entry : {
-    app: './app.jsx',
+    jquery: 'script!jquery/dist/jquery.min.js',
+    foundation: 'script!foundation-sites/dist/foundation.min.js',
+    app: './app.jsx'
   },
+  //configure global imports
+  externals: {
+    jquery: 'jQuery'
+  },
+  plugins: [
+    new webpack.ProvidePlugin({
+      '$' : 'jquery',
+      'jQuery' : 'jquery'
+    }),
+    new webpack.DefinePlugin({
+      'process.env' : {
+        NODE_ENV: JSON.stringify(process.env.NODE_ENV),
+      }
+    })
+  ],
   //the transpiled output is here
   output: {
     path: __dirname + '/dist/assets',
