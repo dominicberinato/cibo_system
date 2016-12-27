@@ -8,9 +8,11 @@ module.exports  ={
   //webpack reads our raw source from here
   context: __dirname + '/src', //root of our code files
   entry : {
-    vendor: ['script!jquery/dist/jquery.min.js',
-    'script!foundation-sites/dist/foundation.min.js'],
+    jquery: 'jquery',
     app: './app.jsx'
+  },
+  externals: {
+    jQuery: 'jQuery'
   },
   //configure global imports
   plugins: [
@@ -18,7 +20,7 @@ module.exports  ={
       'process.env' : {
         NODE_ENV: JSON.stringify(process.env.NODE_ENV),
       }
-    })
+    }),
   ],
   //the transpiled output is here
   output: {
@@ -54,7 +56,7 @@ module.exports  ={
     ],
     alias: {
       src:'src',
-      applicationStyles: "src/styles/app.scss"
+      applicationStyles: "src/styles/app.scss",
     },
     extensions: [".js", ".jsx"],
   },
