@@ -4,7 +4,9 @@
   "description": "This is the property management system for cibo by Launch Design",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "NODE_ENV=test karma start",
+    "start": "node server.js",
+    "postinstall": "webpack -p"
   },
   "repository": {
     "type": "git",
@@ -28,6 +30,7 @@
     "babel-preset-react": "^6.16.0",
     "babel-preset-stage-0": "^6.16.0",
     "css-loader": "^0.26.1",
+    "express": "^4.14.0",
     "node-sass": "^4.1.1",
     "react": "^15.4.1",
     "react-dom": "^15.4.1",
