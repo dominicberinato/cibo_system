@@ -8,8 +8,6 @@ module.exports  ={
   //webpack reads our raw source from here
   context: __dirname + '/src', //root of our code files
   entry: {
-    jquery: 'script!jquery/dist/jquery.min.js',
-    foundation: 'script!foundation-sites/dist/foundation.min.js',
     app: './app.jsx'
   },
   externals: {
