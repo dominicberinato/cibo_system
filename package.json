@@ -1,6 +1,9 @@
 {
   "name": "cibo_property_system",
   "version": "0.0.1",
+  "engines": {
+    "node": "6.2.0"
+  },
   "description": "This is the property management system for cibo by Launch Design",
   "main": "index.js",
   "scripts": {
