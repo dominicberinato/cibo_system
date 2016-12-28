@@ -17,13 +17,14 @@ require('style!css!sass!./styles/app.scss')
  ReactDOM.render(
    <div className="row">
      <div className="columns large-4 medium-4 small-12">
-        <p>Cibo through jsx</p>
+       <p></p>
     </div>
-     <div  className="columns large-4 medium-4 small-12">
-       <p>Cibo through jsx</p>
+     <div className="columns large-4 medium-4 small-12">
+       <p>CIBO PROPERTY SYSTEM</p>
+       <p>Powered By<a href="https://launchdesign.co.za">Launch Design!</a></p>
      </div>
      <div  className="columns large-4 medium-4 small-12">
-       <p>Cibo through jsx</p>
+       <p></p>
      </div>
    </div>,
    document.getElementById('app')
