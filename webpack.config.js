@@ -55,10 +55,11 @@ module.exports = {
   resolve: {
     modules: [
       "node_modules",
-      "./src/components"
+      "./src/components",
+      "./src/components/tabs"
     ],
     alias: {
-      src: 'src',
+      src: path.resolve(__dirname, "src/"),
     },
     extensions: [".js", ".jsx"],
   },
