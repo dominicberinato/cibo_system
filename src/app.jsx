@@ -4,6 +4,7 @@
 
 //add inject plugin for material-ui
 import injectTapEventPlugin from 'react-tap-event-plugin';
+import Reservations from 'Reservations';
 //start inject pluging
 injectTapEventPlugin();
 
@@ -16,16 +17,7 @@ require('style!css!sass!./styles/app.scss')
 
  ReactDOM.render(
    <div className="row">
-     <div className="columns large-4 medium-4 small-12">
-       <p></p>
-    </div>
-     <div className="columns large-4 medium-4 small-12">
-       <p>CIBO PROPERTY SYSTEM</p>
-       <p>Powered By<a href="https://launchdesign.co.za"> Launch Design!</a></p>
-     </div>
-     <div  className="columns large-4 medium-4 small-12">
-       <p></p>
-     </div>
+     <Reservations/>
    </div>,
    document.getElementById('app')
  );
