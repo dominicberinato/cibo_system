@@ -18,7 +18,7 @@ export class CiboBar extends Component {
     return(
       <div>
         <AppBar
-          title="Cibo Properties"
+          title="Cibo Property Management"
           />
         <Tabs>
           <Tab label="Reservations">
