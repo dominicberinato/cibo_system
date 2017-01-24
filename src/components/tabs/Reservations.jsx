@@ -3,7 +3,7 @@ import {connect} from 'react-redux'
 
 export class Reservations extends Component {
   render() {
-    return(<p>Reservations</p>)
+    return(<p>Reservations module will be here</p>)
   }
 }
 

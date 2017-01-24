@@ -19,13 +19,6 @@ var errorLoading  = (err) => {
 export default (
   <Router history={hashHistory}>
     <Route path="/" component={PropertyApp}>
-      <IndexRoute
-        getComponent={(location, cb) =>{
-            System.import('LandingPage')
-           .then(loadRoute(cb))
-           .catch(errorLoading);
-          }}
-      />
     <Route
       path="reservations"
       getComponent={(location, cb) =>{
