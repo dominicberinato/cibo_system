@@ -1,7 +1,8 @@
 import React, {Component} from 'react'
-import AppBar from 'material-ui/AppBar';
-import Drawer from 'material-ui/Drawer';
-import MenuItem from 'material-ui/MenuItem';
+import AppBar from 'material-ui/AppBar'
+import Drawer from 'material-ui/Drawer'
+import MenuItem from 'material-ui/MenuItem'
+import {hashHistory} from 'react-router'
 
 
 
@@ -23,7 +24,10 @@ export class CiboBar extends Component {
       <div>
         <AppBar
           title="Cibo Property Management"
-          onLeftIconButtonTouchTap={this.clicked}
+          onLeftIconButtonTouchTap={() => {
+            this.clicked();
+            hashHistory.push('/admin');
+          }}
           />
         <Drawer
           open={this.state.sidebar}
