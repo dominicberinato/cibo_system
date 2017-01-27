@@ -24,9 +24,9 @@ export class CiboBar extends Component {
       <div>
         <AppBar
           title="Cibo Property Management"
-          onLeftIconButtonTouchTap={() => {
-            this.clicked();
-            hashHistory.push('/admin');
+          onLeftIconButtonTouchTap={this.clicked}
+          onTitleTouchTap={() => {
+            hashHistory.push('/app');
           }}
           />
         <Drawer
@@ -34,7 +34,10 @@ export class CiboBar extends Component {
           docked={false}
           onRequestChange={(open) => this.setState({sidebar: open})}
           >
-        <MenuItem onTouchTap={this.clicked}>Admin</MenuItem>
+        <MenuItem onTouchTap={()=>{
+            this.clicked();
+            hashHistory.push('admin');
+          }}>Admin</MenuItem>
         </Drawer>
       </div>
     );
