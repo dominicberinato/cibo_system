@@ -7,6 +7,7 @@ export class PropertyApp extends Component {
     return(
       <div>
         <CiboBar/>
+        {this.props.children}
       </div>
     )
   }

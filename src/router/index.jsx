@@ -27,6 +27,22 @@ export default (
          .catch(errorLoading);
         }}
       />
+    <Route
+      path="admin"
+      getComponent={(location,cb) => {
+        System.import('Admin')
+       .then(loadRoute(cb))
+       .catch(errorLoading);
+      }}
+      />
+    <Route
+      path="app"
+      getComponent={(location, cb) => {
+        System.import('CiboTabs')
+        .then(loadRoute(cb))
+        .catch(errorLoading);
+      }}
+      />
     </Route>
   </Router>
 )

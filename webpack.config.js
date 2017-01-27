@@ -56,7 +56,9 @@ module.exports = {
     modules: [
       "node_modules",
       "./src/components",
-      "./src/components/tabs"
+      "./src/components/tabs",
+      "./src/components/sections",
+      "./src/components/forms"
     ],
     alias: {
       src: path.resolve(__dirname, "src/"),
