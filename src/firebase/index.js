@@ -15,5 +15,8 @@ try {
 
 }
 
+//add a provider for for google sign in
+export var googleAuthProvider = new firebase.auth.GoogleAuthProvider();
+
 export var firebaseRef = firebase.database().ref();
 export default firebase;
