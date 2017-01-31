@@ -1,13 +1,14 @@
 import * as redux from 'redux'
 import thunk from 'redux-thunk'
 
-import{reservationsReducer} from 'src/reducers/reducers'
+import{reservationsReducer, authReducer} from 'src/reducers/reducers'
 
 
 //lets configure our store
 export var configure = (initialState = {}) => {
   var reducer = redux.combineReducers({
-    reservations: reservationsReducer
+    reservations: reservationsReducer,
+    auth: authReducer
   });
 
 

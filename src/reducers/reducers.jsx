@@ -8,3 +8,10 @@ export var reservationsReducer = (state = [], action) => {
       return state;
   }
 }
+//work on an auth reducer
+export var authReducer = (state = {}, action) => {
+  switch(action.type) {
+    default:
+      return state;
+  }
+}
