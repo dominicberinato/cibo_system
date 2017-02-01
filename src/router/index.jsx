@@ -39,7 +39,8 @@ export default (
     <Route
       path="/"
       component={PropertyApp}>
-    <IndexRoute
+    <Route
+      path="/auth"
       onEnter={redirectLoggedIn}
       getComponent={(location, cb) => {
         System.import('AuthComponent')
@@ -64,6 +65,7 @@ export default (
       />
     <Route
       path="app"
+      onEnter={requireLogin}
       getComponent={(location, cb) => {
         System.import('CiboTabs')
         .then(loadRoute(cb))

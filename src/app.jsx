@@ -2,6 +2,7 @@
  import React from 'react'
  import ReactDOM from 'react-dom'
  import {Provider} from 'react-redux'
+ import {hashHistory} from 'react-router'
 //add inject plugin for material-ui
 import injectTapEventPlugin from 'react-tap-event-plugin';
 import Reservations from 'Reservations';
@@ -26,6 +27,18 @@ require('style!css!sass!./styles/app.scss');
 
 //build a theme
 const cibotheme = getMuiTheme({});
+
+//do auth work
+import firebase from 'src/firebase/index'
+//observe auth state
+firebase.auth().onAuthStateChanged((user) => {
+  //logged in
+  if(user) {
+    hashHistory.push('/app');
+  } else {
+    hashHistory.push('/auth');
+  }
+})
 
  ReactDOM.render(
    <MuiThemeProvider>
