@@ -11,6 +11,10 @@ export var reservationsReducer = (state = [], action) => {
 // an auth reducer to fill the data we need after auth has occured
 export var authReducer = (state = {}, action) => {
   switch(action.type) {
+    case 'LOGIN':
+      return {uid: action.uid};
+    case 'LOGOUT':
+      return {};
     default:
       return state;
   }

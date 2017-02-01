@@ -32,7 +32,7 @@ describe('Billing', () => {
       expect(0).toEqual(8);
     });
     it('should calculate allowances', () => {
-      expect(0).toEqual(0);
+      expect(10).toEqual(0);
     });
     it('should calculate subtotals', () => {
       expect(9).toEqual(90);
