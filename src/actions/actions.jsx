@@ -15,3 +15,15 @@ export var logout = () => {
   };
 }
 //add login async action generator
+export var startLogin = () => {
+  return(dispatch, state) => {
+    //lets use googleauth to auth the user
+    return firebase.auth().signInWithPopup(googleAuthProvider).then((result) => {
+      //deal with login success
+      dispatch(login(result.user.uid));
+    }, (error) => {
+      //deal with errors if any
+      console.log('auth failed please check', error);
+    });
+  };
+}
