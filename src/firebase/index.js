@@ -1,4 +1,4 @@
-
+//add the firebase lib
 import firebase from 'firebase';
 
 try {
