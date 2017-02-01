@@ -11,7 +11,7 @@ export class AuthComponent extends Component {
 
   }
   render() {
-    return(<div></div>);
+    return(<div>Auth</div>);
   }
 };
 export default AuthComponent;

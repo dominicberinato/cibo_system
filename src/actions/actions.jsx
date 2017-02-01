@@ -23,7 +23,7 @@ export var startLogin = () => {
       dispatch(login(result.user.uid));
     }, (error) => {
       //deal with errors if any
-      console.log('auth failed please check', error);
+      console.log('auth failed please check', error.message);
     });
   };
 }
