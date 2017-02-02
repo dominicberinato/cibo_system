@@ -37,7 +37,45 @@ describe('Reducers', () => {
       var result = reducers.authReducer(df({uid: 12345}),df(logoutAction));
 
       //check the result for what we expect
-      expect(result).toEqual({})
+      expect(result).toEqual({});
     });
   });
+
+  //test propertyReducer
+  describe('propertyReducer', () => {
+    it('should set propertydata on addProperty', () => {
+      //add property action
+      var addProperty =  {
+        type: 'ADD_PROPERTY',
+        property: {
+          name: "Best Western Cape Suites Hotel",
+          address: "Roeland Street",
+          coords:"lat, long",
+          id:12345,
+          avatar: 'image here'
+        }
+      };
+
+      //call reducer and use deep freeze to check purity
+      var result = reducers.propertyReducer(df({}), df(addProperty));
+
+      //check that our action was consumed
+      expect(result).toEqual(addProperty.property);
+    });
+
+    //test clear action
+    it('should clear propertydata onclear', () => {
+      //mock an action
+      var clearProperty ={
+        type: 'CLEAR_PROPERTY'
+      };
+
+      //call reducer
+      var result = reducers.propertyReducer(df({}), df(clearProperty));
+
+      //check result to see if our reducers worked
+      expect(result).toEqual({});
+    });
+
+  })
 })
