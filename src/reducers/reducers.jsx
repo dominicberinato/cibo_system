@@ -19,3 +19,11 @@ export var authReducer = (state = {}, action) => {
       return state;
   }
 }
+
+//use this to set relevant propertyData
+export var propertyReducer = (state = {}, action) => {
+  switch (action.type) {
+    default:
+      return state;
+  }
+}
