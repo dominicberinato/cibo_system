@@ -7,35 +7,56 @@ import Marketing from 'Marketing'
 import Operations from 'Operations'
 import StockManagement from 'StockManagement'
 import HumanResources from 'HumanResources'
+import {connect} from 'react-redux'
 
 export class CiboTabs extends Component {
+  constructor(props){
+    super(props);
+  }
   render() {
+    var {property, dispatch} = this.props;
+
+    var renderPropertyMessage = (property) => {
+      if(property == undefined) {
+        return(<div className="property-message text-center"><p className="p-message">Please get an admin to set up your system!</p></div>)
+      } else {
+        return(
+          <Tabs>
+            <Tab label="Reservations">
+              <Reservations/>
+            </Tab>
+            <Tab label="Billing">
+              <Billing/>
+            </Tab>
+            <Tab label="Operations">
+              <Operations/>
+            </Tab>
+            <Tab label="Stock">
+              <StockManagement/>
+            </Tab>
+            <Tab label="Finance">
+              <Finance/>
+            </Tab>
+            <Tab label="HR">
+              <HumanResources/>
+            </Tab>
+            <Tab label="Marketing">
+              <Marketing/>
+            </Tab>
+          </Tabs>
+        )
+      }
+    }
     return(
-      <Tabs>
-        <Tab label="Reservations">
-          <Reservations/>
-        </Tab>
-        <Tab label="Billing">
-          <Billing/>
-        </Tab>
-        <Tab label="Operations">
-          <Operations/>
-        </Tab>
-        <Tab label="Stock">
-          <StockManagement/>
-        </Tab>
-        <Tab label="Finance">
-          <Finance/>
-        </Tab>
-        <Tab label="HR">
-          <HumanResources/>
-        </Tab>
-        <Tab label="Marketing">
-          <Marketing/>
-        </Tab>
-      </Tabs>
+      <div>
+        {renderPropertyMessage()}
+      </div>
     );
   }
 }
 
-export default CiboTabs;
+export default connect((state) => {
+  return {
+    property: state.property
+  }
+})(CiboTabs);
