@@ -36,5 +36,31 @@ describe('Actions', () => {
 
     //check that the result is same as mocked
     expect(result).toEqual(logoutAction);
+  });
+
+  //work on addProperty action test
+  it('should generate addProperty action',  () => {
+    //lets mock a result
+    var addProperty =  {
+      type: 'ADD_PROPERTY',
+      property
+    };
+
+    //trigger
+    var result = actions.addProperty(action.property);
+
+    //check result
+    expect(result).toEqual(addProperty);
+  })
+  //work on clearProperty action test
+  it('should generate clearProperty action', () => {
+    //mock a result
+    var clearProperty =  {
+      type: 'CLEAR_PROPERTY'
+    }
+    //trigger code
+    var result = actions.clearProperty();
+    //check result
+    expect(result).toEqual(clearProperty);
   })
 })
