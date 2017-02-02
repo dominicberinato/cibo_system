@@ -25,7 +25,7 @@ export class CiboBar extends Component {
     var {property, dispatch} = this.props;
     var renderPropertyMessage = (property) => {
       if(property == undefined) {
-        return(<p>Please Get an admin to set up your system</p>)
+        return(<div className="property-message text-center"><p className="p-message">Please get an admin to set up your system!</p></div>)
       }
     }
     return(
