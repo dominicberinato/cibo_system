@@ -10,7 +10,7 @@ export class Admin extends Component {
     return(
       <div className="row admin-panel">
         <div className="columns small-4 large-4">
-          <RaisedButton className="raised-margin" label="Add Property" secondary={true} onClick={this.openAddProp}/>
+          <RaisedButton className="raised-margin" label="Set Property" secondary={true} />
         </div>
       </div>
     )
