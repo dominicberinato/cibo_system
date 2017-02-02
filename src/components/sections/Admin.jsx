@@ -5,13 +5,6 @@ import RaisedButton from 'material-ui/RaisedButton';
 export class Admin extends Component {
   constructor(props) {
     super(props);
-    this.openAddSupp = this.openAddSupp.bind(this);
-  }
-  openAddProp() {
-
-  }
-  saveProp() {
-    
   }
   render() {
     return(

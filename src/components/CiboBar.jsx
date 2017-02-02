@@ -3,6 +3,8 @@ import AppBar from 'material-ui/AppBar'
 import Drawer from 'material-ui/Drawer'
 import MenuItem from 'material-ui/MenuItem'
 import {hashHistory} from 'react-router'
+//add connect from redux to check state
+import{connect} from 'react-redux'
 
 
 
@@ -20,6 +22,12 @@ export class CiboBar extends Component {
     })
   }
   render() {
+    var {property, dispatch} = this.props;
+    var renderPropertyMessage = (property) => {
+      if(property == undefined) {
+        return(<p>Please Get an admin to set up your system</p>)
+      }
+    }
     return(
       <div>
         <AppBar
@@ -29,6 +37,7 @@ export class CiboBar extends Component {
             hashHistory.push('/app');
           }}
           />
+        {renderPropertyMessage()}
         <Drawer
           open={this.state.sidebar}
           docked={false}
@@ -44,4 +53,8 @@ export class CiboBar extends Component {
   }
 };
 
-export default CiboBar;
+export default connect((state) => {
+  return {
+    property: state.property
+  }
+})(CiboBar);
