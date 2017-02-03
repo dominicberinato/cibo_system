@@ -93,7 +93,7 @@ describe('Actions', () => {
         return  propertyRef.remove();
       }).then(()=> {
         testPropertyRef = propertyRef.push();
-        return testPropertyRef.set(testProperty)
+        return testPropertyRef.set(testProperty);
       })
       .then(() => done())
       .catch(done);
@@ -101,14 +101,28 @@ describe('Actions', () => {
 
     ///run this after each tests
     afterEach((done) => {
-      propertyRef.remove()
+      propertyRef.remove().then(() => done());
     });
+
     it('should create property  and dispatch ADD_PROPERTY', (done) => {
+      //lets make a mock store
+      const store = createMockStore({auth:{uid}});
+      //lets call our async action
+      const action = actions.startAddProperty(testProperty);
+
+      store.dispatch(action).then(() => {
+        //get a list of actions
+        const mockActions = store.getActions();
+        //check that our action was called
+        expect(mockactions[0].toInclude({
+          type: 'ADD_PROPERTY',
+          property:
+          {
+            ...testProperty
+          }
+        }));
+        done();
+      },done());
     });
-
   })
-
-
-
-
 })
