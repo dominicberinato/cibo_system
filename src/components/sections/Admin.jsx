@@ -1,5 +1,6 @@
 import React,{Component} from 'react'
-import RaisedButton from 'material-ui/RaisedButton';
+import RaisedButton from 'material-ui/RaisedButton'
+import SetProperty from 'SetProperty'
 
 
 export class Admin extends Component {
@@ -9,8 +10,17 @@ export class Admin extends Component {
   render() {
     return(
       <div className="row admin-panel">
-        <div className="columns small-4 large-4">
-          <RaisedButton className="raised-margin" label="Set Property" secondary={true} />
+        <div className="columns small-6 large-6">
+          <SetProperty/>
+        </div>
+        <div columns small-6 large-6>
+          <div>
+            <p className="text-center">Details</p>
+          </div>
+          <div>
+            <p className="text-center">Tables</p>
+          </div>
+
         </div>
       </div>
     )
