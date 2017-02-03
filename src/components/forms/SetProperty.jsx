@@ -38,11 +38,11 @@ export class SetProperty extends Component {
         <form ref="form" onSubmit={this.setProp}>
           <div>
             <label>Name</label>
-            <input type="text" ref="propName"/>
+            <input type="text" ref="propName" placeholder="Awesome Restaurant"/>
           </div>
           <div>
             <label>Address</label>
-            <input type="text" ref="propAddress"/>
+            <input type="text" ref="propAddress" placeholder="22B Baker"/>
           </div>
           <div>
             <label>Location</label>
