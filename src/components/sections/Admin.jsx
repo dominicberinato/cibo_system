@@ -20,7 +20,6 @@ export class Admin extends Component {
           <div>
             <p className="text-center">Tables</p>
           </div>
-
         </div>
       </div>
     )
