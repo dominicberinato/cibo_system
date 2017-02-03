@@ -48,14 +48,6 @@ export default (
         .catch(errorLoading);
       }}/>
     <Route
-      path="reservations"
-      getComponent={(location, cb) =>{
-          System.import('Reservations')
-         .then(loadRoute(cb))
-         .catch(errorLoading);
-        }}
-      />
-    <Route
       path="admin"
       getComponent={(location,cb) => {
         System.import('Admin')
