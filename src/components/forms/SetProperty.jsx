@@ -5,11 +5,37 @@ import {connect} from 'react-redux'
 export class SetProperty extends Component {
   constructor(props) {
     super(props)
+    //bind the funcs
+    this.setProp = this.setProp.bind(this);
+  }
+  setProp(Event) {
+    //prevent rafressshhh
+    Event.preventDefault();
+    var{dispatch} = this.props;
+    var mRef = this.refs;
+    var pname = mRef.propName.value;
+    var padd = mRef.propAddress.value;
+    var ploc = mRef.propLocation.value;
+    var pava = mRef.propAvatar.value;
+
+    if(pname.length > 0 && padd.length > 0 && pava.length > 0) {
+      //make object to send to dispatch
+      var property = {
+        pname,
+        address: padd,
+        avatar: pava,
+      }
+      //dispatch our action generator
+      dispatch(actions.startAddProperty(property));
+    }
+    else {
+      this.refs.propName.focus();
+    }
   }
   render() {
     return(
       <div>
-        <form>
+        <form ref="form" onSubmit={this.setProp}>
           <div>
             <label>Name</label>
             <input type="text" ref="propName"/>
@@ -27,7 +53,7 @@ export class SetProperty extends Component {
             <input type="text" ref="propAvatar"/>
           </div>
           <div>
-            <button className="button">SAVE PROPERTY</button>
+            <input type="submit" className="button" value="SAVE PROPERTY"/>
           </div>
         </form>
       </div>
