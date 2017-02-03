@@ -1,6 +1,7 @@
 import React,{Component} from 'react'
 import RaisedButton from 'material-ui/RaisedButton'
 import SetProperty from 'SetProperty'
+import AddTable from 'AddTable'
 
 
 export class Admin extends Component {
@@ -12,6 +13,7 @@ export class Admin extends Component {
       <div className="row admin-panel">
         <div className="columns small-6 large-6">
           <SetProperty/>
+          <AddTable/>
         </div>
         <div columns small-6 large-6>
           <div>
