@@ -73,9 +73,39 @@ describe('Actions', () => {
 
   //Test Asynchrounous Actions
   describe('Async Actions', () => {
+
+    var uid;
+    var propertyRef;
+    var testPropertyRef;
+
+    var testProperty =  {
+      pname: 'folk coffee',
+      address: '3 Bree Street',
+      avatar: 'image'
+    };
+
+    //run this code before each asnyc test (login && set up stuff)
+    beforeEach((done) => {
+      //SIGN IN anonymously
+      firebase.auth().signInAnonymously().then((user) => {
+        uid = user.uid;
+        propertyRef = firebaseRef.child(`users/${uid}/property`);
+        return  propertyRef.remove();
+      }).then(()=> {
+        testPropertyRef = propertyRef.push();
+        return testPropertyRef.set(testProperty)
+      })
+      .then(() => done())
+      .catch(done);
+    });
+
+    ///run this after each tests
+    afterEach((done) => {
+      propertyRef.remove()
+    });
     it('should create property  and dispatch ADD_PROPERTY', (done) => {
-      const store = createMockStore();
-    })
+    });
+
   })
 
 
