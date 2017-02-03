@@ -4,11 +4,11 @@ import firebase from 'firebase';
 try {
   // Initialize Firebase
     var config = {
-      apiKey: "AIzaSyAq8VqKWf0oizT_NyJHH_-5LkTXnqunqa0",
-      authDomain: "ciboproperty.firebaseapp.com",
-      databaseURL: "https://ciboproperty.firebaseio.com",
-      storageBucket: "ciboproperty.appspot.com",
-      messagingSenderId: "249867809354"
+      apiKey: process.env.API_KEY,
+      authDomain: process.env.AUTH_DOMAIN,
+      databaseURL: process.env.DATABASE_URL,
+      storageBucket: process.env.STORAGE_BUCKET,
+      messagingSenderId: process.env.MESSAGE_SENDER_ID
     };
     firebase.initializeApp(config);
 } catch (e) {
