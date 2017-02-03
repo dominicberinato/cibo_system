@@ -1,8 +1,16 @@
 'use strict'
-var webpack = require('webpack');
+var webpack = require('webpack')
 var path = require('path')
+var envFile = require('node-env-file')
 //enviroment variable
 process.env.NODE_ENV = process.env.NODE_ENV || 'development';
+// set enviroment
+try{
+  envFile(path.join(__dirname, 'config/'+process.env.NODE_ENV + '.env'));
+
+} catch(e) {
+  console.log(e);
+}
 
 module.exports = {
   //webpack reads our raw source from here
@@ -20,6 +28,10 @@ module.exports = {
     new webpack.DefinePlugin({
       'process.env': {
         NODE_ENV: JSON.stringify(process.env.NODE_ENV),
+        API_KEY: JSON.stringify(process.env.API_KEY),
+        AUTH_DOMAIN:JSON.stringify(process.env.AUTH_DOMAIN),
+        DATABASE_URL:JSON.stringify(process.env.DATABASE_URL),
+        STORAGE_BUCKET:JSON.stringify(process.env.STORAGE_BUCKET)
       }
     }),
     new webpack.LoaderOptionsPlugin({
