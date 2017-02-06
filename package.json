@@ -9,9 +9,9 @@
   "main": "index.js",
   "scripts": {
     "test": "NODE_ENV=test karma start",
-    "build": "webpack -p",
+    "build": "npm rebuild node-sass && webpack -p",
     "start": "node server.js",
-    "postinstall": "npm rebuild node-sass && webpack -p"
+    "postinstall": "npm run build"
   },
   "repository": {
     "type": "git",
