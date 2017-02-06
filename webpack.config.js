@@ -7,7 +7,6 @@ process.env.NODE_ENV = process.env.NODE_ENV || 'development';
 // set enviroment
 try{
   envFile(path.join(__dirname, 'config/'+process.env.NODE_ENV + '.env'));
-
 } catch(e) {
   console.log(e);
 }
@@ -32,6 +31,11 @@ module.exports = {
         AUTH_DOMAIN:JSON.stringify(process.env.AUTH_DOMAIN),
         DATABASE_URL:JSON.stringify(process.env.DATABASE_URL),
         STORAGE_BUCKET:JSON.stringify(process.env.STORAGE_BUCKET)
+      }
+    }),
+    new webpack.optimize.UglifyJsPlugin({
+      compressor: {
+        warnings:false
       }
     }),
     new webpack.LoaderOptionsPlugin({
