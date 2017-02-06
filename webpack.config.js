@@ -6,7 +6,11 @@ var envFile = require('node-env-file')
 process.env.NODE_ENV = process.env.NODE_ENV || 'development';
 // set enviroment
 try{
-  envFile(path.join(__dirname, 'config/'+process.env.NODE_ENV + '.env'));
+  if(process.env.NODE_ENV != 'production') {
+      envFile(path.join(__dirname, 'config/'+process.env.NODE_ENV + '.env'));
+  } else {
+    console.log('on server no need for env file')
+  } 
 } catch(e) {
   console.log(e);
 }
