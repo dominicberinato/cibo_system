@@ -16,7 +16,7 @@ export class AuthComponent extends Component {
   }
   render() {
     return(
-      <div>
+      <div className="auth">
          <div className="columns small-centered small-10 medium-6 large-4">
            <div className=" text-center callout callout-auth">
              <h3>Login</h3>
