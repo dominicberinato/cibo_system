@@ -12,7 +12,7 @@ var loadRoute = (cb) =>  {
 }
 
 var errorLoading  = (err) => {
- console.error('Dynamic page loading failed', err);
+ console.error('Dynamic page loading failed', err.message);
 }
 
 //add middleware for routes that need auth
@@ -40,7 +40,7 @@ export default (
       path="/"
       component={PropertyApp}>
     <Route
-      path="/auth"
+      path="auth"
       onEnter={redirectLoggedIn}
       getComponent={(location, cb) => {
         System.import('AuthComponent')

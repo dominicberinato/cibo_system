@@ -15,8 +15,8 @@ module.exports = {
   //webpack reads our raw source from here
   context: __dirname + '/src', //root of our code files
   entry: {
-    jquery: 'script!jquery/dist/jquery.min.js',
-    foundation: 'script!foundation-sites/dist/foundation.min.js',
+    jquery: 'script-loader!jquery/dist/jquery.min.js',
+    foundation: 'script-loader!foundation-sites/dist/foundation.min.js',
     app: './app.jsx'
   },
   externals: {
@@ -33,11 +33,6 @@ module.exports = {
         STORAGE_BUCKET:JSON.stringify(process.env.STORAGE_BUCKET)
       }
     }),
-    new webpack.optimize.UglifyJsPlugin({
-      compressor: {
-        warnings:false
-      }
-    }),
     new webpack.LoaderOptionsPlugin({
         test: /\.scss$/,
         options: {
@@ -51,9 +46,9 @@ module.exports = {
   ],
   //the transpiled output is here
   output: {
-    path: __dirname + '/dist/assets',
+    path: path.resolve(__dirname, 'dist/assets'),
     filename: '[name].bundle.js',
-    publicPath: '/assets', // for the dev server
+    publicPath: '/assets/', // for the dev server
   },
   module: {
     rules: [

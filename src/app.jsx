@@ -19,11 +19,11 @@ var store = require('src/store/configureStore').configure();
 
 
 // load jquery and foundation in the window scope
-import 'script!jquery'
-import 'script!what-input'
-import 'script!foundation-sites'
+import 'script-loader!jquery'
+import 'script-loader!what-input'
+import 'script-loader!foundation-sites'
 
-require('style!css!sass!./styles/app.scss');
+require('style-loader!css-loader!sass-loader!./styles/app.scss');
 
 //build a theme
 const cibotheme = getMuiTheme({});
