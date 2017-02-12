@@ -2,7 +2,7 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import expect from 'expect'
 // load jquery and foundation in the window scope
-import $ from 'script!jquery'
+import $ from 'script-loader!jquery'
 import TestUtils from 'react-addons-test-utils'
 
 import * as actions from 'actions'

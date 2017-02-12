@@ -2,10 +2,10 @@
 import firebase, {firebaseRef, googleAuthProvider} from 'src/firebase/index'
 
 //add login action
-export var login = (uid) => {
+export var login = (user) => {
   return {
     type: 'LOGIN',
-    uid
+    user
   };
 }
 // add logout action
@@ -20,7 +20,7 @@ export var startLogin = () => {
     //lets use googleauth to auth the user
     return firebase.auth().signInWithPopup(googleAuthProvider).then((result) => {
       //deal with login success
-      dispatch(login(result.user.uid));
+      dispatch(login(result.user));
     }, (error) => {
       //deal with errors if any
       console.log('auth failed please check', error.message);
