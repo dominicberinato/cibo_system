@@ -1,5 +1,6 @@
 //add firebase and components we need
 import firebase, {firebaseRef, googleAuthProvider} from 'src/firebase/index'
+import {hashHistory} from 'react-router'
 
 //add login action
 export var login = (user) => {

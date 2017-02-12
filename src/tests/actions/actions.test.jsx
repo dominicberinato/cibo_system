@@ -22,7 +22,8 @@ describe('Actions', () => {
         name: 'z',
         image: 'http://img.co',
         uid: 12345,
-        isAdmin: false
+        isAdmin: false,
+        email: 'me@me.com'
       }
       var loginAction = {
         type: 'LOGIN',
