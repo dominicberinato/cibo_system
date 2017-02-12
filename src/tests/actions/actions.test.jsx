@@ -18,14 +18,19 @@ describe('Actions', () => {
     //work on login action test
     it('should generate login action', () => {
       //mock an action
+      var user: {
+        name: 'z',
+        image: 'http://img.co',
+        uid: 12345,
+        isAdmin: false
+      }
       var loginAction = {
         type: 'LOGIN',
-        uid: 12345
+        user
       };
 
       //lets trigger the action
-      var result = actions.login(loginAction.uid);
-
+      var result = actions.login(loginAction.user);
       //check that the result is same as mocked
       expect(result).toEqual(loginAction);
     });
