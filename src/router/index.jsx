@@ -28,7 +28,7 @@ var requireLogin = (nextState, replace, next) => {
 var redirectLoggedIn = (nextState, replace, next) => {
   //if user is logged in
   if(firebase.auth().currentUser) {
-    replace('/app');
+    replace('/perm');
   }
   next();
 }
@@ -47,6 +47,15 @@ export default (
         .then(loadRoute(cb))
         .catch(errorLoading);
       }}/>
+    <Route
+      path="/perm"
+      onEnter={requireLogin}
+      getComponent={(location, cb) => {
+        System.import('PermComponent')
+        .then(loadRoute(cb))
+        .catch(errorLoading);
+      }}
+    />
     <Route
       path="admin"
       getComponent={(location,cb) => {

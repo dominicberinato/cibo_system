@@ -21,7 +21,7 @@ export var startLogin = () => {
     //lets use googleauth to auth the user
     return firebase.auth().signInWithPopup(googleAuthProvider).then((result) => {
       //deal with login success
-      dispatch(login(result.user));
+      console.log('auth success', result.user);
     }, (error) => {
       //deal with errors if any
       console.log('auth failed please check', error.message);
