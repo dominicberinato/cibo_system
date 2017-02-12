@@ -34,7 +34,7 @@ import firebase from 'src/firebase/index'
 firebase.auth().onAuthStateChanged((user) => {
   //logged in
   if(user) {
-    hashHistory.push('/app');
+    hashHistory.push('/perm');
   } else {
     hashHistory.push('/auth');
   }

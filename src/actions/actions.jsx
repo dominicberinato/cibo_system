@@ -6,7 +6,7 @@ import {hashHistory} from 'react-router'
 export var login = (user) => {
   return {
     type: 'LOGIN',
-    user
+    user: user
   };
 }
 // add logout action
@@ -20,8 +20,8 @@ export var startLogin = () => {
   return(dispatch, state) => {
     //lets use googleauth to auth the user
     return firebase.auth().signInWithPopup(googleAuthProvider).then((result) => {
-      //deal with login success
-      console.log('auth success', result.user);
+      console.log('auth success');
+      dispatch(login(result.user));
     }, (error) => {
       //deal with errors if any
       console.log('auth failed please check', error.message);

@@ -2,6 +2,7 @@ import React,{Component} from 'react'
 import {hashHistory} from 'react-router'
 import * as actions from 'src/actions/actions'
 import {connect} from 'react-redux'
+import firebase from 'src/firebase/index'
 
 export class AuthComponent extends Component {
   constructor(props) {

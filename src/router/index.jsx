@@ -1,6 +1,8 @@
 import React from 'react'
 import {Route, Router, IndexRoute, hashHistory} from 'react-router';
 import firebase, {googleAuthProvider} from 'src/firebase/index'
+import * as actions from 'src/actions/actions'
+import {connect} from 'react-redux'
 
 //add appshell
 import PropertyApp from 'PropertyApp'
@@ -48,14 +50,12 @@ export default (
         .catch(errorLoading);
       }}/>
     <Route
-      path="/perm"
-      onEnter={requireLogin}
+      path="perm"
       getComponent={(location, cb) => {
         System.import('PermComponent')
         .then(loadRoute(cb))
         .catch(errorLoading);
-      }}
-    />
+    }}/>
     <Route
       path="admin"
       getComponent={(location,cb) => {
