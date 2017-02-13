@@ -6,7 +6,7 @@ import {hashHistory} from 'react-router'
 export var login = (user) => {
   return {
     type: 'LOGIN',
-    user: user
+    user
   };
 }
 // add logout action

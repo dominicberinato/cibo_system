@@ -11,11 +11,14 @@ describe('Reducers', () => {
   //check if Auth Reducer works
   describe('AuthenticationReducer', () => {
     //check if the UID is set on login
-    it('should set UID onLogin',  () => {
+    it('should set userdata onLogin',  () => {
+      var user = {
+        name: "Zacck "
+      }
       //make an action
       var loginAction = {
         type: 'LOGIN',
-        uid: 12345
+        user
       };
 
       //call the reducer with the action
@@ -23,7 +26,7 @@ describe('Reducers', () => {
       var result = reducers.authReducer(df(''), df(loginAction));
 
       //check that the result is what we expect
-      expect(result).toEqual({uid: loginAction.uid})
+      expect(result).toEqual(loginAction.user)
     });
 
     //check if recorded information is cleared on logout
@@ -44,16 +47,17 @@ describe('Reducers', () => {
   //test propertyReducer
   describe('propertyReducer', () => {
     it('should set propertydata on addProperty', () => {
+      var property = {
+        name: "Best Western Cape Suites Hotel",
+        address: "Roeland Street",
+        coords:"lat, long",
+        id:12345,
+        avatar: 'image here'
+      }
       //add property action
       var addProperty =  {
         type: 'ADD_PROPERTY',
-        property: {
-          name: "Best Western Cape Suites Hotel",
-          address: "Roeland Street",
-          coords:"lat, long",
-          id:12345,
-          avatar: 'image here'
-        }
+        property
       };
 
       //call reducer and use deep freeze to check purity
