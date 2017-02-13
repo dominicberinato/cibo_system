@@ -1,5 +1,7 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
+import * as actions from 'src/actions/actions'
+import shortid from 'shortid';
 
 //plain class  for testing
 export class SetProperty extends Component {
@@ -29,18 +31,20 @@ export class SetProperty extends Component {
     var ploc = mRef.propLocation.value;
     var pava = this.state.file;
 
-    if(pname.length > 0 && padd.length > 0 && pava !== null) {
+    if(pname.length > 0 && padd.length) {
       //make object to send to dispatch
+      var pcode = shortid.generate();
       var property = {
         pname,
         address: padd,
         avatar: pava,
+        propCode: pcode
       }
       //dispatch our action generator
       dispatch(actions.startAddProperty(property));
     }
     else {
-      //TODO display warning for form 
+      //TODO display warning for form
       this.refs.propName.focus();
     }
   }
