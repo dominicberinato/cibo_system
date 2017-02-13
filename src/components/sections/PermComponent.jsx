@@ -21,6 +21,7 @@ export class PermComponent extends Component {
         })
       }
       else {
+        //TODO check if user is admin and accord more perms
         hashHistory.push('/app');
       }
     })

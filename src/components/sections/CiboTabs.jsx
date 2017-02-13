@@ -18,8 +18,15 @@ export class CiboTabs extends Component {
 
     var renderPropertyMessage = (property) => {
       if(property == undefined) {
-        return(<div className="property-message text-center"><p className="p-message">Please get an admin to set up your system!</p></div>)
-      } else {
+        return(
+          <div className="text-center">
+            <form >
+              <label className="property-message"> ENTER PROPERTY CODE</label>
+              <input  className="text-center" ref="propCode" type="text" placeholder="5GT-HTG"/>
+              <input  className="button" type="submit" value="CONNECT"/>
+            </form>
+          </div>
+        )} else {
         return(
           <Tabs>
             <Tab label="Reservations">
