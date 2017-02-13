@@ -21,10 +21,15 @@ export var startLogin = () => {
     //lets use googleauth to auth the user
     return firebase.auth().signInWithPopup(googleAuthProvider).then((result) => {
       console.log('auth success');
+      var token= result.credential.accessToken;
       dispatch(login(result.user));
     }, (error) => {
       //deal with errors if any
-      console.log('auth failed please check', error.message);
+      var errorCode = error.code;
+      var errorMessage = error.message;
+      //email getting error
+      var email = error.email
+      console.log('auth failed please check', `Error Code is : ${errorCode} and Error Message Is: ${errorMessage} from email ${email}`);
     });
   };
 }

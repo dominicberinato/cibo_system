@@ -16,6 +16,8 @@ injectTapEventPlugin();
 
 //lets make a store
 var store = require('src/store/configureStore').configure();
+//add actions to call login on auth listener!!
+import * as actions from 'src/actions/actions'
 
 
 // load jquery and foundation in the window scope
@@ -34,6 +36,12 @@ import firebase from 'src/firebase/index'
 firebase.auth().onAuthStateChanged((user) => {
   //logged in
   if(user) {
+    store.dispatch(actions.login({
+      uid: user.uid,
+      name:user.displayName,
+      photo: user.photoURL,
+      email: user.email
+    }));
     hashHistory.push('/perm');
   } else {
     hashHistory.push('/auth');
