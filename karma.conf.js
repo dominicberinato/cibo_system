@@ -2,7 +2,7 @@ var webpackConfig = require('./webpack.config.js');
 
 module.exports = function (config) {
   config.set({
-    browsers: ['Chrome', 'ChromeCanary'],
+    browsers: ['Chrome'],
     customLaunchers: {
             Chrome_travis_ci: {
                 base: 'Chrome',
