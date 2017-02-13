@@ -19,4 +19,6 @@ try {
 export var googleAuthProvider = new firebase.auth.GoogleAuthProvider();
 
 export var firebaseRef = firebase.database().ref();
+//lets exprt a ref for our bucket
+export var storageRef  = firebase.storage().ref();
 export default firebase;

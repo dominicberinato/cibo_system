@@ -1,5 +1,5 @@
 //add firebase and components we need
-import firebase, {firebaseRef, googleAuthProvider} from 'src/firebase/index'
+import firebase, {firebaseRef, googleAuthProvider, storageRef} from 'src/firebase/index'
 import {hashHistory} from 'react-router'
 
 //add login action
@@ -38,8 +38,23 @@ export var addProperty = (property) => {
 }
 
 //add async class to pushProperty
-export var startaddProperty = () => {
+export var startAddProperty = () => {
   return(dispatch, state) => {
-    
+     //collect property data,
+    //perform upload
+    //dispatch addProperty
+  }
+}
+
+//!!!delete property
+export var startdeleteProperty = (id) => {
+  return(dispatch, state) => {
+
+  }
+}
+//clear currentproperty
+export var clearProperty = () => {
+  return {
+    type: 'CLEAR_PROPERTY'
   }
 }
