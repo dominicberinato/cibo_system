@@ -52,6 +52,12 @@ describe('Actions', () => {
 
     //work on addProperty action test
     it('should generate addProperty action',  () => {
+      var property = {
+        name: 'Awesome Place',
+        address: 'Baked AF',
+        location: '33,60',
+        avatar: 'https://img.co'
+      }
       //lets mock a result
       var addProperty =  {
         type: 'ADD_PROPERTY',
@@ -59,7 +65,7 @@ describe('Actions', () => {
       };
 
       //trigger
-      var result = actions.addProperty(action.property);
+      var result = actions.addProperty(addProperty.property);
 
       //check result
       expect(result).toEqual(addProperty);

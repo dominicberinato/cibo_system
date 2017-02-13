@@ -7,8 +7,7 @@ export class PermComponent extends Component {
     super(props)
   }
   componentDidMount() {
-    //when mounted
-    //load user to state
+
 
   }
   render() {

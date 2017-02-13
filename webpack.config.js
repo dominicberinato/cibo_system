@@ -71,6 +71,12 @@ module.exports = {
     ],
     noParse: [
       /node_modules\/sinon/
+    ],
+    loaders: [
+      {
+        test: /\.json$/,
+        loader: 'json',
+      }
     ]
   },
   //finding app modules
@@ -86,8 +92,9 @@ module.exports = {
     ],
     alias: {
       src: path.resolve(__dirname, "src/"),
+      sinon: 'sinon/pkg/sinon'
     },
-    extensions: [".js", ".jsx"],
+    extensions: [".js", ".jsx", ".json"],
   },
   devServer: {
     contentBase: __dirname + '/src',

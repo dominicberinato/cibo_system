@@ -28,3 +28,18 @@ export var startLogin = () => {
     });
   };
 }
+
+//export sync addProperty
+export var addProperty = (property) => {
+  return  {
+    type: 'ADD_PROPERTY',
+    property
+  }
+}
+
+//add async class to pushProperty
+export var startaddProperty = () => {
+  return(dispatch, state) => {
+    
+  }
+}
