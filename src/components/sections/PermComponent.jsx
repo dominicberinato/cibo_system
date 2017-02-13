@@ -8,12 +8,13 @@ export class PermComponent extends Component {
     super(props)
   }
   componentDidMount() {
-
+    
   }
   render() {
     //get user object from state
     var {auth} = this.props;
-    if(auth) {
+    if(auth)
+    {
       //check that user doesnt exist
       firebaseRef.child(`users/${auth.uid}`).once('value').then((userShot) => {
         if(userShot.val() == null) {

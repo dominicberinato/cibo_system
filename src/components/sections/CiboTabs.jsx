@@ -12,6 +12,10 @@ import {connect} from 'react-redux'
 export class CiboTabs extends Component {
   constructor(props){
     super(props);
+    this.assocProduct = this.assocProduct.bind(this);
+  }
+  assocProduct() {
+    
   }
   render() {
     var {property, dispatch} = this.props;
@@ -20,7 +24,7 @@ export class CiboTabs extends Component {
       if(property == undefined) {
         return(
           <div className="text-center">
-            <form >
+            <form ref='form' onSubmit={}>
               <label className="property-message"> ENTER PROPERTY CODE</label>
               <input  className="text-center" ref="propCode" type="text" placeholder="5GT-HTG"/>
               <input  className="button" type="submit" value="CONNECT"/>
