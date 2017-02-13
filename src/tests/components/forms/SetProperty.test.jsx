@@ -55,7 +55,6 @@ describe('SetProperty', () => {
     //set form value
     setprop.refs.propName.value = '';
     setprop.refs.propAddress.value = '';
-    setprop.refs.propAvatar.value = '';
 
     //simulate submit
     TestUtils.Simulate.submit($element.find('form')[0]);
