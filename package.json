@@ -8,7 +8,7 @@
   "description": "This is the property management system for cibo by Launch Design",
   "main": "index.js",
   "scripts": {
-    "test": "NODE_ENV=test CHROME_BIN=google-chrome karma start",
+    "test": "NODE_ENV=test karma start",
     "build": "npm rebuild node-sass && webpack -p",
     "start": "node server.js",
     "postinstall": "npm run build"
