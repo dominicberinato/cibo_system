@@ -8,7 +8,22 @@ export class PermComponent extends Component {
     super(props)
   }
   componentDidMount() {
-    
+    //when mounted check if user has property
+    var {auth} = this.props;
+    if(auth) {
+      //check if user has a propCode
+      firebaseRef.child(`users/${auth.uid}`).once('value').then((userShot) => {
+        if(userShot.val() != null) {
+          var user = userShot.val();
+          if(user.propCode != null) {
+            //if no propcode do nothing
+          } else {
+            //pick property and set it
+
+          }
+        }
+      })
+    }
   }
   render() {
     //get user object from state

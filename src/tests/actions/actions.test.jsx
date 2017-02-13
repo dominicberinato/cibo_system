@@ -36,6 +36,22 @@ describe('Actions', () => {
       expect(result).toEqual(loginAction);
     });
 
+    //it should generate an addTable action
+    it('should generate addTable', () => {
+      var table = {
+        tbname: 7,
+        tbCapacity: 5
+      }
+
+      var addTableAction = {
+        type: 'ADD_TABLE',
+        table
+      }
+
+      var result = actions.addTable(addTableAction.table);
+      expect(result).toEqual(table);
+    })
+
     //work on logout action test
     it('should generate logout action', () => {
       //mock out result action
@@ -124,6 +140,28 @@ describe('Actions', () => {
     afterEach((done) => {
       propertyRef.remove().then(() => done());
     });
+
+    it('should create table and dispatch ADD_TABLE', (done) => {
+      const store = createMockStore({auth:{uid}});
+
+      const table = {
+        tbname: 7,
+        tbcapacity: 6
+      }
+      ///the action
+      const action = actions.startAddTable(table)
+
+      store.dispatch(action).then(() => {
+        mockActions = store.getActions();
+        expect(mockActions[0].toInclude({
+          type: 'ADD_TABLE',
+          table: {
+            ...table
+          }
+        }));
+        done();
+      }, done());
+    })
 
     it('should create property  and dispatch ADD_PROPERTY', (done) => {
       //lets make a mock store

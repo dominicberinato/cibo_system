@@ -12,7 +12,15 @@ export class AddTable extends Component {
   }
   //draw
   render() {
-    return(<p>Add Table</p>)
+    return(
+      <div>
+        <form>
+          <input ref='tableName' type='text'/>
+          <input ref='tableSeats' type='number'/>
+          <input type='submit' className='button' value='Add Table'/>
+        </form>
+      </div>
+  )
   }
 };
 
