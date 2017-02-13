@@ -49,7 +49,7 @@ describe('Actions', () => {
       }
 
       var result = actions.addTable(addTableAction.table);
-      expect(result).toEqual(table);
+      expect(result).toEqual(addTableAction);
     })
 
     //work on logout action test

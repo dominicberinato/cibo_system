@@ -83,3 +83,10 @@ export var clearProperty = () => {
     type: 'CLEAR_PROPERTY'
   }
 }
+//add a table to state
+export var addTable = (table) => {
+  return {
+    type: 'ADD_TABLE',
+    table
+  }
+}
