@@ -16,9 +16,11 @@ describe('PermComponent',() => {
   });
 
   it('calls componentDidMount', () => {
-    sinon.spy(PermComponent.prototype, 'componentDidMount');
+    var spy = sinon.spy(PermComponent.prototype, 'componentDidMount');
     const wrapper = mount(<PermComponent/>);
-    expect(PermComponent.prototype.componentDidMount).to.have.property('callCount', 1);
+    //expect(PermComponent.prototype.componentDidMount).to.have.property('callCount', 1);
+    sinon.assert.calledOnce(spy)
     PermComponent.prototype.componentDidMount.restore();
   })
+
 })
