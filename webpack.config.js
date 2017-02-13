@@ -10,7 +10,7 @@ try{
       envFile(path.join(__dirname, 'config/'+process.env.NODE_ENV + '.env'));
   } else {
     console.log('on server no need for env file')
-  } 
+  }
 } catch(e) {
   console.log(e);
 }
@@ -24,7 +24,11 @@ module.exports = {
     app: './app.jsx'
   },
   externals: {
-    jQuery: 'jQuery'
+    jQuery: 'jQuery',
+    'cheerio': 'window',
+    'react/addons': 'react',
+    'react/lib/ExecutionEnvironment': 'react',
+    'react/lib/ReactContext': 'react',
   },
   //configure global imports
   plugins: [
@@ -64,6 +68,9 @@ module.exports = {
         }],
         exclude: /(node_modules)/
       },
+    ],
+    noParse: [
+      /node_modules\/sinon/
     ]
   },
   //finding app modules
