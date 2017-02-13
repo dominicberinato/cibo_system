@@ -20,9 +20,7 @@ export var startLogin = () => {
   return(dispatch, state) => {
     //lets use googleauth to auth the user
     return firebase.auth().signInWithPopup(googleAuthProvider).then((result) => {
-      console.log('auth success');
-      var token= result.credential.accessToken;
-      dispatch(login(result.user));
+    console.log('auth success')
     }, (error) => {
       //deal with errors if any
       var errorCode = error.code;
@@ -33,6 +31,7 @@ export var startLogin = () => {
     });
   };
 }
+
 
 //export sync addProperty
 export var addProperty = (property) => {
