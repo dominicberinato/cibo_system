@@ -38,11 +38,32 @@ export var addProperty = (property) => {
 }
 
 //add async class to pushProperty
-export var startAddProperty = () => {
+export var startAddProperty = (property) => {
   return(dispatch, state) => {
-     //collect property data,
+     //collect property data
+     var propertyImage = property.avatar;
     //perform upload
-    //dispatch addProperty
+    //get id
+    var propKey = firebaseRef.child('properties').push().key;
+
+    var propFanOut = {};
+    propFanOut[`/properties/${propKey}`] = {
+      ...property,
+      avatar:`${propKey}.png`
+    }
+
+    var uploadTask = storageRef.child(`${propKey}.png`).put(propertyImage);
+    uploadTask.then(() => {
+      console.log('woop up!');
+    })
+    return firebaseRef.update(propFanOut).then(()=>{
+      //dispatch addProperty
+      dispatch(addProperty({
+        ...property,
+        avatar:`${propKey}.png`,
+        propKey
+      }))
+    })
   }
 }
 

@@ -52,11 +52,14 @@ describe('Actions', () => {
 
     //work on addProperty action test
     it('should generate addProperty action',  () => {
+
+      var debug = {hello: "world"};
+      var mockImage = new Blob([JSON.stringify(debug, null, 2)], {type : 'application/json'});
       var property = {
         name: 'Awesome Place',
         address: 'Baked AF',
         location: '33,60',
-        avatar: 'https://img.co'
+        avatar: mockImage
       }
       //lets mock a result
       var addProperty =  {
@@ -90,10 +93,13 @@ describe('Actions', () => {
     var propertyRef;
     var testPropertyRef;
 
+    var debug = {hello: "world"};
+    var mockImage = new Blob([JSON.stringify(debug, null, 2)], {type : 'application/json'});
+
     var testProperty =  {
       pname: 'folk coffee',
       address: '3 Bree Street',
-      avatar: 'image'
+      avatar: mockImage
     };
 
     //run this code before each asnyc test (login && set up stuff)

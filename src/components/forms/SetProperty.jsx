@@ -7,6 +7,17 @@ export class SetProperty extends Component {
     super(props)
     //bind the funcs
     this.setProp = this.setProp.bind(this);
+    this.handleImage = this.handleImage.bind(this);
+    this.state = {
+      file: null
+    };
+  }
+  handleImage(Event) {
+    Event.preventDefault();
+    let file = Event.target.files[0];
+    this.setState({
+        file: file,
+    });
   }
   setProp(Event) {
     //prevent rafressshhh
@@ -16,9 +27,9 @@ export class SetProperty extends Component {
     var pname = mRef.propName.value;
     var padd = mRef.propAddress.value;
     var ploc = mRef.propLocation.value;
-    var pava = mRef.propAvatar.value;
+    var pava = this.state.file;
 
-    if(pname.length > 0 && padd.length > 0 && pava.length > 0) {
+    if(pname.length > 0 && padd.length > 0 && pava !== null) {
       //make object to send to dispatch
       var property = {
         pname,
@@ -29,6 +40,7 @@ export class SetProperty extends Component {
       dispatch(actions.startAddProperty(property));
     }
     else {
+      //TODO display warning for form 
       this.refs.propName.focus();
     }
   }
@@ -50,7 +62,7 @@ export class SetProperty extends Component {
           </div>
           <div>
             <label>Avatar</label>
-            <input type="text" ref="propAvatar"/>
+          <input ref="file" type="file" name="file" onChange={this.handleImage} className="button yellow-button upload-file"/>
           </div>
           <div>
             <input type="submit" className="button" value="SAVE PROPERTY"/>
