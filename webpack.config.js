@@ -74,6 +74,11 @@ module.exports = {
     ],
     loaders: [
       {
+        test: /.js$/,
+        exclude: /node_modules/,
+        loader: 'babel'
+      },
+      {
         test: /\.json$/,
         loader: 'json',
       }
@@ -100,5 +105,5 @@ module.exports = {
     contentBase: __dirname + '/src',
   },
   /*only load the source maps if not production*/
-  devtool: process.env.NODE_ENV === 'production' ? undefined : 'cheap-module-eval-source-map'
+  devtool: process.env.NODE_ENV === 'production' ? undefined : 'inline-source-map'
 };

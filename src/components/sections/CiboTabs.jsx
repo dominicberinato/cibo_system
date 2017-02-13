@@ -26,7 +26,8 @@ export class CiboTabs extends Component {
               <input  className="button" type="submit" value="CONNECT"/>
             </form>
           </div>
-        )} else {
+        )
+      } else {
         return(
           <Tabs>
             <Tab label="Reservations">

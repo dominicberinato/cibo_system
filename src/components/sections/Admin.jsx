@@ -2,6 +2,7 @@ import React,{Component} from 'react'
 import RaisedButton from 'material-ui/RaisedButton'
 import SetProperty from 'SetProperty'
 import AddTable from 'AddTable'
+import {connect} from 'react-redux'
 
 
 export class Admin extends Component {
@@ -18,6 +19,8 @@ export class Admin extends Component {
         <div columns small-6 large-6>
           <div>
             <p className="text-center">Details</p>
+            <p></p>
+            <p></p>
           </div>
           <div>
             <p className="text-center">Tables</p>
@@ -27,4 +30,4 @@ export class Admin extends Component {
     )
   }
 };
-export default Admin;
+export default connect()(Admin);

@@ -2,7 +2,6 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import expect from 'expect'
 // load jquery and foundation in the window scope
-import $ from 'script-loader!jquery'
 import TestUtils from 'react-addons-test-utils'
 
 import * as actions from 'actions'
@@ -17,6 +16,7 @@ describe('SetProperty', () => {
   //check ADD property is called
   it('should dispatch addProperty when a valid property is submitted', () => {
     var addPropertySpy = expect.createSpy();
+
 
     var property = {
       pname: 'folk coffee',
@@ -37,7 +37,7 @@ describe('SetProperty', () => {
 
     //find form and simulate submit
     TestUtils.Simulate.submit($element.find('form')[0]);
-    expect(addPropertySpy).toHaveBeenCalledWith(action)
+    expect(addPropertySpy).toHaveBeenCalledWith(action);
   });
 
   //check that  add property is not called with invalid data
