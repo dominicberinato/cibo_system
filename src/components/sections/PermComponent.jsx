@@ -15,11 +15,12 @@ export class PermComponent extends Component {
       firebaseRef.child(`users/${auth.uid}`).once('value').then((userShot) => {
         if(userShot.val() != null) {
           var user = userShot.val();
-          if(user.propCode != null) {
+          if(userShot.propCode) {
             //if no propcode do nothing
+            console.log('prop code exists')
           } else {
             //pick property and set it
-
+            console.log('prop code doesnt exists')
           }
         }
       })

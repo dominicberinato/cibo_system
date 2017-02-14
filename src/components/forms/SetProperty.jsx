@@ -24,7 +24,7 @@ export class SetProperty extends Component {
   setProp(Event) {
     //prevent rafressshhh
     Event.preventDefault();
-    var{dispatch} = this.props;
+    var{dispatch, auth} = this.props;
     var mRef = this.refs;
     var pname = mRef.propName.value;
     var padd = mRef.propAddress.value;
@@ -32,13 +32,15 @@ export class SetProperty extends Component {
     var pava = this.state.file;
 
     if(pname.length > 0 && padd.length) {
+      //collect user id
       //make object to send to dispatch
       var pcode = shortid.generate();
       var property = {
         pname,
         address: padd,
         avatar: pava,
-        propCode: pcode
+        propCode: pcode,
+        propCreator: auth.uid
       }
       //dispatch our action generator
       dispatch(actions.startAddProperty(property));
@@ -77,6 +79,8 @@ export class SetProperty extends Component {
   }
 };
 
-export default connect(
-
-)(SetProperty);
+export default connect((state) => {
+  return {
+    auth: state.auth
+  }
+})(SetProperty);

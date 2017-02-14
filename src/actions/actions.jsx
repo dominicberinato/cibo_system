@@ -57,7 +57,9 @@ export var startAddProperty = (property) => {
       ...property,
       avatar:`${propKey}.png`,
       propCode
-    }
+    };
+    propFanOut[`/property-users/${propKey}/${property.propCreator}`] = property.propCreator;
+    propFanOut[`/users/${property.propCreator}/propCode`] = propKey;
 
     //perform upload
     var uploadTask = storageRef.child(`${propKey}.png`).put(propertyImage);
