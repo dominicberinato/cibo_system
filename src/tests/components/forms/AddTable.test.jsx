@@ -6,6 +6,8 @@ import $ from 'script-loader!jquery'
 import TestUtils from 'react-addons-test-utils'
 
 import * as actions from 'actions'
+import configureMockStore from 'redux-mock-store'
+import thunk from 'redux-thunk'
 
 //get the unconnected component
 import {AddTable} from 'AddTable'

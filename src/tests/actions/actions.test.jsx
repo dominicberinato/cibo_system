@@ -128,7 +128,8 @@ describe('Actions', () => {
 
     var testTable = {
       tbName: 7,
-      tbCapacity: 6
+      tbCapacity: 6,
+      propID: 7
     }
 
     //run this code before each asnyc test (login && set up stuff)
@@ -177,7 +178,7 @@ describe('Actions', () => {
     });
 
     describe('Table Tests', () => {
-      
+
     })
 
     it('should create table and dispatch ADD_TABLE', (done) => {

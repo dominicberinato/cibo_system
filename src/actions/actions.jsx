@@ -96,12 +96,12 @@ export var startAddTable =  (table) => {
     var propId = table.propID;
     //get propid
     var tableFanOut =  {};
-    var tableKey = firebaseRef.child('tables').push.key;
+    var tableKey = firebaseRef.child('tables').push().key;
     tableFanOut[`/tables/${tableKey}`] = table;
-    tableFanOut[`/property-tables/${propid}/${tableKey}`] = tableKey;
+    tableFanOut[`/property-tables/${propId}/${tableKey}`] = tableKey;
 
     //lets update this fanout
-    return firebaseRef.update(tableKey).then(() => {
+    return firebaseRef.update(tableFanOut).then(() => {
       dispatch(addTable({
         ...table,
         tableKey,

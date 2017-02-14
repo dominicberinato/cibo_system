@@ -1,10 +1,37 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
+import * as actions from 'src/actions/actions'
 
 export class AddTable extends Component {
   //class constructor
   constructor(props) {
-    super(props)
+    super(props);
+    this.saveTable = this.saveTable.bind(this);
+  }
+  saveTable(Event) {
+    Event.preventDefault();
+    var {dispatch} = this.props;
+    //validate all data we need is present
+    var tbname = this.refs.tableName.value;
+    var tbcapacity = this.refs.tableSeats.value;
+    var tbProp =  this.refs.tableProperty.value;
+
+    if(tbname.length == 0 || tbcapacity.length ==  0 || tbProp.length == 0) {
+
+    } else
+    {
+      //call start addtable
+      //curate data
+      var tbObject = {
+        propId:tbProp,
+        tbName,
+        tbCapacity
+      }
+      //uploadData
+      dispatch(actions.startAddTable(tbObject))
+
+
+    }
   }
   //when mounted load ..
   ComponentDidMount(){
@@ -18,9 +45,10 @@ export class AddTable extends Component {
       if(Object.keys(property).length != 0) {
         return(
           <div>
-            <form>
+            <form onSubmit={this.saveTable}>
               <input ref='tableName' type='text'/>
               <input ref='tableSeats' type='number'/>
+              <input ref='tableProperty' type="hidden" defaultValue={property.propKey}/>
               <input type='submit' className='button' value='Add Table'/>
             </form>
           </div>
