@@ -4,6 +4,7 @@ import configureMockStore from 'redux-mock-store'
 import expect from 'expect'
 import thunk from 'redux-thunk'
 import firebase,{firebaseRef} from 'src/firebase/index'
+import shortid from 'shortid'
 
 //use this to mock a store
 var createMockStore = configureMockStore([thunk]);
@@ -115,10 +116,13 @@ describe('Actions', () => {
     var debug = {hello: "world"};
     var mockImage = new Blob([JSON.stringify(debug, null, 2)], {type : 'application/json'});
 
-    var testProperty =  {
+    //GENERATE PROP CODE
+    var propKey = shortid.generate()
+;    var testProperty =  {
       pname: 'folk coffee',
       address: '3 Bree Street',
       avatar: mockImage
+      propKey
     };
 
     var testTable = {
@@ -128,13 +132,13 @@ describe('Actions', () => {
 
     //run this code before each asnyc test (login && set up stuff)
     beforeEach((done) => {
+      var propertyRef = firebaseRef.child('properties').push().key;
       //SIGN IN anonymously
       firebase.auth().signInAnonymously().then((user) => {
         uid = user.uid;
-        propertyRef = firebaseRef.child(`properties/property`);
         return  propertyRef.remove();
       }).then(()=> {
-        testPropertyRef = propertyRef.push();
+        testPropertyRef = propertyRef.;
         return testPropertyRef.set(testProperty);
       })
       .then(() => done())
