@@ -10,13 +10,31 @@ export class PropertyProfile extends Component {
     var renderProp =  () => {
       if(Object.keys(property).length == 0) {
         return(
-          <div><p>Please Set Property Profile</p></div>
+          <div id="emptyMessage"><p>Please Set Property Profile</p></div>
         )
       } else {
         return(
           <div>
-            prop details
+            <div className="columns small-12 large-2 medium-2">
+              <div id="propimg">
+                <img/>
+              </div>
+            </div>
+            <div className="columns small-12 large-10 medium-10">
+              <div id="name">
+                <label>Name:</label>
+                <p>{property.pname}</p>
+              </div>
+              <div id="propcode">
+                <label>Code:</label>
+                <p>{property.propCode}</p>
+              </div>
+              <div id="propaddress">
+                <label>Address</label>
+                <p>{property.address}</p>
+              </div>
           </div>
+        </div>
         )
       }
     }
