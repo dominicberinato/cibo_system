@@ -110,19 +110,19 @@ describe('Actions', () => {
   describe('Async Actions', () => {
 
     var uid;
-    var propertyRef;
-    var testPropertyRef;
+    var propertyRef = firebaseRef.child('properties');
+    var testPropertyKey;
 
     var debug = {hello: "world"};
     var mockImage = new Blob([JSON.stringify(debug, null, 2)], {type : 'application/json'});
 
     //GENERATE PROP CODE
-    var propKey = shortid.generate()
+    var propCode = shortid.generate()
 ;    var testProperty =  {
       pname: 'folk coffee',
       address: '3 Bree Street',
-      avatar: mockImage
-      propKey
+      avatar: mockImage,
+      propCode
     };
 
     var testTable = {
@@ -131,22 +131,22 @@ describe('Actions', () => {
     }
 
     //run this code before each asnyc test (login && set up stuff)
-    beforeEach((done) => {
-      var propertyRef = firebaseRef.child('properties').push().key;
+    before((done) => {
       //SIGN IN anonymously
       firebase.auth().signInAnonymously().then((user) => {
         uid = user.uid;
-        return  propertyRef.remove();
+        //remove any existing proprties
+        return propertyRef.remove();
       }).then(()=> {
-        testPropertyRef = propertyRef.;
-        return testPropertyRef.set(testProperty);
+        //TODO check for correctness
+        return true;
       })
       .then(() => done())
       .catch(done);
     });
 
     ///run this after each tests
-    afterEach((done) => {
+    after((done) => {
       propertyRef.remove().then(() => done());
     });
 
@@ -154,6 +154,7 @@ describe('Actions', () => {
     it('should create property  and dispatch ADD_PROPERTY', (done) => {
       //lets make a mock store
       const store = createMockStore({auth:{uid}});
+      testPropertyKey = firebaseRef.child('properties').push().key;
       //lets call our async action
       const action = actions.startAddProperty(testProperty);
 

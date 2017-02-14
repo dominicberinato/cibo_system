@@ -1,6 +1,7 @@
 //add firebase and components we need
 import firebase, {firebaseRef, googleAuthProvider, storageRef} from 'src/firebase/index'
 import {hashHistory} from 'react-router'
+import shortid from 'shortid'
 
 //add login action
 export var login = (user) => {
@@ -44,18 +45,21 @@ export var addProperty = (property) => {
 //add async class to pushProperty
 export var startAddProperty = (property) => {
   return(dispatch, state) => {
-     //collect property data
-     var propertyImage = property.avatar;
-    //perform upload
+    //collect property data
+    var propertyImage = property.avatar;
     //get id
     var propKey = firebaseRef.child('properties').push().key;
-
+    //build upload
+    //get short code
+    var propCode = shortid.generate();
     var propFanOut = {};
     propFanOut[`/properties/${propKey}`] = {
       ...property,
-      avatar:`${propKey}.png`
+      avatar:`${propKey}.png`,
+      propCode
     }
 
+    //perform upload
     var uploadTask = storageRef.child(`${propKey}.png`).put(propertyImage);
     uploadTask.then(() => {
       console.log('woop up!');
@@ -65,7 +69,8 @@ export var startAddProperty = (property) => {
       dispatch(addProperty({
         ...property,
         avatar:`${propKey}.png`,
-        propKey
+        propKey,
+        propCode
       }))
     })
   }
@@ -86,8 +91,8 @@ export var clearProperty = () => {
 //export async action to start add table
 export var startAddTable =  (table) => {
   return(dispatch, getState) => {
+    var propId = table.propID;
     //get propid
-    var propid = getState.property.propKey;
     var tableFanOut =  {};
     var tableKey = firebaseRef.child('tables').push.key;
     tableFanOut[`/tables/${tableKey}`] = table;
@@ -98,7 +103,6 @@ export var startAddTable =  (table) => {
       dispatch(addTable({
         ...table,
         tableKey,
-        tableProp: propid
       }))
     })
   }
