@@ -121,12 +121,17 @@ describe('Actions', () => {
       avatar: mockImage
     };
 
+    var testTable = {
+      tbName: 7,
+      tbCapacity: 6
+    }
+
     //run this code before each asnyc test (login && set up stuff)
     beforeEach((done) => {
       //SIGN IN anonymously
       firebase.auth().signInAnonymously().then((user) => {
         uid = user.uid;
-        propertyRef = firebaseRef.child(`users/${uid}/property`);
+        propertyRef = firebaseRef.child(`properties/property`);
         return  propertyRef.remove();
       }).then(()=> {
         testPropertyRef = propertyRef.push();
@@ -141,27 +146,6 @@ describe('Actions', () => {
       propertyRef.remove().then(() => done());
     });
 
-    it('should create table and dispatch ADD_TABLE', (done) => {
-      const store = createMockStore({auth:{uid}});
-
-      const table = {
-        tbname: 7,
-        tbcapacity: 6
-      }
-      ///the action
-      const action = actions.startAddTable(table)
-
-      store.dispatch(action).then(() => {
-        mockActions = store.getActions();
-        expect(mockActions[0].toInclude({
-          type: 'ADD_TABLE',
-          table: {
-            ...table
-          }
-        }));
-        done();
-      }, done());
-    })
 
     it('should create property  and dispatch ADD_PROPERTY', (done) => {
       //lets make a mock store
@@ -178,6 +162,28 @@ describe('Actions', () => {
           property:
           {
             ...testProperty
+          }
+        }));
+        done();
+      },done());
+    });
+
+    it('should create table and dispatch ADD_TABLE', (done) => {
+
+      //mock a store
+      const store = createMockStore({auth: {uid}});
+
+      //call our async action
+      const action = actions.startAddTable(testTable);
+
+      store.dispatch(action).then(()=> {
+        //get store's actions
+        const mockActions = store.getActions();
+        //asser that our action was called
+        expect(mockActions[0].toInclude({
+          type: 'ADD_TABLE',
+          table: {
+            ...testTable
           }
         }));
         done();

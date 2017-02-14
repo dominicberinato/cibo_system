@@ -83,6 +83,26 @@ export var clearProperty = () => {
     type: 'CLEAR_PROPERTY'
   }
 }
+//export async action to start add table
+export var startAddTable =  (table) => {
+  return(dispatch, getState) => {
+    //get propid
+    var propid = getState.property.propKey;
+    var tableFanOut =  {};
+    var tableKey = firebaseRef.child('tables').push.key;
+    tableFanOut[`/tables/${tableKey}`] = table;
+    tableFanOut[`/property-tables/${propid}/${tableKey}`] = tableKey;
+
+    //lets update this fanout
+    return firebaseRef.update(tableKey).then(() => {
+      dispatch(addTable({
+        ...table,
+        tableKey,
+        tableProp: propid
+      }))
+    })
+  }
+}
 //add a table to state
 export var addTable = (table) => {
   return {
