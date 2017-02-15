@@ -3,6 +3,7 @@ import RaisedButton from 'material-ui/RaisedButton'
 import SetProperty from 'SetProperty'
 import AddTable from 'AddTable'
 import PropertyProfile from 'PropertyProfile'
+import TableList from 'TableList'
 import {connect} from 'react-redux'
 
 
@@ -21,8 +22,8 @@ export class Admin extends Component {
           <div className="row">
             <PropertyProfile/>
           </div>
-          <div className="row">
-            <p className="text-center">Tables</p>
+          <div>
+            <TableList/>
           </div>
         </div>
       </div>

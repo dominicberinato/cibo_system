@@ -27,16 +27,12 @@ describe('AddTable',  () => {
   it('should dispatch addTable when valid table added', () => {
     const dispatch = sinon.spy()
     //mock store with auth , prop
-    var store = createMockStore({
-      property: {propKey: 1234},
-      auth: {uid: 5662}
-    });
     //full render component
     //pass in spy as dispatch
-    const wrapper = mount(<AddTable store={store} dispatch={dispatch}/>);
+    const wrapper = mount(<AddTable property={{propKey:1232}} dispatch={dispatch}/>);
     //set input values
-    wrapper.ref('tableName').simulate('change', {target: {value: '5'}});
-    wrapper.ref('tableSeats').simulate('change', {target: {value: '5'}});
+    wrapper.ref('tableName').node.value = 5;
+    wrapper.ref('tableSeats').node.value = 7;
 
     //simulate form submit
     wrapper.ref('form').simulate('submit');
@@ -47,17 +43,17 @@ describe('AddTable',  () => {
 
   //check that invalid table isnt passed
   it('should not dispatch addTable with invalid table', () => {
-    var addTableSpy = expect.createSpy();
+    var addTableSpy = sinon.spy();
 
-    //render component
-    var addtable = TestUtils.renderIntoDocument(<AddTable dispatch={addTableSpy}/>);
-    var $element = $(ReactDOM.findDOMNode(addtable));
+    const wrapper = mount(<AddTable property={{propKey:1232}} dispatch={addTableSpy}/>);
+    //set input values
+    wrapper.ref('tableName').node.value = '';
+    wrapper.ref('tableSeats').node.value = '';
 
-    //set values
-    addtable.refs.tableName.value = '';
-    addtable.refs.tableCapacity.value = '';
-    //simulate submit
-    TestUtils.Simulate.submit($element.find('form')[0]);
-    expect(addTableSpy).toNotHaveBeenCalled();
+    //simulate form submit
+    wrapper.ref('form').simulate('submit');
+
+    //assert that the spy was called
+    sinon.assert.notCalled(addTableSpy);
   })
 });

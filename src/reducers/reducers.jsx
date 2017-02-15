@@ -30,3 +30,12 @@ export var propertyReducer = (state = {}, action) => {
       return state;
   }
 }
+
+export var tablesReducer = (state = [], action) => {
+  switch(action.type) {
+    case 'ADD_TABLE':
+      break;
+    default:
+      return state;
+  }
+}

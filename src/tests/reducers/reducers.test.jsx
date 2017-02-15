@@ -82,4 +82,30 @@ describe('Reducers', () => {
     });
 
   })
+
+  //test tablesReducer
+  describe('tablesReducer', () => {
+    it('should add a new table on addTable', () => {
+      expect(1).toEqual(2);
+    });
+    it('should update table on updateTable', () => {
+      expect(1).toEqual(2);
+    });
+    it('should delete table on deleteTable', () => {
+      
+    })
+  })
+
+  //test reservations reducer
+  describe('reservationsReducer', () => {
+    it('should set reservation data on addReservation', () => {
+      expect(1).toEqual(2);
+    });
+    it('should remove reservation on removeReservation', () => {
+      expect(1).toEqual(2);
+    });
+    it('should update reservation on updateReservation', () => {
+      expect(1).toEqual(2);
+    })
+  });
 })

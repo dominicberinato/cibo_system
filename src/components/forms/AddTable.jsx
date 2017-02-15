@@ -24,13 +24,11 @@ export class AddTable extends Component {
       //curate data
       var tbObject = {
         propId:tbProp,
-        tbName,
-        tbCapacity
+        tbname,
+        tbcapacity
       }
       //uploadData
       dispatch(actions.startAddTable(tbObject))
-
-
     }
   }
   //when mounted load ..
@@ -41,7 +39,7 @@ export class AddTable extends Component {
   render() {
     var {property} =  this.props;
     var renderForm =  () => {
-      if(Object.keys(property).length != 0) {
+      if(property.propKey != undefined) {
         return(
           <div>
             <form ref='form' onSubmit={this.saveTable}>

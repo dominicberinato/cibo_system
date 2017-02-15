@@ -1,7 +1,7 @@
 import * as redux from 'redux'
 import thunk from 'redux-thunk'
 
-import{reservationsReducer, authReducer, propertyReducer} from 'src/reducers/reducers'
+import{reservationsReducer, authReducer, propertyReducer, tablesReducer} from 'src/reducers/reducers'
 
 
 //lets configure our store
@@ -9,7 +9,8 @@ export var configure = (initialState = {}) => {
   var reducer = redux.combineReducers({
     reservations: reservationsReducer,
     auth: authReducer,
-    property: propertyReducer
+    property: propertyReducer,
+    tables: tablesReducer
   });
 
 
