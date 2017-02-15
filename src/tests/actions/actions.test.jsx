@@ -41,7 +41,7 @@ describe('Actions', () => {
     it('should generate addTable', () => {
       var table = {
         tbname: 7,
-        tbCapacity: 5
+        tbcapacity: 5
       }
 
       var addTableAction = {
@@ -54,11 +54,29 @@ describe('Actions', () => {
     });
 
     it('should generate updateTable action', () => {
-      expect(1).toEqual(3);
+       var updates  = {
+         tbname: 9
+       };
+
+       var updateTableAction = {
+         type: 'UPDATE_TABLE',
+         updates
+       }
+
+       var result = actions.updateTable(10, updates);
+
+       expect(result).toInclude(updateTableAction);
     });
 
     it('should generate deleteTable action', () => {
-      expect(3).toEqual(4);
+      var id = 2;
+      var deleteTableAction = {
+        type:'DELETE_TABLE',
+        id
+      }
+
+      var result = actions.deleteTable(id);
+      expect(result).toEqual(deleteTableAction);
     });
 
     //work on logout action test

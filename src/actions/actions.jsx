@@ -117,6 +117,23 @@ export var clearProperty = () => {
     type: 'CLEAR_PROPERTY'
   }
 }
+//export deleteTable
+export var deleteTable = (id) => {
+  return {
+    type: 'DELETE_TABLE',
+    id
+  }
+};
+
+//export updateTableAction =
+export var updateTable = (id, updates) => {
+  return {
+    type: 'UPDATE_TABLE',
+    id,
+    updates
+  }
+};
+
 //export async action to start add table
 export var startAddTable =  (table) => {
   return(dispatch, getState) => {
