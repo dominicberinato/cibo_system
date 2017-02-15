@@ -14,7 +14,8 @@ import configureMockStore from 'redux-mock-store'
 
 import {PermComponent} from 'PermComponent'
 
-var createMockStore = configureMockStore({thunk})
+var createMockStore = configureMockStore({thunk});
+
 describe('PermComponent',() => {
   it('should exist', () => {
     expect(PermComponent).toExist();

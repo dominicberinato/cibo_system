@@ -32,7 +32,7 @@ export class CiboTabs extends Component {
   }
   render() {
     var {property, dispatch} = this.props;
-    var renderPropertyMessage = (property) => {
+    var renderPropertyMessage = () => {
       if(property == undefined) {
         return(
           <div className="text-center">
