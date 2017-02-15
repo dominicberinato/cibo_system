@@ -49,6 +49,10 @@ export class CiboBar extends Component {
             this.clicked();
             hashHistory.push('admin');
           }}>Admin</MenuItem>
+          <MenuItem onTouchTap={()=>{
+              this.clicked();
+              hashHistory.push('admin');
+            }}>FloorPlan</MenuItem>
         </Drawer>
       </div>
     );

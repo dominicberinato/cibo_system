@@ -1,10 +1,11 @@
 import React from 'react'
-import ReactDOM from 'react-dom'
 import expect from 'expect'
-// load jquery and foundation in the window scope
-import TestUtils from 'react-addons-test-utils'
+//get the unconnected component
+import {AddTable} from 'AddTable'
+//enzyme stuff
+import {mount} from 'enzyme'
+import sinon from 'sinon'
 
-import * as actions from 'actions'
 
 import {SetProperty} from 'SetProperty'
 
@@ -15,7 +16,7 @@ describe('SetProperty', () => {
 
   //check ADD property is called
   it('should dispatch addProperty when a valid property is submitted', () => {
-    var addPropertySpy = expect.createSpy();
+    var addPropertySpy = sinon.spy();
     //mock file
     var debug = {hello: "world"};
     var mockImage = new Blob([JSON.stringify(debug, null, 2)], {type : 'application/json'});
@@ -27,21 +28,16 @@ describe('SetProperty', () => {
       avatar: mockImage
     };
 
-    var action = actions.startAddProperty(property);
-
-    //render component
-    var setprop = TestUtils.renderIntoDocument(<SetProperty dispatch={addPropertySpy}/>);
-    var $element = $(ReactDOM.findDOMNode(setprop));
-
+    const wrapper = mount(<SetProperty auth={{uid: 1234}} dispatch={addPropertySpy}/>)
 
     //set form values
-    setprop.refs.propName.value = property.pname;
-    setprop.refs.propAddress.value = property.address;
-    setprop.refs.file.value = '';
+    wrapper.ref.propName.value = property.pname;
+    wrapper.ref.propAddress.value = property.address;
+    wrapper.ref.file.value = property.avatar;
 
     //find form and simulate submit
-    TestUtils.Simulate.submit($element.find('form')[0]);
-    expect(addPropertySpy).toHaveBeenCalledWith(action);
+    wrapper.ref('form').simulate('submit');
+    sinon.assert.calledOnce(addPropertySpy)
   });
 
   //check that  add property is not called with invalid data
