@@ -37,7 +37,7 @@ export class PermComponent extends Component {
                   ...property,
                   propKey: propShot.key
                 }));
-                hashHistory.push('/admin');
+                hashHistory.push('/app');
               })
             } else {
               //TODO create user property list
