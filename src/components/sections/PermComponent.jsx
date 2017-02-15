@@ -9,7 +9,8 @@ export class PermComponent extends Component {
     super(props)
   }
   componentDidMount() {
-    if(auth)
+    var {auth, dispatch} = this.props;
+    if(auth != undefined)
     {
       //check that user doesnt exist
       firebaseRef.child(`users/${auth.uid}`).once('value').then((userShot) => {
@@ -26,6 +27,7 @@ export class PermComponent extends Component {
           firebaseRef.child(`users/${auth.uid}`).once('value').then((userShot) => {
             //check if user has a propCode
             var user = userShot.val();
+            console.log('this is the user', user);
             if(user.propCode) {
 
               //user has prop code download property and send to admin
@@ -47,17 +49,17 @@ export class PermComponent extends Component {
 
         }
       })
-      //onboard
     }
   }
   render() {
     //get user object from state
     var {auth, dispatch} = this.props;
     var welcomeMessage = () => {
-      if(auth.name) {
+      if(auth != undefined) {
+        var uname = auth.name;
         return(
           <div className="text-center permissions-text>">
-            <p>{`Hello ${auth.name}!`}</p>
+            <p>{`Hello ${uname}!`}</p>
             <p>Please wait as we load your property</p>
           </div>
         )
