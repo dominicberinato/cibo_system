@@ -20,7 +20,6 @@ describe('PropertyProfile', () => {
   })
   it('should render property message  if emmpty', () => {
     const store = createMockStore({property: {}});
-
     const wrapper = mount(<PropertyProfile store={store}/>);
     expect(wrapper.find('#emptyMessage')).toExist();
   })

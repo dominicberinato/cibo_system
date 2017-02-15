@@ -9,10 +9,6 @@ export class PermComponent extends Component {
     super(props)
   }
   componentDidMount() {
-  }
-  render() {
-    //get user object from state
-    var {auth, dispatch} = this.props;
     if(auth)
     {
       //check that user doesnt exist
@@ -53,11 +49,24 @@ export class PermComponent extends Component {
       })
       //onboard
     }
+  }
+  render() {
+    //get user object from state
+    var {auth, dispatch} = this.props;
+    var welcomeMessage = () => {
+      if(auth.name) {
+        return(
+          <div className="text-center permissions-text>">
+            <p>{`Hello ${auth.name}!`}</p>
+            <p>Please wait as we load your property</p>
+          </div>
+        )
+      }
+    }
     return(
-      <div className="text-center permissions-text>">
-        <p>{`Hello ${auth.name}!`}</p>
-        <p>Please wait as we load your property</p>
-      </div>)
+      <div>
+      {welcomeMessage()}
+    </div>)
   }
 }
 export default connect((state) => {

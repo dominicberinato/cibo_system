@@ -13,14 +13,16 @@ export class PropertyProfile extends Component {
   }
   componentDidMount() {
     var {dispatch, property} = this.props;
-     storageRef.child(property.avatar).getDownloadURL().then((url) => {
-       this.setState({
-         link: url
-       });
-       }).catch((error) => {
-       //an error occurred
-       console.log('error occured when fetching image link', error )
-     })
+    if(property.avatar) {
+      storageRef.child(property.avatar).getDownloadURL().then((url) => {
+        this.setState({
+          link: url
+        });
+        }).catch((error) => {
+        //an error occurred
+        console.log('error occured when fetching image link', error )
+      })
+    } 
   }
   render(){
     var {property} = this.props;

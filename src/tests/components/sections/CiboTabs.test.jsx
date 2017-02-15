@@ -12,5 +12,7 @@ describe('CiboTabs', () => {
     expect(CiboTabs).toExist();
   });
 
+  it('should dispatch assocProp when code is provided', () => {
 
+  })
 })
