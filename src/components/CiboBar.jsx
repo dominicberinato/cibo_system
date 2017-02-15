@@ -22,7 +22,14 @@ export class CiboBar extends Component {
     })
   }
   render() {
-    var {property, dispatch} = this.props;
+    var {property, dispatch, auth} = this.props;
+    var userImage =  () => {
+      if(auth.photo) {
+        return(
+          <img className="bar-image" src={auth.photo}/>
+        )
+      }
+    }
     return(
       <div>
         <AppBar
@@ -31,6 +38,7 @@ export class CiboBar extends Component {
           onTitleTouchTap={() => {
             hashHistory.push('/app');
           }}
+          iconElementRight={userImage()}
           />
         <Drawer
           open={this.state.sidebar}
@@ -49,6 +57,7 @@ export class CiboBar extends Component {
 
 export default connect((state) => {
   return {
-    property: state.property
+    property: state.property,
+    auth: state.auth
   }
 })(CiboBar);
