@@ -13,15 +13,15 @@ export class Admin extends Component {
   render() {
     return(
       <div className="row admin-panel">
-        <div className="columns small-6 large-6">
+        <div className="columns small-12 medium-6 large-6">
           <SetProperty/>
           <AddTable/>
         </div>
-        <div columns small-6 large-6>
-          <div>
+        <div className="columns small-12 large-6 medium-6">
+          <div className="row">
             <PropertyProfile/>
           </div>
-          <div>
+          <div className="row">
             <p className="text-center">Tables</p>
           </div>
         </div>
