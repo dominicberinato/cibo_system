@@ -43,10 +43,18 @@ export class AddTable extends Component {
         return(
           <div>
             <form ref='form' onSubmit={this.saveTable}>
-              <input ref='tableName' type='text'/>
-              <input ref='tableSeats' type='number'/>
+              <div>
+                <label>Name / Number</label>
+                <input ref='tableName' type='text'/>
+              </div>
+              <div>
+                <label>Table Capacity</label>
+                <input ref='tableSeats' type='number'/>
+              </div>
               <input ref='tableProperty' type="hidden" defaultValue={property.propKey}/>
-              <input type='submit' className='button' value='Add Table'/>
+              <div className="text-center">
+                <input type='submit' className='button' value='Add Table'/>
+              </div>
             </form>
           </div>
         )

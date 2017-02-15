@@ -70,7 +70,7 @@ export class SetProperty extends Component {
           <label>Avatar</label>
           <input ref="file" type="file" name="file" onChange={this.handleImage} className="button yellow-button upload-file"/>
           </div>
-          <div>
+          <div className="text-center">
             <input type="submit" className="button" value="SAVE PROPERTY"/>
           </div>
         </form>
