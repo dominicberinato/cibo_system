@@ -29,7 +29,6 @@ export class PermComponent extends Component {
             var user = userShot.val();
             console.log('this is the user', user);
             if(user.propCode) {
-
               //user has prop code download property and send to admin
               //download a the property
               firebaseRef.child(`properties/${user.propCode}`).once('value').then((propShot) => {
@@ -41,9 +40,25 @@ export class PermComponent extends Component {
                 hashHistory.push('/admin');
               })
             } else {
-              //if user doesnt have propcode i.e not admin collect prop and push to app
-              //get the property user list
-              hashHistory.push('/app');
+              //TODO create user property list
+              var lastPropertyKey;
+              firebaseRef.child('property-users').orderByValue()
+              .once('value', (userprops) => {
+                userprops.forEach((propUsersList) => {
+                  propUsersList.forEach((propUser) => {
+                    var lastProperty = propUsersList.key;
+                  })
+                })
+              })
+
+              //dispatch prop action
+              //collect this property from db
+              firebaseRef.child(`properties/${propUsersList.key}`).once('value').then((propSnapShot) => {
+                dispatch(actions.addProperty({
+                  ...propSnapShot.val(),
+                  propKey: propUsersList.key
+                }))
+              })
             }
           })
 

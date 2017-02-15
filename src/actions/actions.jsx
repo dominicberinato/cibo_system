@@ -54,7 +54,7 @@ export var assocUser = (uid, propCode) => {
       //update list on db to assoc user
       var assocFanOut = {};
       //populate fanout
-      assocFanOut[`/property-users/${properyKey}/${uid}`] = uid;
+      assocFanOut[`/property-users/${propertyKey}/${uid}`] = uid;
 
       return firebaseRef.update(assocFanOut).then(() => {
         //dispath addProperty and render
