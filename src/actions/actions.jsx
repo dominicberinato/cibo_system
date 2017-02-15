@@ -120,7 +120,7 @@ export var clearProperty = () => {
 //export async action to start add table
 export var startAddTable =  (table) => {
   return(dispatch, getState) => {
-    var propId = table.propID;
+    var propId = table.propId;
     //get propid
     var tableFanOut =  {};
     var tableKey = firebaseRef.child('tables').push().key;
