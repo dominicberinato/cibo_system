@@ -1,9 +1,26 @@
 import React,{Component} from 'react'
 import {connect} from 'react-redux'
+import {storageRef} from 'src/firebase/index'
+
 
 export class PropertyProfile extends Component {
   constructor(props){
     super(props);
+    //add a state item for the image link
+    this.state = {
+      link: ''
+    };
+  }
+  componentDidMount() {
+    var {dispatch, property} = this.props;
+     storageRef.child(property.avatar).getDownloadURL().then((url) => {
+       this.setState({
+         link: url
+       });
+       }).catch((error) => {
+       //an error occurred
+       console.log('error occured when fetching image link', error )
+     })
   }
   render(){
     var {property} = this.props;
@@ -17,7 +34,7 @@ export class PropertyProfile extends Component {
           <div>
             <div className="columns small-12 large-2 medium-2">
               <div id="propimg">
-                <img/>
+                <img className="property-avatar" src={this.state.link}/>
               </div>
             </div>
             <div className="columns small-12 large-10 medium-10">

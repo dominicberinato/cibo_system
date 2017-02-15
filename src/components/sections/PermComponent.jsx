@@ -52,7 +52,7 @@ export class PermComponent extends Component {
       })
       //onboard
     }
-    return(<div></div>)
+    return(<div className="text-center"><p> Loading User Permissions ...</p></div>)
   }
 }
 export default connect((state) => {
