@@ -1,3 +1,10 @@
+import React from 'react'
+import expect from 'expect'
+//get the unconnected component
+import {AddTable} from 'AddTable'
+//enzyme stuff
+import {mount} from 'enzyme'
+import sinon from 'sinon'
 
 //use this to mock a store
 

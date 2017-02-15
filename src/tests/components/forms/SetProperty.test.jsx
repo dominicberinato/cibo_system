@@ -31,9 +31,9 @@ describe('SetProperty', () => {
     const wrapper = mount(<SetProperty auth={{uid: 1234}} dispatch={addPropertySpy}/>)
 
     //set form values
-    wrapper.ref.propName.value = property.pname;
-    wrapper.ref.propAddress.value = property.address;
-    wrapper.ref.file.value = property.avatar;
+    wrapper.ref('propName').node.value = property.pname;
+    wrapper.ref('propAddress').node.value = property.address;
+    wrapper.ref('file').node.value = '';
 
     //find form and simulate submit
     wrapper.ref('form').simulate('submit');
@@ -42,18 +42,6 @@ describe('SetProperty', () => {
 
   //check that  add property is not called with invalid data
   it('should not dispatch addProperty when invalid property data', () => {
-    var addPropertySpy  = expect.createSpy();
 
-    //render
-    var setprop = TestUtils.renderIntoDocument(<SetProperty dispatch={addPropertySpy}/>);
-    var $element = $(ReactDOM.findDOMNode(setprop));
-
-    //set form value
-    setprop.refs.propName.value = '';
-    setprop.refs.propAddress.value = '';
-
-    //simulate submit
-    TestUtils.Simulate.submit($element.find('form')[0]);
-    expect(addPropertySpy).toNotHaveBeenCalled();
   });
 });
