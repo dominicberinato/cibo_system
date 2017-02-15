@@ -57,7 +57,8 @@ export class PermComponent extends Component {
                 dispatch(actions.addProperty({
                   ...propSnapShot.val(),
                   propKey: propUsersList.key
-                }))
+                }));
+                hashHistory.push('/app')
               })
             }
           })
