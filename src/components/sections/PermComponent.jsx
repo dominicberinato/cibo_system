@@ -2,6 +2,7 @@ import React,{Component} from 'react'
 import {connect} from 'react-redux'
 import firebase,{firebaseRef} from 'src/firebase/index'
 import {hashHistory} from 'react-router'
+import * as actions from 'src/actions/actions'
 
 export class PermComponent extends Component {
   constructor(props) {
@@ -11,7 +12,7 @@ export class PermComponent extends Component {
   }
   render() {
     //get user object from state
-    var {auth} = this.props;
+    var {auth, dispatch} = this.props;
     if(auth)
     {
       //check that user doesnt exist
@@ -30,9 +31,17 @@ export class PermComponent extends Component {
             //check if user has a propCode
             var user = userShot.val();
             if(user.propCode) {
-              //user has prop code download property and send to admin
-              hashHistory.push('/admin');
 
+              //user has prop code download property and send to admin
+              //download a the property
+              firebaseRef.child(`properties/${user.propCode}`).once('value').then((propShot) => {
+                var property = propShot.val();
+                dispatch(actions.addProperty({
+                  ...property,
+                  propKey: propShot.key
+                }));
+                hashHistory.push('/admin');
+              })
             } else {
               //if user doesnt have propcode i.e not admin collect prop and push to app
               hashHistory.push('/app');
