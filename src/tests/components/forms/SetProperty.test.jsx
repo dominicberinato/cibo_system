@@ -37,11 +37,22 @@ describe('SetProperty', () => {
 
     //find form and simulate submit
     wrapper.ref('form').simulate('submit');
-    sinon.assert.calledOnce(addPropertySpy)
+    sinon.assert.calledOnce(addPropertySpy);
   });
 
   //check that  add property is not called with invalid data
   it('should not dispatch addProperty when invalid property data', () => {
+    var addPropertySpy = sinon.spy();
 
+    const wrapper = mount(<SetProperty auth={{uid: 1234}} dispatch={addPropertySpy}/>)
+
+    //set form values
+    wrapper.ref('propName').node.value = '';
+    wrapper.ref('propAddress').node.value = '';
+    wrapper.ref('file').node.value = '';
+
+    //find form and simulate submit
+    wrapper.ref('form').simulate('submit');
+    sinon.assert.notCalled(addPropertySpy)
   });
 });
