@@ -8,23 +8,6 @@ export class PermComponent extends Component {
     super(props)
   }
   componentDidMount() {
-    //when mounted check if user has property
-    var {auth} = this.props;
-    if(auth) {
-      //check if user has a propCode
-      firebaseRef.child(`users/${auth.uid}`).once('value').then((userShot) => {
-        if(userShot.val() != null) {
-          var user = userShot.val();
-          if(userShot.propCode) {
-            //if no propcode do nothing
-            console.log('prop code exists')
-          } else {
-            //pick property and set it
-            console.log('prop code doesnt exists')
-          }
-        }
-      })
-    }
   }
   render() {
     //get user object from state
@@ -37,13 +20,25 @@ export class PermComponent extends Component {
           var userFanOut = {}
           userFanOut[`/users/${auth.uid}`] = auth;
           return firebaseRef.update(userFanOut).then(() => {
-            console.log('regod!');
             hashHistory.push('/app');
           })
         }
         else {
-          //TODO check if user is admin and accord more perms
-          hashHistory.push('/app');
+          //check if user is admin and accord more perms
+          //select user
+          firebaseRef.child(`users/${auth.uid}`).once('value').then((userShot) => {
+            //check if user has a propCode
+            var user = userShot.val();
+            if(user.propCode) {
+              //user has prop code download property and send to admin
+              hashHistory.push('/admin');
+
+            } else {
+              //if user doesnt have propcode i.e not admin collect prop and push to app
+              hashHistory.push('/app');
+            }
+          })
+
         }
       })
       //onboard

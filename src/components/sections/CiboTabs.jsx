@@ -15,11 +15,10 @@ export class CiboTabs extends Component {
     this.assocProduct = this.assocProduct.bind(this);
   }
   assocProduct() {
-    
+
   }
   render() {
     var {property, dispatch} = this.props;
-
     var renderPropertyMessage = (property) => {
       if(property == undefined) {
         return(
