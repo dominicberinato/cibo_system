@@ -51,7 +51,15 @@ describe('Actions', () => {
 
       var result = actions.addTable(addTableAction.table);
       expect(result).toEqual(addTableAction);
-    })
+    });
+
+    it('should generate updateTable action', () => {
+      expect(1).toEqual(3);
+    });
+
+    it('should generate deleteTable action', () => {
+      expect(3).toEqual(4);
+    });
 
     //work on logout action test
     it('should generate logout action', () => {
@@ -155,6 +163,15 @@ describe('Actions', () => {
     afterEach((done) => {
       firebaseRef.remove().then(() => done());
     });
+
+    it('should update table and dispatch updateTable', () => {
+      expect(1).toEqual(4);
+    });
+
+    it('should delete table and dispatch deleteTable', () => {
+      expect(2).toEqual(3);
+    });
+
 
     it('should associate user and property then dispatch ADD_PROPERTY', (done) => {
       //push property

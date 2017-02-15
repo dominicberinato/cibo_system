@@ -92,7 +92,7 @@ describe('Reducers', () => {
       expect(1).toEqual(2);
     });
     it('should delete table on deleteTable', () => {
-      
+      expect(9).toEqual(6);
     })
   })
 

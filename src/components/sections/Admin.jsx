@@ -12,6 +12,7 @@ export class Admin extends Component {
     super(props);
   }
   render() {
+    //TODO show SetProperty only if prop not set
     return(
       <div className="row admin-panel">
         <div className="columns small-12 medium-6 large-6">
