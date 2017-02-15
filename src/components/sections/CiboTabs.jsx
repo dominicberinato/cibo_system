@@ -38,8 +38,8 @@ export class CiboTabs extends Component {
           <div className="text-center">
             <form ref='form' onSubmit={this.assocProduct}>
               <label className="property-message"> ENTER PROPERTY CODE</label>
-              <input  className="text-center" ref="propCode" type="text" placeholder="5GT-HTG"/>
-              <input  className="button" type="submit" value="CONNECT"/>
+              <input className="text-center" ref="propCode" type="text" placeholder="5GT-HTG"/>
+              <input ref="submit" className="button" type="submit" value="CONNECT"/>
             </form>
           </div>
         )

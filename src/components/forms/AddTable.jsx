@@ -40,7 +40,6 @@ export class AddTable extends Component {
   //draw
   render() {
     var {property} =  this.props;
-    console.log('this is property', property);
     var renderForm =  () => {
       if(Object.keys(property).length != 0) {
         return(
