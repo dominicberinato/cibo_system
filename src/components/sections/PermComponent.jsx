@@ -52,7 +52,11 @@ export class PermComponent extends Component {
       })
       //onboard
     }
-    return(<div className="text-center"><p> Loading User Permissions ...</p></div>)
+    return(
+      <div className="text-center permissions-text>">
+        <p>{`Hello ${auth.name}!`}</p>
+        <p>Please wait as we load your property</p>
+      </div>)
   }
 }
 export default connect((state) => {
