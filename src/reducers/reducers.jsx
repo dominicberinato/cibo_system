@@ -34,7 +34,26 @@ export var propertyReducer = (state = {}, action) => {
 export var tablesReducer = (state = [], action) => {
   switch(action.type) {
     case 'ADD_TABLE':
-      break;
+      return [
+        ...state,
+        action.table
+      ];
+    case 'UPDATE_TABLE':
+      return state.map((table) => {
+        if(table.id == action.id) {
+          return {
+            ...table,
+            ...action.updates
+          };
+        } else
+        {
+          return table;
+        }
+      });
+    case 'DELETE_TABLE':
+      return state.filter((table) => {
+        return table.tbKey != action.id
+      });
     default:
       return state;
   }
