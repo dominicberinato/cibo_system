@@ -16,17 +16,17 @@ export class CiboTabs extends Component {
     this.assocProduct = this.assocProduct.bind(this);
   }
   assocProduct(Event) {
-    //make sure refresh doesn't happen
-    Event.preventDefault();
+    Event.preventDefault(); //prevent refresh
     //collect user id from state
     var {dispatch, auth} = this.props;
-    if(auth) {
-      //if user logged in
-      var uid = auth.uid;
-      //check if code is set
-      var pcode = this.refs.propCode.value;
-      if(pcode.length != 0 )  {
-        //dispatch start  accoc user
+    //check that user exists
+    if(auth != undefined) {
+      //check that form has value
+      var code = this.refs.propCode.value;
+      //check that code is valid
+      if(code.length > 0) {
+        //dispatch assoc action
+        dispatch(actions.assocUser(auth.uid, code));
       }
     }
   }
