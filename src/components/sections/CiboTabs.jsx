@@ -8,14 +8,27 @@ import Operations from 'Operations'
 import StockManagement from 'StockManagement'
 import HumanResources from 'HumanResources'
 import {connect} from 'react-redux'
+import * as actions from 'src/actions/actions'
 
 export class CiboTabs extends Component {
   constructor(props){
     super(props);
     this.assocProduct = this.assocProduct.bind(this);
   }
-  assocProduct() {
-
+  assocProduct(Event) {
+    //make sure refresh doesn't happen
+    Event.preventDefault();
+    //collect user id from state
+    var {dispatch, auth} = this.props;
+    if(auth) {
+      //if user logged in
+      var uid = auth.uid;
+      //check if code is set
+      var pcode = this.refs.propCode.value;
+      if(pcode.length != 0 )  {
+        //dispatch start  accoc user
+      }
+    }
   }
   render() {
     var {property, dispatch} = this.props;
@@ -68,6 +81,7 @@ export class CiboTabs extends Component {
 
 export default connect((state) => {
   return {
-    property: state.property
+    property: state.property,
+    auth: state.auth
   }
 })(CiboTabs);

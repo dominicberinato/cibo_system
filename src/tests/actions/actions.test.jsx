@@ -133,7 +133,7 @@ describe('Actions', () => {
     }
 
     //run this code before each asnyc test (login && set up stuff)
-    before((done) => {
+    beforeEach((done) => {
       store = createMockStore({})
       //SIGN IN anonymously
       firebase.auth().signInAnonymously().then((user) => {
@@ -152,8 +152,29 @@ describe('Actions', () => {
     });
 
     ///run this after each tests
-    after((done) => {
+    afterEach((done) => {
       firebaseRef.remove().then(() => done());
+    });
+
+    it('should associate user and property then dispatch ADD_PROPERTY', (done) => {
+      //push property
+      testPropertyKey = firebaseRef.child('properties').push().key;
+      firebaseRef.child(`properties/${testPropertyKey}`).set(testProperty);
+
+      //mock our action
+      const action = actions.assocUser(1235, propCode);
+
+      store.dispatch(action).then(() => {
+        //collect mocked actions
+        const mockActions = store.getActions();
+        expect(mockActions[0].toInclude({
+          type: 'ADD_PROPERTY',
+          property: {
+            ...testProperty
+          }
+        }));
+        done();
+      }, done());
     });
 
 

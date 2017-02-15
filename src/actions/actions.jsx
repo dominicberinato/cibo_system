@@ -42,6 +42,33 @@ export var addProperty = (property) => {
   }
 }
 
+//export property assoc
+export var assocUser = (uid, propCode) => {
+  return(dispatch, state) => {
+    var propertyKey;
+    //find product with code
+    return firebaseRef.child('properties').orderByChild('propCode').equalTo(propCode).once('value').then((propList) => {
+      propList.forEach((property) => {
+        propertyKey = property.key;
+      })
+      //update list on db to assoc user
+      var assocFanOut = {};
+      //populate fanout
+      assocFanOut[`/property-users/${properyKey}/${uid}`] = uid;
+
+      return firebaseRef.update(assocFanOut).then(() => {
+        //dispath addProperty and render
+        dispatch(addProperty({
+          ...property,
+          propKey: propertyKey
+        }));
+      })
+    })
+
+
+  }
+}
+
 //add async class to pushProperty
 export var startAddProperty = (property) => {
   return(dispatch, state) => {

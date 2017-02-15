@@ -44,6 +44,7 @@ export class PermComponent extends Component {
               })
             } else {
               //if user doesnt have propcode i.e not admin collect prop and push to app
+              //get the property user list
               hashHistory.push('/app');
             }
           })
