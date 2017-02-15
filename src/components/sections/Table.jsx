@@ -11,13 +11,13 @@ export class Table extends Component {
       if(tbname != undefined && tbcapacity != undefined) {
         return(
           <div>
-            <div className="text-center">
+            <div >
               <label>Table Name/Number</label>
               <p ref="tbname">{tbname}</p>
             </div>
-            <div className="text-center">
+            <div >
               <label>Table Capacity</label>
-              <p ref="tbcapacity">tbcapacity</p>
+              <p ref="tbcapacity">{tbcapacity}</p>
             </div>
           </div>
         )

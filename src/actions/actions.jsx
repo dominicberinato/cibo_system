@@ -148,7 +148,7 @@ export var startAddTable =  (table) => {
     return firebaseRef.update(tableFanOut).then(() => {
       dispatch(addTable({
         ...table,
-        tableKey,
+        tbKey: tableKey
       }))
     })
   }
