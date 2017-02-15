@@ -5,12 +5,17 @@ import expect from 'expect'
 import $ from 'script-loader!jquery'
 import TestUtils from 'react-addons-test-utils'
 
-import * as actions from 'actions'
-import configureMockStore from 'redux-mock-store'
-import thunk from 'redux-thunk'
-
 //get the unconnected component
 import {AddTable} from 'AddTable'
+
+//enzyme stuff
+import {mount} from 'enzyme'
+import sinon from 'sinon'
+import thunk from 'redux-thunk'
+import configureMockStore from 'redux-mock-store'
+
+//use this to mock a store
+var createMockStore = configureMockStore([thunk]);
 
 describe('AddTable',  () => {
   //check that component exists
@@ -20,27 +25,24 @@ describe('AddTable',  () => {
 
   //use spies to check that correct actions are dispatched
   it('should dispatch addTable when valid table added', () => {
-    var addTableSpy = expect.createSpy();
-    //mock table data
-    var table = {
-     tbname:'Sambuka',
-     tbcapacity: 7
-    }
+    const dispatch = sinon.spy()
+    //mock store with auth , prop
+    var store = createMockStore({
+      property: {propKey: 1234},
+      auth: {uid: 5662}
+    });
+    //full render component
+    //pass in spy as dispatch
+    const wrapper = mount(<AddTable store={store} dispatch={dispatch}/>);
+    //set input values
+    wrapper.ref('tableName').simulate('change', {target: {value: '5'}});
+    wrapper.ref('tableSeats').simulate('change', {target: {value: '5'}});
 
-    //var addtable Action
-    var action = actions.startAddTable(table);
+    //simulate form submit
+    wrapper.ref('form').simulate('submit');
 
-    /*render component & test */
-    var addtable = TestUtils.renderIntoDocument(<AddTable dispatch={addTableSpy}/>);
-    var $element = $(ReactDOM.findDOMNode(addtable));
-
-    //populate fields with data
-    addtable.refs.tableName.value = table.tbname;
-    addtable.refs.tableCapacity.value = table.tbcapacity;
-
-    //simulate a submit
-    TestUtils.Simulate.submit($element.find(('form')[0]));
-    expect(addTableSpy).toHaveBeenCalledWith(action);
+    //assert that the spy was called
+    sinon.assert.calledOnce(dispatch);
   });
 
   //check that invalid table isnt passed

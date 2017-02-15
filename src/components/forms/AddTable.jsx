@@ -45,7 +45,7 @@ export class AddTable extends Component {
       if(Object.keys(property).length != 0) {
         return(
           <div>
-            <form onSubmit={this.saveTable}>
+            <form ref='form' onSubmit={this.saveTable}>
               <input ref='tableName' type='text'/>
               <input ref='tableSeats' type='number'/>
               <input ref='tableProperty' type="hidden" defaultValue={property.propKey}/>

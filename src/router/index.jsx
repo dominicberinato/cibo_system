@@ -58,6 +58,7 @@ export default (
     }}/>
     <Route
       path="admin"
+      onEnter={requireLogin}
       getComponent={(location,cb) => {
         System.import('Admin')
        .then(loadRoute(cb))
