@@ -15,6 +15,9 @@ export class CiboTabs extends Component {
     super(props);
     this.assocProduct = this.assocProduct.bind(this);
   }
+  componentDidMount() {
+    
+  }
   assocProduct(Event) {
     Event.preventDefault(); //prevent refresh
     //collect user id from state

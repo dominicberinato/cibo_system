@@ -17,6 +17,17 @@ describe('CiboTabs', () => {
     expect(CiboTabs).toExist();
   });
 
+  it('calls componentDidMount', () => {
+    //make spy
+    var spy = sinon.spy(CiboTabs.prototype, 'componentDidMount');
+    //render component
+    const wrapper = mount(<CiboTabs/>);
+    //make assertion
+    sinon.assert.calledOnce(spy);
+    CiboTabs.prototype.componentDidMount.restore();
+
+  });
+
   it('should not dispatch assocProp on invalid data', () => {
     const dispatch = sinon.spy();
     const wrapper = mount(<CiboTabs dispatch={dispatch}/>);
@@ -24,7 +35,7 @@ describe('CiboTabs', () => {
     wrapper.ref('propCode').simulate('change', {target:{value: ''}});
     wrapper.ref('form').simulate('submit');
     sinon.assert.notCalled(dispatch);
-  })
+  });
 
   it('should dispatch assocProp when code is provided', () => {
     //mock a store with a user
@@ -49,5 +60,5 @@ describe('CiboTabs', () => {
 
     //assert spy was called
     sinon.assert.calledOnce(dispatch);
-  })
+  });
 })

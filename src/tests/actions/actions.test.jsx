@@ -53,6 +53,18 @@ describe('Actions', () => {
       expect(result).toEqual(addTableAction);
     });
 
+    it('should generate addReservation Action', () => {
+      expect(4).toEqual(7);
+    });
+
+    it('should generate removeReservation Action',  () => {
+      expect(4).toEqual(8);
+    })
+
+    it('should generate updateReservation Action', () => {
+      expect(67).toEqual(99);
+    })
+
     it('should generate updateTable action', () => {
        var updates  = {
          tbname: 9
