@@ -198,11 +198,13 @@ export var collectTables = () => {
     return tablesRef.once('value').then((tablesShot) => {
       tablesShot.forEach((childTable) => {
         var tableKey = childTable.key;
-        //add every table to state
-        dispatch(addTable({
-          tbKey: tableKey,
-          ...childTable.val()
-        }))
+        //lets fetch the table from firebase
+        return firebaseRef.child(`tables/${tableKey}`).once('value').then((thisTable) => {
+          dispatch(addTable({
+            tbKey: tableKey,
+            ...thisTable.val()
+          }))
+        })
       })
 
     })

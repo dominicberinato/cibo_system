@@ -1,10 +1,16 @@
 import React,{Component} from 'react'
 import {connect} from 'react-redux'
 import Table from 'Table'
+import * as actions from 'src/actions/actions'
 
 export class TableList extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
+  }
+  componentDidMount() {
+    //when mounted also pull some tables from db if any
+    var {dispatch} = this.props;
+    dispatch(actions.collectTables());
   }
   render() {
     var {tables} = this.props;
