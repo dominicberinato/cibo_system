@@ -160,3 +160,52 @@ export var addTable = (table) => {
     table
   }
 }
+
+//export add Reservation action
+export var addReservation = (reservation) => {
+  return {
+    type: 'ADD_RESERVATION',
+    reservation
+  }
+}
+
+
+//export update reservation
+export var updateReservation = (id, updates) => {
+  return {
+    type: 'UPDATE_RESERVATION',
+    id,
+    updates
+  }
+}
+
+//export remove reservation
+export var removeReservation = (id) => {
+  return {
+    type: 'REMOVE_RESERVATION',
+    id
+  }
+}
+
+
+//export action to collect tables
+export var collectTables = () => {
+  return(dispatch, getState) => {
+    //get the id of the property so we can use a lookup table
+    var propKey = getState().property.propKey;
+
+    var tablesRef = firebaseRef.child(`property-tables/${propKey}`);
+    return tablesRef.once('value').then((tablesShot) => {
+      tablesShot.forEach((childTable) => {
+        var tableKey = childTable.key;
+        //add every table to state
+        dispatch(addTable({
+          tbKey: tableKey,
+          ...childTable.val()
+        }))
+      })
+
+    })
+
+  }
+}

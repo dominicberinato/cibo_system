@@ -31,8 +31,6 @@ describe('PermComponent',() => {
     };
 
     const store = createMockStore({auth});
-
-
     var spy = sinon.spy(PermComponent.prototype, 'componentDidMount');
     const wrapper = mount(<PermComponent store={store}/>);
     //expect(PermComponent.prototype.componentDidMount).to.have.property('callCount', 1);

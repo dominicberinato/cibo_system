@@ -54,15 +54,53 @@ describe('Actions', () => {
     });
 
     it('should generate addReservation Action', () => {
-      expect(4).toEqual(7);
+      //mock data
+      var reservation = {
+        resKey: 8,
+        name: 'Isaac',
+        number: 6,
+        tbKey: 7
+      };
+      var addReservationAction = {
+        type: 'ADD_RESERVATION',
+        reservation
+      };
+      //mock call
+      var result = actions.addReservation(addReservationAction.reservation);
+      //assertion
+      expect(result).toEqual(addReservationAction);
+
     });
 
     it('should generate removeReservation Action',  () => {
-      expect(4).toEqual(8);
+      //mock data
+      var resKey = 9;
+      var removeReservationAction  = {
+        type: 'REMOVE_RESERVATION',
+        id: resKey
+      };
+      //mock calll
+      var result = actions.removeReservation(removeReservationAction.id);
+      //assertion
+      expect(result).toEqual(removeReservationAction);
     })
 
     it('should generate updateReservation Action', () => {
-      expect(67).toEqual(99);
+
+      //mock data
+      var updates =  {
+        name: 'Yohan'
+      };
+      var resKey = 9;
+      var updateReservationAction = {
+        type: 'UPDATE_RESERVATION',
+        id: resKey,
+        updates
+      };
+      // mock calll
+      var result = actions.updateReservation(resKey, updates);
+      //assertion
+      expect(result).toEqual(updateReservationAction);
     })
 
     it('should generate updateTable action', () => {
@@ -150,6 +188,7 @@ describe('Actions', () => {
     var uid;
     var propertyRef = firebaseRef.child('properties');
     var testPropertyKey;
+    var testTableRef;
     var store;
 
     var debug = {hello: "world"};
@@ -182,8 +221,12 @@ describe('Actions', () => {
         //remove any existing proprties
         return firebaseRef.remove();
       }).then(()=> {
-        //TODO check for correctness
-        return true;
+        testTableRef = firebaseRef.child('tables').push();
+
+        return testTableRef.set({
+          ...testTable
+        });
+
       })
       .then(() => done())
       .catch(done);
@@ -194,12 +237,44 @@ describe('Actions', () => {
       firebaseRef.remove().then(() => done());
     });
 
+    it('should create a reservation and dispatch ADD_RESERVATION', () => {
+      expect(5).toEqual(7);
+    });
+
+    it('should update a reservation and dispatch UPDATE_RESERVATION', () => {
+      expect(8).toEqual(0);
+    });
+
+    it('should remove a reservation and dispatch REMOVE_RESERVATION',  () => {
+      expect(7).toEqual(8);
+    })
+
+    it('should collect tables and dispatch ADD_TABLE',  () => {
+
+    });
+
     it('should update table and dispatch updateTable', () => {
       expect(1).toEqual(4);
     });
 
     it('should delete table and dispatch deleteTable', () => {
       expect(2).toEqual(3);
+    });
+
+    it('should collect tables and dispatch ADD_TABLE',  (done) => {
+      const store = createMockStore({property: {propKey: testPropertyKey}});
+      const action = actions.collectTables();
+
+      store.dispatch(action).then(()=> {
+        const mockActions = store.getActions();
+
+        //work on actions
+        expect(mockActions[0].type).toEqual('ADD_TABLE');
+        expect(mockActions[0].tables.length).toEqual(1);
+        expect(mockActions[0].tables[0].tbname).toEqual(testTable.tbname);
+
+        done();
+      }, done)
     });
 
 

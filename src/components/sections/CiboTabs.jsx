@@ -16,7 +16,11 @@ export class CiboTabs extends Component {
     this.assocProduct = this.assocProduct.bind(this);
   }
   componentDidMount() {
-    
+    var{property, dispatch} = this.props;
+    //check that we have a property key
+    if(property.propKey  != undefined) {
+      dispatch(actions.collectTables(property.propkey));
+    }
   }
   assocProduct(Event) {
     Event.preventDefault(); //prevent refresh
