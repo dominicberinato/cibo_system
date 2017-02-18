@@ -53,6 +53,15 @@ describe('Actions', () => {
       expect(result).toEqual(addTableAction);
     });
 
+    it('should generate clear Table action', () => {
+      var action = {
+        type: 'CLEAR_TABLES'
+      };
+
+      var result = actions.clearTables();
+      expect(result).toEqual(action);
+    })
+
     it('should generate addReservation Action', () => {
       //mock data
       var reservation = {
@@ -274,7 +283,7 @@ describe('Actions', () => {
         expect(mockActions[0].tables[0].tbname).toEqual(testTable.tbname);
 
         done();
-      }, done)
+      }, done());
     });
 
 

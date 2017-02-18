@@ -1,6 +1,8 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import MakeReservation from 'MakeReservation'
+import Availability from 'Availability'
+import CurrentBookings from 'CurrentBookings'
 
 export class Reservations extends Component {
   render() {
@@ -11,10 +13,10 @@ export class Reservations extends Component {
         </div>
         <div className="columns small-12 large-6 medium-6">
           <div className="row">
-            Availability
+            <Availability/>
           </div>
           <div className="row">
-            Current Bookings
+            <CurrentBookings/>
           </div>
         </div>
       </div>

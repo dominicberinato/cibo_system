@@ -125,6 +125,29 @@ describe('Reducers', () => {
 
       expect(result[0].tbcapacity).toEqual(updates.tbcapacity);
     });
+    it('should clear tables on clearTables', () => {
+      //mock the table
+      var tables = [{
+        tbname: 7,
+        tbcapacity: 8,
+        tbKey: 8
+      },
+      {
+        tbname: 7,
+        tbcapacity: 8,
+        tbKey: 9
+      }
+      ];
+
+      var clearTablesAction = {
+        type:'CLEAR_TABLES'
+      }
+
+      var result = reducers.tablesReducer(df(tables), df(clearTablesAction));
+
+      //assertion
+      expect(result.length).toEqual(0)
+    })
     it('should delete table on deleteTable', () => {
       //mock the table
       var tables = [{

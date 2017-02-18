@@ -72,6 +72,8 @@ export var tablesReducer = (state = [], action) => {
       return state.filter((table) => {
         return table.tbKey != action.id
       });
+    case 'CLEAR_TABLES':
+      return [];
     default:
       return state;
   }

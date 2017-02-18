@@ -187,6 +187,13 @@ export var removeReservation = (id) => {
   }
 }
 
+//action to clear tables
+export var clearTables = () => {
+  return {
+    type: 'CLEAR_TABLES'
+  }
+}
+
 
 //export action to collect tables
 export var collectTables = () => {
@@ -196,6 +203,8 @@ export var collectTables = () => {
 
     var tablesRef = firebaseRef.child(`property-tables/${propKey}`);
     return tablesRef.once('value').then((tablesShot) => {
+      //clear tables for consistency
+      dispatch(clearTables());
       tablesShot.forEach((childTable) => {
         var tableKey = childTable.key;
         //lets fetch the table from firebase
