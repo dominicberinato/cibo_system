@@ -22,4 +22,4 @@ export default connect((state) => {
   return{
     reservations: state.reservations
   }
-})
+})(CurrentBookings);

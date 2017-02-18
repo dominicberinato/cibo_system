@@ -9,7 +9,7 @@ export class Availability extends Component {
   componentDidMount() {
     //todo implement collectReservations
     var {dispatch} = this.props;
-    dispatch(actions(collectTables()));
+    dispatch(actions.collectTables());
   }
   render() {
     var {tables, reservations} = this.props;
@@ -25,7 +25,7 @@ export class Availability extends Component {
 
 export default connect((state) => {
   return{
-    reservations: state.reservations;
-    tables: state.tables;
+    reservations: state.reservations,
+    tables: state.tables
   }
-})
+})(Availability);
