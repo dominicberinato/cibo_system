@@ -25,7 +25,11 @@ try{
 var plugins = PRODUCTION
     ?   [
             new webpack.optimize.CommonsChunkPlugin({name:'vendor', filename:'vendor.[hash:12].min.js'}),
-            new webpack.optimize.UglifyJsPlugin(),
+            new webpack.optimize.UglifyJsPlugin({
+              compress: {
+                warnings: false
+              }
+            }),
             new HTMLWebpackPlugin({
               template: 'index-template.html'
             }),
