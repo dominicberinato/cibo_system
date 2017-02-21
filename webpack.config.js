@@ -18,6 +18,60 @@ try{
   console.log(e);
 }
 
+var buildModule = PRODUCTION
+    ?             {
+                    rules: [
+                      {
+                        test: /\.(js|jsx)$/, //check for all js files
+                        use: [{
+                          loader: 'babel-loader',
+                          options: { presets: ['react', 'es2015', 'stage-0']}
+                        }],
+                        exclude: /(node_modules)/
+                      },
+                    ],
+                    noParse: [
+                      /node_modules\/sinon/
+                    ],
+                    loaders: [
+                      {
+                        test: /.js$/,
+                        exclude: /node_modules/,
+                        loader: 'babel'
+                      },
+                      {
+                        test: /\.json$/,
+                        loader: 'json',
+                      }
+                    ]
+                  }
+      :           {
+                      rules: [
+                        {
+                          test: /\.(js|jsx)$/, //check for all js files
+                          use: [{
+                            loader: 'babel-loader',
+                            options: { presets: ['react', 'es2015', 'stage-0', 'react-hmre']}
+                          }],
+                          exclude: /(node_modules)/
+                        },
+                      ],
+                      noParse: [
+                        /node_modules\/sinon/
+                      ],
+                      loaders: [
+                        {
+                          test: /.js$/,
+                          exclude: /node_modules/,
+                          loader: 'babel'
+                        },
+                        {
+                          test: /\.json$/,
+                          loader: 'json',
+                        }
+                      ]
+                    };
+
 
 
 module.exports = {
@@ -63,32 +117,7 @@ module.exports = {
     filename: '[name].bundle.js',
     publicPath: '/assets/', // for the dev server
   },
-  module: {
-    rules: [
-      {
-        test: /\.(js|jsx)$/, //check for all js files
-        use: [{
-          loader: 'babel-loader',
-          options: { presets: ['react', 'es2015', 'stage-0', 'react-hmre'] }
-        }],
-        exclude: /(node_modules)/
-      },
-    ],
-    noParse: [
-      /node_modules\/sinon/
-    ],
-    loaders: [
-      {
-        test: /.js$/,
-        exclude: /node_modules/,
-        loader: 'babel'
-      },
-      {
-        test: /\.json$/,
-        loader: 'json',
-      }
-    ]
-  },
+  module: buildModule,
   //finding app modules
   resolve: {
     modules: [
