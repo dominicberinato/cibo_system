@@ -3,10 +3,13 @@ var webpack = require('webpack')
 var path = require('path')
 var envFile = require('node-env-file')
 //enviroment variable
-process.env.NODE_ENV = process.env.NODE_ENV || 'development';
+PRODUCTION =  process.env.NODE_ENV === 'production';
+DEVELOPMENT = process.env.NODE_ENV === 'development';
+TEST = process.env.NODE_ENV === 'test';
+
 // set enviroment
 try{
-  if(process.env.NODE_ENV != 'production') {
+  if(DEVELOPMENT || TEST) {
       envFile(path.join(__dirname, 'config/'+process.env.NODE_ENV + '.env'));
   } else {
     console.log('on server no need for env file')
@@ -64,7 +67,7 @@ module.exports = {
         test: /\.(js|jsx)$/, //check for all js files
         use: [{
           loader: 'babel-loader',
-          options: { presets: ['react', 'es2015', 'stage-0', 'react-hmre'] }
+          options: { presets: ['react', 'es2015', 'stage-0', {PR}] }
         }],
         exclude: /(node_modules)/
       },
