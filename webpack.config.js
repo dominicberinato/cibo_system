@@ -2,6 +2,9 @@
 var webpack = require('webpack')
 var path = require('path')
 var envFile = require('node-env-file')
+var HTMLWebpackPlugin = require('html-webpack-plugin');
+var CompressionPlugin = require('compression-webpack-plugin');
+var OfflinePlugin =  require('offline-plugin');
 //enviroment variable
 var PRODUCTION =  process.env.NODE_ENV === 'production';
 var DEVELOPMENT = process.env.NODE_ENV === 'development';
@@ -18,6 +21,55 @@ try{
   console.log(e);
 }
 
+//separate production plugins and developement plugins
+var plugins = PRODUCTION
+    ?   [
+            new webpack.optimize.CommonsChunkPlugin({name:'vendor', filename:'vendor.[hash:12].min.js'}),
+            new webpack.optimize.UglifyJSPlugin({
+              compress: {
+                warnings: false
+              }
+            }),
+            new HTMLWebpackPlugin({
+              template: 'index-template.html'
+            }),
+            new CompressionPlugin({
+              asset: "[path].gz[query]",
+              algorithm: "gzip",
+              test: /\.js$|\.css$|.html$/,
+              threshold: 10240,
+              minRatio: 0.8
+            }),
+            new OfflinePlugin()
+        ]
+    : [
+
+    ];
+
+//push universal plugins
+plugins.push(
+  new webpack.DefinePlugin({
+    'process.env': {
+      NODE_ENV: JSON.stringify(process.env.NODE_ENV),
+      API_KEY: JSON.stringify(process.env.API_KEY),
+      AUTH_DOMAIN:JSON.stringify(process.env.AUTH_DOMAIN),
+      DATABASE_URL:JSON.stringify(process.env.DATABASE_URL),
+      STORAGE_BUCKET:JSON.stringify(process.env.STORAGE_BUCKET),
+    }
+  }),
+  new webpack.LoaderOptionsPlugin({
+      test: /\.scss$/,
+      options: {
+        sassLoader: {
+          includePaths: [
+            path.resolve(__dirname, './node_modules/foundation-sites/scss')
+          ]
+        }
+      }
+  })
+)
+
+//different entries for production and developement
 var entry =  PRODUCTION
     ?   {
           app: ['./app.jsx'],
@@ -113,31 +165,11 @@ module.exports = {
     'react/lib/ReactContext': 'react',
   },
   //configure global imports
-  plugins: [
-    new webpack.DefinePlugin({
-      'process.env': {
-        NODE_ENV: JSON.stringify(process.env.NODE_ENV),
-        API_KEY: JSON.stringify(process.env.API_KEY),
-        AUTH_DOMAIN:JSON.stringify(process.env.AUTH_DOMAIN),
-        DATABASE_URL:JSON.stringify(process.env.DATABASE_URL),
-        STORAGE_BUCKET:JSON.stringify(process.env.STORAGE_BUCKET),
-      }
-    }),
-    new webpack.LoaderOptionsPlugin({
-        test: /\.scss$/,
-        options: {
-          sassLoader: {
-            includePaths: [
-              path.resolve(__dirname, './node_modules/foundation-sites/scss')
-            ]
-          }
-        }
-    })
-  ],
+  plugins: plugins,
   //the transpiled output is here
   output: {
     path: path.resolve(__dirname, 'dist/assets'),
-    filename: '[name].bundle.js',
+    filename: PRODUCTION ? '[name].[hash:12].min.js' : '[name].bundle.js',
     publicPath: '/assets/', // for the dev server
   },
   module: buildModule,
