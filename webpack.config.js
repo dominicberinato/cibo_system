@@ -30,9 +30,6 @@ var plugins = PRODUCTION
                 warnings: false
               }
             }),
-            new HTMLWebpackPlugin({
-              template: 'index-template.html'
-            }),
             new CompressionPlugin({
               asset: "[path].gz[query]",
               algorithm: "gzip",
@@ -49,6 +46,9 @@ var plugins = PRODUCTION
 
 //push universal plugins
 plugins.push(
+  new HTMLWebpackPlugin({
+    template: 'index-template.html'
+  }),
   new webpack.DefinePlugin({
     'process.env': {
       NODE_ENV: JSON.stringify(process.env.NODE_ENV),
@@ -171,8 +171,8 @@ module.exports = {
   //the transpiled output is here
   output: {
     path: path.join(__dirname, 'dist'),
-    filename: PRODUCTION ? '[name].[hash:12].min.js' : '[name].bundle.js',
-    publicPath: '/', // for the dev server
+    publicPath: '/', //for the dev server
+    filename: PRODUCTION ? '[name].[hash:12].min.js' : '[name].bundle.js'
   },
   module: buildModule,
   //finding app modules
@@ -191,9 +191,6 @@ module.exports = {
       sinon: 'sinon/pkg/sinon'
     },
     extensions: [".js", ".jsx", ".json"],
-  },
-  devServer: {
-    contentBase: __dirname + '/src',
   },
   /*only load the source maps if not production*/
   devtool: process.env.NODE_ENV === 'production' ? undefined : 'inline-source-map'

@@ -21,7 +21,7 @@ app.use(function (req, res, next){
 var oneYear = 1 * 365 * 24 * 60 * 60 * 1000;
 app.use(compression());
 //show app folder to serve
-app.use(express.static(__dirname +'/dist')); // specifies a a folder name to expose
+app.use(express.static(__dirname +'/dist/')); // specifies a a folder name to expose
 
 
 //start the server
