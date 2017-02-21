@@ -25,18 +25,14 @@ try{
 var plugins = PRODUCTION
     ?   [
             new webpack.optimize.CommonsChunkPlugin({name:'vendor', filename:'vendor.[hash:12].min.js'}),
-            new webpack.optimize.UglifyJsPlugin({
-              compress: {
-                warnings: false
-              }
-            }),
+            new webpack.optimize.UglifyJsPlugin(),
             new HTMLWebpackPlugin({
               template: 'index-template.html'
             }),
             new CompressionPlugin({
               asset: "[path].gz[query]",
               algorithm: "gzip",
-              test: /\.js$|\.css$|.html$/,
+              test: /\.js$|.html$/,
               threshold: 10240,
               minRatio: 0.8
             }),
@@ -59,6 +55,8 @@ plugins.push(
     }
   }),
   new webpack.LoaderOptionsPlugin({
+      minimize: true,
+      debug: false,
       test: /\.scss$/,
       options: {
         sassLoader: {
@@ -81,10 +79,7 @@ var entry =  PRODUCTION
             'react',
             'react-redux',
             'firebase',
-            'express',
-            'css-loader',
             'material-ui',
-            'node-sass',
             'react-dom',
             'react-router',
             'react-tap-event-plugin',
