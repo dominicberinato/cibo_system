@@ -84,7 +84,6 @@ var entry = PRODUCTION
             'material-ui',
             'react-router',
             'firebase',
-            'google-map-react',
             'react-dom',
             'redux-thunk'
           ]
