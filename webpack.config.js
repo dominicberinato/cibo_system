@@ -24,6 +24,7 @@ try{
 //separate production plugins and developement plugins
 var plugins = PRODUCTION
     ?   [
+
             new webpack.optimize.CommonsChunkPlugin({name:'vendor', filename:'vendor.[hash:12].min.js'}),
             new webpack.optimize.UglifyJsPlugin({
               compress: {
@@ -37,18 +38,18 @@ var plugins = PRODUCTION
               threshold: 10240,
               minRatio: 0.8
             }),
-            new webpack.IgnorePlugin(/vertx/),
+            new HTMLWebpackPlugin({
+              template: 'index-template.html'
+            }),
             new OfflinePlugin()
         ]
     : [
 
-    ];
+      ];
 
 //push universal plugins
 plugins.push(
-  new HTMLWebpackPlugin({
-    template: 'index-template.html'
-  }),
+
   new webpack.DefinePlugin({
     'process.env': {
       NODE_ENV: JSON.stringify(process.env.NODE_ENV),
@@ -86,7 +87,6 @@ var entry =  PRODUCTION
             'material-ui',
             'react-dom',
             'react-router',
-            'react-tap-event-plugin',
             'redux',
           ]
         }
@@ -156,6 +156,12 @@ var buildModule = PRODUCTION || TEST
 module.exports = {
   //webpack reads our raw source from here
   context: __dirname + '/src', //root of our code files
+  stats: {
+    colors: true,
+    modules: true,
+    reasons: true,
+    errorDetails: true
+  },
   //fix for can't find 'fs'
   target: 'node',
   entry: entry,
@@ -171,7 +177,7 @@ module.exports = {
   //the transpiled output is here
   output: {
     path: path.join(__dirname, 'dist'),
-    publicPath: '/', //for the dev server
+    publicPath: '/dist', //for the dev server
     filename: PRODUCTION ? '[name].[hash:12].min.js' : '[name].bundle.js'
   },
   module: buildModule,
@@ -193,5 +199,5 @@ module.exports = {
     extensions: [".js", ".jsx", ".json"],
   },
   /*only load the source maps if not production*/
-  devtool: process.env.NODE_ENV === 'production' ? undefined : 'inline-source-map'
+  devtool: 'source-map'
 };
