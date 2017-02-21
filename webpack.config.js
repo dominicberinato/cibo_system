@@ -21,47 +21,45 @@ try{
   console.log(e);
 }
 
-//separate production plugins and developement plugins
 var plugins = PRODUCTION
     ?   [
-            //new webpack.optimize.CommonsChunkPlugin({name:'vendor', filename:'vendor.[hash:12].min.js'}),
-            new webpack.optimize.UglifyJsPlugin({
-              compress: {
-                warnings: false
-              }
-            }),
-            new CompressionPlugin({
-              asset: "[path].gz[query]",
-              algorithm: "gzip",
-              test: /\.js$/,
-              threshold: 10240,
-              minRatio: 0.8
-            }),
-            new HTMLWebpackPlugin({
-              template: 'index-template.html'
-            }),
-            new OfflinePlugin()
+          new webpack.optimize.CommonsChunkPlugin({name:'vendor', filename:'vendor.[hash:12].min.js'}),
+          new webpack.optimize.UglifyJsPlugin({
+            compress: {
+              warnings: false
+            }
+          }),
+          new HTMLWebpackPlugin({
+            template:'index-template.html'
+          }),
+          new CompressionPlugin({
+            asset: "[path].gz[query]",
+            algorithm: "gzip",
+            test: /\.js$|\.css$|\.html$/,
+            threshold: 10240,
+            minRatio: 0.8
+          }),
+          new OfflinePlugin()
         ]
-    : [
+    :   [
 
-      ];
+        ];
 
-//push universal plugins
+//add universal plugins
 plugins.push(
-
   new webpack.DefinePlugin({
-    'process.env': {
-      NODE_ENV: JSON.stringify(process.env.NODE_ENV),
-      API_KEY: JSON.stringify(process.env.API_KEY),
-      AUTH_DOMAIN:JSON.stringify(process.env.AUTH_DOMAIN),
-      DATABASE_URL:JSON.stringify(process.env.DATABASE_URL),
-      STORAGE_BUCKET:JSON.stringify(process.env.STORAGE_BUCKET),
-    }
-  }),
-  new webpack.LoaderOptionsPlugin({
-      minimize: true,
+   'process.env': {
+     NODE_ENV: JSON.stringify(process.env.NODE_ENV),
+     API_KEY: JSON.stringify(process.env.API_KEY),
+     AUTH_DOMAIN: JSON.stringify(process.env.AUTH_DOMAIN),
+     DATABASE_URL: JSON.stringify(process.env.DATABASE_URL),
+     STORAGE_BUCKET: JSON.stringify(process.env.STORAGE_BUCKET)
+   }
+ }),
+ new webpack.LoaderOptionsPlugin({
+      minimize:true,
       debug: false,
-      test: /\.(css|scss|sass|less|styl})$/,
+      test: /\.scss$/,
       options: {
         sassLoader: {
           includePaths: [
@@ -70,29 +68,33 @@ plugins.push(
         }
       }
   })
-)
+);
 
-//different entries for production and developement
-var entry =  PRODUCTION
-    ?
-        [
-            './app.jsx',
+//check if on production
+var entry = PRODUCTION
+    ?   {
+          app: ['./app.jsx'],
+          vendor:
+          [
             'script-loader!jquery/dist/jquery.min.js',
             'script-loader!foundation-sites/dist/foundation.min.js',
             'react',
-            'react-redux',
-            'firebase',
-            'material-ui',
-            'react-dom',
-            'react-router',
             'redux',
-        ]
-    :   {
-          jquery: 'script-loader!jquery/dist/jquery.min.js',
-          foundation: 'script-loader!foundation-sites/dist/foundation.min.js',
-          app: './app.jsx'
-        };
+            'react-redux',
+            'material-ui',
+            'react-router',
+            'firebase',
+            'google-map-react',
+            'react-dom',
+            'redux-thunk'
+          ]
+        }
+    :   [
 
+          'script-loader!jquery/dist/jquery.min.js',
+          'script-loader!foundation-sites/dist/foundation.min.js',
+          './app.jsx'
+        ];
 //enable or disable hot module replace
 var buildModule = PRODUCTION || TEST
     ?             {
@@ -174,7 +176,7 @@ module.exports = {
   //the transpiled output is here
   output: {
     path: path.join(__dirname, 'dist'),
-    publicPath: '/dist', //for the dev server
+    publicPath: '/', //for the dev server
     filename: PRODUCTION ? '[name].[hash:12].min.js' : '[name].bundle.js'
   },
   module: buildModule,
@@ -194,6 +196,11 @@ module.exports = {
       sinon: 'sinon/pkg/sinon'
     },
     extensions: [".js", ".jsx", ".json"],
+  },
+  devServer: {
+    contentBase: './dist',
+    inline: true,
+    hot: true
   },
   /*only load the source maps if not production*/
   devtool: 'source-map'
