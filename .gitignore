@@ -1,4 +1,4 @@
 node_modules/
-dist/assets/*.*
+dist/
 config/development.env
 .travis.yml

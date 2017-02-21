@@ -32,7 +32,7 @@ var plugins = PRODUCTION
             new CompressionPlugin({
               asset: "[path].gz[query]",
               algorithm: "gzip",
-              test: /\.js$|.html$/,
+              test: /\.js$/,
               threshold: 10240,
               minRatio: 0.8
             }),
@@ -166,9 +166,9 @@ module.exports = {
   plugins: plugins,
   //the transpiled output is here
   output: {
-    path: path.resolve(__dirname, 'dist/assets'),
+    path: path.join(__dirname, 'dist'),
     filename: PRODUCTION ? '[name].[hash:12].min.js' : '[name].bundle.js',
-    publicPath: '/assets/', // for the dev server
+    publicPath: '/', // for the dev server
   },
   module: buildModule,
   //finding app modules
