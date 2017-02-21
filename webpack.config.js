@@ -156,6 +156,8 @@ var buildModule = PRODUCTION || TEST
 module.exports = {
   //webpack reads our raw source from here
   context: __dirname + '/src', //root of our code files
+  //fix for can't find 'fs'
+  target: 'node',
   entry: entry,
   externals: {
     jQuery: 'jQuery',
