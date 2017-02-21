@@ -3,9 +3,9 @@ var webpack = require('webpack')
 var path = require('path')
 var envFile = require('node-env-file')
 //enviroment variable
-PRODUCTION =  process.env.NODE_ENV === 'production';
-DEVELOPMENT = process.env.NODE_ENV === 'development';
-TEST = process.env.NODE_ENV === 'test';
+var PRODUCTION =  process.env.NODE_ENV === 'production';
+var DEVELOPMENT = process.env.NODE_ENV === 'development';
+var TEST = process.env.NODE_ENV === 'test';
 
 // set enviroment
 try{
@@ -17,6 +17,8 @@ try{
 } catch(e) {
   console.log(e);
 }
+
+
 
 module.exports = {
   //webpack reads our raw source from here
@@ -67,7 +69,7 @@ module.exports = {
         test: /\.(js|jsx)$/, //check for all js files
         use: [{
           loader: 'babel-loader',
-          options: { presets: ['react', 'es2015', 'stage-0', {PR}] }
+          options: { presets: ['react', 'es2015', 'stage-0', 'react-hmre'] }
         }],
         exclude: /(node_modules)/
       },
