@@ -18,7 +18,34 @@ try{
   console.log(e);
 }
 
-var buildModule = PRODUCTION
+var entry =  PRODUCTION
+    ?   {
+          app: ['./app.jsx'],
+          vendor:
+          [
+            'script-loader!jquery/dist/jquery.min.js',
+            'script-loader!foundation-sites/dist/foundation.min.js',
+            'react',
+            'react-redux',
+            'firebase',
+            'express',
+            'css-loader',
+            'material-ui',
+            'node-sass',
+            'react-dom',
+            'react-router',
+            'react-tap-event-plugin',
+            'redux',
+          ]
+        }
+    :   {
+          jquery: 'script-loader!jquery/dist/jquery.min.js',
+          foundation: 'script-loader!foundation-sites/dist/foundation.min.js',
+          app: './app.jsx'
+        };
+
+//enable or disable hot module replace
+var buildModule = PRODUCTION || TEST
     ?             {
                     rules: [
                       {
@@ -77,11 +104,7 @@ var buildModule = PRODUCTION
 module.exports = {
   //webpack reads our raw source from here
   context: __dirname + '/src', //root of our code files
-  entry: {
-    jquery: 'script-loader!jquery/dist/jquery.min.js',
-    foundation: 'script-loader!foundation-sites/dist/foundation.min.js',
-    app: './app.jsx'
-  },
+  entry: entry,
   externals: {
     jQuery: 'jQuery',
     'cheerio': 'window',
