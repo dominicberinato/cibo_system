@@ -64,7 +64,7 @@ module.exports = {
         test: /\.(js|jsx)$/, //check for all js files
         use: [{
           loader: 'babel-loader',
-          options: { presets: ['react', 'es2015', 'stage-0'] }
+          options: { presets: ['react', 'es2015', 'stage-0', 'react-hmre'] }
         }],
         exclude: /(node_modules)/
       },

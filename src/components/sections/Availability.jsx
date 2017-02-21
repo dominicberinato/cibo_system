@@ -15,8 +15,10 @@ export class Availability extends Component {
     var {tables, reservations} = this.props;
     return(
       <div className="availability">
-        <p>Current Reservations: {reservations.length}</p>
-        <p>Avaible Tables: {tables.length - reservations.length}</p>
+        <div>
+          <p>Current Reservations: {reservations.length}</p>
+        </div>
+        <p>Available Table: {tables.length - reservations.length}</p>
         <p>Total Tables: {tables.length}</p>
       </div>
     )
