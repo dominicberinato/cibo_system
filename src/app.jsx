@@ -57,6 +57,11 @@ firebase.auth().onAuthStateChanged((user) => {
    document.getElementById('app')
  );
 
+ if(process.env.NODE_ENV === 'production') {
+   //lets install a service worker
+   require('offline-plugin/runtime').install();
+ }
+
  if(process.env.NODE_ENV === 'development') {
    if(module.hot) {
      module.hot.accept();
