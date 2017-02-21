@@ -175,9 +175,9 @@ module.exports = {
   plugins: plugins,
   //the transpiled output is here
   output: {
-    path: path.join(__dirname, 'dist'),
     publicPath: '/', //for the dev server
-    filename: PRODUCTION ? '[name].[hash:12].min.js' : '[name].bundle.js'
+    filename: PRODUCTION ? '[name].[hash:12].min.js' : '[name].bundle.js',
+    path: __dirname + '/dist'
   },
   module: buildModule,
   //finding app modules
