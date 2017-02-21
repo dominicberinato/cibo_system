@@ -24,8 +24,7 @@ try{
 //separate production plugins and developement plugins
 var plugins = PRODUCTION
     ?   [
-
-            new webpack.optimize.CommonsChunkPlugin({name:'vendor', filename:'vendor.[hash:12].min.js'}),
+            //new webpack.optimize.CommonsChunkPlugin({name:'vendor', filename:'vendor.[hash:12].min.js'}),
             new webpack.optimize.UglifyJsPlugin({
               compress: {
                 warnings: false
@@ -62,7 +61,7 @@ plugins.push(
   new webpack.LoaderOptionsPlugin({
       minimize: true,
       debug: false,
-      test: /\.scss$/,
+      test: /\.(css|scss|sass|less|styl})$/,
       options: {
         sassLoader: {
           includePaths: [
@@ -75,10 +74,9 @@ plugins.push(
 
 //different entries for production and developement
 var entry =  PRODUCTION
-    ?   {
-          app: ['./app.jsx'],
-          vendor:
-          [
+    ?
+        [
+            './app.jsx',
             'script-loader!jquery/dist/jquery.min.js',
             'script-loader!foundation-sites/dist/foundation.min.js',
             'react',
@@ -88,8 +86,7 @@ var entry =  PRODUCTION
             'react-dom',
             'react-router',
             'redux',
-          ]
-        }
+        ]
     :   {
           jquery: 'script-loader!jquery/dist/jquery.min.js',
           foundation: 'script-loader!foundation-sites/dist/foundation.min.js',
