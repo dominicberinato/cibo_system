@@ -10,7 +10,7 @@
   "scripts": {
     "dev": "NODE_ENV=development webpack-dev-server --progress --inline --hot",
     "test": "NODE_ENV=test karma start",
-    "build": "npm rebuild node-sass && webpack -p",
+    "build": "NODE_ENV=production pm rebuild node-sass && webpack",
     "start": "node server.js",
     "postinstall": "npm run build"
   },
