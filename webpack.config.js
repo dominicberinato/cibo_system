@@ -1,15 +1,18 @@
 'use strict'
-var webpack = require('webpack')
-var path = require('path')
-var envFile = require('node-env-file')
+var webpack = require('webpack');
+var path = require('path');
+var envFile = require('node-env-file');
 var HTMLWebpackPlugin = require('html-webpack-plugin');
-var CompressionPlugin = require('compression-webpack-plugin');
-var OfflinePlugin =  require('offline-plugin');
-//enviroment variable
-var PRODUCTION =  process.env.NODE_ENV === 'production';
-var DEVELOPMENT = process.env.NODE_ENV === 'development';
-var TEST = process.env.NODE_ENV === 'test';
+var CompressionPlugin = require("compression-webpack-plugin");
+var OfflinePlugin = require('offline-plugin');
 
+//enviroment variable
+var DEVELOPMENT = process.env.NODE_ENV === 'development';
+var PRODUCTION = process.env.NODE_ENV === 'production';
+var TEST = process.env.NODE_ENV === 'test'
+
+
+//load env file using process.env
 // set enviroment
 try{
   if(DEVELOPMENT || TEST) {
@@ -21,12 +24,39 @@ try{
   console.log(e);
 }
 
+//check if on production
+var entry = PRODUCTION
+    ?   {
+          app: ['./app.jsx'],
+          vendor:
+          [
+            'script-loader!jquery/dist/jquery.min.js',
+            'script-loader!foundation-sites/dist/foundation.min.js',
+            'react',
+            'redux',
+            'react-redux',
+            'material-ui',
+            'react-router',
+            'firebase',
+            'react-dom',
+            'redux-thunk'
+          ]
+        }
+    :   [
+          './app.jsx',
+          'script-loader!jquery/dist/jquery.min.js',
+          'script-loader!foundation-sites/dist/foundation.min.js'
+        ];
+
 var plugins = PRODUCTION
     ?   [
           new webpack.optimize.CommonsChunkPlugin({name:'vendor', filename:'vendor.[hash:12].min.js'}),
           new webpack.optimize.UglifyJsPlugin({
             compress: {
-              warnings: false
+              warnings: false,
+              screw_ie8: true,
+              dead_code: true,
+              unused: true
             }
           }),
           new HTMLWebpackPlugin({
@@ -70,30 +100,6 @@ plugins.push(
   })
 );
 
-//check if on production
-var entry = PRODUCTION
-    ?   {
-          app: ['./app.jsx'],
-          vendor:
-          [
-            'script-loader!jquery/dist/jquery.min.js',
-            'script-loader!foundation-sites/dist/foundation.min.js',
-            'react',
-            'redux',
-            'react-redux',
-            'material-ui',
-            'react-router',
-            'firebase',
-            'react-dom',
-            'redux-thunk'
-          ]
-        }
-    :   [
-
-          'script-loader!jquery/dist/jquery.min.js',
-          'script-loader!foundation-sites/dist/foundation.min.js',
-          './app.jsx'
-        ];
 //enable or disable hot module replace
 var buildModule = PRODUCTION || TEST
     ?             {
@@ -106,6 +112,10 @@ var buildModule = PRODUCTION || TEST
                         }],
                         exclude: /(node_modules)/
                       },
+                      {
+                        test: /\.scss$/,
+                        use:['style-loader','css-loader','sass-loader']
+                      }
                     ],
                     noParse: [
                       /node_modules\/sinon/
@@ -131,7 +141,11 @@ var buildModule = PRODUCTION || TEST
                             options: { presets: ['react', 'es2015', 'stage-0', 'react-hmre']}
                           }],
                           exclude: /(node_modules)/
-                        },
+                          },
+                          {
+                            test: /\.scss$/,
+                            use:['style-loader','css-loader','sass-loader']
+                          },
                       ],
                       noParse: [
                         /node_modules\/sinon/
@@ -148,38 +162,19 @@ var buildModule = PRODUCTION || TEST
                         }
                       ]
                     };
-
-
-
-module.exports = {
-  //webpack reads our raw source from here
-  context: __dirname + '/src', //root of our code files
-  stats: {
-    colors: true,
-    modules: true,
-    reasons: true,
-    errorDetails: true
-  },
-  //fix for can't find 'fs'
-  target: 'node',
+module.exports =  {
+  //find this file and start from there
+  context: __dirname + '/src',
   entry: entry,
   externals: {
-    jQuery: 'jQuery',
-    'cheerio': 'window',
-    'react/addons': 'react',
-    'react/lib/ExecutionEnvironment': 'react',
-    'react/lib/ReactContext': 'react',
+    'jquery': 'jQuery'
   },
-  //configure global imports
   plugins: plugins,
-  //the transpiled output is here
   output: {
-    publicPath: '/', //for the dev server
+    publicPath:'/',
     filename: PRODUCTION ? '[name].[hash:12].min.js' : '[name].bundle.js',
     path: __dirname + '/dist'
   },
-  module: buildModule,
-  //finding app modules
   resolve: {
     modules: [
       "node_modules",
@@ -194,8 +189,9 @@ module.exports = {
       src: path.resolve(__dirname, "src/"),
       sinon: 'sinon/pkg/sinon'
     },
-    extensions: [".js", ".jsx", ".json"],
+    extensions: [" ",".js", ".jsx", "json"]
   },
+  module: buildModule,
   devServer: {
     contentBase: './dist',
     inline: true,

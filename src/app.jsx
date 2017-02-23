@@ -25,7 +25,7 @@ import 'script-loader!jquery'
 import 'script-loader!what-input'
 import 'script-loader!foundation-sites'
 
-require('style-loader!css-loader!sass-loader!./styles/app.scss');
+require('./styles/app.scss');
 
 //build a theme
 const cibotheme = getMuiTheme({});

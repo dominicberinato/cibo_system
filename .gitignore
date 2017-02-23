@@ -1,3 +1,4 @@
 node_modules/
 config/development.env
 .travis.yml
+dist/index.html
