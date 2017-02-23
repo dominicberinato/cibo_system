@@ -6,7 +6,13 @@ import {hashHistory} from 'react-router'
 //add connect from redux to check state
 import{connect} from 'react-redux'
 
-
+const styles = {
+  userImage: {
+    borderRadius: '50%',
+    height: '3rem',
+    width: '3rem',
+  }
+}
 
 export class CiboBar extends Component {
   constructor(props) {
@@ -26,7 +32,7 @@ export class CiboBar extends Component {
     var userImage =  () => {
       if(auth.photo) {
         return(
-          <img className="bar-image" src={auth.photo}/>
+          <img style={styles.userImage} src={auth.photo}/>
         )
       }
     }
@@ -39,6 +45,7 @@ export class CiboBar extends Component {
             hashHistory.push('/app');
           }}
           iconElementRight={userImage()}
+          iconStyleRight={styles.userImage}
           />
         <Drawer
           open={this.state.sidebar}

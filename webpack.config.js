@@ -6,6 +6,8 @@ var HTMLWebpackPlugin = require('html-webpack-plugin');
 var CompressionPlugin = require("compression-webpack-plugin");
 var OfflinePlugin = require('offline-plugin');
 
+
+
 //enviroment variable
 var DEVELOPMENT = process.env.NODE_ENV === 'development';
 var PRODUCTION = process.env.NODE_ENV === 'production';
@@ -27,11 +29,12 @@ try{
 //check if on production
 var entry = PRODUCTION
     ?   {
-          app: ['./app.jsx'],
+          app:
+           [
+             './app.jsx',
+           ],
           vendor:
           [
-            'script-loader!jquery/dist/jquery.min.js',
-            'script-loader!foundation-sites/dist/foundation.min.js',
             'react',
             'redux',
             'react-redux',
@@ -43,10 +46,8 @@ var entry = PRODUCTION
           ]
         }
     :   [
-          './app.jsx',
-          'script-loader!jquery/dist/jquery.min.js',
-          'script-loader!foundation-sites/dist/foundation.min.js'
-        ];
+          './app.jsx'
+        ]
 
 var plugins = PRODUCTION
     ?   [
@@ -69,10 +70,17 @@ var plugins = PRODUCTION
             threshold: 10240,
             minRatio: 0.8
           }),
-          new OfflinePlugin()
+          new OfflinePlugin(
+            {
+              updateStrategy: 'changed',
+              responseStrategy: 'network-first'
+            }
+          )
         ]
     :   [
-
+          new HTMLWebpackPlugin({
+            template:'index-template.html'
+          })
         ];
 
 //add universal plugins
@@ -85,19 +93,7 @@ plugins.push(
      DATABASE_URL: JSON.stringify(process.env.DATABASE_URL),
      STORAGE_BUCKET: JSON.stringify(process.env.STORAGE_BUCKET)
    }
- }),
- new webpack.LoaderOptionsPlugin({
-      minimize:true,
-      debug: false,
-      test: /\.scss$/,
-      options: {
-        sassLoader: {
-          includePaths: [
-            path.resolve(__dirname, './node_modules/foundation-sites/scss')
-          ]
-        }
-      }
-  })
+ })
 );
 
 //enable or disable hot module replace
@@ -111,25 +107,10 @@ var buildModule = PRODUCTION || TEST
                           options: { presets: ['react', 'es2015', 'stage-0']}
                         }],
                         exclude: /(node_modules)/
-                      },
-                      {
-                        test: /\.scss$/,
-                        use:['style-loader','css-loader','sass-loader']
                       }
                     ],
                     noParse: [
                       /node_modules\/sinon/
-                    ],
-                    loaders: [
-                      {
-                        test: /.js$/,
-                        exclude: /node_modules/,
-                        loader: 'babel'
-                      },
-                      {
-                        test: /\.json$/,
-                        loader: 'json',
-                      }
                     ]
                   }
       :           {
@@ -141,27 +122,14 @@ var buildModule = PRODUCTION || TEST
                             options: { presets: ['react', 'es2015', 'stage-0', 'react-hmre']}
                           }],
                           exclude: /(node_modules)/
-                          },
-                          {
-                            test: /\.scss$/,
-                            use:['style-loader','css-loader','sass-loader']
-                          },
+                          }
                       ],
                       noParse: [
                         /node_modules\/sinon/
-                      ],
-                      loaders: [
-                        {
-                          test: /.js$/,
-                          exclude: /node_modules/,
-                          loader: 'babel'
-                        },
-                        {
-                          test: /\.json$/,
-                          loader: 'json',
-                        }
                       ]
                     };
+
+
 module.exports =  {
   //find this file and start from there
   context: __dirname + '/src',
@@ -171,25 +139,25 @@ module.exports =  {
   },
   plugins: plugins,
   output: {
-    publicPath:'/',
+    publicPath: PRODUCTION ? '/' : '/',
     filename: PRODUCTION ? '[name].[hash:12].min.js' : '[name].bundle.js',
     path: __dirname + '/dist'
   },
   resolve: {
-    modules: [
-      "node_modules",
-      "./src/components",
-      "./src/components/tabs",
-      "./src/components/sections",
-      "./src/components/forms",
-      "./src/reducers",
-      "./src/actions"
+    modules: [ //Directories where webpack can source modules from
+      'node_modules',
+      './src/components',
+      './src/components/tabs',
+      './src/components/sections',
+      './src/components/forms',
+      './src/reducers',
+      './src/actions'
     ],
     alias: {
       src: path.resolve(__dirname, "src/"),
       sinon: 'sinon/pkg/sinon'
     },
-    extensions: [" ",".js", ".jsx", "json"]
+    extensions: [" ",".js", ".jsx"]
   },
   module: buildModule,
   devServer: {
