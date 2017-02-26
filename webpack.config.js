@@ -31,10 +31,12 @@ var entry = PRODUCTION
     ?   {
           app:
            [
-             './app.jsx',
+             './app.jsx'
            ],
           vendor:
           [
+            'script-loader!jquery/dist/jquery.min.js',
+            'script-loader!foundation-sites/dist/foundation.min.js',
             'react',
             'redux',
             'react-redux',
@@ -46,7 +48,9 @@ var entry = PRODUCTION
           ]
         }
     :   [
-          './app.jsx'
+          './app.jsx',
+          'script-loader!jquery/dist/jquery.min.js',
+          'script-loader!foundation-sites/dist/foundation.min.js'
         ]
 
 var plugins = PRODUCTION
@@ -93,7 +97,19 @@ plugins.push(
      DATABASE_URL: JSON.stringify(process.env.DATABASE_URL),
      STORAGE_BUCKET: JSON.stringify(process.env.STORAGE_BUCKET)
    }
- })
+ }),
+ new webpack.LoaderOptionsPlugin({
+      minimize:true,
+      debug: false,
+      test: /\.scss$/,
+      options: {
+        sassLoader: {
+          includePaths: [
+            path.resolve(__dirname, './node_modules/foundation-sites/scss')
+          ]
+        }
+      }
+  })
 );
 
 //enable or disable hot module replace
@@ -107,11 +123,16 @@ var buildModule = PRODUCTION || TEST
                           options: { presets: ['react', 'es2015', 'stage-0']}
                         }],
                         exclude: /(node_modules)/
+                      },
+                      {
+                        test: /\.scss$/,
+                        use:['style-loader','css-loader','sass-loader']
                       }
                     ],
                     noParse: [
                       /node_modules\/sinon/
                     ]
+
                   }
       :           {
                       rules: [
@@ -122,7 +143,11 @@ var buildModule = PRODUCTION || TEST
                             options: { presets: ['react', 'es2015', 'stage-0', 'react-hmre']}
                           }],
                           exclude: /(node_modules)/
-                          }
+                        },
+                        {
+                        test: /\.scss$/,
+                        use:['style-loader','css-loader','sass-loader']
+                        }
                       ],
                       noParse: [
                         /node_modules\/sinon/

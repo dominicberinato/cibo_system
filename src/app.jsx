@@ -3,6 +3,15 @@
  import ReactDOM from 'react-dom'
  import {Provider} from 'react-redux'
  import {hashHistory} from 'react-router'
+
+
+// load jquery and foundation in the window scope
+import 'script-loader!jquery'
+import 'script-loader!what-input'
+import 'script-loader!foundation-sites'
+require('./styles/app.scss')
+
+
 //add inject plugin for material-ui
 import injectTapEventPlugin from 'react-tap-event-plugin';
 import Reservations from 'Reservations';

@@ -4,7 +4,6 @@
 @import "base/foundation-settings";
 @import "foundation";
 @include foundation-everything;
-@import "node_modules/sass-material-colors/sass/sass-material-colors";
 
 @import "components/admin";
 @import "components/cibobar";
