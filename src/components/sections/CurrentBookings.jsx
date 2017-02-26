@@ -10,10 +10,16 @@ export class CurrentBookings extends Component {
 
   }
   render(){
+
+    var {reservations} = this.props;
     var renderReservations = () => {
-      return 0;
+      if(reservations.length != 0) {
+        return 'we have reservations!'
+      } else {
+        return(<p>No Reservations at the moment</p>)
+      }
     }
-    return(<div>{renderReservations()}</div>)
+    return(<div className='reservation-box'>{renderReservations()}</div>)
   }
 }
 
