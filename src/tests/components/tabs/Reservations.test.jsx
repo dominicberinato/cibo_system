@@ -8,35 +8,9 @@ describe('Reservations', () => {
   });
 
   describe('Book', () => {
-    it('should list all the tables available', () =>{
+    it('should render an <Availability/> component', () =>{
+
       expect(2).toEqual(1);
-    });
-
-    it('should allow time of booking to be selected', () =>{
-      expect(1).toEqual(2);
-    });
-
-    it('should allow input of guest name', () => {
-      expect(2).toEqual(4);
-    });
-
-    it('should allow input of number of guests', () => {
-      expect(0).toEqual(5);
-    });
-    it('should allow input of guest contacts', () => {
-      expect(3).toEqual(7);
-    });
-
-    it('should allow prepayment', () => {
-      expect(7).toEqual(9);
-    });
-
-    it('should allow input of dietary', () => {
-      expect(8).toEqual(45);
-    });
-
-    it('should allow selection', () => {
-      expect(7).toEqual(4);
     });
   });
 
@@ -60,7 +34,7 @@ describe('Reservations', () => {
     });
 
     it('should allow walk ins', () => {
-      expect(8).toEqual(0);
+      expect(8).tol(0);
     });
 
     it('should join and break tables to cover demand', () => {
