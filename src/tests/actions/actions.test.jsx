@@ -200,6 +200,8 @@ describe('Actions', () => {
     var testPropertyKey;
     var testTableRef;
     var store;
+    var testReservationKey;
+    var testReservationRef;
 
     var debug = {hello: "world"};
     var mockImage = new Blob([JSON.stringify(debug, null, 2)], {type : 'application/json'});
@@ -219,6 +221,13 @@ describe('Actions', () => {
       propID: 7
     }
 
+    var testReservation = {
+      name: 'Isaac',
+      number: 6,
+      tbKey: 7,
+      propKey: 9
+    }
+
     //run this code before each asnyc test (login && set up stuff)
     beforeEach((done) => {
       store = createMockStore({})
@@ -232,7 +241,11 @@ describe('Actions', () => {
         return firebaseRef.remove();
       }).then(()=> {
         testTableRef = firebaseRef.child('tables').push();
-
+        testReservationRef = firebaseRef.child('reservations').push();
+        testReservationKey = testReservationRef.key;
+        testReservationRef.set({
+          ...testReservation
+        });
         return testTableRef.set({
           ...testTable
         });
@@ -269,8 +282,23 @@ describe('Actions', () => {
       }, done());
     });
 
-    it('should update a reservation and dispatch UPDATE_RESERVATION', () => {
-      expect(8).toEqual(0);
+    it('should update a reservation and dispatch UPDATE_RESERVATION', (done) => {
+       //create mock store with user prop & reservation
+       var store = createMockStore({auth:{uid}});
+
+       //mock updates
+       var updates = {
+         time: '0988'
+       };
+
+       //mock action
+       const action = actions.startUpdateReservation(testReservationKey, updates);
+       //dispatch action
+       store.dispatch(action).then(() => {
+         //lets assert
+         expect(mockActions[0].type).toEqual('UPDATE_RESERVATION');
+         done();
+       }, done())
     });
 
     it('should remove a reservation and dispatch REMOVE_RESERVATION',  () => {

@@ -203,6 +203,24 @@ export var addReservation = (reservation) => {
 }
 
 
+//export action to async update reservation
+export var startUpdateReservation =(id, updates) => {
+  return(dispatch, getState) => {
+    //check if updating valid reservation
+    return firebaseRef.child(`/reservations/${id}`).once('value').then((reservationSnap) => {
+      if(reservationSnap.val() != null) {
+        var resUpdate =  {};
+        resUpdate[`/reservations/${id}`] = updates;
+
+        //push to server
+        return firebaseRef.update(resUpdate).then(() => {
+          dispatch(updateReservation(id, updates));
+        })
+      }
+    })
+  }
+}
+
 //export update reservation
 export var updateReservation = (id, updates) => {
   return {
