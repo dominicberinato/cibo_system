@@ -161,6 +161,39 @@ export var addTable = (table) => {
   }
 }
 
+
+//export startAddReservation async action
+export var startAddReservation  = (reservation) => {
+  return(dispatch, getState) => {
+    //Alert if tables arent enough
+    var userID = getState().auth.uid
+    //table id
+    var tableID = reservation.tbKey;
+    //prop id
+    var propID = reservation.propKey;
+
+
+    //lets make a reservations fan out
+    var reservationFanOut = {};
+    //get a ref key for out reservation
+    var reservationKey =  firebaseRef.child('reservations').push().key;
+    reservationFanOut[`reservations/${reservationKey}`] = reservation;
+    reservationFanOut[`property-reservations/${propID}/${reservationKey}`] = reservationKey;
+    reservationFanOut[`table-reservations/${tableID}/${reservationKey}`] = reservationKey;
+    reservationFanOut[`user-reservations/${userID}/${reservationKey}`] = reservationKey;
+
+    //update database
+    return firebaseRef.update(reservationFanOut).then(() => {
+      dispatch(addReservation({
+        ...reservation,
+        resKey: reservationKey,
+        resUser: userID
+      }))
+    });
+  }
+}
+
+
 //export add Reservation action
 export var addReservation = (reservation) => {
   return {

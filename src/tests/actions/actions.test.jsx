@@ -68,7 +68,8 @@ describe('Actions', () => {
         resKey: 8,
         name: 'Isaac',
         number: 6,
-        tbKey: 7
+        tbKey: 7,
+        propKey: 9
       };
       var addReservationAction = {
         type: 'ADD_RESERVATION',
@@ -246,8 +247,26 @@ describe('Actions', () => {
       firebaseRef.remove().then(() => done());
     });
 
-    it('should create a reservation and dispatch ADD_RESERVATION', () => {
-      expect(5).toEqual(7);
+    it('should create a reservation and dispatch ADD_RESERVATION', (done) => {
+      //mock a store with a property
+      const store = createMockStore({property: {propKey: testPropertyKey}, auth: {uid: uid}});
+      //sample reservation
+      var reservation = {
+        name: 'Isaac',
+        number: 6,
+        tbKey: 7,
+        propKey: 9
+      };
+      //populate sample action
+      const action = actions.startAddReservation(reservation);
+      //dispatch sample action
+      store.dispatch(action).then(() =>{
+        const mockActions = store.getActions();
+        //assert add reservation was called
+        expect(mockActions[0].type).toEqual('ADD_RESERVATION');
+        expect(mockActions[0].reservations.length).toEqual(1);
+        done();
+      }, done());
     });
 
     it('should update a reservation and dispatch UPDATE_RESERVATION', () => {
@@ -257,10 +276,6 @@ describe('Actions', () => {
     it('should remove a reservation and dispatch REMOVE_RESERVATION',  () => {
       expect(7).toEqual(8);
     })
-
-    it('should collect tables and dispatch ADD_TABLE',  () => {
-
-    });
 
     it('should update table and dispatch updateTable', () => {
       expect(1).toEqual(4);
