@@ -117,6 +117,19 @@ export var clearProperty = () => {
     type: 'CLEAR_PROPERTY'
   }
 }
+
+//export async action to delete table
+export var startDeleteTable = (tbKey) => {
+  return(dispatch, getState) => {
+    //TODO clean all connected
+    var deleteTableFanOut =  {};
+    //lets remove content
+    return firebaseRef.child(`tables/${tbKey}`).remove().then(() => {
+      //lets call the deleteTable
+      dispatch(deleteTable(tbKey));
+    })
+  }
+}
 //export deleteTable
 export var deleteTable = (id) => {
   return {

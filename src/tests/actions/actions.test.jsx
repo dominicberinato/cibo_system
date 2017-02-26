@@ -345,9 +345,26 @@ describe('Actions', () => {
 
     });
 
-    it('should delete table and dispatch deleteTable', () => {
-      expect(2).toEqual(3);
-    });
+    it('should delete table and dispatch deleteTable', (done) => {
+      //mock a store with our table
+      const store  = createMockStore ({auth: {uid}, tables:[
+        {
+          ...testTable,
+          tbKey: testTableKey
+        }
+      ]});
+
+      //construct action
+      const action = actions.startDeleteTable(testTableKey);
+      //dispatch action
+      store.dispatch(action).then(() => {
+        //collect assertions
+        const mockActions = store.getActions();
+        //make our assertions
+        expect(mockActions[0].type).toEqual('DELETE_TABLE');
+        done();
+      }, done());
+    })
 
     it('should collect tables and dispatch ADD_TABLE',  (done) => {
       const store = createMockStore({property: {propKey: testPropertyKey}});
