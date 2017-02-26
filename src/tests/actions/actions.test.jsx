@@ -199,6 +199,7 @@ describe('Actions', () => {
     var propertyRef = firebaseRef.child('properties');
     var testPropertyKey;
     var testTableRef;
+    var testTableKey;
     var store;
     var testReservationKey;
     var testReservationRef;
@@ -216,8 +217,8 @@ describe('Actions', () => {
     };
 
     var testTable = {
-      tbName: 7,
-      tbCapacity: 6,
+      tbname: 7,
+      tbcapacity: 6,
       propID: 7
     }
 
@@ -241,6 +242,7 @@ describe('Actions', () => {
         return firebaseRef.remove();
       }).then(()=> {
         testTableRef = firebaseRef.child('tables').push();
+        testTableKey = testTableRef.key;
         testReservationRef = firebaseRef.child('reservations').push();
         testReservationKey = testReservationRef.key;
         testReservationRef.set({
@@ -295,7 +297,7 @@ describe('Actions', () => {
        const action = actions.startUpdateReservation(testReservationKey, updates);
        //dispatch action
        store.dispatch(action).then(() => {
-         const mockActions = store.getActions()
+         const mockActions = store.getActions();
          //lets assert
          expect(mockActions[0].type).toEqual('UPDATE_RESERVATION');
          done();
@@ -318,11 +320,29 @@ describe('Actions', () => {
         //lets assert
         expect(mockActions[0].type).toEqual('REMOVE_RESERVATION')
         done();
-      }, done())
+      }, done());
     })
 
-    it('should update table and dispatch updateTable', () => {
-      expect(1).toEqual(4);
+    it('should update table and dispatch updateTable', (done) => {
+      //mock a store
+      const store =  createMockStore({auth:{uid}});
+
+      //mock data updatew
+      var updates: {
+        tbname: 6
+      };
+
+      //mock our action
+      const action = actions.startUpdateTable(testTableKey, updates);
+      //dispatch mockaction
+      store.dispatch(action).then(() => {
+        //get actions
+        const mockActions = store.getActions();
+        //asert
+        expect(mockActions[0].type).toEqual('UPDATE_TABLE');
+        done();
+      }, done());
+
     });
 
     it('should delete table and dispatch deleteTable', () => {
@@ -388,9 +408,6 @@ describe('Actions', () => {
       },done());
     });
 
-    describe('Table Tests', () => {
-
-    })
 
     it('should create table and dispatch ADD_TABLE', (done) => {
 

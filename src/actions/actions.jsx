@@ -125,6 +125,28 @@ export var deleteTable = (id) => {
   }
 };
 
+//export action to remote update table
+export var startUpdateTable = (id, updates) => {
+  return(dispatch, getState) => {
+     //check that the table we are about to upate is valid
+     return firebaseRef.child(`/tables/${id}`).once('value').then((tableSnapshot) => {
+       if(tableSnapshot.val() != null) {
+         //create a fanout
+         var updateTableFanOut =  {} ;
+         //populate
+         updateTableFanOut['/tables/${id}']  = {
+                                                  ...tableSnapshot.val(),
+                                                  ...updates
+                                                };
+        //later object spread overrides earlier^^^^
+        //update table locally
+        dispatch(updateTable(id, updates));
+       }
+       //TODO deal with failure
+     })
+  }
+}
+
 //export updateTableAction =
 export var updateTable = (id, updates) => {
   return {
