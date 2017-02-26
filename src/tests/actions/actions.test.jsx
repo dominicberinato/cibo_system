@@ -295,14 +295,30 @@ describe('Actions', () => {
        const action = actions.startUpdateReservation(testReservationKey, updates);
        //dispatch action
        store.dispatch(action).then(() => {
+         const mockActions = store.getActions()
          //lets assert
          expect(mockActions[0].type).toEqual('UPDATE_RESERVATION');
          done();
        }, done())
     });
 
-    it('should remove a reservation and dispatch REMOVE_RESERVATION',  () => {
-      expect(7).toEqual(8);
+    it('should remove a reservation and dispatch REMOVE_RESERVATION',  (done) => {
+      //mock a store with a user and some resevations
+      const store = createMockStore({auth: {uid}, reservations:[{
+        ...testReservation,
+        resKey: testReservationKey
+      }]});
+
+      //lets mock an action
+      const action = actions.startRemoveReservation(testReservationKey);
+
+      store.dispatch(action).then(() => {
+        //get actions
+        const mockActions = store.getActions();
+        //lets assert
+        expect(mockActions[0].type).toEqual('REMOVE_RESERVATION')
+        done();
+      }, done())
     })
 
     it('should update table and dispatch updateTable', () => {

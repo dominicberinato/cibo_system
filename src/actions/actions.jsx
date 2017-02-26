@@ -230,6 +230,15 @@ export var updateReservation = (id, updates) => {
   }
 }
 
+//an action to remove a resevation
+export var startRemoveReservation = (id) => {
+  return(dispatch, getState) =>{
+    return firebaseRef.child(`/reservations/${id}`).remove().then(() => {
+      dispatch(removeReservation(id));
+    })
+  }
+}
+
 //export remove reservation
 export var removeReservation = (id) => {
   return {

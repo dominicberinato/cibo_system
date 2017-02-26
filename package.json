@@ -12,7 +12,7 @@
     "test": "NODE_ENV=test karma start",
     "build": "webpack",
     "start": "node server.js",
-    "postinstall": "NODE_ENV=production webpack"
+    "postinstall": "NODE_ENV=production npm rebuild node-sass && webpack"
   },
   "repository": {
     "type": "git",
