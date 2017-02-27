@@ -2,6 +2,8 @@ import expect from 'expect'
 import {MakeReservation} from 'MakeReservation'
 import {mount} from 'enzyme'
 import React from 'react'
+import sinon from 'sinon'
+
 
 
 describe('<MakeReservation/>', () =>{
@@ -25,9 +27,10 @@ describe('<MakeReservation/>', () =>{
 
   var reservations = [];
 
-  //lets render the item
-  const wrapper = mount(<MakeReservation store={{tables, reservations}}/>);
+
   it('should allow input valid guest',() => {
+    //lets render the item
+    const wrapper = mount(<MakeReservation store={{tables, reservations}}/>);
     //expect ref for name
     expect(wrapper.ref('resOwner').length).toEqual(1);
     //expect ref for contact
@@ -42,7 +45,39 @@ describe('<MakeReservation/>', () =>{
   });
 
   it('should dispatch addReservation on valid reservation', () =>{
-    expect(1).toEqual(0)
+
+    //lets mock a spy
+    const dispatch = sinon.spy();
+    var auth = {uid: 123};
+    var property = {propKey: 234};
+
+    //let mount our component
+    const wrapper = mount(<MakeReservation dispatch={dispatch} tables={tables} auth={auth} property={property}/>);
+
+    //lets mock a reservation
+    const reservation = {
+        resKey: 8,
+        name: 'Isaac',
+        number: 6,
+        tbKey: 7,
+        propKey: 9,
+        contact: '0724341105',
+        guestAmount: 7,
+        time: '0900'
+    };
+
+    //fill required values
+    wrapper.ref('resOwner').node.value = reservation.name;
+    wrapper.ref('resTime').node.value = reservation.time;
+    wrapper.ref('resTable').node.value = reservation.tbKey;
+    wrapper.ref('resAmount').node.value = reservation.guestAmount;
+    wrapper.ref('resContact').node.value = reservation.contact;
+
+    //simulate submit
+    wrapper.ref('form').simulate('submit');
+
+    //assert that dispatch was called
+    sinon.assert.calledOnce(dispatch);
   });
 
   it('should not dispatch addReservation if reservation invalid',  () => {

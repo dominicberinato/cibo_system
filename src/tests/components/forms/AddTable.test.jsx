@@ -16,7 +16,7 @@ describe('AddTable',  () => {
 
   //use spies to check that correct actions are dispatched
   it('should dispatch addTable when valid table added', () => {
-    const dispatch = sinon.spy()
+    const dispatch = sinon.spy();
     //mock store with auth , prop
     //full render component
     //pass in spy as dispatch
