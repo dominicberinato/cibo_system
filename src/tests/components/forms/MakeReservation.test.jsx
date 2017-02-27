@@ -40,4 +40,12 @@ describe('<MakeReservation/>', () =>{
     //expect ref for table
     expect(wrapper.ref('resTable').length).toEqual(1);
   });
+
+  it('should dispatch addReservation on valid reservation', () =>{
+    expect(1).toEqual(0)
+  });
+
+  it('should not dispatch addReservation if reservation invalid',  () => {
+    expect(1).toEqual(0);
+  });
 });
