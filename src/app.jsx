@@ -33,6 +33,11 @@ import * as actions from 'src/actions/actions'
 //build a theme
 const cibotheme = getMuiTheme({});
 
+if(process.env.NODE_ENV === 'production') {
+  //lets install a service worker
+  require('offline-plugin/runtime').install();
+}
+
 //do auth work
 import firebase from 'src/firebase/index'
 //observe auth state
@@ -60,10 +65,6 @@ firebase.auth().onAuthStateChanged((user) => {
    document.getElementById('app')
  );
 
- if(process.env.NODE_ENV === 'production') {
-   //lets install a service worker
-   require('offline-plugin/runtime').install();
- }
 
  if(process.env.NODE_ENV === 'development') {
    if(module.hot) {
