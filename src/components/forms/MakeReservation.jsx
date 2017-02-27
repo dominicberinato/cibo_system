@@ -54,11 +54,11 @@ export class MakeReservation extends Component {
         <p>Make Reservation</p>
         <form ref="form" onSubmit={this.submitReservation}>
           <div>
-            <label>Guest Name</label>
+            <label>Guest Name*</label>
             <input ref="resOwner" type="text"/>
           </div>
           <div>
-            <label>Time</label>
+            <label>Time*</label>
             <input ref="resTime" type="dateTime"/>
           </div>
           <div>
@@ -70,12 +70,15 @@ export class MakeReservation extends Component {
             <input type="text" ref="resTable"/>
           </div>
           <div>
-            <label>Number of Guests</label>
+            <label>Number of Guests*</label>
             <input type="text" ref="resAmount"/>
           </div>
           <div>
             <label>Contact</label>
             <input type="text" ref="resContact"/>
+          </div>
+          <div>
+            <p>All fields marked by * are required please</p>
           </div>
           <div>
             <input type="submit" className="button hollow"/>

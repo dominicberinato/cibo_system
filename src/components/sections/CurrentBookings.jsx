@@ -16,7 +16,7 @@ export class CurrentBookings extends Component {
       if(reservations.length != 0) {
         return 'we have reservations!'
       } else {
-        return(<p>No Reservations at the moment</p>)
+        return(<p ref='resservations message'>No Reservations at the moment</p>)
       }
     }
     return(<div className='reservation-box'>{renderReservations()}</div>)
