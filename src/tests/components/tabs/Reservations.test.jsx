@@ -1,11 +1,15 @@
 import React from 'react'
 import expect from 'expect'
-import {shallow} from 'enzyme'
+import {mount} from 'enzyme'
 import {Reservations} from 'Reservations'
 import {Availability} from 'Availability'
 import {MakeReservation} from 'MakeReservation'
 
 describe('Reservations', () => {
+
+  it('should exist', () => {
+     expect(Reservations).toExist();
+  });
   var tables =
   [
       {
@@ -19,19 +23,11 @@ describe('Reservations', () => {
         tbKey:7
       }
   ];
+
   var reservations = [];
-  it('should exist', () => {
-     expect(Reservations).toExist();
-  });
 
   describe('Allow Bookings, Show Availability, Show Bookings', () => {
-    //lets render an Reservations component
-    const wrapper = shallow(<Reservations/>);
-    //make assertions
-    it('renders a <MakeReservation/> component', () => {
-      expect(wrapper.find('MakeReservation').length).toEqual(1);
-    });
-
+  
 
   });
 

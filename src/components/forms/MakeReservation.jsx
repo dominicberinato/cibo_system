@@ -30,6 +30,10 @@ export class MakeReservation extends Component {
             <input type="text" ref="resAmount"/>
           </div>
           <div>
+            <label>Contact</label>
+            <input type="text" ref="resContact"/>
+          </div>
+          <div>
             <input type="submit" className="button hollow"/>
           </div>
         </form>
