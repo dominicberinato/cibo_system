@@ -3,16 +3,12 @@ import {connect} from 'react-redux'
 import MakeReservation from 'MakeReservation'
 import Availability from 'Availability'
 import CurrentBookings from 'CurrentBookings'
-import {Column} from 'react-foundation'
 
-const styles = {
-  reservations: {
-    flex: 1,
-    flexDirection: 'row'
-  }
-}
 
 export class Reservations extends Component {
+  constructor (props) {
+    super(props);
+  }
   render() {
     return(
       <div className="row">

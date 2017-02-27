@@ -7,6 +7,6 @@ describe('<Availability/>', () => {
   })
 
   it('should list Total Tables, Available Tables,Booked',() => {
-
+    expect(9).toEqual(1);
   })
 })

@@ -1,26 +1,47 @@
+import React from 'react'
 import expect from 'expect'
-
+import {shallow} from 'enzyme'
 import {Reservations} from 'Reservations'
+import {Availability} from 'Availability'
+import {MakeReservation} from 'MakeReservation'
 
 describe('Reservations', () => {
+  var tables =
+  [
+      {
+        tbname:6,
+        tbcapacity:8,
+        tbKey: 6
+      },
+      {
+        tbname: 7,
+        tbcapacity: 9,
+        tbKey:7
+      }
+  ];
+  var reservations = [];
   it('should exist', () => {
      expect(Reservations).toExist();
   });
 
-  describe('Book', () => {
-    it('should render an <Availability/> component', () =>{
-
-      expect(2).toEqual(1);
+  describe('Allow Bookings, Show Availability, Show Bookings', () => {
+    //lets render an Reservations component
+    const wrapper = shallow(<Reservations/>);
+    //make assertions
+    it('renders a <MakeReservation/> component', () => {
+      expect(wrapper.find('MakeReservation').length).toEqual(1);
     });
+
+
   });
 
   describe('Third Party Reservations', () => {
     it('should expose api to check Reservations', () => {
-      expect(8).toEqual(10);
+
     });
 
     it('should control availability in real', () => {
-      expect(3).toEqual(0);
+
     });
   });
 

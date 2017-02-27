@@ -18,6 +18,5 @@ describe('<TableList/>', () => {
     const wrapper = shallow(<TableList tables={tables}/>);
     //assert
     expect(wrapper.find(Table).length).toEqual(tables.length)
-
   })
 })
