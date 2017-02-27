@@ -81,6 +81,22 @@ describe('<MakeReservation/>', () =>{
   });
 
   it('should not dispatch addReservation if reservation invalid',  () => {
-    expect(1).toEqual(0);
+
+    //mock a spy
+    const addReservationSpy = sinon.spy();
+
+    //render our Component
+    var auth = {uid: 123};
+    var property = {propKey: 234};
+
+    //let mount our component
+    const wrapper = mount(<MakeReservation dispatch={addReservationSpy} tables={tables} auth={auth} property={property}/>);
+    wrapper.ref('resOwner').node.value = '';
+    wrapper.ref('resTime').node.value = '';
+    //simulate submit
+    wrapper.ref('form').simulate('submit');
+
+    //make assertion
+    sinon.assert.notCalled(addReservationSpy);
   });
 });

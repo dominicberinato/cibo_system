@@ -12,18 +12,23 @@ export class MakeReservation extends Component {
     Event.preventDefault();
     //get data from state.
     var {property, auth, dispatch} =  this.props;
+    var guestName = this.refs.resOwner;
+    var guestContact = this.refs.resContact;
+    var guestTime = this.refs.resTime;
+    var resTable = this.refs.resTable;
+    var resOwner = auth.uid;
+    var resProperty = property.propKey;
+
     //construct the object we need to submit
     if(property.propKey != undefined && auth.uid != undefined) {
-      var guestName = this.refs.resOwner;
-      var guestContact = this.refs.resContact;
-      var guestTime = this.refs.resTime;
-      var resTable = this.refs.resTable;
-      var resOwner = auth.uid;
-      var resProperty = property.propKey;
 
       //validate and submit
-      if(guestName.length != 0 && guestContact.length != 0 && guestTime.length != 0)
-        {
+      if(guestName.length == 0 || guestContact.length == 0 || guestTime.length == 0) {
+
+      }
+      else
+      {
+
           var reservation =  {
             name: guestName,
             tbKey: resTable,
@@ -36,6 +41,9 @@ export class MakeReservation extends Component {
           //lets then dispatch start add reservation
           dispatch(actions.startAddReservation(reservation));
         }
+    }
+    else {
+      console.log('unset propkey uid');
     }
   }
   render() {
