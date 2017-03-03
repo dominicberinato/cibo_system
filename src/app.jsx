@@ -27,34 +27,38 @@ injectTapEventPlugin();
 var store = require('src/store/configureStore').configure();
 //add actions to call login on auth listener!!
 import * as actions from 'src/actions/actions'
+//do auth work
+import firebase from 'src/firebase/index'
 
 
 
 //build a theme
 const cibotheme = getMuiTheme({});
 
+const watchAuth = () => {
+  //observe auth state
+  firebase.auth().onAuthStateChanged((user) => {
+    //logged in
+    if(user) {
+      store.dispatch(actions.login({
+        uid: user.uid,
+        name:user.displayName,
+        photo: user.photoURL,
+        email: user.email
+      }));
+      hashHistory.push('/perm');
+    } else {
+      hashHistory.push('/auth');
+    }
+  })
+}
+
 if(process.env.NODE_ENV === 'production') {
   //lets install a service worker
   require('offline-plugin/runtime').install();
 }
 
-//do auth work
-import firebase from 'src/firebase/index'
-//observe auth state
-firebase.auth().onAuthStateChanged((user) => {
-  //logged in
-  if(user) {
-    store.dispatch(actions.login({
-      uid: user.uid,
-      name:user.displayName,
-      photo: user.photoURL,
-      email: user.email
-    }));
-    hashHistory.push('/perm');
-  } else {
-    hashHistory.push('/auth');
-  }
-})
+
 
  ReactDOM.render(
    <MuiThemeProvider>
@@ -67,6 +71,7 @@ firebase.auth().onAuthStateChanged((user) => {
 
 
  if(process.env.NODE_ENV === 'development') {
+   watchAuth();
    if(module.hot) {
      module.hot.accept();
    }
