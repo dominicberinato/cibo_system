@@ -4,7 +4,8 @@ var path = require('path');
 var envFile = require('node-env-file');
 var HTMLWebpackPlugin = require('html-webpack-plugin');
 var CompressionPlugin = require("compression-webpack-plugin");
-var OfflinePlugin = require('offline-plugin');
+var SWPrecacheWebpackPlugin = require('sw-precache-webpack-plugin');
+
 
 
 
@@ -74,10 +75,16 @@ var plugins = PRODUCTION
             threshold: 10240,
             minRatio: 0.8
           }),
-          new OfflinePlugin(
+          new SWPrecacheWebpackPlugin(
             {
-              updateStrategy: 'changed',
-              responseStrategy: 'network-first'
+              cacheId: 'cibo',
+              filename: 'cibo-sw.js',
+              maximumFileSizeToCacheInBytes: 4194304,
+              minify: true,
+              runtimeCaching: [{
+                handler: 'fastest',
+                urlPattern: /[.]js$/,
+              }],
             }
           )
         ]

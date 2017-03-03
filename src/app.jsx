@@ -55,7 +55,8 @@ const watchAuth = () => {
 
 if(process.env.NODE_ENV === 'production') {
   //lets install a service worker
-  require('offline-plugin/runtime').install();
+  watchAuth();
+
 }
 
 
