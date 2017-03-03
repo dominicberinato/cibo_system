@@ -55,6 +55,9 @@ const watchAuth = () => {
 
 if(process.env.NODE_ENV === 'production') {
   //lets install a service worker
+  if('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('/cibo-sw.js')
+  }
   watchAuth();
 
 }
