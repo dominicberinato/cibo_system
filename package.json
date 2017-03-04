@@ -10,9 +10,10 @@
   "scripts": {
     "dev": "NODE_ENV=development webpack-dev-server --hot",
     "test": "NODE_ENV=test karma start",
-    "build": "yarn remove node-sass && yarn add node-sass@late && webpack",
+    "build": "webpack",
     "start": "node server.js",
-    "postinstall": "NODE_ENV=production && webpack"
+    "heroku-postbuild": "yarn remove node-sass && yarn add node-sass@latest",
+    "postinstall": "NODE_ENV=production webpack"
   },
   "repository": {
     "type": "git",
