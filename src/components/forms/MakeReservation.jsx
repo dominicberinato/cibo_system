@@ -59,7 +59,7 @@ export class MakeReservation extends Component {
           </div>
           <div>
             <label>Time*</label>
-            <input ref="resTime" type="dateTime"/>
+            <input ref="resTime" type="datetime-local"/>
           </div>
           <div>
             <label>Dietary Concerns</label>
