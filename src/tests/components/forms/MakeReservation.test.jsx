@@ -30,7 +30,7 @@ describe('<MakeReservation/>', () =>{
 
   it('should allow input valid guest',() => {
     //lets render the item
-    const wrapper = mount(<MakeReservation store={{tables, reservations}}/>);
+    const wrapper = mount(<MakeReservation tables={tables}/>);
     //expect ref for name
     expect(wrapper.ref('resOwner').length).toEqual(1);
     //expect ref for contact
@@ -91,8 +91,8 @@ describe('<MakeReservation/>', () =>{
 
     //let mount our component
     const wrapper = mount(<MakeReservation dispatch={addReservationSpy} tables={tables} auth={auth} property={property}/>);
-    wrapper.ref('resOwner').node.value = '';
     wrapper.ref('resTime').node.value = '';
+    console.log(wrapper.ref('resOwner').node.value);
     //simulate submit
     wrapper.ref('form').simulate('submit');
 

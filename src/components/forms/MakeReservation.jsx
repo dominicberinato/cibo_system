@@ -24,7 +24,7 @@ export class MakeReservation extends Component {
 
       //validate and submit
       if(guestName.length == 0 || guestContact.length == 0 || guestTime.length == 0) {
-
+        console.log('invalid data');
       }
       else
       {
@@ -42,16 +42,13 @@ export class MakeReservation extends Component {
           dispatch(actions.startAddReservation(reservation));
         }
     }
-    else {
-      console.log('unset propkey uid');
-    }
   }
   render() {
     //TODO use select for tables
     var {tables} = this.props;
     //lets make a function to render a table for each table
     var renderTables = (table) => {
-      return(<option key={table.tbKey} value={table.tbKey}>{table.tbname}</option>)
+      return(<option value={table.tbKey}>{table.tbname}</option>)
     }
     return(
       <div>
