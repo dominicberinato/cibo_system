@@ -91,7 +91,8 @@ var plugins = PRODUCTION
     :   [
           new HTMLWebpackPlugin({
             template:'index-template.html'
-          })
+          }),
+          new webpack.NamedModulesPlugin()
         ];
 
 //add universal plugins
