@@ -49,6 +49,10 @@ export class MakeReservation extends Component {
   render() {
     //TODO use select for tables
     var {tables} = this.props;
+    //lets make a function to render a table for each table
+    var renderTables = (table) => {
+      return(<option key={table.tbKey} value={table.tbKey}>{table.tbname}</option>)
+    }
     return(
       <div>
         <p>Make Reservation</p>
@@ -66,8 +70,8 @@ export class MakeReservation extends Component {
             <textarea ref="resDiet" rows="5"></textarea>
           </div>
           <div>
-            <label>Table</label>
-            <input type="text" ref="resTable"/>
+            <label>Choose Table</label>
+            <select ref="resTable">{tables.map(renderTables)}</select>
           </div>
           <div>
             <label>Number of Guests*</label>
