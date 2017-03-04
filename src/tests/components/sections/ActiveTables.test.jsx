@@ -8,5 +8,7 @@ describe('<ActiveTables/>',  () => {
     expect(ActiveTables).toExist();
   });
 
-  
+  it('should allow adding of a new Bill', () =>{
+    
+  })
 })
