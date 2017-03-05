@@ -27,6 +27,14 @@ module.exports = function (config) {
       }
     },
     webpack: webpackConfig,
+    externals: {
+       'jsdom': 'window',
+       'cheerio': 'window',
+       'react/lib/ExecutionEnvironment': true,
+       'react/addons': true,
+       'react/lib/ReactContext': 'window',
+       'sinon': 'window.sinon'
+     },
     webpackServer: {
       noInfo: true
     }

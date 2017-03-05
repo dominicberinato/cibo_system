@@ -23,7 +23,7 @@ export class ActiveTableItem extends Component {
 
 //define props for this compon
 ActiveTableItem.propTypes = {
-  tbname: React.PropTypes.string.isRequired,
+  tbname: React.PropTypes.string,
   resOwner: React.PropTypes.string,
   bill: React.PropTypes.number
 }
