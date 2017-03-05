@@ -1,7 +1,7 @@
 import expect from 'expect'
 import {mount} from 'enzyme'
 import React from 'react'
-import ActiveTableItem from 'ActiveTableItem'
+import {ActiveTableItem} from 'ActiveTableItem'
 
 
 describe('<ActiveTableItem/>',() => {
