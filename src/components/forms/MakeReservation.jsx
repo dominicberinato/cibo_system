@@ -23,7 +23,7 @@ export class MakeReservation extends Component {
     if(property.propKey != undefined && auth.uid != undefined) {
 
       //validate and submit
-      if(guestName.length == 0 || guestContact.length == 0 || guestTime.length == 0) {
+      if(guestName.length == '' || guestContact.length == 0 || guestTime.length == 0) {
         console.log('invalid data');
       }
       else
@@ -46,10 +46,6 @@ export class MakeReservation extends Component {
   render() {
     //TODO use select for tables
     var {tables} = this.props;
-    //lets make a function to render a table for each table
-    var renderTables = (table) => {
-      return(<option value={table.tbKey}>{table.tbname}</option>)
-    }
     return(
       <div>
         <p>Make Reservation</p>
@@ -68,7 +64,9 @@ export class MakeReservation extends Component {
           </div>
           <div>
             <label>Choose Table</label>
-            <select ref="resTable">{tables.map(renderTables)}</select>
+            <select ref="resTable">{tables.map((table) =>{
+                return(<option key={table.tbKey} value={table.tbKey}>{table.tbname}</option>)
+              })}</select>
           </div>
           <div>
             <label>Number of Guests*</label>

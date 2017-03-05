@@ -17,8 +17,7 @@ describe('CiboTabs', () => {
   it('should not dispatch assocProp on invalid data', () => {
     const dispatch = sinon.spy();
     const wrapper = mount(<CiboTabs property={{propKey:'17ty9y'}} dispatch={dispatch}/>);
-    wrapper.setProps({})
-    wrapper.ref('propCode').simulate('change', {target:{value: ''}});
+    wrapper.ref('propCode').node.value = null;
     wrapper.ref('form').simulate('submit');
     sinon.assert.notCalled(dispatch);
   });

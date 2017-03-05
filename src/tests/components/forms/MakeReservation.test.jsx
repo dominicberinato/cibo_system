@@ -92,7 +92,6 @@ describe('<MakeReservation/>', () =>{
     //let mount our component
     const wrapper = mount(<MakeReservation dispatch={addReservationSpy} tables={tables} auth={auth} property={property}/>);
     wrapper.ref('resTime').node.value = '';
-    console.log(wrapper.ref('resOwner').node.value);
     //simulate submit
     wrapper.ref('form').simulate('submit');
 
