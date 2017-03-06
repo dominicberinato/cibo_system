@@ -1,6 +1,6 @@
 import React,{Component} from 'react'
 import {connect} from 'react-redux'
-import * as actions from 'src/actions/actions'
+import {collectTables} from 'src/actions/tableActions'
 
 export class Availability extends Component {
   constructor(props){
@@ -9,7 +9,7 @@ export class Availability extends Component {
   componentDidMount() {
     //todo implement collectReservations
     var {dispatch} = this.props;
-    dispatch(actions.collectTables());
+    dispatch(collectTables());
   }
   render() {
     var {tables, reservations} = this.props;

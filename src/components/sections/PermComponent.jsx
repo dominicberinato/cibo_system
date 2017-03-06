@@ -2,7 +2,7 @@ import React,{Component} from 'react'
 import {connect} from 'react-redux'
 import firebase,{firebaseRef} from 'src/firebase/index'
 import {hashHistory} from 'react-router'
-import * as actions from 'src/actions/actions'
+import {addProperty} from 'src/actions/propertyActions'
 
 export class PermComponent extends Component {
   constructor(props) {
@@ -33,7 +33,7 @@ export class PermComponent extends Component {
               //download a the property
               firebaseRef.child(`properties/${user.propCode}`).once('value').then((propShot) => {
                 var property = propShot.val();
-                dispatch(actions.addProperty({
+                dispatch(addProperty({
                   ...property,
                   propKey: propShot.key
                 }));
@@ -54,7 +54,7 @@ export class PermComponent extends Component {
               //dispatch prop action
               //collect this property from db
               firebaseRef.child(`properties/${propUsersList.key}`).once('value').then((propSnapShot) => {
-                dispatch(actions.addProperty({
+                dispatch(addProperty({
                   ...propSnapShot.val(),
                   propKey: propUsersList.key
                 }));

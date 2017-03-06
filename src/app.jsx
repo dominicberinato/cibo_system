@@ -26,7 +26,7 @@ injectTapEventPlugin();
 //lets make a store
 var store = require('src/store/configureStore').configure();
 //add actions to call login on auth listener!!
-import * as actions from 'src/actions/actions'
+import {login} from 'src/actions/authActions'
 //do auth work
 import firebase from 'src/firebase/index'
 
@@ -40,7 +40,7 @@ const watchAuth = () => {
   firebase.auth().onAuthStateChanged((user) => {
     //logged in
     if(user) {
-      store.dispatch(actions.login({
+      store.dispatch(login({
         uid: user.uid,
         name:user.displayName,
         photo: user.photoURL,

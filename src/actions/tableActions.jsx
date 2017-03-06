@@ -1,0 +1,110 @@
+import {firebaseRef} from 'src/firebase/index'
+//export async action to delete table
+export var startDeleteTable = (tbKey) => {
+  return(dispatch, getState) => {
+    //TODO clean all connected
+    var deleteTableFanOut =  {};
+    //lets remove content
+    return firebaseRef.child(`tables/${tbKey}`).remove().then(() => {
+      //lets call the deleteTable
+      dispatch(deleteTable(tbKey));
+    })
+  }
+}
+//export deleteTable
+export var deleteTable = (id) => {
+  return {
+    type: 'DELETE_TABLE',
+    id
+  }
+};
+
+//export action to remote update table
+export var startUpdateTable = (id, updates) => {
+  return(dispatch, getState) => {
+     //check that the table we are about to upate is valid
+     return firebaseRef.child(`/tables/${id}`).once('value').then((tableSnapshot) => {
+       if(tableSnapshot.val() != null) {
+         //create a fanout
+         var updateTableFanOut =  {} ;
+         //populate
+         updateTableFanOut['/tables/${id}']  = {
+                                                  ...tableSnapshot.val(),
+                                                  ...updates
+                                                };
+        //later object spread overrides earlier^^^^
+        //update table locally
+        dispatch(updateTable(id, updates));
+       }
+       //TODO deal with failure
+     })
+  }
+}
+
+//export action to collect tables
+export var collectTables = () => {
+  return(dispatch, getState) => {
+    //get the id of the property so we can use a lookup table
+    var propKey = getState().property.propKey;
+
+    var tablesRef = firebaseRef.child(`property-tables/${propKey}`);
+    return tablesRef.once('value').then((tablesShot) => {
+      //clear tables for consistency
+      dispatch(clearTables());
+      tablesShot.forEach((childTable) => {
+        var tableKey = childTable.key;
+        //lets fetch the table from firebase
+        return firebaseRef.child(`tables/${tableKey}`).once('value').then((thisTable) => {
+          dispatch(addTable({
+            tbKey: tableKey,
+            ...thisTable.val()
+          }))
+        })
+      })
+
+    })
+
+  }
+}
+
+//export updateTableAction =
+export var updateTable = (id, updates) => {
+  return {
+    type: 'UPDATE_TABLE',
+    id,
+    updates
+  }
+};
+
+//export async action to start add table
+export var startAddTable =  (table) => {
+  return(dispatch, getState) => {
+    var propId = table.propId;
+    //get propid
+    var tableFanOut =  {};
+    var tableKey = firebaseRef.child('tables').push().key;
+    tableFanOut[`/tables/${tableKey}`] = table;
+    tableFanOut[`/property-tables/${propId}/${tableKey}`] = tableKey;
+
+    //lets update this fanout
+    return firebaseRef.update(tableFanOut).then(() => {
+      dispatch(addTable({
+        ...table,
+        tbKey: tableKey
+      }))
+    })
+  }
+}
+//add a table to state
+export var addTable = (table) => {
+  return {
+    type: 'ADD_TABLE',
+    table
+  }
+}
+//action to clear tables
+export var clearTables = () => {
+  return {
+    type: 'CLEAR_TABLES'
+  }
+}

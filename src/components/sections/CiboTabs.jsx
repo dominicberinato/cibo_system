@@ -8,7 +8,8 @@ import Operations from 'Operations'
 import StockManagement from 'StockManagement'
 import HumanResources from 'HumanResources'
 import {connect} from 'react-redux'
-import * as actions from 'src/actions/actions'
+import {collectTables} from 'src/actions/tableActions'
+import {assocUser} from 'src/actions/authActions'
 
 export class CiboTabs extends Component {
   constructor(props){

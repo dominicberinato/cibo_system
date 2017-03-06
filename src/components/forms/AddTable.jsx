@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
-import {startAddTable} from 'src/actions/actions'
+import {startAddTable} from 'src/actions/tableActions'
 
 export class AddTable extends Component {
   //class constructor

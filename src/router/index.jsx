@@ -1,7 +1,6 @@
 import React from 'react'
 import {Route, Router, IndexRoute, hashHistory} from 'react-router';
 import firebase, {googleAuthProvider} from 'src/firebase/index'
-import * as actions from 'src/actions/actions'
 import {connect} from 'react-redux'
 
 //add appshell

@@ -1,6 +1,6 @@
 import React,{Component} from 'react'
 import {hashHistory} from 'react-router'
-import * as actions from 'src/actions/actions'
+import {startLogin} from 'src/actions/authActions'
 import {connect} from 'react-redux'
 import firebase from 'src/firebase/index'
 
@@ -13,7 +13,7 @@ export class AuthComponent extends Component {
   onLogin() {
     var{dispatch} = this.props;
     //call login action to sign in with popup
-    dispatch(actions.startLogin());
+    dispatch(startLogin());
   }
   render() {
     return(

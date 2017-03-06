@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
-import * as actions from 'src/actions/actions'
+import {startAddProperty} from 'src/actions/propertyActions'
 import shortid from 'shortid';
 
 //plain class  for testing
@@ -43,7 +43,7 @@ export class SetProperty extends Component {
         propCreator: auth.uid
       }
       //dispatch our action generator
-      dispatch(actions.startAddProperty(property));
+      dispatch(startAddProperty(property));
     }
     else {
       //TODO display warning for form

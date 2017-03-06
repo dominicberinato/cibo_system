@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
-import * as actions from 'src/actions/actions'
+import {startAddReservation} from 'src/actions/reservationActions'
 
 export class MakeReservation extends Component {
   constructor(props) {
@@ -39,7 +39,7 @@ export class MakeReservation extends Component {
           }
 
           //lets then dispatch start add reservation
-          dispatch(actions.startAddReservation(reservation));
+          dispatch(startAddReservation(reservation));
         }
     }
   }

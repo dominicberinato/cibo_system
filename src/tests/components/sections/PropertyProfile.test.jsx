@@ -1,16 +1,9 @@
 import React from 'react'
-import ReactDOM from 'react-dom'
-import $ from 'script-loader!jquery'
 import sinon from 'sinon'
 import expect from 'expect'
-//actions
-import * as actions from 'actions';
 //use enzyme to test components
 import {mount} from 'enzyme'
-import configureMockStore from 'redux-mock-store'
-import thunk from 'redux-thunk'
-//use this to mock a store
-var createMockStore = configureMockStore([thunk]);
+
 
 import PropertyProfile from 'PropertyProfile'
 
@@ -19,8 +12,8 @@ describe('PropertyProfile', () => {
     expect(PropertyProfile).toExist();
   })
   it('should render property message  if emmpty', () => {
-    const store = createMockStore({property: {}});
-    const wrapper = mount(<PropertyProfile store={store}/>);
+    const property =  {};
+    const wrapper = mount(<PropertyProfile property={property}/>);
     expect(wrapper.find('#emptyMessage')).toExist();
   })
 
@@ -35,7 +28,7 @@ describe('PropertyProfile', () => {
     const store = createMockStore({property});
 
     //mount element with our data
-    const wrapper = mount(<PropertyProfile store={store}/>)
+    const wrapper = mount(<PropertyProfile property={property}/>)
 
     expect(wrapper.find('#name')).toExist();
     // expect(wrapper.find('#propimg').to.have.length(1));

@@ -1,20 +1,12 @@
 import React from 'react'
-import ReactDOM from 'react-dom'
-import $ from 'script-loader!jquery'
 import sinon from 'sinon'
 import expect from 'expect'
-//actions
-import * as actions from 'actions';
 //use enzyme to test components
 import {mount} from 'enzyme'
 
-//thunk and createMockStore
-import thunk from 'redux-thunk'
-import configureMockStore from 'redux-mock-store'
 
 import {PermComponent} from 'PermComponent'
 
-var createMockStore = configureMockStore([thunk]);
 
 describe('PermComponent',() => {
   it('should exist', () => {
@@ -32,7 +24,7 @@ describe('PermComponent',() => {
 
     const store = createMockStore({auth});
     var spy = sinon.spy(PermComponent.prototype, 'componentDidMount');
-    const wrapper = mount(<PermComponent store={store}/>);
+    const wrapper = mount(<PermComponent auth={auth}/>);
     //expect(PermComponent.prototype.componentDidMount).to.have.property('callCount', 1);
     sinon.assert.calledOnce(spy)
     PermComponent.prototype.componentDidMount.restore();

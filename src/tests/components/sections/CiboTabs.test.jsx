@@ -1,6 +1,5 @@
 import React from 'react'
 import sinon from 'sinon'
-import * as actions from 'actions'
 import {mount} from 'enzyme'
 import expect from 'expect'
 //store stuff
