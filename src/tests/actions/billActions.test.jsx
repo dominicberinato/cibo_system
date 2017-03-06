@@ -187,8 +187,31 @@ describe('billActions', () => {
       firebaseRef.remove().then(() => done());
     });
 
-    it('should run', () => {
-      expect(0).toEqual(1);
+    it('should run startAddBill and dispatch ADD_BILL', (done) => {
+      //mock an action
+      var bill = {
+        billKey: 1232,
+        tbKey:2,
+        tbname: 2,
+        resOwner: 'Isaac',
+        bill: 30
+      };
+      //mock the action
+      const action = actions.startAddBill(bill);
+
+      //dispatch our action
+      store.dispatch(action).then(() => {
+        //collect actions
+        const mockActions = store.getActions();
+        //assert that add bill was called
+        expect(mockActions[0].toInclude({
+          type: 'ADD_BILL',
+          bill: {
+            ...bill
+          }
+        }));
+        done(); //async test done
+      },done());//if error
     })
 
   })
