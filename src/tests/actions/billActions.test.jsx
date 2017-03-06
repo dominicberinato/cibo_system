@@ -241,7 +241,7 @@ describe('billActions', () => {
 
         expect(mockActions[0].toInclude({
           type: 'ADD_ITEM',
-          id: billKey,
+          id: bill.billKey,
           bill: {
             ...bill
           }
@@ -251,7 +251,42 @@ describe('billActions', () => {
     });
 
     it('should startRemoveItem and dispatch REMOVE_ITEM',  () => {
+      //mock an action
+      var bill = {
+        billKey: 1232,
+        tbKey:2,
+        tbname: 2,
+        resOwner: 'Isaac',
+        bill: 30
+      };
 
+      //mock updates
+      const updates = {
+        bill: 40,
+        items: [
+          '20'
+        ]
+      };
+
+      //mock out async action
+      const action = actions.startRemoveItem(bill.billKey, updates);
+
+
+      //dispatch the action
+      store.dispatch(action).then(() => {
+        //collect actions that were call
+        const mockActions = store.getActions();
+
+        //lets assert the actions were called
+        expect(mockActions[0].toInclude({
+          type: 'REMOVE_ITEM',
+          id: bill.billKey,
+          bill: {
+            ...bill
+          }
+        }));
+        done();
+      }, done());
     })
 
   })
