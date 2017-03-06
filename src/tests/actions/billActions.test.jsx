@@ -287,6 +287,33 @@ describe('billActions', () => {
         }));
         done();
       }, done());
+    });
+
+    it('should startDeleteBill and dispatch DELETE_BILL', (done) => {
+      //mock an action
+      var bill = {
+        billKey: 1232,
+        tbKey:2,
+        tbname: 2,
+        resOwner: 'Isaac',
+        bill: 30
+      };
+
+      //lets mock action
+      const action = actions.startDeleteBill(bill.billKey);
+
+      //dispatch our delee action
+      store.dispatch(action).then(() => {
+        //collect actions
+        const mockActions = store.getActions();
+
+        //lets assert that the actions were called
+        expect(mockActions[0].toInclude({
+          type: 'DELETE_BILL',
+          id: bill.billKey
+        }));
+        done();
+      }, done());
     })
 
   })
