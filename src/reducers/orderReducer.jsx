@@ -1,4 +1,4 @@
-export var orderReducer = (state = {}, action) {
+export var orderReducer = (state = {}, action) => {
   switch (action.type) {
     case 'ADD_ITEM':
       return {
