@@ -57,16 +57,66 @@ describe('billActions', () => {
 
       var addItemAction = {
         type: 'ADD_ITEM',
-        billId: bills[0].billKey
+        billId: bills[0].billKey,
+        updates
       };
 
       //lets work on a result
       var result = actions.addItem(bills[0].billKey, updates);
 
       expect(result).toEqual(addItemAction);
+    });
 
-    })
+    it('should generate removeItem Action', () => {
+      //mock an action
+      var bills = [{
+        billKey: 1232,
+        tbKey:2,
+        tbname: 2,
+        resOwner: 'Isaac',
+        bill: 30
+      }];
 
+      const updates = {
+        bill: 40,
+        items: [
+          '20'
+        ]
+      };
+
+      var removeItemAction = {
+        type: 'REMOVE_ITEM',
+        billId: bills[0].billKey,
+        updates
+      };
+
+      //generate a result
+      var result = actions.removeItem(bill[0].billKey, updates)
+      //assert
+      expect(result).toEqual(removeItemAction);
+    });
+
+    it('should generate deleteBill Action', () => {
+      //mock an action
+      var bills = [{
+        billKey: 1232,
+        tbKey:2,
+        tbname: 2,
+        resOwner: 'Isaac',
+        bill: 30
+      }];
+
+      var deleteBillAction = {
+        type: 'DELETE_BILL',
+        id: bills[0].bill
+      };
+
+      //lets call our actions
+      var result = actions.deleteBill(bills[0].billKey);
+
+      //asssert on result
+      expect(result).toEqual(deleteBillAction);
+    });
   })
 
   describe('Async', () => {
