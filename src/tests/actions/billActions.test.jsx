@@ -212,6 +212,46 @@ describe('billActions', () => {
         }));
         done(); //async test done
       },done());//if error
+    });
+
+    it('should run startAddItem and dispatch ADD_ITEM', (done) => {
+      //mock an action
+      var bill = {
+        billKey: 1232,
+        tbKey:2,
+        tbname: 2,
+        resOwner: 'Isaac',
+        bill: 30
+      };
+
+      //mock updates
+      const updates = {
+        bill: 40,
+        items: [
+          '20'
+        ]
+      };
+
+      const action = actions.startAddBillItem(bill.billKey, updates);
+
+      //dispatch our action
+      store.dispatch(action).then(() => {
+        //collect actions
+        const mockActions = store.getActions();
+
+        expect(mockActions[0].toInclude({
+          type: 'ADD_ITEM',
+          id: billKey,
+          bill: {
+            ...bill
+          }
+        }));
+        done();
+      }, done());
+    });
+
+    it('should startRemoveItem and dispatch REMOVE_ITEM',  () => {
+
     })
 
   })
