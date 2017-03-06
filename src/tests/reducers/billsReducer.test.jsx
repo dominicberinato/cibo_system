@@ -20,5 +20,11 @@ describe('BillsReducer', () => {
     var result = billsReducer(df([]), df(billAction));
 
     expect(result[0]).toEqual(billAction.bill);
+  });
+  
+  it('should delete a bill', () => {
+    expect(1).toEqual(2);
   })
+
+
 })
