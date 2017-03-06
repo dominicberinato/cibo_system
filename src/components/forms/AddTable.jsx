@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
-import * as actions from 'src/actions/actions'
+import {startAddTable} from 'src/actions/actions'
 
 export class AddTable extends Component {
   //class constructor
@@ -28,7 +28,7 @@ export class AddTable extends Component {
         tbcapacity
       }
       //uploadData
-      dispatch(actions.startAddTable(tbObject))
+      dispatch(startAddTable(tbObject))
     }
   }
   //when mounted load ..
