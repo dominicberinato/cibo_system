@@ -57,7 +57,7 @@ describe('billActions', () => {
 
       var addItemAction = {
         type: 'ADD_ITEM',
-        billId: bills[0].billKey,
+        id: bills[0].billKey,
         updates
       };
 
