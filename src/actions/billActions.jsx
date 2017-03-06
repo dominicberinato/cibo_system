@@ -18,4 +18,11 @@ export var addItem = (id, updates) => {
 };
 
 //action to  remove item
+export var removeItem = (id, updates) => {
+  return {
+    type: 'REMOVE_ITEM',
+    id,
+    updates
+  };
+};
 //action to delete bill

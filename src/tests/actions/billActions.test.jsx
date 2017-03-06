@@ -86,12 +86,12 @@ describe('billActions', () => {
 
       var removeItemAction = {
         type: 'REMOVE_ITEM',
-        billId: bills[0].billKey,
+        id: bills[0].billKey,
         updates
       };
 
       //generate a result
-      var result = actions.removeItem(bill[0].billKey, updates)
+      var result = actions.removeItem(bills[0].billKey, updates)
       //assert
       expect(result).toEqual(removeItemAction);
     });
