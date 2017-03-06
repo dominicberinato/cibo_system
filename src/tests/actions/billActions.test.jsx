@@ -108,7 +108,7 @@ describe('billActions', () => {
 
       var deleteBillAction = {
         type: 'DELETE_BILL',
-        id: bills[0].bill
+        id: bills[0].billKey
       };
 
       //lets call our actions
