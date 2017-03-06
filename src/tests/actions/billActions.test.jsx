@@ -2,53 +2,72 @@ import configureMockStore from 'redux-mock-store'
 import expect from 'expect'
 import thunk from 'redux-thunk'
 import firebase,{firebaseRef} from 'src/firebase/index'
-import * as actions from 'propertyActions'
+import * as actions from 'billActions'
 import {login} from 'authActions'
 import shortid from 'shortid'
-
-
 
 
 //use this to mock a store
 var createMockStore = configureMockStore([thunk]);
 
-describe('propertyActions', () => {
-  describe('sync', () => {
-    //work on addProperty action test
-    it('should generate addProperty action',  () => {
+describe('billActions', () => {
+  it('should exist', () => {
+    expect(actions).toExist();
+  })
 
-      var debug = {hello: "world"};
-      var mockImage = new Blob([JSON.stringify(debug, null, 2)], {type : 'application/json'});
-      var property = {
-        name: 'Awesome Place',
-        address: 'Baked AF',
-        location: '33,60',
-        avatar: mockImage
-      }
-      //lets mock a result
-      var addProperty =  {
-        type: 'ADD_PROPERTY',
-        property
+  describe('sync', () => {
+
+    it('should generate addBill Action', () =>{
+       //mock an action
+       var bill = {
+         billKey: 1232,
+         tbKey:2,
+         tbname: 2,
+         resOwner: 'Isaac',
+         bill: 30
+       };
+
+       //action we expect
+       var addBillAction = {
+         type: 'ADD_BILL',
+         bill
+       };
+
+       var result = actions.addBill(bill);
+
+       expect(result).toEqual(addBillAction);
+    });
+
+    it('should generate addItem Action', () => {
+      //mock an action
+      var bills = [{
+        billKey: 1232,
+        tbKey:2,
+        tbname: 2,
+        resOwner: 'Isaac',
+        bill: 30
+      }];
+
+      const updates = {
+        bill: 40,
+        items: [
+          '20'
+        ]
       };
 
-      //trigger
-      var result = actions.addProperty(addProperty.property);
+      var addItemAction = {
+        type: 'ADD_ITEM',
+        billId: bills[0].billKey
+      };
 
-      //check result
-      expect(result).toEqual(addProperty);
+      //lets work on a result
+      var result = actions.addItem(bills[0].billKey, updates);
+
+      expect(result).toEqual(addItemAction);
+
     })
-    //work on clearProperty action test
-    it('should generate clearProperty action', () => {
-      //mock a result
-      var clearProperty =  {
-        type: 'CLEAR_PROPERTY'
-      }
-      //trigger code
-      var result = actions.clearProperty();
-      //check result
-      expect(result).toEqual(clearProperty);
-    });
-  });
+
+  })
 
   describe('Async', () => {
     var uid;
@@ -118,26 +137,9 @@ describe('propertyActions', () => {
       firebaseRef.remove().then(() => done());
     });
 
-
-    it('should create property  and dispatch ADD_PROPERTY', (done) => {
-      testPropertyKey = firebaseRef.child('properties').push().key;
-      //lets call our async action
-      const action = actions.startAddProperty(testProperty);
-
-      store.dispatch(action).then(() => {
-        //get a list of actions
-        const mockActions = store.getActions();
-        //check that our action was called
-        expect(mockactions[0].toInclude({
-          type: 'ADD_PROPERTY',
-          property:
-          {
-            ...testProperty
-          }
-        }));
-        done();
-      },done());
-    });
+    it('should run', () => {
+      expect(0).toEqual(1);
+    })
 
   })
 })
