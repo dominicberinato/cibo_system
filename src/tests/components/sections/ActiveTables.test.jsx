@@ -34,7 +34,7 @@ describe('<ActiveTables/>',  () => {
     }];
 
     //lets render the component with the bills
-    const wrapper = shallow(<ActiveTables dispatch={dispatch} store={bills}/>);
+    const wrapper = shallow(<ActiveTables dispatch={dispatch} bills={bills}/>);
 
     //assert that component renders an item for each bill
     expect(wrapper.find(ActiveTableItem).length).toEqual(bills.length);
