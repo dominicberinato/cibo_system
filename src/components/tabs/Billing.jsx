@@ -4,6 +4,9 @@ import BillingStats from 'BillingStats'
 import CurrentBill from 'CurrentBill'
 
 export class Billing extends Component {
+  constructor(props){
+    super(props)
+  }
   render() {
     return(
       <div>
