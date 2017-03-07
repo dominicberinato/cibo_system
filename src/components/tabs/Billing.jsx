@@ -1,5 +1,7 @@
 import React, {Component} from 'react'
 import ActiveTables from 'ActiveTables'
+import BillingStats from 'BillingStats'
+import CurrentBill from 'CurrentBill'
 
 export class Billing extends Component {
   render() {
@@ -10,11 +12,11 @@ export class Billing extends Component {
             <ActiveTables/>
           </div>
           <div className="row">
-            <p className="text-center">Billing Stats</p>
+            <BillingStats/>
           </div>
         </div>
         <div className="columns large-6 medium-6 small-12">
-          <p className="text-center">Bill Details</p>
+          <CurrentBill/>
         </div>
       </div>
     );

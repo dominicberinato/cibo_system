@@ -16,11 +16,11 @@ export class ActiveTables extends Component {
           return(<ActiveTableItem key={bill.tbname} {...bill}/>);
         })
       } else {
-        return (<p ref="empty-bills">'No Active Tables Lets Hustle'</p>)
+        return (<p ref="empty-bills">No Active Tables Lets Hustle</p>)
       }
     }
     return(
-      <div>
+      <div className="text-center">
           <p className="text-center">Active Tables</p>
           {renderBills()}
           <div>
