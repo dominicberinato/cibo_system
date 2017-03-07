@@ -250,7 +250,7 @@ describe('billActions', () => {
       }, done());
     });
 
-    it('should startRemoveItem and dispatch REMOVE_ITEM',  () => {
+    it('should startRemoveItem and dispatch REMOVE_ITEM',  (done) => {
       //mock an action
       var bill = {
         billKey: 1232,

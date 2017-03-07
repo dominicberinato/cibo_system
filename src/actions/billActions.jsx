@@ -45,6 +45,8 @@ export var startAddItem =  (id, updates) => {
     //make fan out
     var billUpdateFanout =  {};
 
+    //TODO computation for bill totals
+
     //update the bill
     var updatedBill = {
       ...updates
@@ -55,7 +57,7 @@ export var startAddItem =  (id, updates) => {
 
     return firebaseRef.update(billUpdateFanout).then(() => {
       //lets update local data
-      dispatch(updatedBill(id, updates))
+      dispatch(addItem(id, updates));
     })
   }
 }
@@ -68,6 +70,33 @@ export var removeItem = (id, updates) => {
     updates
   };
 };
+
+//async action to removeItem =
+export var startRemoveItem = (id, updates) => {
+  return(dispatch, getState) => {
+    //since we are updating
+    //make fan out
+    var billUpdateFanout =  {};
+
+    //TODO computation for bill totals
+
+    //update the bill
+    var updatedBill = {
+      ...updates
+    };
+
+    //populate fanout
+    billUpdateFanout[`/bills/${id}`] = updatedBill
+
+    return firebaseRef.update(billUpdateFanout).then(() => {
+      //lets update local data
+      dispatch(removeItem(id, updates))
+    })
+  }
+}
+
+
+
 
 //action to delete bill
 export var deleteBill = (id) => {

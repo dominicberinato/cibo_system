@@ -65,7 +65,7 @@ describe('tablesReducer', () => {
 
     //assertion
     expect(result.length).toEqual(0)
-  })
+  });
   it('should delete table on deleteTable', () => {
     //mock the table
     var tables = [{
