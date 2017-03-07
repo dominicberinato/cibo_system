@@ -20,7 +20,7 @@ describe('<Billing/>', () => {
     //mount billing
     const wrapper = shallow(<Billing tables bills />);
     //assert on wrapper
-    //expect(wrapper.find(CurrentBill).length).toEqual(1,'CurrentBill not rendered');
+    expect(wrapper.find(CurrentBill).length).toEqual(1,'CurrentBill not rendered');
     expect(wrapper.find(BillingStats).length).toEqual(1,'BillingStats not rendered');
     expect(wrapper.find(ActiveTables).length).toEqual(1, 'ActiveTables not rendered');
   });
