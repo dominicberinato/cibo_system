@@ -96,8 +96,6 @@ export var startRemoveItem = (id, updates) => {
 }
 
 
-
-
 //action to delete bill
 export var deleteBill = (id) => {
   return  {
@@ -105,3 +103,20 @@ export var deleteBill = (id) => {
     id
   };
 };
+
+//async action to deleteBill
+export var startDeleteBill = (bill) => {
+  return (dispatch, getState) => {
+    //make a fan out
+    var billDeleteFanout = {};
+
+    //update fanout
+    billDeleteFanout[`/bills/${bill.id}`] = null;
+    billDeleteFanout[`/table-bills/${bill.tbKey}/${bill.id}`] = null;
+
+    return firebaseRef.update(billDeleteFanout).then(() => {
+      //lets dispatch local delete
+      dispatch(deleteBill(id));
+    })
+  }
+}

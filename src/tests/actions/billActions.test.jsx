@@ -292,7 +292,7 @@ describe('billActions', () => {
     it('should startDeleteBill and dispatch DELETE_BILL', (done) => {
       //mock an action
       var bill = {
-        billKey: 1232,
+        id: 1232,
         tbKey:2,
         tbname: 2,
         resOwner: 'Isaac',
@@ -300,7 +300,7 @@ describe('billActions', () => {
       };
 
       //lets mock action
-      const action = actions.startDeleteBill(bill.billKey);
+      const action = actions.startDeleteBill(bill.id);
 
       //dispatch our delee action
       store.dispatch(action).then(() => {
