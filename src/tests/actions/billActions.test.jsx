@@ -232,7 +232,7 @@ describe('billActions', () => {
         ]
       };
 
-      const action = actions.startAddBillItem(bill.billKey, updates);
+      const action = actions.startAddItem(bill.billKey, updates);
 
       //dispatch our action
       store.dispatch(action).then(() => {

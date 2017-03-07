@@ -38,6 +38,28 @@ export var addItem = (id, updates) => {
   };
 };
 
+//async action to add item to bill
+export var startAddItem =  (id, updates) => {
+  return(dispatch, getState) => {
+    //since we are updating
+    //make fan out
+    var billUpdateFanout =  {};
+
+    //update the bill
+    var updatedBill = {
+      ...updates
+    };
+
+    //populate fanout
+    billUpdateFanout[`/bills/${id}`] = updatedBill
+
+    return firebaseRef.update(billUpdateFanout).then(() => {
+      //lets update local data
+      dispatch(updatedBill(id, updates))
+    })
+  }
+}
+
 //action to  remove item
 export var removeItem = (id, updates) => {
   return {
