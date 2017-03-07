@@ -1,6 +1,7 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import ActiveTableItem from 'ActiveTableItem'
+import {startAddBill} from 'billActions'
 
 export class ActiveTables extends Component {
   constructor(props){
@@ -23,7 +24,7 @@ export class ActiveTables extends Component {
           <p className="text-center">Active Tables</p>
           {renderBills()}
           <div>
-            <button ref="add-bill" className="button hollow" onClick={dispatch(actions.StartBill)}>Start Bill</button>
+            <button ref="add-bill" className="button hollow" onClick={dispatch(startAddBill)}>Start Bill</button>
           </div>
       </div>
     )
@@ -41,5 +42,7 @@ ActiveTables.defaultProps = {
 };
 
 export default connect((state) => {
-  bills: state.bills
+  return{
+    bills: state.bills
+  }
 })(ActiveTables);

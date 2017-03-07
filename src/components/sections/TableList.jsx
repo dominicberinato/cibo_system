@@ -1,7 +1,7 @@
 import React,{Component} from 'react'
 import {connect} from 'react-redux'
 import Table from 'Table'
-import {collectTables} from 'src/actions/tableActions'
+import {collectTables, clearTables} from 'src/actions/tableActions'
 
 export class TableList extends Component {
   constructor(props) {
@@ -10,6 +10,7 @@ export class TableList extends Component {
   componentDidMount() {
     //when mounted also pull some tables from db if any
     var {dispatch} = this.props;
+    dispatch(clearTables)
     dispatch(collectTables());
   }
   render() {

@@ -2,7 +2,7 @@ import React,{Component} from 'react'
 import {connect} from 'react-redux'
 import firebase,{firebaseRef} from 'src/firebase/index'
 import {hashHistory} from 'react-router'
-import {addProperty} from 'src/actions/propertyActions'
+import {addProperty} from 'propertyActions'
 
 export class PermComponent extends Component {
   constructor(props) {
@@ -27,7 +27,7 @@ export class PermComponent extends Component {
           firebaseRef.child(`users/${auth.uid}`).once('value').then((userShot) => {
             //check if user has a propCode
             var user = userShot.val();
-            console.log('this is the user', user);
+            //console.log('this is the user', user);
             if(user.propCode) {
               //user has prop code download property and send to admin
               //download a the property

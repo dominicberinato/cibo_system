@@ -1,6 +1,6 @@
 import React,{Component} from 'react'
 import {hashHistory} from 'react-router'
-import {startLogin} from 'src/actions/authActions'
+import {startLogin} from 'authActions'
 import {connect} from 'react-redux'
 import firebase from 'src/firebase/index'
 

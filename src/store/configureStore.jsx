@@ -1,8 +1,10 @@
 import * as redux from 'redux'
 import thunk from 'redux-thunk'
-
-import{reservationsReducer, authReducer, propertyReducer, tablesReducer, billsReducer} from 'src/reducers/reducers'
-
+import {reservationsReducer} from 'reservationsReducer'
+import {authReducer} from 'authReducer'
+import {propertyReducer} from 'propertyReducer'
+import {tablesReducer} from 'tablesReducer'
+import {billsReducer} from 'billsReducer'
 
 //lets configure our store
 export var configure = (initialState = {}) => {

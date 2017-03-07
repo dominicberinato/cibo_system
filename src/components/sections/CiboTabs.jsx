@@ -8,8 +8,8 @@ import Operations from 'Operations'
 import StockManagement from 'StockManagement'
 import HumanResources from 'HumanResources'
 import {connect} from 'react-redux'
-import {collectTables} from 'src/actions/tableActions'
-import {assocUser} from 'src/actions/authActions'
+import {collectTables, clearTables} from 'tableActions'
+import {assocUser} from 'authActions'
 
 export class CiboTabs extends Component {
   constructor(props){
@@ -20,7 +20,7 @@ export class CiboTabs extends Component {
     var{property, dispatch} = this.props;
     //check that we have a property key
     if(property.propKey  != undefined) {
-      dispatch(actions.collectTables(property.propkey));
+      dispatch(collectTables(property.propkey));
     }
   }
   assocProduct(Event) {
@@ -34,7 +34,7 @@ export class CiboTabs extends Component {
       //check that code is valid
       if(code.length > 0) {
         //dispatch assoc action
-        dispatch(actions.assocUser(auth.uid, code));
+        dispatch(assocUser(auth.uid, code));
       }
     }
   }
