@@ -48,11 +48,10 @@ export var collectTables = () => {
     var propKey = getState().property.propKey;
 
     var tablesRef = firebaseRef.child(`property-tables/${propKey}`);
-    dispatch(clearTables());
 
     return tablesRef.once('value').then((tablesShot) => {
       var tables = Object.keys(tablesShot.val());
-
+      dispatch(clearTables());
       tables.map((table) => {
         //lets fetch the table from firebase
         return firebaseRef.child(`tables/${table}`).once('value').then((thisTable) => {

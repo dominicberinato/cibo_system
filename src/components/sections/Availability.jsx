@@ -9,7 +9,6 @@ export class Availability extends Component {
   componentDidMount() {
     //todo implement collectReservations
     var {dispatch} = this.props;
-    dispatch(collectTables());
   }
   render() {
     var {tables, reservations} = this.props;

@@ -20,7 +20,7 @@ export class CiboTabs extends Component {
     var{property, dispatch} = this.props;
     //check that we have a property key
     if(property.propKey  != undefined) {
-      dispatch(collectTables(property.propkey));
+      dispatch(collectTables());
     }
   }
   assocProduct(Event) {
