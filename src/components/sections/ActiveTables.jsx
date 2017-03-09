@@ -8,9 +8,11 @@ export class ActiveTables extends Component {
     super(props)
     this.addBill =  this.addBill.bind(this);
   }
-  addBill() {
+  addBill(Event) {
+    Event.preventDefault();
     var {dispatch} = this.props;
-    dispatch(startAddBill())
+    //dispatch(startAddBill())
+    console.log('addbill clicked');
   }
   render() {
     var {bills, dispatch} = this.props;
@@ -20,7 +22,7 @@ export class ActiveTables extends Component {
         return (<p className="empty-bills">No Active Tables Lets Hustle</p>)
       } else {
         return bills.map((bill) => {
-          return(<ActiveTableItem key={bill.tbname} {...bill}/>);
+          return('we have table');
         });
       }
     }
@@ -29,7 +31,7 @@ export class ActiveTables extends Component {
           <p className="text-center">Active Tables</p>
           {renderBills()}
           <div>
-            <button ref="add-bill" onClick={this.addBill()} className="add-bill button hollow">Start Bill</button>
+            <button ref="add-bill" onClick={this.addBill} className="add-bill button hollow">Start Bill</button>
           </div>
       </div>
     )

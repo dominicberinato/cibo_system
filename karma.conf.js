@@ -27,6 +27,8 @@ module.exports = function (config) {
       }
     },
     webpack: webpackConfig,
+    browserDisconnectTimeout: 10000,
+    browserNoActivityTimeout: 20000,
     externals: {
        'jsdom': 'window',
        'cheerio': 'window',
