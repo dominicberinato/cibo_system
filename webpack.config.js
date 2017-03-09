@@ -67,7 +67,10 @@ var plugins = PRODUCTION
               unused: true
             }
           }),
-          new ExtractTextPlugin('[name].[hash:12].css'),
+          new ExtractTextPlugin({
+            filename: '[name].[hash:12].css',
+            disable: false
+          }),
           //purify al teh css
           new HTMLWebpackPlugin({
             template:'index-template.html'
@@ -137,7 +140,8 @@ var buildModule = PRODUCTION || TEST
                         test: /\.scss$/,
                         use:ExtractTextPlugin.extract({
                           fallback: 'style-loader',
-                          use: ['css-loader','sass-loader']
+                          use: ['css-loader','sass-loader'],
+                          publicPath: '/dist'
                         })
                       }
                     ],
