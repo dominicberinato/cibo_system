@@ -81,10 +81,7 @@ var plugins = PRODUCTION
               filename: 'cibo-sw.js',
               maximumFileSizeToCacheInBytes: 4194304,
               minify: true,
-              runtimeCaching: [{
-                handler: 'fastest',
-                urlPattern: /[.]js$/,
-              }],
+              skipWaiting: true
             }
           )
         ]
