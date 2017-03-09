@@ -72,13 +72,13 @@ var plugins = PRODUCTION
             disable: false
           }),
           // //purify al teh css
-          new PurifyCSSPlugin({
-             paths: glob.sync(path.join(__dirname, 'dist/*.html')),
-             moduleExtensions: ['.html'],
-             minimize: true,
-             purifyOptions: { info: true, minify: true },
-             verbose: true
-           }),
+          // new PurifyCSSPlugin({
+          //    paths: glob.sync(path.join(__dirname, 'dist/*.html')),
+          //    moduleExtensions: ['.html'],
+          //    minimize: true,
+          //    purifyOptions: { info: true, minify: true },
+          //    verbose: true
+          //  }),
           new HTMLWebpackPlugin({
             template:'index-template.html'
           }),
