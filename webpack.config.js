@@ -72,10 +72,10 @@ var plugins = PRODUCTION
             disable: false
           }),
           // //purify al teh css
-          // new PurifyCSSPlugin({
-          //    paths: glob.sync(path.join(__dirname, 'dist/*.html')),
-          //   verbose: true
-          //  }),
+          new PurifyCSSPlugin({
+             paths: glob.sync(path.join(__dirname, 'dist/*.html')),
+            verbose: true
+           }),
           new HTMLWebpackPlugin({
             template:'index-template.html'
           }),
