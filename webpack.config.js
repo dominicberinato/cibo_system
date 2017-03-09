@@ -69,10 +69,6 @@ var plugins = PRODUCTION
           }),
           new ExtractTextPlugin('[name].[hash:12].css'),
           //purify al teh css
-          new PurifyCSSPlugin({
-            paths: glob.sync(path.join(__dirname, 'dist/*.html')),
-            verbose: true
-          }),
           new HTMLWebpackPlugin({
             template:'index-template.html'
           }),
