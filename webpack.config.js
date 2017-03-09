@@ -74,7 +74,9 @@ var plugins = PRODUCTION
           // //purify al teh css
           new PurifyCSSPlugin({
              paths: glob.sync(path.join(__dirname, 'dist/*.html')),
-            verbose: true
+             minimize: true,
+             purifyOptions: { info: true, minify: true },
+             verbose: true
            }),
           new HTMLWebpackPlugin({
             template:'index-template.html'
