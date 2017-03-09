@@ -11,10 +11,10 @@ export class ActiveTableItem extends Component {
   render() {
     var {tbname, resOwner, bill} = this.props
     return(
-      <div>
-        <p ref="bill-table" className="bill-table">{tbname}</p>
-        <p ref="bill-owner" className="bill-owner">{resOwner}</p>
-        <p ref="bill-tot" className="bill-tot">{bill}</p>
+      <div className="bill-item">
+        <p ref="bill-table" className="bill-table">Table: {tbname}</p>
+        <p ref="bill-owner" className="bill-owner">Owner: {resOwner}</p>
+        <p ref="bill-tot" className="bill-tot">Amount: {bill}</p>
       </div>
     )
   }

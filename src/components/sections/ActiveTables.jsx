@@ -9,10 +9,9 @@ export class ActiveTables extends Component {
     this.addBill =  this.addBill.bind(this);
   }
   addBill(Event) {
-    Event.preventDefault();
+    //Event.preventDefault();
     var {dispatch} = this.props;
-    //dispatch(startAddBill())
-    console.log('addbill clicked');
+    dispatch(startAddBill())
   }
   render() {
     var {bills, dispatch} = this.props;
@@ -22,7 +21,7 @@ export class ActiveTables extends Component {
         return (<p className="empty-bills">No Active Tables Lets Hustle</p>)
       } else {
         return bills.map((bill) => {
-          return('we have table');
+          return(<ActiveTableItem key={bill.tbname} {...bill}/>);
         });
       }
     }

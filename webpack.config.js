@@ -5,7 +5,9 @@ var envFile = require('node-env-file');
 var HTMLWebpackPlugin = require('html-webpack-plugin');
 var CompressionPlugin = require("compression-webpack-plugin");
 var SWPrecacheWebpackPlugin = require('sw-precache-webpack-plugin');
-
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const PurifyCSSPlugin = require('purifycss-webpack');
+const glob = require('glob');
 
 
 
@@ -64,6 +66,12 @@ var plugins = PRODUCTION
               dead_code: true,
               unused: true
             }
+          }),
+          new ExtractTextPlugin('[name].[hash:12].css'),
+          //purify al teh css
+          new PurifyCSSPlugin({
+            paths: glob.sync(path.join(__dirname, 'dist/*.html')),
+            verbose: true
           }),
           new HTMLWebpackPlugin({
             template:'index-template.html'
@@ -131,7 +139,10 @@ var buildModule = PRODUCTION || TEST
                       },
                       {
                         test: /\.scss$/,
-                        use:['style-loader','css-loader','sass-loader']
+                        use:ExtractTextPlugin.extract({
+                          fallback: 'style-loader',
+                          use: ['css-loader','sass-loader']
+                        })
                       }
                     ],
                     noParse: [
