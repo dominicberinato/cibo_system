@@ -17,7 +17,7 @@ describe('billActions', () => {
 
   describe('sync', () => {
 
-    it('should generate addBill Action', () =>{
+    it('should generate START_BILL Action', () =>{
        //mock an action
        var bill = {
          billKey: 1232,
@@ -29,7 +29,7 @@ describe('billActions', () => {
 
        //action we expect
        var addBillAction = {
-         type: 'ADD_BILL',
+         type: 'START_BILL',
          bill
        };
 
@@ -187,7 +187,7 @@ describe('billActions', () => {
       firebaseRef.remove().then(() => done());
     });
 
-    it('should run startAddBill and dispatch ADD_BILL', (done) => {
+    it('should run startAddBill and dispatch START_BILL', (done) => {
       //mock an action
       var bill = {
         billKey: 1232,
@@ -205,7 +205,7 @@ describe('billActions', () => {
         const mockActions = store.getActions();
         //assert that add bill was called
         expect(mockActions[0].toInclude({
-          type: 'ADD_BILL',
+          type: 'START_BILL',
           bill: {
             ...bill
           }

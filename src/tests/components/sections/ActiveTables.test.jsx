@@ -66,20 +66,26 @@ describe('<ActiveTables/>',  () => {
       tbcapacity: 3
     }];
 
+
     //lets render the component with the bills
     const wrapper = shallow(<ActiveTables dispatch={dispatch} tables={tables} bills={bills}/>);
 
     //assert that component renders an item for each bill
-    expect(wrapper.find(ActiveTableItem).length).toEqual(bills.length);
+    expect(wrapper.find('.bill-item').length).toEqual(bills.length);
   });
 
   it('should show  a message when no bills', () => {
     var dispatch = () => {};
+    const tables = [{
+      tbKey:1,
+      tbname: 2,
+      tbcapacity: 3
+    }];
 
     //mock bills
     const bills = [];
     //let's render the component
-    const wrapper = shallow(<ActiveTables dispatch={dispatch} bills={bills}/>);
+    const wrapper = shallow(<ActiveTables dispatch={dispatch} tables={tables} bills={bills}/>);
     //assert that the message is showns
     expect(wrapper.find('.empty-bills').length).toEqual(1);
   })
