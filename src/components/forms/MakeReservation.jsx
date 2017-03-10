@@ -21,9 +21,9 @@ export class MakeReservation extends Component {
 
     //construct the object we need to submit
     if(property.propKey != undefined && auth.uid != undefined) {
-
       //validate and submit
-      if(guestName.length == '' || guestContact.length == 0 || guestTime.length == 0) {
+      if(guestName.length == 0 || guestContact.length == 0 || guestTime.length == 0) {
+        console.log('guestName', guestName, 'guestContact', guestContact, 'guestTime', guestTime)
         console.log('invalid data');
       }
       else

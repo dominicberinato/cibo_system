@@ -68,7 +68,7 @@ describe('<MakeReservation/>', () =>{
 
     //fill required values
     wrapper.ref('resOwner').node.value = reservation.name;
-    wrapper.ref('resTime').node.value = reservation.time;
+    wrapper.ref('resTime').node.value = "2013-03-18T13:00";
     wrapper.ref('resTable').node.value = reservation.tbKey;
     wrapper.ref('resAmount').node.value = reservation.guestAmount;
     wrapper.ref('resContact').node.value = reservation.contact;

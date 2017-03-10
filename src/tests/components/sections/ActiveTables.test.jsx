@@ -19,7 +19,7 @@ describe('<ActiveTables/>',  () => {
 
     const tables = [{
       tbKey:1,
-      tbname: 2,
+      tbname: '2',
       tbcapacity: 3
     }];
 
@@ -37,7 +37,7 @@ describe('<ActiveTables/>',  () => {
     const dispatch = sinon.spy();
     const tables = [{
       tbKey:1,
-      tbname: 2,
+      tbname: '2',
       tbcapacity: 3
     }];
 
