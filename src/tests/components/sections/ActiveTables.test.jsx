@@ -62,7 +62,7 @@ describe('<ActiveTables/>',  () => {
 
     const tables = [{
       tbKey:1,
-      tbname: 2,
+      tbname: '2',
       tbcapacity: 3
     }];
 
@@ -79,7 +79,7 @@ describe('<ActiveTables/>',  () => {
     const wrapper = shallow(<ActiveTables dispatch={dispatch} tables={tables} bills={bills} auth={auth}/>);
     //console.log(wrapper.debug())
     //assert that component renders an item for each bill
-    expect(wrapper.find('.bill-item').length).toEqual(bills.length);
+    expect(wrapper.find(ActiveTableItem).length).toEqual(bills.length);
   });
 
   it('should show  a message when no bills', () => {

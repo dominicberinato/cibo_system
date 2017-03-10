@@ -12,10 +12,10 @@ export class MakeReservation extends Component {
     Event.preventDefault();
     //get data from state.
     var {property, auth, dispatch} =  this.props;
-    var guestName = this.refs.resOwner;
-    var guestContact = this.refs.resContact;
-    var guestTime = this.refs.resTime;
-    var resTable = this.refs.resTable;
+    var guestName = this.refs.resOwner.value;
+    var guestContact = this.refs.resContact.value;
+    var guestTime = this.refs.resTime.value;
+    var resTable = this.refs.resTable.value;
     var resOwner = auth.uid;
     var resProperty = property.propKey;
 
