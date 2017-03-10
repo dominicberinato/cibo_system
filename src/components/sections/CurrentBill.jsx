@@ -8,8 +8,10 @@ export class CurrentBill extends Component {
 
   render() {
     return(
-      <div className="text-center">
-        <p>Current Bill</p>
+      <div className="current-bill">
+        <div className="text-center">
+           <p>Items.</p>
+        </div>
       </div>
     )
   }

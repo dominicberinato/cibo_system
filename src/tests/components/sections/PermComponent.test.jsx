@@ -22,9 +22,9 @@ describe('PermComponent',() => {
       email: 'e@2.co'
     };
 
-    const store = createMockStore({auth});
+
     var spy = sinon.spy(PermComponent.prototype, 'componentDidMount');
-    const wrapper = mount(<PermComponent auth={auth}/>);
+    const wrapper = mount(<PermComponents store={auth}/>);
     //expect(PermComponent.prototype.componentDidMount).to.have.property('callCount', 1);
     sinon.assert.calledOnce(spy)
     PermComponent.prototype.componentDidMount.restore();

@@ -1,7 +1,7 @@
 import React from 'react'
 import expect from 'expect'
 import sinon from 'sinon'
-import {shallow, mount} from 'enzyme'
+import {shallow, mount, render} from 'enzyme'
 
 import {ActiveTables} from 'ActiveTables'
 import {ActiveTableItem} from 'ActiveTableItem'
@@ -68,8 +68,8 @@ describe('<ActiveTables/>',  () => {
 
 
     //lets render the component with the bills
-    const wrapper = shallow(<ActiveTables dispatch={dispatch} tables={tables} bills={bills}/>);
-
+    const wrapper = render(<ActiveTables dispatch={dispatch} tables={tables} bills={bills}/>);
+    //console.log(wrapper.debug())
     //assert that component renders an item for each bill
     expect(wrapper.find('.bill-item').length).toEqual(bills.length);
   });
