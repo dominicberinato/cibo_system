@@ -19,4 +19,4 @@ export class OrderItem extends Component {
   }
 };
 
-export default connect()(OrderItem);
+export default OrderItem;

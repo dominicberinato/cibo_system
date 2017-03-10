@@ -1,5 +1,4 @@
 import React,{Component} from 'react'
-import {connect} from 'react-redux'
 
 export class ActiveTableItem extends Component {
   constructor(props){
@@ -41,4 +40,4 @@ ActiveTableItem.defaultProps = {
 
 
 
-export default connect()(ActiveTableItem);
+export default (ActiveTableItem);
