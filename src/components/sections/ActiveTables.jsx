@@ -9,12 +9,23 @@ export class ActiveTables extends Component {
     this.addBill =  this.addBill.bind(this);
   }
   addBill(Event) {
-    //Event.preventDefault();
-    var {dispatch} = this.props;
-    dispatch(startAddBill())
+    Event.preventDefault();
+    var {dispatch, auth} = this.props;
+    //curate new bill
+    var tbKey =  this.refs.resTable.value;
+    var billCreator = auth.uid
+    //create new bill
+    //console.log('tbKey', tbKey, 'auth',billCreator);
+    //validate
+    if(tbKey.length != 0 && billCreator.length != 0) {
+      dispatch(startAddBill({
+        tbKey,
+        billCreator
+      }));
+    }
   }
   render() {
-    var {bills, dispatch} = this.props;
+    var {bills, dispatch, tables} = this.props;
     //conditinal rendr of bills
     var renderBills = () => {
       if(bills.length == 0) {
@@ -30,7 +41,13 @@ export class ActiveTables extends Component {
           <p className="text-center">Active Tables</p>
           {renderBills()}
           <div>
-            <button ref="add-bill" onClick={this.addBill} className="add-bill button hollow">Start Bill</button>
+            <form ref='form' onSubmit={this.addBill}>
+              <label>Choose Table</label>
+              <select className="table-select" ref="resTable">{tables.map((table) =>{
+                  return(<option key={table.tbKey} value={table.tbKey}>{table.tbname}</option>)
+                })}</select>
+              <button ref="add-bill" className="add-bill button hollow">Start Bill</button>
+            </form>
           </div>
       </div>
     )
@@ -39,11 +56,15 @@ export class ActiveTables extends Component {
 
 //declare props for our component
 ActiveTables.propTypes = {
-  bills: React.PropTypes.array.isRequired
+  bills: React.PropTypes.array.isRequired,
+  auth: React.PropTypes.object,
+  tables: React.PropTypes.array
 };
 
 export default connect((state) => {
   return{
-    bills: state.bills
+    bills: state.bills,
+    tables: state.tables,
+    auth: state.auth
   }
 })(ActiveTables);

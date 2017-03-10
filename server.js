@@ -3,6 +3,8 @@ var express = require('express');
 var path = require('path');
 var compression = require('compression');
 
+//serverside rendering
+
 //create our app
 var app = express();
 const PORT = process.env.PORT || 3000;

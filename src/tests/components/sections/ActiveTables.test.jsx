@@ -14,12 +14,39 @@ describe('<ActiveTables/>',  () => {
   it('should allow adding of a new Bill', () =>{
     //mock aspy as dispatch
     const dispatch = sinon.spy();
+
+
+
+    const tables = [{
+      tbKey:1,
+      tbname: 2,
+      tbcapacity: 3
+    }];
+
     //render component
-    const wrapper = shallow(<ActiveTables bills={[]} dispatch={dispatch}/>);
+    const wrapper = mount(<ActiveTables bills={[]} tables={tables} auth={{uid: 123}} dispatch={dispatch}/>);
+    wrapper.find('.table-select').node.selectedIndex = 0;
+    //find button to add bill //press button
+    wrapper.find('form').simulate('submit')
+    //check that dispatch was called
+    sinon.assert.calledOnce(dispatch);
+  });
+
+  it('should not allow adding of a new Bill if invalid', () =>{
+    //mock aspy as dispatch
+    const dispatch = sinon.spy();
+    const tables = [{
+      tbKey:1,
+      tbname: 2,
+      tbcapacity: 3
+    }];
+
+    //render component
+    const wrapper = shallow(<ActiveTables bills={[]} tables={tables} auth={{uid: 123}} dispatch={dispatch}/>);
     //find button to add bill //press button
     wrapper.find('.add-bill').simulate('click')
     //check that dispatch was called
-    sinon.assert.calledOnce(dispatch);
+    sinon.assert.notCalled(dispatch);
   });
 
   it('should show an item for each bill', () => {
@@ -33,8 +60,14 @@ describe('<ActiveTables/>',  () => {
       bill: 30
     }];
 
+    const tables = [{
+      tbKey:1,
+      tbname: 2,
+      tbcapacity: 3
+    }];
+
     //lets render the component with the bills
-    const wrapper = shallow(<ActiveTables dispatch={dispatch} bills={bills}/>);
+    const wrapper = shallow(<ActiveTables dispatch={dispatch} tables={tables} bills={bills}/>);
 
     //assert that component renders an item for each bill
     expect(wrapper.find(ActiveTableItem).length).toEqual(bills.length);
