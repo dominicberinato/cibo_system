@@ -55,7 +55,7 @@ describe('<ActiveTables/>',  () => {
     sinon.assert.notCalled(dispatch);
   });
 
-  it.only('should show an item for each bill', () => {
+  it('should show an item for each bill', () => {
     var dispatch = () => {};
     //lets mock some bills
     const bills = [{

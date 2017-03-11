@@ -1,19 +1,27 @@
 import React,{Component} from 'react'
+import {connect} from 'react-redux'
+import {currBill} from 'billActions'
 
 export class ActiveTableItem extends Component {
   constructor(props){
     super(props)
+    this.setBill = this.setBill.bind(this)
   }
   componentDidMount(){
 
   }
+  setBill(Event) {
+    Event.preventDefault();
+    var {id, dispatch} = this.props;
+    dispatch(currBill(id));
+  }
   render() {
     var {tbname, resOwner, bill} = this.props
     return(
-      <div className="bill-item">
-        <p ref="bill-table" className="bill-table">Table: {tbname}</p>
-        <p ref="bill-owner" className="bill-owner">Owner: {resOwner}</p>
-        <p ref="bill-tot" className="bill-tot">Amount: {bill}</p>
+      <div className="bill-item" onClick={this.setBill}>
+        <div className="columns large-4 small-4 medium-4"><p ref="bill-table" className="bill-table">Table: {tbname}</p></div>
+        <div className="columns large-4 small-4 medium-4"><p ref="bill-owner" className="bill-owner">Owner: {resOwner}</p></div>
+        <div className="columns large-4 small-4 medium-4"><p ref="bill-tot" className="bill-tot">Amount: {bill}</p></div>
       </div>
     )
   }
@@ -40,4 +48,4 @@ ActiveTableItem.defaultProps = {
 
 
 
-export default (ActiveTableItem);
+export default connect()(ActiveTableItem);

@@ -32,7 +32,7 @@ export class ActiveTables extends Component {
         return (<p className="empty-bills">No Active Tables Lets Hustle</p>)
       } else {
         return bills.map((bill) => {
-          return(<ActiveTableItem key={bill.tbname} {...bill}/>);
+          return(<ActiveTableItem key={bill.id} {...bill}/>);
         });
       }
     }
