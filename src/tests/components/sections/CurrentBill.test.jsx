@@ -2,7 +2,7 @@ import React from 'react'
 import {CurrentBill} from 'CurrentBill'
 import expect from 'expect'
 
-describe('<CurrentBill/>', () => {
+describe.only('<CurrentBill/>', () => {
   it('should exist', () => {
     expect(CurrentBill).toExist();
   });
