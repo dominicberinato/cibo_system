@@ -1,4 +1,4 @@
-import React, {Component} from 'react'
+import React, {Component, PropTypes} from 'react'
 import {Tabs, Tab} from 'material-ui/Tabs';
 import Billing from 'Billing'
 import Reservations from 'Reservations'
@@ -41,12 +41,13 @@ export class CiboTabs extends Component {
   render() {
     var {property, dispatch} = this.props;
     var renderPropertyMessage = () => {
-      if(property == undefined) {
+      console.log('property', property)
+      if(property.propKey == undefined) {
         return(
           <div className="text-center">
             <form ref='form' onSubmit={this.assocProduct}>
               <label className="property-message"> ENTER PROPERTY CODE</label>
-              <input className="text-center" ref="propCode" type="text" placeholder="5GT-HTG"/>
+              <input className="text-center prop-code" ref="propCode" type="text" placeholder="5GT-HTG"/>
               <input ref="submit" className="button" type="submit" value="CONNECT"/>
             </form>
           </div>
@@ -86,6 +87,8 @@ export class CiboTabs extends Component {
     );
   }
 }
+
+
 
 export default connect((state) => {
   return {

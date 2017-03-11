@@ -1,9 +1,14 @@
 import React from 'react'
 import sinon from 'sinon'
-import {mount} from 'enzyme'
+import {shallow} from 'enzyme'
 import expect from 'expect'
 //store stuff
-import {CiboTabs} from 'CiboTabs'
+import {Provider} from 'react-redux'
+import CiboTabs from 'CiboTabs'
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
+import thunk from 'redux-thunk'
+import configureMockStore from 'redux-mock-store'
+var createMockStore = configureMockStore([thunk]);
 
 
 describe('CiboTabs', () => {
@@ -14,10 +19,18 @@ describe('CiboTabs', () => {
   //TODO test componen t did muount
 
   it('should not dispatch assocProp on invalid data', () => {
+    const property = {propKey:'17ty9y'};
+    const store = createMockStore({});
     const dispatch = sinon.spy();
-    const wrapper = mount(<CiboTabs property={{propKey:'17ty9y'}} dispatch={dispatch}/>);
-    wrapper.ref('propCode').node.value = null;
-    wrapper.ref('form').simulate('submit');
+    const wrapper = shallow(
+      <MuiThemeProvider>
+        <Provider store={store}>
+          <CiboTabs  dispatch={dispatch}/>
+        </Provider>
+      </MuiThemeProvider>
+      );
+    wrapper.find('.prop-code').node.value = null;
+    wrapper.find('form').simulate('submit');
     sinon.assert.notCalled(dispatch);
   });
 
@@ -30,15 +43,23 @@ describe('CiboTabs', () => {
       uid: 12343,
       email: 'e@2.co'
     };
+    const property = {propKey:'17ty9y'}
+    const store = createMockStore({auth});
 
     //make spy
     const dispatch = sinon.spy();
     //mount
-    const wrapper = mount(<CiboTabs auth={auth} property={{propKey:'17ty9y'}} dispatch={dispatch}/>);
+    const wrapper = shallow(
+      <MuiThemeProvider>
+        <Provider store={store}>
+          <CiboTabs dispatch={dispatch}/>
+        </Provider>
+      </MuiThemeProvider>
+    );
     //wrapper.setProps({auth: auth});
     //mock input
-    wrapper.ref('propCode').node.value = '123grt';
-    wrapper.ref('form').simulate('submit');
+    wrapper.find('.prop-code').node.value = '123grt';
+    wrapper.find('form').simulate('submit');
     //assert spy was called
     sinon.assert.calledOnce(dispatch);
   });

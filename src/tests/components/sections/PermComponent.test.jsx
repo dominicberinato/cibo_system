@@ -24,7 +24,7 @@ describe('PermComponent',() => {
 
 
     var spy = sinon.spy(PermComponent.prototype, 'componentDidMount');
-    const wrapper = mount(<PermComponents store={auth}/>);
+    const wrapper = mount(<PermComponent store={auth}/>);
     //expect(PermComponent.prototype.componentDidMount).to.have.property('callCount', 1);
     sinon.assert.calledOnce(spy)
     PermComponent.prototype.componentDidMount.restore();
