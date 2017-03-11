@@ -15,8 +15,9 @@ describe('billActions', () => {
     expect(actions).toExist();
   })
 
-  var billID = 123;
-  it.only('should generate CURR_BILL action', () => {
+
+  it('should generate CURR_BILL action', () => {
+    var billID = 123;
     var currBillAction = {
       type: 'CURR_BILL',
       billID
