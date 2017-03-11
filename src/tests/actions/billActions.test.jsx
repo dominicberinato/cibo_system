@@ -15,6 +15,18 @@ describe('billActions', () => {
     expect(actions).toExist();
   })
 
+  var billID = 123;
+  it.only('should generate CURR_BILL action', () => {
+    var currBillAction = {
+      type: 'CURR_BILL',
+      billID
+    }
+
+    var result = actions.currBill(billID);
+
+    expect(result).toEqual(currBillAction);
+  });
+
   describe('sync', () => {
 
     it('should generate START_BILL Action', () =>{

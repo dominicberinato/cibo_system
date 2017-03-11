@@ -7,6 +7,13 @@ export var addBill = (bill) => {
     bill
   };
 };
+
+export var currBill = (billID) => {
+  return {
+    type: 'CURR_BILL',
+    billID
+  };
+}
 //async action to start new table
 //TODO somebills will only be counter bills ... add option as table
 export var startAddBill = (bill) => {
