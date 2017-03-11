@@ -1,4 +1,4 @@
-import React, {Component} from 'react'
+import React, {Component, PropTypes} from 'react'
 import {connect} from 'react-redux'
 import ActiveTableItem from 'ActiveTableItem'
 import {startAddBill} from 'billActions'
@@ -56,10 +56,18 @@ export class ActiveTables extends Component {
 
 //declare props for our component
 ActiveTables.propTypes = {
-  bills: React.PropTypes.array.isRequired,
-  auth: React.PropTypes.object,
-  tables: React.PropTypes.array
+  bills: PropTypes.array.isRequired,
+  auth: PropTypes.object,
+  tables: PropTypes.array
 };
+
+ActiveTables.defaultProps = {
+  bills:[],
+  auth: {},
+  tables:[]
+}
+
+
 
 export default connect((state) => {
   return{

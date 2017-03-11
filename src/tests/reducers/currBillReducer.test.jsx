@@ -3,7 +3,7 @@ var df = require('deep-freeze-strict')
 import {currBillReducer} from 'currBillReducer'
 
 describe('currBillReducer', () => {
-  it.only('should set the current Bill', () => {
+  it('should set the current Bill', () => {
 
     var billID = 123;
 

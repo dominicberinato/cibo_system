@@ -2,9 +2,15 @@ import React from 'react'
 import expect from 'expect'
 import sinon from 'sinon'
 import {shallow, mount} from 'enzyme'
+import {Provider} from 'react-redux'
+import thunk from 'redux-thunk'
+import configureMockStore from 'redux-mock-store'
+
+var createMockStore = configureMockStore([thunk]);
+
 
 import {ActiveTables} from 'ActiveTables'
-import {ActiveTableItem} from 'ActiveTableItem'
+import ConnectedActive, {ActiveTableItem} from 'ActiveTableItem'
 
 describe('<ActiveTables/>',  () => {
   it('should exist', () => {
@@ -49,7 +55,7 @@ describe('<ActiveTables/>',  () => {
     sinon.assert.notCalled(dispatch);
   });
 
-  it('should show an item for each bill', () => {
+  it.only('should show an item for each bill', () => {
     var dispatch = () => {};
     //lets mock some bills
     const bills = [{
@@ -70,13 +76,15 @@ describe('<ActiveTables/>',  () => {
       uid: 1234
     };
 
-    const store = {
-      tables, bills, auth
-    };
+  const store = createMockStore({tables, bills, auth});
 
 
     //lets render the component with the bills
-    const wrapper = shallow(<ActiveTables dispatch={dispatch} tables={tables} bills={bills} auth={auth}/>);
+    const wrapper = mount(
+      <Provider store={store}>
+        <ConnectedActive dispatch={dispatch}/>
+      </Provider>
+    );
     //console.log(wrapper.debug())
     //assert that component renders an item for each bill
     expect(wrapper.find(ActiveTableItem).length).toEqual(bills.length);

@@ -5,6 +5,7 @@ import {authReducer} from 'authReducer'
 import {propertyReducer} from 'propertyReducer'
 import {tablesReducer} from 'tablesReducer'
 import {billsReducer} from 'billsReducer'
+import {currBillReducer} from 'currBillReducer'
 
 //lets configure our store
 export var configure = (initialState = {}) => {
@@ -13,7 +14,8 @@ export var configure = (initialState = {}) => {
     auth: authReducer,
     property: propertyReducer,
     tables: tablesReducer,
-    bills: billsReducer
+    bills: billsReducer,
+    currBill: currBillReducer
   });
 
 
