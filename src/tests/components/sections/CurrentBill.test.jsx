@@ -2,6 +2,7 @@ import React from 'react'
 import {CurrentBill} from 'CurrentBill'
 import expect from 'expect'
 import {shallow} from 'enzyme'
+import sinon from 'sinon'
 
 describe.only('<CurrentBill/>', () => {
   it('should exist', () => {
@@ -35,7 +36,25 @@ describe.only('<CurrentBill/>', () => {
   })
 
   it('should allow ordered products to be added to correct table', () => {
-    expect(9).toEqual(19);
+    //mock dispatch
+    const dispatch = sinon.spy()
+    //render a component
+    const bills = [
+      {
+        id: '12345',
+        tbKey: 1232,
+        billCreator: 32433
+      }
+    ];
+
+    const currBill = '12345';
+    //render item
+    const wrapper = shallow(<CurrentBill currBill={currBill} dispatch={dispatch} bills={bills}/>);
+
+    wrapper.find('form').simulate('submit');
+
+    //lets assert that dispatch was called
+    sinon.assert.calledOnce(dispatch);
   });
 
   it('should allow removal of products from table', () => {

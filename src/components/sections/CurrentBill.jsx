@@ -8,7 +8,7 @@ export class CurrentBill extends Component {
     this.clearBill  = this.clearBill.bind(this);
   };
   addItem(e){
-    e.preventDefault();
+
   }
 
   clearBill(e) {
@@ -29,10 +29,26 @@ export class CurrentBill extends Component {
         //list items
       } else {
         //if no items message
-        return(<p className="no-orders text-center"> Please take orders</p>)
+        return(
+          <div>
+            <p className="no-orders text-center"> Please take orders</p>
+            <div className="text-center ">
+              <form ref='form' onSubmit={this.addItem}>
+                <div>
+                  <label>Order Item</label>
+                  <input type='text' ref='orderID'/>
+                </div>
+                <div>
+                  <button className="button ">Add Item</button>
+                </div>
+              </form>
+            </div>
+            <div>
+              <button className="button alert">Clear</button>
+            </div>
+          </div>
+        )
       }
-
-
     }
     return(
       <div className="current-bill">
@@ -41,14 +57,6 @@ export class CurrentBill extends Component {
         </div>
         <div>
           {currBillItems()}
-        </div>
-        <div clasName="row bottom-buttons">
-          <div className="text-center columns large-6 small-6  medium-6">
-            <button className="button ">Add Item</button>
-          </div>
-          <div className="text-center columns large-6 small-6  medium-6">
-            <button className="button alert">Clear</button>
-          </div>
         </div>
       </div>
     )
@@ -69,6 +77,6 @@ CurrentBill.defaultProps = {
 export default connect((state) => {
   return {
     currBill: state.currBill,
-    bills: bills
+    bills: state.bills
   }
 })(CurrentBill);

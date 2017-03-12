@@ -13,7 +13,7 @@ var loadRoute = (cb) =>  {
 }
 
 var errorLoading  = (err) => {
- console.error('Dynamic page loading failed', err.message);
+ console.error('Dynamic page loading failed', err);
 }
 
 //add middleware for routes that need auth

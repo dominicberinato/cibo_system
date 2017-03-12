@@ -215,5 +215,5 @@ module.exports =  {
     hot: true
   },
   /*only load the source maps if not production*/
-  devtool: 'eval'
+  devtool: 'source-map'
 };

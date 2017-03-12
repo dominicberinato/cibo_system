@@ -56,7 +56,7 @@ export class ActiveTables extends Component {
 
 //declare props for our component
 ActiveTables.propTypes = {
-  bills: PropTypes.array.isRequired,
+  bills: PropTypes.array,
   auth: PropTypes.object,
   tables: PropTypes.array
 };
