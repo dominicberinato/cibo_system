@@ -17,6 +17,23 @@ describe.only('<CurrentBill/>', () => {
     expect(wrapper.find('.no-bill').length).toEqual(1);
   });
 
+  it('should show message if currentBill has no orders', () => {
+    const bills = [
+      {
+        id: '12345',
+        tbKey: 1232,
+        billCreator: 32433
+      }
+    ];
+
+    const currBill = '12345';
+    //render item
+    const wrapper = shallow(<CurrentBill currBill={currBill} bills={bills}/>)
+
+    //assert that message was shown
+    expect(wrapper.find('.no-orders').length).toEqual(1);
+  })
+
   it('should allow ordered products to be added to correct table', () => {
     expect(9).toEqual(19);
   });

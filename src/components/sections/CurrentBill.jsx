@@ -15,11 +15,24 @@ export class CurrentBill extends Component {
     e.preventDefault();
   }
   render() {
-    var {currBill} = this.props;
+    var {currBill, bills} = this.props;
     var currBillItems = () => {
       if(currBill == '') {
-        return(<p className="no-bill"> Please Select a Bill for Details</p>)
+        return(<p className="no-bill text-center"> Please Select a Bill for Details</p>)
       }
+      //pick current bill from state
+      var myBill = bills.find((billItem) => {
+        return billItem.id == currBill
+      })
+      //check items
+      if(myBill.items != undefined) {
+        //list items
+      } else {
+        //if no items message
+        return(<p className="no-orders text-center"> Please take orders</p>)
+      }
+
+
     }
     return(
       <div className="current-bill">
@@ -44,15 +57,18 @@ export class CurrentBill extends Component {
 
 //define expected props
 CurrentBill.propTypes  = {
-  currBill: PropTypes.string
+  currBill: PropTypes.string,
+  bills: PropTypes.array
 };
 
 //define default props
 CurrentBill.defaultProps = {
-  currBill: ''
+  currBill: '',
+  bills: []
 }
 export default connect((state) => {
   return {
-    currBill: state.currBill
+    currBill: state.currBill,
+    bills: bills
   }
 })(CurrentBill);
