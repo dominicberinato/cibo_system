@@ -1,10 +1,20 @@
 import React from 'react'
 import {CurrentBill} from 'CurrentBill'
 import expect from 'expect'
+import {shallow} from 'enzyme'
 
 describe.only('<CurrentBill/>', () => {
   it('should exist', () => {
     expect(CurrentBill).toExist();
+  });
+
+  it('should show message if no bill selected', () => {
+
+    //render object
+    const wrapper =  shallow(<CurrentBill currBill={""}/>)
+    //pass empty currentBill
+    //assert message was shown
+    expect(wrapper.find('.no-bill').length).toEqual(1);
   });
 
   it('should allow ordered products to be added to correct table', () => {
@@ -19,7 +29,5 @@ describe.only('<CurrentBill/>', () => {
     expect(8).toEqual(9);
   });
 
-  it('should allow users to end shift by closing tables for the day',  () => {
-    expect(89).toEqual(9);
-  });
+
 })
