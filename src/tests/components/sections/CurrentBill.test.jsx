@@ -1,7 +1,7 @@
 import React from 'react'
 import {CurrentBill} from 'CurrentBill'
 import expect from 'expect'
-import {shallow} from 'enzyme'
+import {shallow, mount} from 'enzyme'
 import sinon from 'sinon'
 
 describe.only('<CurrentBill/>', () => {
@@ -49,7 +49,8 @@ describe.only('<CurrentBill/>', () => {
 
     const currBill = '12345';
     //render item
-    const wrapper = shallow(<CurrentBill currBill={currBill} dispatch={dispatch} bills={bills}/>);
+    const wrapper = mount(<CurrentBill currBill={currBill} dispatch={dispatch} bills={bills}/>);
+    wrapper.ref('orderID').node.value = 6;
 
     wrapper.find('form').simulate('submit');
 
