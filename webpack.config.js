@@ -8,6 +8,10 @@ var SWPrecacheWebpackPlugin = require('sw-precache-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const PurifyCSSPlugin = require('purifycss-webpack');
 const glob = require('glob');
+const DashboardPlugin = require('webpack-dashboard/plugin');
+
+
+
 
 
 
@@ -103,7 +107,8 @@ var plugins = PRODUCTION
           new HTMLWebpackPlugin({
             template:'index-template.html'
           }),
-          new webpack.NamedModulesPlugin()
+          new webpack.NamedModulesPlugin(),
+          new DashboardPlugin()
         ];
 
 //add universal plugins
@@ -212,7 +217,7 @@ module.exports =  {
   devServer: {
     contentBase: './dist',
     inline: true,
-    hot: true
+    hot: true,
   },
   /*only load the source maps if not production*/
   devtool: 'source-map'
