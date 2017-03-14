@@ -10,11 +10,6 @@ const PurifyCSSPlugin = require('purifycss-webpack');
 const glob = require('glob');
 const DashboardPlugin = require('webpack-dashboard/plugin');
 
-
-
-
-
-
 //enviroment variable
 var DEVELOPMENT = process.env.NODE_ENV === 'development';
 var PRODUCTION = process.env.NODE_ENV === 'production';
