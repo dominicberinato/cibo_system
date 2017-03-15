@@ -4,7 +4,7 @@ import expect from 'expect'
 import {shallow, mount} from 'enzyme'
 import sinon from 'sinon'
 
-describe.only('<CurrentBill/>', () => {
+describe('<CurrentBill/>', () => {
   it('should exist', () => {
     expect(CurrentBill).toExist();
   });

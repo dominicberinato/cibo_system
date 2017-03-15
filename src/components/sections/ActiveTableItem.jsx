@@ -1,4 +1,4 @@
-import React,{Component} from 'react'
+import React,{Component, PropTypes} from 'react'
 import {connect} from 'react-redux'
 import {currBill} from 'billActions'
 
@@ -16,10 +16,13 @@ export class ActiveTableItem extends Component {
     dispatch(currBill(id));
   }
   render() {
-    var {tbname, resOwner, bill} = this.props
+    var {tbKey, resOwner, bill, tables} = this.props
+    const tb = tables.find((tableItem) => {
+      return tableItem.tbKey == tbKey
+    })
     return(
       <div className="bill-item" onClick={this.setBill}>
-        <div className="columns large-4 small-4 medium-4"><p ref="bill-table" className="bill-table">Table: {tbname}</p></div>
+        <div className="columns large-4 small-4 medium-4"><p ref="bill-table" className="bill-table">Table: {tb.tbname}</p></div>
         <div className="columns large-4 small-4 medium-4"><p ref="bill-owner" className="bill-owner">Owner: {resOwner}</p></div>
         <div className="columns large-4 small-4 medium-4"><p ref="bill-tot" className="bill-tot">Amount: {bill}</p></div>
       </div>
@@ -30,9 +33,10 @@ export class ActiveTableItem extends Component {
 
 //define props for this compon
 ActiveTableItem.propTypes = {
-  tbname: React.PropTypes.string,
-  resOwner: React.PropTypes.string,
-  bill: React.PropTypes.number
+  resOwner: PropTypes.string,
+  bill: PropTypes.number,
+  tbKey: PropTypes.string,
+  tables: PropTypes.array
 }
 
 
@@ -43,9 +47,14 @@ ActiveTableItem.propTypes = {
 ActiveTableItem.defaultProps = {
   resOwner: 'Stranger',
   bill: 0,
-  tbname: '0'
+  tbKey: '',
+  tables: []
 }
 
 
 
-export default connect()(ActiveTableItem);
+export default connect((state) => {
+  return {
+    tables: state.tables
+  }
+})(ActiveTableItem);
