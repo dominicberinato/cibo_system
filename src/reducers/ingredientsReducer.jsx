@@ -22,6 +22,5 @@ export var ingredientsReducer = (state = [], action) => {
       });
     default:
       return state;
-
   }
 }

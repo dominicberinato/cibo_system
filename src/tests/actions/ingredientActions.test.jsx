@@ -112,12 +112,12 @@ describe.only('ingridientActions', () => {
       pname: 'folk coffee',
       address: '3 Bree Street',
       avatar: mockImage,
-      propCode: 58686816897
+      propKey: 58686816897
     };
 
     //run this code before each asnyc test (login && set up stuff)
     beforeEach((done) => {
-      store = createMockStore({})
+      store = createMockStore({property})
       //SIGN IN anonymously
       firebase.auth().signInAnonymously().then((user) => {
         uid = user.uid;
