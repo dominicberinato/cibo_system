@@ -1,5 +1,4 @@
 import expect from 'expect'
-
 import {StockManagement} from 'StockManagement'
 
 describe.only('StockManagement', () => {
