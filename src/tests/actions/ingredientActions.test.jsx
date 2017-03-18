@@ -1,5 +1,5 @@
 import expect from 'expect'
-import * as actions from 'ingridientActions'
+import * as actions from 'ingredientActions'
 import configureMockStore from 'redux-mock-store'
 import firebase,{firebaseRef} from 'src/firebase/index'
 import thunk from 'redux-thunk'
@@ -14,9 +14,9 @@ describe.only('ingridientActions', () => {
 
   describe('Sync Actions', () => {
 
-    it('should generate addIngridient action',  () => {
+    it('should generate addIngredient action',  () => {
       //mock an ingridient
-      const ingridient = {
+      const ingredient = {
         id: 123232,
         category: 'dairy',
         description: 'butter',
@@ -29,17 +29,17 @@ describe.only('ingridientActions', () => {
 
       //action we expect back
       const addIngAction  =  {
-        type:'ADD_INGRIDIENT',
-        ingridient
+        type:'ADD_INGREDIENT',
+        ingredient
       };
 
       //call an action with our data
-      var result = actions.addIngridient(ingridient);
+      var result = actions.addIngredient(ingredient);
 
       expect(result).toEqual(addIngAction);
     });
 
-    it('should generate deleteIngridient action', () => {
+    it('should generate deleteIngredient action', () => {
 
       //mock an ingridient
       const ingridient = {
@@ -55,21 +55,21 @@ describe.only('ingridientActions', () => {
 
       //mock up a result
       const deleteAction  = {
-        type: 'DELETE_INGRIDIENT',
-        id: ingridient.id
+        type: 'DELETE_INGREDIENT',
+        id: ingredient.id
       }
 
       //call the action
-      const result = actions.deleteIngridient(ingridient.id);
+      const result = actions.deleteIngredient(ingridient.id);
 
       //assert on result
       expect(result).toEqual(deleteAction);
     });
 
-    it('should generate updateIngridient action', () => {
+    it('should generate updateIngredient action', () => {
 
       //mock an ingridient
-      const ingridient = {
+      const ingredient = {
         id: 123232,
         category: 'dairy',
         description: 'butter',
@@ -86,13 +86,13 @@ describe.only('ingridientActions', () => {
       };
 
       const updateAction = {
-        type: 'UPDATE_INGRIDIENT',
-        id: ingridient.id,
+        type: 'UPDATE_INGREDIENT',
+        id: ingredient.id,
         updates
       };
 
       //lets call the actions
-      var result = actions.updateIngridient(ingridient.id, updates)
+      var result = actions.updateIngredient(ingredient.id, updates)
 
       //expect the actions
       expect(result).toEqual(updateAction);
@@ -137,10 +137,10 @@ describe.only('ingridientActions', () => {
       firebaseRef.remove().then(() => done());
     });
 
-    it('should call startUpdateIngridient and dispatch updateIngridient', (done) => {
+    it('should call startUpdateIngredient and dispatch updateIngridient', (done) => {
       //mock an ingridient
-      const ingridient = {
-        id: 67979
+      const ingredient = {
+        id: 67979,
         category: 'dairy',
         description: 'butter',
         brand: 'Netherend',
@@ -156,7 +156,7 @@ describe.only('ingridientActions', () => {
       };
 
       //trigger and assert
-      const action = actions.startUpdateIngridient(ingridient.id, updates);
+      const action = actions.startUpdateIngredient(ingredient.id, updates);
 
       //dispatch
       store.dispatch(action).then(() => {
@@ -165,17 +165,18 @@ describe.only('ingridientActions', () => {
 
         //assert
         expect(mockActions[0].toInclude({
-          type: 'UPDATE_INGRIDIENT',
+          type: 'UPDATE_INGREDIENT',
           id: ingridient.id,
           updates
         }));
         done();
       }, done())
-    })
+    });
 
-    it('should call startAddIngridient and dispatch addIngridient', (done) => {
+    it('should startDeleteIngredient and dispatch deleteIngredient',(done) => {
       //mock an ingridient
-      const ingridient = {
+      const ingredient = {
+        id:669879,
         category: 'dairy',
         description: 'butter',
         brand: 'Netherend',
@@ -185,7 +186,36 @@ describe.only('ingridientActions', () => {
         offdate: '03/04/2018'
       };
 
-      const action = actions.startAddIngridient(ingridient);
+      //mock an action
+      const action = actions.startDeleteIngredient(ingredient.id);
+
+      //dispatch action
+      store.dispatch(action).then(() => {
+        //get fired actions
+        const mockActions = store.getActions();
+        //assert
+        expect(mockActions[0].toInclude({
+          type: 'DELETE_INGREDIENT',
+          id: ingridient.id
+        }));
+        done();
+      }, done())
+    })
+
+
+    it('should call startAddIngridient and dispatch addIngridient', (done) => {
+      //mock an ingridient
+      const ingredient = {
+        category: 'dairy',
+        description: 'butter',
+        brand: 'Netherend',
+        size: '100kg',
+        cost: 'R32',
+        supplier: 121323,
+        offdate: '03/04/2018'
+      };
+
+      const action = actions.startAddIngredient(ingredient);
 
       store.dispatch(action).then(() => {
         //let collect actions
@@ -193,7 +223,7 @@ describe.only('ingridientActions', () => {
 
         //assert that addIngridient was called
         expect(mockActions[0].toInclude({
-          type:'ADD_INGRIDIENT',
+          type:'ADD_INGREDIENT',
           ingridient: {
             ...ingridient
           }
