@@ -145,13 +145,12 @@ describe('billActions', () => {
     var debug = {hello: "world"};
     var mockImage = new Blob([JSON.stringify(debug, null, 2)], {type : 'application/json'});
 
-    //GENERATE PROP CODE
-    var propCode = shortid.generate();
+
     var testProperty =  {
       pname: 'folk coffee',
       address: '3 Bree Street',
       avatar: mockImage,
-      propCode
+      propCode: 58686816897
     };
 
     var testTable = {
