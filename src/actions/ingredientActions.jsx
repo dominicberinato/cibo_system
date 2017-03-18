@@ -1,7 +1,7 @@
-export var addIngredient = (ingridient) => {
+export var addIngredient = (ingredient) => {
   return {
     type: 'ADD_INGREDIENT',
-    ingridient
+    ingredient
   };
 }
 

@@ -6,6 +6,7 @@ import {propertyReducer} from 'propertyReducer'
 import {tablesReducer} from 'tablesReducer'
 import {billsReducer} from 'billsReducer'
 import {currBillReducer} from 'currBillReducer'
+import {ingredientsReducer} from 'ingredientsReducer'
 
 //lets configure our store
 export var configure = (initialState = {}) => {
@@ -15,7 +16,8 @@ export var configure = (initialState = {}) => {
     property: propertyReducer,
     tables: tablesReducer,
     bills: billsReducer,
-    currBill: currBillReducer
+    currBill: currBillReducer,
+    ingredients: ingredientsReducer
   });
 
 

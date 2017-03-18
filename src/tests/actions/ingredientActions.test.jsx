@@ -42,7 +42,7 @@ describe.only('ingridientActions', () => {
     it('should generate deleteIngredient action', () => {
 
       //mock an ingridient
-      const ingridient = {
+      const ingredient = {
         id: 123232,
         category: 'dairy',
         description: 'butter',
@@ -60,7 +60,7 @@ describe.only('ingridientActions', () => {
       }
 
       //call the action
-      const result = actions.deleteIngredient(ingridient.id);
+      const result = actions.deleteIngredient(ingredient.id);
 
       //assert on result
       expect(result).toEqual(deleteAction);
