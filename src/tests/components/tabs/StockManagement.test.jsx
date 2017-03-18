@@ -1,7 +1,7 @@
 import expect from 'expect'
 import {StockManagement} from 'StockManagement'
 
-describe.only('StockManagement', () => {
+describe('StockManagement', () => {
   it('should exist', () =>{
     expect(StockManagement).toExist();
   });
