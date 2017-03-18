@@ -22,7 +22,7 @@ describe('propertyReducer', () => {
     var result = propertyReducer(df({}), df(addProperty));
 
     //check that our action was consumed
-    expect(result).toEqual(addProperty.property);
+    expect(result[0]).toEqual(addProperty.property);
   });
 
   //test clear action
