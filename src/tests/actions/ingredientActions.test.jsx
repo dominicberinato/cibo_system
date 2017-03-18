@@ -117,7 +117,7 @@ describe.only('ingridientActions', () => {
 
     //run this code before each asnyc test (login && set up stuff)
     beforeEach((done) => {
-      store = createMockStore({property})
+      store = createMockStore({property:testProperty})
       //SIGN IN anonymously
       firebase.auth().signInAnonymously().then((user) => {
         uid = user.uid;
