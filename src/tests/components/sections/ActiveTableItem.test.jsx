@@ -20,7 +20,7 @@ describe('<ActiveTableItem/>',() => {
       //lets mock some bills
       const bills = [{
         id: 1232,
-        tbKey:2,
+        tbKey:1,
         tbname: 2,
         resOwner: 'Isaac',
         bill: 30

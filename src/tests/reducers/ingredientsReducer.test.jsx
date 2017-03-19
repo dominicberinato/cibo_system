@@ -2,7 +2,7 @@ import expect from 'expect'
 var df = require('deep-freeze-strict')
 import {ingredientsReducer} from 'ingredientsReducer'
 
-describe.only('ingredientsReducer', () => {
+describe('ingredientsReducer', () => {
   it('should add an ingredient',  () => {
     //mock an ingridient
     const ingredient = {
