@@ -1,12 +1,12 @@
 import firebase, {firebaseRef} from 'src/firebase/index'
-
+//local add ingredient
 export var addIngredient = (ingredient) => {
   return {
     type: 'ADD_INGREDIENT',
     ingredient
   };
 }
-
+//async add ingredient
 export var startAddIngredient = (ingredient) => {
   return(dispatch, getState) => {
     //collect data
@@ -26,7 +26,7 @@ export var startAddIngredient = (ingredient) => {
 
   }
 }
-
+//local update ingredient
 export var updateIngredient = (id, updates) =>{
   return {
     type: 'UPDATE_INGREDIENT',
@@ -34,6 +34,24 @@ export var updateIngredient = (id, updates) =>{
     updates
   };
 }
+
+//async update ingredient
+export var startUpdateIngredient = (id, updates) => {
+  return (dispatch, getState) => {
+    //init update obj
+    var IngUpdateFanOut = {};
+    //populate update
+    IngUpdateFanOut[`/ingredients/${id}`] = updates;
+
+    //lets run update and call local
+    return firebaseRef.update(IngUpdateFanOut).then(() => {
+      //dispatch local action
+      dispatch(updateIngredient(id, updates))
+    });
+  }
+}
+
+
 
 export var deleteIngredient = (id) => {
   return {
