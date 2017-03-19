@@ -52,10 +52,27 @@ export var startUpdateIngredient = (id, updates) => {
 }
 
 
-
 export var deleteIngredient = (id) => {
   return {
     type: 'DELETE_INGREDIENT',
     id
   };
+}
+
+export var startDeleteIngredient = (id) => {
+  return(dispatch, getState) => {
+    const prop = getState().property.propKey
+    //lets create a fanout
+    var IngDeleteFanOut =  {};
+
+    //populate fanout with we want deleted
+    IngDeleteFanOut[`/ingredients/${id}`] = null;
+    IngDeleteFanOut[`/ingredients/${prop}/${id}`] =  null;
+
+    //update remote db
+    return firebaseRef.update(IngDeleteFanOut).then(() => {
+      //dispatch local
+      dispatch(deleteIngredient(id))
+    })
+  }
 }
