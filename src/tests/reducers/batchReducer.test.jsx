@@ -2,7 +2,7 @@ import expect from 'expect'
 var df  =require('deep-freeze-strict');
 import {batchReducer} from 'batchReducer'
 
-describe.only('batchReducer',  () => {
+describe('batchReducer',  () => {
   it('should add a batch', () => {
     //mock some data
     const batch = {
