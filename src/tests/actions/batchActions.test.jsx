@@ -73,9 +73,14 @@ describe.only('batchActions', ()=> {
         cost: 3400
       };
 
+      //mock a result
       const deleteBatchAction = {
+        type: 'DELETE_BATCH',
+        id: batch.id
+      };
 
-      }
+      //get a result
+      const res = actions.deleteBatch(batch.id)
     })
   });
 
