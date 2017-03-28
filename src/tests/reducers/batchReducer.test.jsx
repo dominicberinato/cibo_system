@@ -1,5 +1,5 @@
 import expect from 'expect'
-import * as df from 'deep-freeze-strict'
+var df  =require('deep-freeze-strict');
 import {batchReducer} from 'batchReducer'
 
 describe.only('batchReducer',  () => {
@@ -26,7 +26,7 @@ describe.only('batchReducer',  () => {
 
   it('should update batch on updateBatch', () => {
     //mock some data
-    const batch = {
+    const batches = [{
       id: 3,
       category: 'sauce',
       description: 'Bordelause Sauce',
@@ -34,18 +34,42 @@ describe.only('batchReducer',  () => {
       size: 2,
       ingridients: [3,4],
       cost: 3400
-    };
+    }];
+
 
     const action =  {
       type: 'UPDATE_BATCH',
-      id: batch.id,
+      id: batches[0].id,
       updates: {
         ingridients: [3,4,5]
       }
     };
 
-    const result = batchReducer(df([]), df(action));
+    const result = batchReducer(df(batches), df(action));
 
     expect(result[0].ingridients).toEqual(action.updates.ingridients);
-  })
+  });
+
+  it('should delete a batch on deleteBatch', () => {
+    //mock some data
+    const batches = [{
+      id: 3,
+      category: 'sauce',
+      description: 'Bordelause Sauce',
+      units: 'kg',
+      size: 2,
+      ingridients: [3,4],
+      cost: 3400
+    }];
+
+
+    const action = {
+      type: 'DELETE_BATCH',
+      id: batches[0].id
+    };
+
+    const result = batchReducer(df(batches), df(action));
+
+    expect(result).toExclude(batches[0]);
+  });
 })
