@@ -35,9 +35,39 @@ export var updateBatch = (id, updates) =>{
   };
 };
 
+export var startUpdateBatch = (id, updates) => {
+  return(dispatch, getState) => {
+    var batchUpdateFanOut =  {};
+
+    //populate
+    batchUpdateFanOut[`/batches/${id}`] = updates;
+
+    return firebaseRef.update(batchUpdateFanOut).then(() => {
+      //call local
+      dispatch(updateBatch(id, updates));
+    })
+  }
+}
+
 export var deleteBatch = (id) => {
   return {
     type: 'DELETE_BATCH',
     id
   };
 };
+
+export var startDeleteBatch = (id) =>  {
+  return(dispatch, getState) => {
+    const prop = getState().property.propKey;
+    var batchDeleteFanoOut = {};
+
+    //populate
+    batchDeleteFanOut[`/batches/${id}`] = null;
+    batchDeleteFanOut[`property-batches/${prop}/${id}`] = null;
+
+    //call update
+    return firebaseRef.update(batchDeleteFanOut).then(() => {
+      dispatch(deleteBatch(id));
+    })
+  }
+}
