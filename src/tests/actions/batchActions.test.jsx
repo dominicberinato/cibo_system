@@ -80,7 +80,7 @@ describe.only('batchActions', ()=> {
       };
 
       //get a result
-      const res = actions.deleteBatch(batch.id)
+      const res = actions.deleteBatch(batch.id);
     })
   });
 
