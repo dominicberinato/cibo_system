@@ -156,6 +156,67 @@ describe.only('batchActions', ()=> {
         }));
         done();
       }, done());
-    })
+    });
+
+    it('should call startUpdateBatch and dispatch updateBatch',  (done) => {
+      //mock an item
+      const batch = {
+        id: 3,
+        category: 'sauce',
+        description: 'Bordelause Sauce',
+        units: 'kg',
+        size: 2,
+        ingridients: [3,4],
+        cost: 3400
+      };
+
+      //mock some updates
+      const updates =  {
+        ingridients: [3,4,5,6]
+      };
+
+      //action
+      const action = actions.startUpdateBatch(batch.id, updates);
+
+      //dispatch actions
+      store.dispatch(action).then(() => {
+        //collect called action on store
+        const mockActions =  store.getActions();
+
+        //assert updateBatch
+        expect(mockActions[0].toInclude({
+          type: 'UPDATE_BATCH',
+          updates,
+          id: batch.id
+        }));
+        done();
+      }, done());
+    });
+
+    it('should call startDeleteBatch and dispatch deleteBatch', (done) => {
+      //mock an item
+      const batch = {
+        id: 3,
+        category: 'sauce',
+        description: 'Bordelause Sauce',
+        units: 'kg',
+        size: 2,
+        ingridients: [3,4],
+        cost: 3400
+      };
+
+      const action = actions.startDeleteBatch(batch.id);
+
+      //dispatch actions
+      store.dispatch(action).then((done) => {
+        //collect dispatched actions
+        const mockActions = store.getActions();
+        expect(mockActions[0].toInclude({
+          type: 'DELETE_BATCH',
+          id: batch.id
+        }));
+        done();
+      }, done());
+    });
   });
 })
