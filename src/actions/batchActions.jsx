@@ -59,7 +59,7 @@ export var deleteBatch = (id) => {
 export var startDeleteBatch = (id) =>  {
   return(dispatch, getState) => {
     const prop = getState().property.propKey;
-    var batchDeleteFanoOut = {};
+    var batchDeleteFanOut = {};
 
     //populate
     batchDeleteFanOut[`/batches/${id}`] = null;

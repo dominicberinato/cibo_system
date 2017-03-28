@@ -7,7 +7,7 @@ import thunk from 'redux-thunk'
 const createMockStore = configureMockStore([thunk]);
 
 
-describe.only('batchActions', ()=> {
+describe('batchActions', ()=> {
   it('should exist', () => {
     expect(actions).toExist()
   });
