@@ -11,7 +11,7 @@ export var startAddIngredient = (ingredient) => {
   return(dispatch, getState) => {
     //collect data
     const IngKey =  firebaseRef.child('ingredients').push().key;
-    const prop = getState().property.propKey
+    const prop = getState().property.propKey;
     var IngFanOut = {};
     IngFanOut[`/ingredients/${IngKey}`] = ingredient;
     IngFanOut[`/property-ingredients/${prop}/${IngKey}`] = IngKey;
