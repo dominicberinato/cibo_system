@@ -54,7 +54,7 @@ describe.only('recipeActions', () => {
     const recipeAction = {
       type: 'UPDATE_RECIPE',
       id: recipe.id,
-      updateBatchAction
+      updates
     };
 
     //call actions with data
