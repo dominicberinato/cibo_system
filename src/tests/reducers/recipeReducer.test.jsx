@@ -48,12 +48,12 @@ describe('recipeReducer', () => {
 
     const res = recipeReducer(df(recipes), df(action));
 
-    expect(res).toExclude(recipe);
+    expect(res).toExclude(recipes[0]);
   });
 
   it('should update recipe on updateRecipe', () => {
     //mock recipe
-    const recipe = [{
+    const recipes = [{
       category: 'starter',
       description: 'portions',
       portions: 4,

@@ -7,7 +7,7 @@ import thunk from 'redux-thunk'
 const createMockStore = configureMockStore([thunk]);
 
 
-describe.only('recipeActions', () => {
+describe('recipeActions', () => {
   it('should exist', () => {
     expect(actions).toExist();
   });
