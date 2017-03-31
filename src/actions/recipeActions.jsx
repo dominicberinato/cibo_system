@@ -63,3 +63,18 @@ export var startUpdateRecipe = (id, updates) => {
 
   }
 }
+
+export var startDeleteRecipe =  (id) => {
+  return(dispatch, getState) => {
+    const prop = getState().property.propKey;
+
+    var delRecipeFanOut =  {};
+
+    delRecipeFanOut[`/recipes${id}`] = null;
+    delRecipeFanOut[`/property-recipes/${prop}/${id}`] = null;
+
+    return firebaseRef.update(delRecipeFanOut).then(() => {
+      dispatch(deleteRecipe(id));
+    })
+  }
+}
