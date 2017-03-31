@@ -134,8 +134,62 @@ describe.only('menuActions', () => {
         }));
         done();
       }, done());
+    });
 
+    it('should dispatch deleteMenu after startDeleteMenu', (done) => {
 
+      //mock an object
+      const menu = {
+        id:1,
+        name: 'bar menu',
+        category: 'starters',
+        menuItems: [1,2]
+      };
+
+      //get an action
+      const action = actions.startDeleteMenu(menu.id);
+
+      //dispatch
+      store.dispatch(action).then(()=>{
+        //get actions
+        const mockActions = store.getActions();
+
+        //assert
+        expect(mockActions[0].toInclude({
+          type: 'DELETE_MENU',
+          id: menu.id
+        }));
+        done();
+      }, done());
+    });
+
+    it('should dispatch updateMenu after startUpdateMenu', (done) => {
+      //mock an object
+      const menu = {
+        id:1,
+        name: 'bar menu',
+        category: 'starters',
+        menuItems: [1,2]
+      };
+
+      const updates = {
+        menuItems: [4,5]
+      };
+      const action = actions.startUpdateMenu(menu.id, updates);
+
+      store.dispatch(action).then(() => {
+        //get Actions
+        const mockActions =  store.getActions();
+
+        //assert
+        expect(mockActions[0].toInclude({
+          type: 'UPDATE_MENU',
+          menu: {
+            ...menu
+          }
+        }));
+        done();
+      }, done());
     })
 
   })

@@ -6,6 +6,9 @@ import {hashHistory} from 'react-router'
 //add connect from redux to check state
 import{connect} from 'react-redux'
 
+
+
+
 const styles = {
   userImage: {
     borderRadius: '50%',
@@ -26,6 +29,8 @@ export class CiboBar extends Component {
     this.setState({
       sidebar: !this.state.sidebar
     })
+  };
+  componentDidMount() {
   }
   render() {
     var {property, dispatch, auth} = this.props;
