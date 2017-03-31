@@ -145,14 +145,44 @@ describe.only('recipeActions', () => {
         const mockActions = store.getActions();
 
         //assert that action was triggered
-        expect(mockActions[0]).toInclude({
+        expect(mockActions[0].toInclude({
           type: 'ADD_RECIPE',
-          recipe
-        });
-      })
+          recipe: {
+            ...recipe
+          }
+        }));
+        done();
+      }, done());
+    });
 
-    })
+    it('should call deleteRecipe after startDeleteRecipe', (done) => {
+      //mock recipe
+      const recipe = {
+        category: 'starter',
+        description: 'portions',
+        portions: 4,
+        totalCost: 34,
+        desiredCost: 30,
+        suggestedPrice: 67,
+        id: 3
+      };
 
-  })
+      const updates = {
+        suggestedPrice: 45
+      };
+      const action = actions.startUpdateRecipe(recipe.id, updates);
 
+      store.dispatch(action).then(() => {
+        const mockActions = store.getActions();
+
+        //assert on called actions
+        expect(mockActions[0].toInclude({
+          type: 'UPDATE_RECIPE',
+          recipe: {
+            ...recipe,
+          }
+        }));
+        done();
+      },done());
+  });
 })
