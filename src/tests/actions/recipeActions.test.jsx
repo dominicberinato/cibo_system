@@ -155,7 +155,7 @@ describe.only('recipeActions', () => {
       }, done());
     });
 
-    it('should call deleteRecipe after startDeleteRecipe', (done) => {
+    it('should call updateRecipe after startUpdateRecipe', (done) => {
       //mock recipe
       const recipe = {
         category: 'starter',
@@ -184,5 +184,34 @@ describe.only('recipeActions', () => {
         }));
         done();
       },done());
+    });
+
+    it('should call deleteRecipe on startDeleteRecipe', (done) => {
+    //mock recipe
+    const recipe = {
+      category: 'starter',
+      description: 'portions',
+      portions: 4,
+      totalCost: 34,
+      desiredCost: 30,
+      suggestedPrice: 67,
+      id: 3
+    };
+
+    const action = actions.startDeleteRecipe(recipe.id);
+
+    //dispatch action
+    store.dispatch(action).then(() => {
+      //get fired actions
+      const mockActions = store.getActions();
+
+      //assert on actions
+      expect(mockActions[0].toInclude({
+        type: 'DELETE_RECIPE',
+        id: recipe.id
+      }));
+      done();
+    }, done());
+    });
   });
-})
+});
