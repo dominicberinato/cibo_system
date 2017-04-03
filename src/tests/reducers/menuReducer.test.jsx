@@ -26,4 +26,49 @@ describe.only('menuReducer', () => {
 
     expect(res[0]).toEqual(action.menu);
   });
-})
+
+  it('should update menu on updateMenu', () => {
+    //mock some data
+    const menus = [{
+      id:1,
+      name: 'bar menu',
+      category: 'starters',
+      menuItems: [1,2]
+    }];
+
+    const updates = {
+      menuItems: [1,2,3]
+    };
+
+    //mock an action
+    const action = {
+      type: 'UPDATE_MENU',
+      id: menus[0].id,
+      updates
+    };
+
+    var res = menuReducer(df(menus), df(action));
+
+    expect(res[0].menuItems).toEqual(updates.menuItems);
+  });
+
+  it('should delete menu on deleteMenu',  () => {
+    //mock some data
+    const menus = [{
+      id:1,
+      name: 'bar menu',
+      category: 'starters',
+      menuItems: [1,2]
+    }];
+
+    //mock actions
+    const action = {
+      type: 'DELETE_MENU',
+      id: menus[0].id
+    };
+
+    var res = menuReducer(df(menus), df(action));
+
+    expect(res).toExclude(menus[0]);
+  });
+});
