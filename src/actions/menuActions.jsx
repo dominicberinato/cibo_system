@@ -56,7 +56,7 @@ export var startDeleteMenu = (id) => {
 
     //commit our update
     return firebaseRef.update(deleteMenuFanout).then(() => {
-      dispatch(deleteMenu(id));
+      dispatch(deleteMenu(id)); 
     });
   };
 };
