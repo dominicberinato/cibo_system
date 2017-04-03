@@ -56,7 +56,23 @@ export var startDeleteMenu = (id) => {
 
     //commit our update
     return firebaseRef.update(deleteMenuFanout).then(() => {
-      dispatch(deleteMenu(id)); 
+      dispatch(deleteMenu(id));
+    });
+  };
+};
+
+export var startUpdateMenu =  (id, updates) => {
+  return(dispatch, getState) => {
+    //get our property
+    const prop = getState().property.propKey;
+
+    var updateMenuFanOut = {};
+
+    updateMenuFanOut[`/menus/${id}`] =  updates;
+    updateMenuFanOut[`/property-menus/${prop}/${id}`] = updates;
+
+    return firebaseRef.update(updateMenuFanOut).then(() => {
+      dispatch(updateMenu(id, updates));
     });
   };
 };
