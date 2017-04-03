@@ -2,7 +2,7 @@ var df = require('deep-freeze-strict')
 import expect from 'expect'
 import {menuReducer} from 'menuReducer'
 
-describe.only('menuReducer', () => {
+describe('menuReducer', () => {
   it('should exist', () => {
     expect(menuReducer).toExist();
   });
