@@ -9,6 +9,7 @@ import {currBillReducer} from 'currBillReducer'
 import {ingredientsReducer} from 'ingredientsReducer'
 import {batchReducer} from 'batchReducer'
 import {recipeReducer} from 'recipeReducer'
+import {menuReducer} from 'menuReducer'
 
 //lets configure our store
 export var configure = (initialState = {}) => {
@@ -21,7 +22,8 @@ export var configure = (initialState = {}) => {
     currBill: currBillReducer,
     ingredients: ingredientsReducer,
     batches: batchReducer,
-    recipes: recipeReducer
+    recipes: recipeReducer,
+    menus: menuReducer
   });
 
 
