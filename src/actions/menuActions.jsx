@@ -11,3 +11,11 @@ export var deleteMenu =  (id) => {
     id
   };
 };
+
+export var updateMenu = (id, updates) => {
+  return {
+    type: 'UPDATE_MENU',
+    id,
+    updates
+  };
+};
