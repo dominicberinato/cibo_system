@@ -35,6 +35,35 @@ describe.only('beverageActions', () => {
       expect(res).toEqual(action)
     });
 
-    
-  })
+    it('should generate updateBeverage action', () => {
+      const beverage =  {
+        id: 1,
+        major: 'Spirit',
+        category: 'Vodka',
+        brand: 'Grey Goose',
+        description: 'Citron',
+        unitsize: '220ml',
+        purchasesize: '6 units',
+        purchasecost: 300
+      };
+
+      const updates = {
+        purchasecost: 400
+      };
+
+
+
+      const action =  {
+        type: 'UPDATE_BEVERAGE',
+        id: beverage.id,
+        updates
+      };
+
+      const res = actions.updateBeverage(beverage.id, updates);
+
+      expect(res).toEqual(action);
+    });
+
+
+  });
 })
