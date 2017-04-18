@@ -64,6 +64,28 @@ describe.only('beverageActions', () => {
       expect(res).toEqual(action);
     });
 
+    it('should generate deleteBeverage action', () => {
+      const beverage =  {
+        id: 1,
+        major: 'Spirit',
+        category: 'Vodka',
+        brand: 'Grey Goose',
+        description: 'Citron',
+        unitsize: '220ml',
+        purchasesize: '6 units',
+        purchasecost: 300
+      };
+
+      const action = {
+        type: 'DELETE_BEVERAGE',
+        id: beverage.id
+      };
+
+      const res = actions.deleteBeverage(beverage.id);
+
+      expect(res).toEqual(action);
+    });
+
 
   });
 })
