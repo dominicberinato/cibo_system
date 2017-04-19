@@ -63,3 +63,21 @@ export var updateBeverage = (id, updates) => {
     updates
   };
 };
+
+export var startUpdateBeverage = (id, updates) => {
+  return (dispatch, getState) => {
+    const beverageKey  = id;
+    const propKey = getState().property.propKey;
+
+    //lets make a fanout
+    const beverageFanOut = {};
+
+    beverageFanOut[`/beverages/${beverageKey}`] =  updates;
+    beverageFanOut[`/property-beverages/${beverageKey}`] = updates;
+
+    return firebaseRef.update(beverageFanOut).then(() => {
+      //dispatch local action
+      dispatch(updateBeverage(id, updates));
+    });
+  }
+}
