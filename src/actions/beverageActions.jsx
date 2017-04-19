@@ -36,6 +36,26 @@ export var deleteBeverage = (id) => {
   };
 };
 
+export var startDeleteBeverage = (id) => {
+  return(dispatch, getState) => {
+    const beverageKey  = id;
+    const propKey = getState().property.propKey;
+
+    //lets make a fanout
+    const beverageFanOut = {};
+
+    beverageFanOut[`/beverages/${beverageKey}`] =  null;
+    beverageFanOut[`/property-beverages/${beverageKey}`] = null;
+
+    //push our updates
+
+    return firebaseRef.update(beverageFanOut).then(() => {
+      //local data
+      dispatch(deleteBeverage(id));
+    });
+  };
+};
+
 export var updateBeverage = (id, updates) => {
   return {
     type: 'UPDATE_BEVERAGE',
