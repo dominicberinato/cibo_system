@@ -3,7 +3,7 @@ var df  =require('deep-freeze-strict');
 import {beverageReducer} from 'beverageReducer'
 
 
-describe.only('beverageReducer', () => {
+describe('beverageReducer', () => {
   it('should exist',  () => {
     expect(beverageReducer).toExist();
   });
