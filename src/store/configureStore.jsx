@@ -10,6 +10,7 @@ import {ingredientsReducer} from 'ingredientsReducer'
 import {batchReducer} from 'batchReducer'
 import {recipeReducer} from 'recipeReducer'
 import {menuReducer} from 'menuReducer'
+import {beverageReducer} from 'beverageReducer'
 
 //lets configure our store
 export var configure = (initialState = {}) => {
@@ -23,7 +24,8 @@ export var configure = (initialState = {}) => {
     ingredients: ingredientsReducer,
     batches: batchReducer,
     recipes: recipeReducer,
-    menus: menuReducer
+    menus: menuReducer,
+    beverages: beverageReducer
   });
 
 
