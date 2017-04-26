@@ -57,7 +57,32 @@ describe.only('cocktailActions', () => {
 
       expect(res).toEqual(action);
 
-    })
+    });
+
+    it('should generate deleteCocktail Action', () => {
+
+      //mock a cocktail
+      const cocktail  =  {
+        id: 2,
+        name: 'Tea',
+        contents: [
+          {id: 23, amount: '2 spoons'},
+          {id: 56, amount: '1 pinch'}
+        ]
+      };
+
+      const action = {
+        type: 'DELETE_COCKTAIL',
+        id: cocktail.id
+      };
+
+      const res = actions.deleteCocktail(cocktail.id);
+
+      expect(res).toEqual(action);
+    });
+  });
+
+  describe('Async', () => {
 
   });
 });
