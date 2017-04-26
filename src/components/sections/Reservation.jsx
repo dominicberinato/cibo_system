@@ -16,7 +16,7 @@ export class Reservation extends  Component {
         return(<p ref="reservationError"> Reloading reservation</p>)
       } else {
         return(
-          <div>
+          <div className='res-item'>
             <div>
               <p ref='name'>Name: {name}</p>
             </div>
