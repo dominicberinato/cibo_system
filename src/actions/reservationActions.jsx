@@ -83,3 +83,17 @@ export var removeReservation = (id) => {
     id
   }
 }
+
+//fetch all reservations from db
+export var fetchReservations = () => {
+  return(dispatch, getState) => {
+    const propKey = getState().property.propKey;
+    return firebaseRef.child(`/property-reservations/${propKey}`).once('value', (snapshot) => {
+      snapshot.forEach((childShot) => {
+        firebaseRef.child(`/reservations/${childShot.val()}`).once('value', (resShot) => {
+          dispatch(addReservation(resShot.val()));
+        });
+      })
+    })
+  };
+};

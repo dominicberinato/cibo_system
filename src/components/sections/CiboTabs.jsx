@@ -10,6 +10,8 @@ import HumanResources from 'HumanResources'
 import {connect} from 'react-redux'
 import {collectTables, clearTables} from 'tableActions'
 import {assocUser} from 'authActions'
+import {fetchReservations} from 'reservationActions'
+
 
 export class CiboTabs extends Component {
   constructor(props){
@@ -21,6 +23,7 @@ export class CiboTabs extends Component {
     //check that we have a property key
     if(property.propKey  != undefined) {
       dispatch(collectTables());
+      dispatch(fetchReservations());
     }
   }
   assocProduct(Event) {

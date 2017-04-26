@@ -7,11 +7,8 @@ export class CurrentBookings extends Component {
   constructor(props) {
     super(props);
   }
-  componentDidMount() {
 
-  }
   render(){
-
     var {reservations} = this.props;
     var renderReservations = () => {
       if(reservations.length != 0) {
