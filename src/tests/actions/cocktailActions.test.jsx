@@ -33,5 +33,31 @@ describe.only('cocktailActions', () => {
       expect(res).toEqual(action);
     });
 
+    it('should generate updateCocktail Action', () => {
+      //mock a cocktail
+      const cocktail  =  {
+        id: 2,
+        name: 'Tea',
+        contents: [
+          {id: 23, amount: '2 spoons'},
+          {id: 56, amount: '1 pinch'}
+        ]
+      };
+
+
+      const updates =  {name: 'Strong tea'};
+
+      const action = {
+        type: 'UPDATE_COCKTAIL',
+        id: cocktail.id,
+        updates
+      };
+
+      const res =  actions.updateCocktail(cocktail.id, updates);
+
+      expect(res).toEqual(action);
+
+    })
+
   });
 });
