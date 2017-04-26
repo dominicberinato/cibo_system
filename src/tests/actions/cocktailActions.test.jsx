@@ -6,7 +6,7 @@ import thunk from 'redux-thunk'
 
 const createMockStore = configureMockStore([thunk]);
 
-describe.only('cocktailActions', () => {
+describe('cocktailActions', () => {
 
   describe('sync', () => {
 

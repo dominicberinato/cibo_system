@@ -1,4 +1,5 @@
 import React, {Component} from 'react'
+import {connect} from 'react-redux'
 
 
 export class Reservation extends  Component {
@@ -6,21 +7,24 @@ export class Reservation extends  Component {
     super(props)
   };
   render() {
-    var {name, time, tbKey} = this.props;
+    var {name, time, tbKey, tables} = this.props;
     var renderRes = () => {
+      const table = tables.find((table) => {
+        return table.tbKey == tbKey;
+      })
       if(name.length == 0 || time.length == 0 || tbKey.length == 0){
         return(<p ref="reservationError"> Reloading reservation</p>)
       } else {
         return(
           <div>
             <div>
-              <p ref='name'>`Name: ${name}`</p>
+              <p ref='name'>Name: {name}</p>
             </div>
             <div>
-              <p ref='time'>`Time: ${time}`</p>
+              <p ref='time'>Time: {time}</p>
             </div>
             <div>
-              <p ref='table'>`Table: ${tbKey}`</p>
+              <p ref='table'>Table: {table.tbname}</p>
             </div>
           </div>
         )
@@ -32,4 +36,8 @@ export class Reservation extends  Component {
   };
 };
 
-export default Reservation;
+export default connect((state) => {
+  return {
+    tables: state.tables
+  }
+})(Reservation);
