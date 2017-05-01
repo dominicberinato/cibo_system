@@ -1,5 +1,6 @@
 import React, {Component} from 'react'
 import StockButtonsPane from 'StockButtonsPane'
+import StockFormsPane from 'StockFormsPane'
 
 export class StockManagement extends Component {
   constructor(props) {
@@ -12,7 +13,7 @@ export class StockManagement extends Component {
           <StockButtonsPane/>
         </div>
         <div className="columns small-12 medium-6 large-6 text-center">
-          <p>Form-Pane</p>
+          <StockFormsPane/>
         </div>
       </div>
     );

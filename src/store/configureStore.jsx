@@ -11,6 +11,7 @@ import {batchReducer} from 'batchReducer'
 import {recipeReducer} from 'recipeReducer'
 import {menuReducer} from 'menuReducer'
 import {beverageReducer} from 'beverageReducer'
+import {utilReducer} from 'utilReducer'
 
 //lets configure our store
 export var configure = (initialState = {}) => {
@@ -25,7 +26,8 @@ export var configure = (initialState = {}) => {
     batches: batchReducer,
     recipes: recipeReducer,
     menus: menuReducer,
-    beverages: beverageReducer
+    beverages: beverageReducer,
+    stockForm: utilReducer
   });
 
 
