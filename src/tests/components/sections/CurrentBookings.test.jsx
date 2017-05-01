@@ -17,6 +17,10 @@ describe('<CurrentBookings/>', () => {
     expect(wrapper.find(Reservation).length).toEqual(reservations.length);
   });
 
+  it('should show only future reservations', () => {
+
+  });
+
   it('should show empty reservations warnings', () => {
     const reservations = [];
     const wrapper = mount(<CurrentBookings reservations={reservations}/>);

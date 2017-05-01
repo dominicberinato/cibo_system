@@ -6,7 +6,7 @@ import thunk from 'redux-thunk'
 
 const createMockStore = configureMockStore([thunk]);
 
-describe('cocktailActions', () => {
+describe.only('cocktailActions', () => {
 
   describe('sync', () => {
 
@@ -83,6 +83,43 @@ describe('cocktailActions', () => {
   });
 
   describe('Async', () => {
+    //do set up for async tests
+    //data needed
+    var uid;
+    var propertyRef = firebaseRef.child('properties');
+    var testPropertyKey;
+    var store;
+    var debug = {hello: "world"};
+    var mockImage = new Blob([JSON.stringify(debug, null, 2)], {type : 'application/json'});
+    var testProperty =  {
+      pname: 'folk coffee',
+      address: '3 Bree Street',
+      avatar: mockImage,
+      propKey: 58686816897
+    };
+
+    //run this code before each asnyc test (login && set up stuff)
+    beforeEach((done) => {
+      store = createMockStore({property:testProperty})
+      //SIGN IN anonymously
+      firebase.auth().signInAnonymously().then((user) => {
+        uid = user.uid;
+        testProperty.propCreator = uid
+
+        //remove any existing proprties
+        return firebaseRef.remove();
+      }).then(()=> {
+
+      })
+      .then(() => done())
+      .catch(done);
+    });
+
+    ///run this after each tests
+    afterEach((done) => {
+      firebaseRef.remove().then(() => done());
+    });
+
 
   });
 });
