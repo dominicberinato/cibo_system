@@ -13,7 +13,9 @@ export class StockButtonsPane extends Component {
       <div className="text-center">
         <div className="row">
           <div className="columns small-6">
-            <RaisedButton className="stock-buttons" label="Ingridients" primary={true}/>
+            <RaisedButton className="stock-buttons" onTouchTap={() => {
+                dispatch(actions.setStockForm('ingridients'))
+              }} label="Ingridients" primary={true}/>
             <RaisedButton className="stock-buttons" label="Batches" primary={true}/>
             <RaisedButton className="stock-buttons" label="Beverages" primary={true}/>
           </div>
@@ -28,6 +30,4 @@ export class StockButtonsPane extends Component {
   }
 }
 
-export default connect((state) => {
-
-})(StockButtonsPane);
+export default connect()(StockButtonsPane);
