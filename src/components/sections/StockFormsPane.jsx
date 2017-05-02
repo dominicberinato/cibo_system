@@ -8,9 +8,42 @@ export class StockFormsPane extends Component{
 
   render() {
     var {stockForm}  = this.props;
-    return(
-      <p>{stockForm}</p>
-    )
+    var whichForm =  () => {
+      switch (stockForm) {
+        case 'ingridients':
+          return (
+            <p>Ingridients Form</p>
+          );
+        case 'batches':
+          return (
+            <p>Batches Form</p>
+          );
+        case 'beverages':
+          return (
+            <p>Beverages Form</p>
+          );
+        case 'menus':
+          return (
+            <p>Menus Form</p>
+          );
+        case 'archive':
+          return (
+            <p>archive form</p>
+          );
+        case 'cocktails':
+          return (
+            <p>Cocktails Form</p>
+          );
+        default:
+          return (
+            <p>Please Select a form from the buttons</p>
+          );
+      }
+    }
+
+    return (<div>
+      {whichForm()}
+    </div>);
   }
 };
 
