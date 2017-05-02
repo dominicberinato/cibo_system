@@ -16,13 +16,23 @@ export class StockButtonsPane extends Component {
             <RaisedButton className="stock-buttons" onTouchTap={() => {
                 dispatch(actions.setStockForm('ingridients'))
               }} label="Ingridients" primary={true}/>
-            <RaisedButton className="stock-buttons" label="Batches" primary={true}/>
-            <RaisedButton className="stock-buttons" label="Beverages" primary={true}/>
+            <RaisedButton className="stock-buttons" onTouchTap={() => {
+                dispatch(actions.setStockForm('batches'))
+              }} label="Batches" primary={true}/>
+            <RaisedButton className="stock-buttons" onTouchTap={() => {
+                dispatch(actions.setStockForm('beverages'))
+              }} label="Beverages" primary={true}/>
           </div>
           <div className="columns small-6">
-            <RaisedButton className="stock-buttons" label="Menus" primary={true}/>
-            <RaisedButton className="stock-buttons" label="Archive" primary={true}/>
-            <RaisedButton className="stock-buttons" label="CockTails" primary={true}/>
+            <RaisedButton className="stock-buttons" onTouchTap={() => {
+                dispatch(actions.setStockForm('menus'))
+              }} label="Menus" primary={true}/>
+            <RaisedButton className="stock-buttons" onTouchTap={() => {
+                dispatch(actions.setStockForm('archive'))
+              }} label="Archive" primary={true}/>
+            <RaisedButton className="stock-buttons" onTouchTap={() => {
+                dispatch(actions.setStockForm('cocktails'))
+              }} label="CockTails" primary={true}/>
           </div>
         </div>
       </div>
