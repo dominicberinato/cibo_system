@@ -12,6 +12,7 @@ import {recipeReducer} from 'recipeReducer'
 import {menuReducer} from 'menuReducer'
 import {beverageReducer} from 'beverageReducer'
 import {utilReducer} from 'utilReducer'
+import {reducer as formReducer} from 'redux-form'
 
 //lets configure our store
 export var configure = (initialState = {}) => {
@@ -27,7 +28,8 @@ export var configure = (initialState = {}) => {
     recipes: recipeReducer,
     menus: menuReducer,
     beverages: beverageReducer,
-    stockForm: utilReducer
+    stockForm: utilReducer,
+    form: formReducer
   });
 
 

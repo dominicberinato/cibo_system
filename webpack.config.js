@@ -8,7 +8,6 @@ var SWPrecacheWebpackPlugin = require('sw-precache-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const PurifyCSSPlugin = require('purifycss-webpack');
 const glob = require('glob');
-const DashboardPlugin = require('webpack-dashboard/plugin');
 
 //enviroment variable
 var DEVELOPMENT = process.env.NODE_ENV === 'development';
@@ -103,7 +102,6 @@ var plugins = PRODUCTION
             template:'index-template.html'
           }),
           new webpack.NamedModulesPlugin(),
-          new DashboardPlugin()
         ];
 
 //add universal plugins

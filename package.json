@@ -8,7 +8,7 @@
   "description": "This is the property management system for cibo by Launch Design",
   "main": "index.js",
   "scripts": {
-    "dev": "NODE_ENV=development webpack-dashboard -- webpack-dev-server --hot",
+    "dev": "NODE_ENV=development webpack-dev-server --hot",
     "test": "NODE_ENV=test karma start",
     "build": "webpack",
     "start": "node server.js",
@@ -58,6 +58,7 @@
     "react-router": "^3.0.2",
     "react-tap-event-plugin": "2.0.1",
     "redux": "^3.6.0",
+    "redux-form": "^6.7.0",
     "redux-thunk": "^2.2.0",
     "sass-loader": "3.1.2",
     "script-loader": "^0.7.0",

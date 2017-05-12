@@ -11,11 +11,11 @@ describe.only('utilReducer', () => {
 
     const action  = {
       type: 'SET_STOCK_FORM',
-      formName: 'beverages'
+      form: 'beverages'
     };
 
     const res = utilReducer(df(''), df(action));
 
-    expect(res).toEqual(action.formName);
+    expect(res).toEqual(action.form);
   });
 })
