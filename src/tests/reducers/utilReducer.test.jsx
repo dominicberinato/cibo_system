@@ -2,7 +2,7 @@ import expect from 'expect'
 var df = require('deep-freeze-strict')
 import {utilReducer} from 'utilReducer'
 
-describe.only('utilReducer', () => {
+describe('utilReducer', () => {
   it('should exist', () => {
     expect(utilReducer).toExist();
   });

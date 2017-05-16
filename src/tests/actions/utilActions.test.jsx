@@ -1,7 +1,7 @@
 import expect from 'expect'
 import * as actions from 'utilActions'
 
-describe.only('Utility Actions', () => {
+describe('Utility Actions', () => {
   it('should exist', () => {
     expect(actions).toExist();
   });
