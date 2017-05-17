@@ -3,17 +3,20 @@ import {Field, reduxForm} from 'redux-form'
 
 export class IngridientForm extends Component {
   render() {
+    var {handleSubmit} = this.props
     return(
       <div>
-        <p>Add Ingridient</p>
-        <form>
+        <div className="text-center form-label">
+          <p>Add Ingridient</p>
+        </div>
+        <form ref="form" onSubmit={handleSubmit}>
         <div>
           <label>Category</label>
           <Field name="ingridientCategory" type="text" component="input"/>
         </div>
         <div>
           <label>Description</label>
-          <Field name="ingridientDescription" type="text" component="textarea"/>
+          <Field name="ingridientDescription" type="text" rows="4" component="textarea"/>
         </div>
         <div>
           <label>Brand</label>

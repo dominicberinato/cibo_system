@@ -12,7 +12,7 @@ export class StockManagement extends Component {
         <div className="columns small-12 medium-6 large-6 text-center">
           <StockButtonsPane/>
         </div>
-        <div className="columns small-12 medium-6 large-6 text-center">
+        <div className="columns small-12 medium-6 large-6">
           <StockFormsPane/>
         </div>
       </div>
