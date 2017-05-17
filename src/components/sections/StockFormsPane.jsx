@@ -3,7 +3,7 @@ import {connect} from 'react-redux'
 import IngridientForm from 'IngridientForm'
 import BatchForm from 'BatchForm'
 import RecipeForm from 'RecipeForm'
-
+import MenuForm from 'MenuForm'
 export class StockFormsPane extends Component{
   constructor(props) {
     super(props)
@@ -12,6 +12,7 @@ export class StockFormsPane extends Component{
   /* Add Submit Handler for Ingridient form
   Add Submit Handler for Batch Form
   Add Submit Handler for RecipeForm
+  Add submit handler for menuForm
   */
 
 
@@ -37,7 +38,7 @@ export class StockFormsPane extends Component{
           );
         case 'menus':
           return (
-            <p>Menus Form</p>
+            <MenuForm/>
           );
         case 'archive':
           return (
