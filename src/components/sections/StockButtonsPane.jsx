@@ -22,6 +22,9 @@ export class StockButtonsPane extends Component {
             <RaisedButton className="stock-buttons" onTouchTap={() => {
                 dispatch(actions.setStockForm('beverages'))
               }} label="Beverages" primary={true}/>
+            <RaisedButton className="stock-buttons" onTouchTap={() => {
+                dispatch(actions.setStockForm('recipes'))
+              }} label="Recipes" primary={true}/>
           </div>
           <div className="columns small-6">
             <RaisedButton className="stock-buttons" onTouchTap={() => {

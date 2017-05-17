@@ -1,6 +1,8 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import IngridientForm from 'IngridientForm'
+import BatchForm from 'BatchForm'
+import RecipeForm from 'RecipeForm'
 
 export class StockFormsPane extends Component{
   constructor(props) {
@@ -8,6 +10,8 @@ export class StockFormsPane extends Component{
   }
   //TODO
   /* Add Submit Handler for Ingridient form
+  Add Submit Handler for Batch Form
+  Add Submit Handler for RecipeForm
   */
 
 
@@ -21,7 +25,11 @@ export class StockFormsPane extends Component{
           );
         case 'batches':
           return (
-            <p>Batches Form</p>
+            <BatchForm/>
+          );
+        case 'recipes':
+          return(
+            <RecipeForm/>
           );
         case 'beverages':
           return (

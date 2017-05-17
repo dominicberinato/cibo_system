@@ -3,7 +3,7 @@ import {Field, reduxForm} from 'redux-form'
 
 export class IngridientForm extends Component {
   render() {
-    var {handleSubmit} = this.props
+    var {handleSubmit} = this.props;
     return(
       <div>
         <div className="text-center form-label">
