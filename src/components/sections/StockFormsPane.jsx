@@ -1,10 +1,15 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
+import IngridientForm from 'IngridientForm'
 
 export class StockFormsPane extends Component{
   constructor(props) {
     super(props)
   }
+  //TODO
+  /* Add Submit Handler for Ingridient form
+  */
+
 
   render() {
     var {stockForm}  = this.props;
@@ -12,7 +17,7 @@ export class StockFormsPane extends Component{
       switch (stockForm) {
         case 'ingridients':
           return (
-            <p>Ingridients Form</p>
+            <IngridientForm/>
           );
         case 'batches':
           return (

@@ -1,6 +1,4 @@
 import React, {Component} from 'react'
-import {connect} from 'react-redux'
-import {startAddReservation} from 'src/actions/reservationActions'
 import {Field, reduxForm} from 'redux-form'
 
 export class MakeReservationForm extends Component {
@@ -40,8 +38,8 @@ export class MakeReservationForm extends Component {
           <div>
             <p>All fields marked by * are required please</p>
           </div>
-          <div>
-            <input type="submit" className="button hollow"/>
+          <div className="text-center">
+            <input type="submit" value="Make Reservation" className="button hollow"/>
           </div>
         </form>
       </div>

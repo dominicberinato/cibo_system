@@ -4,8 +4,9 @@ import {mount} from 'enzyme'
 import React from 'react'
 import sinon from 'sinon'
 
-describe('<IngridientForm/>', () => {
+describe.only('<IngridientForm/>', () => {
   it('should exist', () => {
     expect(IngridientForm).toExist();
-  })
+  });
+
 })
