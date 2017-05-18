@@ -1,18 +1,37 @@
 import React, {Component} from 'react'
 import {Field, reduxForm} from 'redux-form'
 
+const required = value => (value ? undefined : 'Required')
+
+
+const renderField = ({input, label, type, meta: {touched, error, warning}}) => (
+  <div>
+    <label>{label}</label>
+    <div>
+      <input {...input} placeholder={label} type={type} />
+      {touched &&
+        ((error && <span>{error}</span>) ||
+          (warning && <span>{warning}</span>))}
+    </div>
+  </div>
+)
+
 export class MakeReservationForm extends Component {
   render() {
+
     //TODO use select for tables
-    var {tables, handleSubmit} = this.props;
+    var {tables, handleSubmit, pristine, submitting, reset} = this.props;
     return(
       <div>
         <p>Make Reservation</p>
         <form ref="form" onSubmit={handleSubmit}>
-          <div>
-            <label>Guest Name*</label>
-            <Field name="resOwner" type="text" component="input"/>
-          </div>
+            <Field
+              name="resOwner"
+              type="text"
+              label="Guest Name *"
+              component={renderField}
+              validate={[required]}
+              />
           <div>
             <label>Time*</label>
             <Field name="resTime" component="input" type="datetime-local"/>
@@ -39,7 +58,7 @@ export class MakeReservationForm extends Component {
             <p>All fields marked by * are required please</p>
           </div>
           <div className="text-center">
-            <input type="submit" value="Make Reservation" className="button hollow"/>
+            <input type="submit" value="Make Reservation" disabled={submitting} className="button hollow"/>
           </div>
         </form>
       </div>
