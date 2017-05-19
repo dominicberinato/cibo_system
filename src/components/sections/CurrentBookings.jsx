@@ -11,12 +11,16 @@ export class CurrentBookings extends Component {
   render(){
     var {reservations} = this.props;
     var renderReservations = () => {
-      if(reservations.length != 0) {
-        return reservations.map((res) => {
+      var now = new Date();
+      var currentReservations = reservations.filter((res) => {
+        return(res.time > now.getTime());
+      });
+      if(currentReservations.length != 0) {
+        return currentReservations.map((res) => {
           return(<Reservation key={res.resKey} {...res} />);
         })
       } else {
-        return(<p ref='eResMsg'>No Reservations at the moment</p>)
+        return(<p className="text-center" ref='eResMsg'>No Reservations at the moment</p>)
       }
     }
     return(<div className='reservation-box'>{renderReservations()}</div>)

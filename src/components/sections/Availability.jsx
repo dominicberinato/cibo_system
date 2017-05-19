@@ -13,16 +13,21 @@ export class Availability extends Component {
   render() {
     var {tables, reservations} = this.props;
     var renderStats = () =>  {
+      //list validReservatations
+      var now = new Date();
+      var currentReservations = reservations.filter((res) => {
+        return(res.time > now.getTime());
+      });
       if(tables.length == 0){
         return(<p ref='tableMessage'>No Tables for Bookings</p>)
       } else {
         return(
           <div>
             <div>
-              <p ref="currentRes">Current Reservations: {reservations.length}</p>
+              <p ref="currentRes">Current Reservations: {currentReservations.length}</p>
             </div>
             <div>
-              <p ref="availableTables">Available Table: {tables.length - reservations.length}</p>
+              <p ref="availableTables">Available Tables: {tables.length - currentReservations.length}</p>
             </div>
             <div>
               <p ref="totalTables">Total Tables: {tables.length}</p>
