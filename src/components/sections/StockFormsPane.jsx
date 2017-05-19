@@ -14,15 +14,16 @@ export class StockFormsPane extends Component{
   Add Submit Handler for RecipeForm
   Add submit handler for menuForm
   */
-
-
+  handleIngridient = (values) => {
+    console.log(values);
+  }
   render() {
     var {stockForm}  = this.props;
     var whichForm =  () => {
       switch (stockForm) {
         case 'ingridients':
           return (
-            <IngridientForm/>
+            <IngridientForm onSubmit={this.handleIngridient}/>
           );
         case 'batches':
           return (

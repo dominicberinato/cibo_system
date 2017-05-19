@@ -1,20 +1,10 @@
 import React, {Component} from 'react'
 import {Field, reduxForm} from 'redux-form'
 import {required} from 'validation'
+import {renderField} from 'renderField'
 
 
 
-const renderField = ({input, label, type, meta: {touched, error, warning}}) => (
-  <div>
-    <label>{label}</label>
-    <div>
-      <input {...input} placeholder={label} type={type} />
-      {touched &&
-        ((error && <span>{error}</span>) ||
-          (warning && <span>{warning}</span>))}
-    </div>
-  </div>
-)
 
 export class MakeReservationForm extends Component {
   render() {
