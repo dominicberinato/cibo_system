@@ -5,12 +5,13 @@ import BatchForm from 'BatchForm'
 import RecipeForm from 'RecipeForm'
 import MenuForm from 'MenuForm'
 import {startAddIngredient} from 'ingredientActions'
+import {startAddBatch} from 'batchActions'
 export class StockFormsPane extends Component{
   constructor(props) {
     super(props)
   }
   //TODO
-  /* 
+  /*
   Add Submit Handler for Batch Form
   Add Submit Handler for RecipeForm
   Add submit handler for menuForm
@@ -19,8 +20,12 @@ export class StockFormsPane extends Component{
     var {dispatch} = this.props;
     dispatch(startAddIngredient(values));
   }
+  handleBatch = (values) => {
+    var {dispatch} = this.props;
+    dispatch(startAddBatch(values));
+  }
   render() {
-    var {stockForm}  = this.props;
+    var {stockForm, dispatc}  = this.props;
     var whichForm =  () => {
       switch (stockForm) {
         case 'ingridients':
@@ -29,7 +34,7 @@ export class StockFormsPane extends Component{
           );
         case 'batches':
           return (
-            <BatchForm/>
+            <BatchForm onSubmit={this.handleBatch}/>
           );
         case 'recipes':
           return(
