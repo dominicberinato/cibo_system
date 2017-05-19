@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
 import {Field, reduxForm} from 'redux-form'
+import {required} from 'validation'
 
-const required = value => (value ? undefined : 'Required')
 
 
 const renderField = ({input, label, type, meta: {touched, error, warning}}) => (

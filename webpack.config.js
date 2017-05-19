@@ -198,7 +198,8 @@ module.exports =  {
       './src/components/forms',
       './src/reducers',
       './src/actions',
-      './src/reducers'
+      './src/reducers',
+      './src/utils'
     ],
     alias: {
       src: path.resolve(__dirname, "src/"),
