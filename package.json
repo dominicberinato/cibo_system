@@ -59,6 +59,7 @@
     "react-tap-event-plugin": "2.0.1",
     "redux": "^3.6.0",
     "redux-form": "^6.7.0",
+    "redux-form-material-ui": "^4.2.0",
     "redux-thunk": "^2.2.0",
     "sass-loader": "3.1.2",
     "script-loader": "^0.7.0",
