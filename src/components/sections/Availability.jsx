@@ -1,6 +1,8 @@
 import React,{Component} from 'react'
 import {connect} from 'react-redux'
 import {collectTables} from 'src/actions/tableActions'
+import Chip from 'material-ui/Chip';
+
 
 export class Availability extends Component {
   constructor(props){
@@ -19,18 +21,18 @@ export class Availability extends Component {
         return(res.time > now.getTime());
       });
       if(tables.length == 0){
-        return(<p ref='tableMessage'>No Tables for Bookings</p>)
+        return(<Chip ref='tableMessage'>No Tables for Bookings</Chip>)
       } else {
         return(
           <div>
-            <div>
-              <p ref="currentRes">Current Reservations: {currentReservations.length}</p>
+            <div className="chip-row">
+              <Chip ref="currentRes">Current Reservations: {currentReservations.length}</Chip>
             </div>
-            <div>
-              <p ref="availableTables">Available Tables: {tables.length - currentReservations.length}</p>
+            <div className="chip-row">
+              <Chip ref="availableTables">Available Tables: {tables.length - currentReservations.length}</Chip>
             </div>
-            <div>
-              <p ref="totalTables">Total Tables: {tables.length}</p>
+            <div className="chip-row">
+              <Chip ref="totalTables">Total Tables: {tables.length}</Chip>
             </div>
           </div>
 

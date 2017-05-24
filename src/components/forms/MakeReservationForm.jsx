@@ -2,6 +2,7 @@ import React, {Component} from 'react'
 import {Field, reduxForm} from 'redux-form'
 import {required} from 'validation'
 import MenuItem from 'material-ui/MenuItem'
+import Chip from 'material-ui/Chip';
 import {TextField, DatePicker, TimePicker, SelectField} from 'redux-form-material-ui'
 
 
@@ -13,7 +14,7 @@ export class MakeReservationForm extends Component {
     var {tables, handleSubmit, pristine, submitting, reset} = this.props;
     return(
       <div>
-        <p className="heavy">MAKE RESERVATION</p>
+        <Chip className="res-chip">MAKE RESERVATION</Chip>
         <form ref="form" onSubmit={handleSubmit}>
           <div>
             <label>Guest Name</label>

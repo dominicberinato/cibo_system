@@ -1,5 +1,6 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
+import Chip from 'material-ui/Chip';
 //TODO Create single reservation item && render list
 import Reservation from 'Reservation'
 
@@ -20,7 +21,7 @@ export class CurrentBookings extends Component {
           return(<Reservation key={res.resKey} {...res} />);
         })
       } else {
-        return(<p className="text-center" ref='eResMsg'>No Reservations at the moment</p>)
+        return(<Chip className="text-center" ref='eResMsg'>No Reservations at the moment</Chip>)
       }
     }
     return(<div className='reservation-box'>{renderReservations()}</div>)

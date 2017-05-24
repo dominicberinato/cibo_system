@@ -2,6 +2,7 @@ import React, {Component} from 'react'
 import {Field, reduxForm} from 'redux-form'
 import {required} from 'validation'
 import {renderField} from 'renderField'
+import {Chip} from 'material-ui/Chip'
 
 
 export class IngridientForm extends Component {
@@ -10,7 +11,7 @@ export class IngridientForm extends Component {
     return(
       <div>
         <div className="text-center form-label">
-          <p>Add Ingridient</p>
+          <Chip>Add Ingridient</Chip>
         </div>
         <form ref="form" onSubmit={handleSubmit}>
         <div>
