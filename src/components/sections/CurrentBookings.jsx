@@ -14,7 +14,13 @@ export class CurrentBookings extends Component {
     var renderReservations = () => {
       var now = new Date();
       var currentReservations = reservations.filter((res) => {
-        return(res.time > now.getTime());
+        console.log('now', now.getHours());
+        console.log('resTime', new Date(res.reTime).getHours());
+        // console.log('resTime',res.resTime);
+        // console.log('now'now)
+        //
+        // return(res.resTime > now.getTime());
+        return true;
       });
       if(currentReservations.length != 0) {
         return currentReservations.map((res) => {

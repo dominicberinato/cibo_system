@@ -5,9 +5,10 @@ export var startAddReservation  = (reservation) => {
     //Alert if tables arent enough
     var userID = getState().auth.uid
     //table id
-    var tableID = reservation.tbKey;
+    var tableID = reservation.resTable;
     //prop id
-    var propID = reservation.propKey;
+    var propID = getState().property.propKey;
+
 
 
     //lets make a reservations fan out

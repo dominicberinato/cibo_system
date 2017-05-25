@@ -1,6 +1,7 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import MakeReservationForm from 'MakeReservationForm'
+import {startAddReservation} from 'reservationActions'
 
 export class MakeReservation extends Component {
   constructor(props) {
@@ -10,7 +11,7 @@ export class MakeReservation extends Component {
   submitReservation(values) {
     //get data from state.
     var {property, auth, tables, dispatch} =  this.props;
-    console.log(values);
+    dispatch(startAddReservation(values));
   }
   render() {
     var {tables} = this.props;

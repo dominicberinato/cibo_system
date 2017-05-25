@@ -9,7 +9,6 @@ import {TextField, DatePicker, TimePicker, SelectField} from 'redux-form-materia
 
 export class MakeReservationForm extends Component {
   render() {
-
     //TODO use select for tables
     var {tables, handleSubmit, pristine, submitting, reset} = this.props;
     return(
@@ -37,7 +36,7 @@ export class MakeReservationForm extends Component {
           <div>
             <label>Time</label>
             <Field
-              name="resTime"
+              name="resDate"
               component={TimePicker}
               validate={[required]}
             />
@@ -47,14 +46,13 @@ export class MakeReservationForm extends Component {
             <Field
               name="resDiet"
               component={TextField}
-              validate={[required]}
               multiLine={true}
               rows={3}
             />
           </div>
           <div>
             <label>Choose Table</label>
-            <Field name="resTable" component={SelectField} validate={[required]} hinttext="Pick A table">
+            <Field name="resTable" component={SelectField} validate={[required]} hintText="Pick A table">
               {tables.map((table) =>{
                 return(<MenuItem key={table.tbKey} value={table.tbKey} primaryText={table.tbname}/>)
               })}
