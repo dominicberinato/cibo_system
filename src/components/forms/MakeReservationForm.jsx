@@ -31,6 +31,7 @@ export class MakeReservationForm extends Component {
               name="resDate"
               component={DatePicker}
               validate={[required]}
+              format={(value, name) => value === '' ? null : value}
             />
           </div>
           <div>
@@ -39,6 +40,7 @@ export class MakeReservationForm extends Component {
               name="resTime"
               component={TimePicker}
               validate={[required]}
+              format={(value, name) => value === '' ? null : value}
             />
           </div>
           <div>
