@@ -2,6 +2,7 @@ import React,{Component} from 'react'
 import {connect} from 'react-redux'
 import Table from 'Table'
 import {collectTables, clearTables} from 'tableActions'
+import Chip from 'material-ui/Chip'
 
 export class TableList extends Component {
   constructor(props) {
@@ -23,7 +24,7 @@ export class TableList extends Component {
         })
       } else {
         return (
-           <p className="container__message">No Tables </p>
+            <Chip>No Tables </Chip>
         )
       }
     }

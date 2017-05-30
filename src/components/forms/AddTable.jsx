@@ -60,7 +60,7 @@ export class AddTable extends Component {
         )
       } else {
         return(
-          <p>Please Property Details To Add A Table</p>
+          <p>Please upload a property, to add a Table</p>
         )
       }
     }

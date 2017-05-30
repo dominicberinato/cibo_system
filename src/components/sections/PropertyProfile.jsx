@@ -1,6 +1,7 @@
 import React,{Component} from 'react'
 import {connect} from 'react-redux'
 import {storageRef} from 'src/firebase/index'
+import {Chip} from 'material-ui/Chip'
 
 
 export class PropertyProfile extends Component {
@@ -22,14 +23,16 @@ export class PropertyProfile extends Component {
         //an error occurred
         console.log('error occured when fetching image link', error )
       })
-    } 
+    }
   }
   render(){
     var {property} = this.props;
     var renderProp =  () => {
       if(Object.keys(property).length == 0) {
         return(
-          <div id="emptyMessage"><p>Please Set Property Profile</p></div>
+          <div id="emptyMessage" className="text-center">
+            <p>Please Set Property Profile</p>
+          </div>
         )
       } else {
         return(
