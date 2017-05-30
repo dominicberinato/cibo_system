@@ -36,7 +36,7 @@ export class MakeReservationForm extends Component {
           <div>
             <label>Time</label>
             <Field
-              name="resDate"
+              name="resTime"
               component={TimePicker}
               validate={[required]}
             />

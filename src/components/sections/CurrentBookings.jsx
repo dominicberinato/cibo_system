@@ -14,13 +14,37 @@ export class CurrentBookings extends Component {
     var renderReservations = () => {
       var now = new Date();
       var currentReservations = reservations.filter((res) => {
-        console.log('now', now.getHours());
-        console.log('resTime', new Date(res.reTime).getHours());
-        // console.log('resTime',res.resTime);
-        // console.log('now'now)
-        //
-        // return(res.resTime > now.getTime());
-        return true;
+          const resDate = new Date(res.resDate).getUTCDate()
+          const nowHours = now.getHours()
+          const nowMinutes = now.getMinutes()
+          const resHours = new Date(res.resTime).getUTCHours()
+          const resMinutes = new Date(res.resTime).getUTCMinutes()
+
+
+          //check if the reservation is the same as today or later
+          if(resDate >= now.getDate()) {
+            //edge case if its the same hour we should check for minutes
+            if(nowHours == resHours) {
+              //if current minutes are less than resMinutes then it is valid
+              if(nowMinutes < resMinutes ){
+                return true
+              } else {
+                //else no
+                return false
+              }
+            }
+            else if (nowHours > resHours) {
+
+              //if current hour are  past your hour don't show
+              return false
+            } else {
+
+              //show
+              return true
+            }
+          } else {
+            return false;
+          }
       });
       if(currentReservations.length != 0) {
         return currentReservations.map((res) => {
@@ -34,6 +58,9 @@ export class CurrentBookings extends Component {
   }
 }
 
+CurrentBookings.defaultProps= {
+  reservations: []
+};
 
 export default connect((state) => {
   return{
