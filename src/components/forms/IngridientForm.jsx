@@ -10,9 +10,7 @@ export class IngridientForm extends Component {
     var {handleSubmit} = this.props;
     return(
       <div>
-        <div className="text-center form-label">
-          <Chip>Add Ingridient</Chip>
-        </div>
+        <p>Add Ingredient</p>
         <form ref="form" onSubmit={handleSubmit}>
         <div>
           <label>Category</label>

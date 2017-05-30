@@ -2,7 +2,7 @@ import React, {Component} from 'react'
 import {Field, reduxForm} from 'redux-form'
 import {required} from 'validation'
 import MenuItem from 'material-ui/MenuItem'
-import Chip from 'material-ui/Chip';
+import Chip from 'material-ui/Chip'
 import {TextField, DatePicker, TimePicker, SelectField} from 'redux-form-material-ui'
 
 
