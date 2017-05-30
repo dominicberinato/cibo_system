@@ -1,8 +1,7 @@
 import React, {Component} from 'react'
 import {Field, reduxForm} from 'redux-form'
 import {required} from 'validation'
-import {renderField} from 'renderField'
-import {Chip} from 'material-ui/Chip'
+import {TextField, DatePicker, SelectField} from 'redux-form-material-ui'
 
 
 export class IngridientForm extends Component {
@@ -14,31 +13,62 @@ export class IngridientForm extends Component {
         <form ref="form" onSubmit={handleSubmit}>
         <div>
           <label>Category</label>
-          <Field name="ingredientCategory" type="text" component={renderField} validate={[required]}/>
+          <Field
+            name="ingredientCategory"
+            type="text"
+            component={TextField}
+            validate={[required]}/>
         </div>
         <div>
           <label>Description</label>
-          <Field name="ingredientDescription" type="text" rows="4" component={renderField} validate={[required]}/>
+          <Field
+            name="ingredientDescription"
+            type="text"
+            multiLine={true}
+            rows={4}
+            component={TextField}
+            validate={[required]}/>
         </div>
         <div>
           <label>Brand</label>
-          <Field name="ingredientBrand" type="text" component={renderField} validate={[required]}/>
+          <Field
+            name="ingredientBrand"
+            type="text"
+            component={TextField}
+            validate={[required]}/>
         </div>
         <div>
           <label>Pack Size</label>
-          <Field name="ingredientPSize" type="text" component={renderField} validate={[required]}/>
+          <Field
+            name="ingredientPSize"
+            type="text"
+            component={TextField}
+            validate={[required]}/>
         </div>
         <div>
           <label>Pack Cost</label>
-          <Field name="ingredientPackCost" type="text" component={renderField} validate={[required]}/>
+          <Field
+            name="ingredientPackCost"
+            type="text"
+            component={TextField}
+            validate={[required]}/>
         </div>
         <div>
           <label>Supplier</label>
-          <Field name="ingredientSupplier" type="text" component={renderField} validate={[required]}/>
+          <Field
+            name="ingredientSupplier"
+            type="text"
+            component={TextField}
+            validate={[required]}/>
         </div>
         <div>
           <label>Estimate Life Span</label>
-          <Field name="ingredientElife" type="text" component={renderField} validate={[required]}/>
+          <Field
+            name="ingredientElife"
+            type="text"
+            component={DatePicker}
+            format={(value, name) => value === '' ? null : value}
+            validate={[required]}/>
         </div>
         <div className="text-center">
           <input type="submit" value="Add Ingridient" className="button"/>
