@@ -1,4 +1,5 @@
 import firebase, {firebaseRef} from 'src/firebase/index'
+import {reset} from 'redux-form'
 //local add ingredient
 export var addIngredient = (ingredient) => {
   return {
@@ -22,6 +23,8 @@ export var startAddIngredient = (ingredient) => {
         ...ingredient,
         id: IngKey
       }));
+
+      dispatch(reset('ingridient'));
     })
 
   }

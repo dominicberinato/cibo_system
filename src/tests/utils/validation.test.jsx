@@ -2,7 +2,7 @@ import * as validations from 'validation'
 import expect from 'expect'
 
 
-describe.only('Validation Rules',  () => {
+describe('Validation Rules',  () => {
   it('should exist', () => {
     expect(validations).toExist()
   })
