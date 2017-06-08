@@ -2,7 +2,7 @@ import {firebaseRef} from 'src/firebase/index'
 //export async action to delete table
 export var startDeleteTable = (tbKey) => {
   return(dispatch, getState) => {
-    //TODO clean all connected
+    //TODO delete all connected assets to table using fanout
     var deleteTableFanOut =  {};
     //lets remove content
     return firebaseRef.child(`tables/${tbKey}`).remove().then(() => {
@@ -36,7 +36,7 @@ export var startUpdateTable = (id, updates) => {
         //update table locally
         dispatch(updateTable(id, updates));
        }
-       //TODO deal with failure
+       //TODO deal with failure to update table in firebase
      })
   }
 }

@@ -9,7 +9,6 @@ import {TextField, DatePicker, TimePicker, SelectField} from 'redux-form-materia
 
 export class MakeReservationForm extends Component {
   render() {
-    //TODO use select for tables
     var {tables, handleSubmit, pristine, submitting, reset} = this.props;
     return(
       <div>

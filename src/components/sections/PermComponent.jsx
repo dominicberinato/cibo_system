@@ -40,7 +40,7 @@ export class PermComponent extends Component {
                 hashHistory.push('/app');
               })
             } else {
-              //TODO create user property list
+              //TODO collect user property list from firebase
               var lastPropertyKey;
               firebaseRef.child('property-users').orderByValue()
               .once('value', (userprops) => {

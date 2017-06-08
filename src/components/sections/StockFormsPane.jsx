@@ -10,12 +10,6 @@ export class StockFormsPane extends Component{
   constructor(props) {
     super(props)
   }
-  //TODO
-  /*
-  Add Submit Handler for Batch Form
-  Add Submit Handler for RecipeForm
-  Add submit handler for menuForm
-  */
   handleIngridient = (values) => {
     var {dispatch} = this.props;
     dispatch(startAddIngredient(values));

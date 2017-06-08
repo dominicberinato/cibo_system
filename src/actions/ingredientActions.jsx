@@ -7,6 +7,14 @@ export var addIngredient = (ingredient) => {
     ingredient
   };
 }
+
+
+//Collect the ingredients for this property from db
+//TODO Collect ingredients owned by this property and add them to state
+export const collectPropIngridients = () => {
+
+}
+
 //async add ingredient
 export var startAddIngredient = (ingredient) => {
   return(dispatch, getState) => {
@@ -23,10 +31,8 @@ export var startAddIngredient = (ingredient) => {
         ...ingredient,
         id: IngKey
       }));
-
       dispatch(reset('ingridient'));
     })
-
   }
 }
 //local update ingredient

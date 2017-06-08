@@ -20,7 +20,7 @@ export class CurrentBookings extends Component {
           const resHours = new Date(res.resTime).getUTCHours()
           const resMinutes = new Date(res.resTime).getUTCMinutes()
 
-
+          //TODO Filter current reservations using time and date properly
           //check if the reservation is the same as today or later
           if(resDate >= now.getDate()) {
             //edge case if its the same hour we should check for minutes
@@ -34,7 +34,6 @@ export class CurrentBookings extends Component {
               }
             }
             else if (nowHours > resHours) {
-
               //if current hour are  past your hour don't show
               return false
             } else {

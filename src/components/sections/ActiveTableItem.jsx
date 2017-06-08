@@ -13,13 +13,11 @@ export class ActiveTableItem extends Component {
   setBill(Event) {
     Event.preventDefault();
     var {id, dispatch} = this.props;
-    //TODO:
-    //considere adding details to bill
+    //TODO consider adding more details to bill
     dispatch(currBill(id));
   }
   render() {
-    // TODO:
-    //TEST that active table shows correctly
+    // TODO TEST that active table shows correctly
     var {tbKey, resOwner, bill, tables} = this.props
     const tb = tables.find((tableItem) => {
       return tableItem.tbKey == tbKey

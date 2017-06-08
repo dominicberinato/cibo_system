@@ -16,8 +16,7 @@ describe('CiboTabs', () => {
     expect(CiboTabs).toExist();
   });
 
-  //TODO test componen t did muount
-
+  it('should run initialization when user loads')
   it('should not dispatch assocProp on invalid data', () => {
     const property = {propKey:'17ty9y'};
     const store = createMockStore({});
