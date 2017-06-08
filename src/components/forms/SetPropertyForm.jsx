@@ -38,7 +38,6 @@ export class SetPropertyForm extends Component {
           </div>
           <div>
             <label>2nd Address Line</label>
-            <input type="text" ref="propLocation"/>
             <Field
               name="propLocation"
               type="text"
