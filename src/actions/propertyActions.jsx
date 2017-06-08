@@ -11,9 +11,10 @@ export var addProperty = (property) => {
 
 //add async class to pushProperty
 export var startAddProperty = (property) => {
-  return(dispatch, state) => {
+  return(dispatch, getState) => {
     //collect property data
-    var propertyImage = property.avatar;
+    const propertyImage = property.avatar
+    const propCreator = getState().auth.id
     //get id
     var propKey = firebaseRef.child('properties').push().key;
     //build upload
@@ -23,6 +24,7 @@ export var startAddProperty = (property) => {
     propFanOut[`/properties/${propKey}`] = {
       ...property,
       avatar:`${propKey}.png`,
+      propCreator,
       propCode
     };
     propFanOut[`/property-users/${propKey}/${property.propCreator}`] = property.propCreator;
