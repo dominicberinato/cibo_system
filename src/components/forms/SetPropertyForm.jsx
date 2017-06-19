@@ -16,10 +16,12 @@ export class SetPropertyForm extends Component {
   }
 
   render() {
-    return(
+    //add submit handler
+   const {handleSubmit} = this.props;
+   return(
       <div>
         <Chip>Property Details</Chip>
-        <form ref="form" onSubmit={this.setProp}>
+        <form ref="form" onSubmit={handleSubmit}>
           <div>
             <label>Name</label>
             <Field
@@ -47,8 +49,8 @@ export class SetPropertyForm extends Component {
           <div>
           <label>Avatar</label>
           <Field
+              name="avatar"
               type="file"
-              name="poster"
               component={FileInput}
             />
           </div>

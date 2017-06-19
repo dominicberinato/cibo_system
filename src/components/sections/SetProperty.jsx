@@ -10,6 +10,7 @@ export class SetProperty extends Component {
     this.setProp = this.setProp.bind(this)
   }
   setProp(values) {
+      const {dispatch} = this.props;
       //dispatch our action generator
       dispatch(startAddProperty(values));
   }
