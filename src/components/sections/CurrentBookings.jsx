@@ -45,8 +45,8 @@ export class CurrentBookings extends Component {
             return false;
           }
       });
-      if(currentReservations.length != 0) {
-        return currentReservations.map((res) => {
+      if(reservations.length != 0) {
+        return reservations.map((res) => {
           return(<Reservation key={res.resKey} {...res} />);
         })
       } else {
