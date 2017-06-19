@@ -33,6 +33,7 @@ export var startAddProperty = (property) => {
     //perform upload
     var uploadTask = storageRef.child(`${propKey}.png`).put(propertyImage);
     uploadTask.then(() => {
+      //TODO Log this to firebase functions
       console.log('woop up!');
     })
     return firebaseRef.update(propFanOut).then(()=>{

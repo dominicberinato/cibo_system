@@ -4,7 +4,6 @@ var path = require('path');
 var envFile = require('node-env-file');
 var HTMLWebpackPlugin = require('html-webpack-plugin');
 var CompressionPlugin = require("compression-webpack-plugin");
-var SWPrecacheWebpackPlugin = require('sw-precache-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const PurifyCSSPlugin = require('purifycss-webpack');
 const glob = require('glob');
@@ -86,16 +85,7 @@ var plugins = PRODUCTION
             test: /\.js$|\.css$|\.html$/,
             threshold: 10240,
             minRatio: 0.8
-          }),
-          new SWPrecacheWebpackPlugin(
-            {
-              cacheId: 'cibo',
-              filename: 'cibo-sw.js',
-              maximumFileSizeToCacheInBytes: 4194304,
-              minify: true,
-              skipWaiting: true
-            }
-          )
+          })
         ]
     :   [
           new HTMLWebpackPlugin({
