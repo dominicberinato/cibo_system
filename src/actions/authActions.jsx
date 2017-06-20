@@ -1,4 +1,5 @@
 import firebase, {firebaseRef, googleAuthProvider, storageRef} from 'src/firebase/index'
+import { addProperty } from 'propertyActions'
 //add login action
 export var login = (user) => {
   return {
@@ -17,6 +18,7 @@ export var startLogin = () => {
   return(dispatch, state) => {
     //lets use googleauth to auth the user
     return firebase.auth().signInWithPopup(googleAuthProvider).then((result) => {
+    //TODO use firwbase functions for logging
     console.log('auth success')
     }, (error) => {
       //deal with errors if any
@@ -37,18 +39,18 @@ export var assocUser = (uid, propCode) => {
     return firebaseRef.child('properties').orderByChild('propCode').equalTo(propCode).once('value').then((propList) => {
       propList.forEach((property) => {
         propertyKey = property.key;
-      })
-      //update list on db to assoc user
-      var assocFanOut = {};
-      //populate fanout
-      assocFanOut[`/property-users/${propertyKey}/${uid}`] = uid;
+        //update list on db to assoc user
+        var assocFanOut = {};
+        //populate fanout
+        assocFanOut[`/property-users/${propertyKey}/${uid}`] = uid;
 
-      return firebaseRef.update(assocFanOut).then(() => {
-        //dispath addProperty and render
-        dispatch(addProperty({
-          ...property,
-          propKey: propertyKey
-        }));
+        return firebaseRef.update(assocFanOut).then(() => {
+          //dispath addProperty and render
+          dispatch(addProperty({
+            ...property.val(),
+            propKey: propertyKey
+          }));
+        })
       })
     })
 
