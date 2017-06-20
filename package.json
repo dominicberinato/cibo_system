@@ -1,6 +1,6 @@
 {
   "name": "cibo_property_system",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "engines": {
     "node": "6.3.1",
     "yarn": "0.24.6"
