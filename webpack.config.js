@@ -35,7 +35,7 @@ var entry = PRODUCTION
           vendor:
           [
             'script-loader!jquery/dist/jquery.min.js',
-            'script-loader!foundation-sites/dist/foundation.min.js',
+            'script-loader!foundation-sites/dist/js/foundation.min.js',
             'react',
             'redux',
             'react-redux',
@@ -49,7 +49,7 @@ var entry = PRODUCTION
     :   [
           './app.jsx',
           'script-loader!jquery/dist/jquery.min.js',
-          'script-loader!foundation-sites/dist/foundation.min.js'
+          'script-loader!foundation-sites/dist/js/foundation.min.js'
         ]
 
 var plugins = PRODUCTION
