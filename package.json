@@ -3,7 +3,7 @@
   "version": "0.0.2",
   "engines": {
     "node": "6.2.0",
-    "npm": "3.8.9"
+    "yarn": "0.24.6"
   },
   "description": "This is the property management system for cibo by Launch Design",
   "main": "index.js",
