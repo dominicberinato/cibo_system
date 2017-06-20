@@ -5,7 +5,6 @@ var envFile = require('node-env-file');
 var HTMLWebpackPlugin = require('html-webpack-plugin');
 var CompressionPlugin = require("compression-webpack-plugin");
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
-const PurifyCSSPlugin = require('purifycss-webpack');
 const glob = require('glob');
 
 //enviroment variable
@@ -55,6 +54,7 @@ var entry = PRODUCTION
 
 var plugins = PRODUCTION
     ?   [
+          new webpack.optimize.ModuleConcatenationPlugin(),
           new webpack.optimize.CommonsChunkPlugin({name:'vendor', filename:'vendor.[hash:12].min.js'}),
           new webpack.optimize.UglifyJsPlugin({
             compress: {
@@ -68,14 +68,6 @@ var plugins = PRODUCTION
             filename: '[name].[hash:12].css',
             disable: false
           }),
-          // //purify al teh css
-          // new PurifyCSSPlugin({
-          //    paths: glob.sync(path.join(__dirname, 'dist/*.html')),
-          //    moduleExtensions: ['.html'],
-          //    minimize: true,
-          //    purifyOptions: { info: true, minify: true },
-          //    verbose: true
-          //  }),
           new HTMLWebpackPlugin({
             template:'index-template.html'
           }),
