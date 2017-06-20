@@ -1,6 +1,6 @@
 {
   "name": "cibo_property_system",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "engines": {
     "node": "6.2.0",
     "npm": "3.8.9"
@@ -12,7 +12,7 @@
     "test": "NODE_ENV=test karma start",
     "build": "webpack",
     "start": "node server.js",
-    "postinstall": "NODE_ENV=production npm rebuild node-sass && webpack"
+    "postinstall": "NODE_ENV=production webpack"
   },
   "repository": {
     "type": "git",
