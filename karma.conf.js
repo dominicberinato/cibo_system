@@ -14,7 +14,7 @@ module.exports = function (config) {
     files: [
       'node_modules/sinon/pkg/sinon.js',
       'node_modules/jquery/dist/jquery.min.js',
-      'node_modules/foundation-sites/dist/foundation.min.js',
+      'node_modules/foundation-sites/dist/js/foundation.min.js',
       'src/tests/**/*.test.jsx'
     ],
     preprocessors: {
