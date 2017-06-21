@@ -46,4 +46,41 @@ describe.only('userPropertiesActions', () => {
 
   })
 
-})
+  describe('async', () => {
+    const sampleProp = {
+      name: 'Azure',
+      key: 123
+    };
+
+    let propRef;
+    //do some set up
+    beforeEach(done => {
+      const beforeFanout = {};
+      firebase.auth().signInAnonymously().then((user) => {
+        //get user id
+        const uid = user.uid;
+        //get prop key
+        const pkey =  sampleProp.key;
+        //add user and property to firebase
+        beforeFanout[`/users/${uid}`] = uid;
+        beforeFanout[`/properties/${pkey}`] =  sampleProp;
+        beforeFanout[`/property-users/${pkey}/${uid}`] = uid;
+        beforeFanout[`/user-properties/${uid}/${pkey}`] = sampleProp;
+
+        return firebaseRef.update(beforeFanout)
+        .then(() => done())
+        .catch(done);
+      })
+    });
+
+    afterEach(done =>  {
+      //clear fb
+      firebaseRef.remove().then(() =>  done());
+    })
+
+    it('should collect userproperties', done => {
+      expect(1).toEqual(2);
+      done();
+    })
+  });
+});
