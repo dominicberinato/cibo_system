@@ -194,6 +194,14 @@ module.exports =  {
     contentBase: './dist',
     inline: true,
     hot: true,
+    stats: {
+      chunks: true,
+      timings: true
+    }
+  },
+  stats : {
+    chunks: true,
+    timings: true,
   },
   /*only load the source maps if not production*/
   devtool: 'source-map'
