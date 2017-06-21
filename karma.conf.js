@@ -9,7 +9,6 @@ module.exports = function (config) {
                 flags: ['--no-sandbox']
             }
         },
-    singleRun: true,
     frameworks: ['mocha'],
     files: [
       'node_modules/sinon/pkg/sinon.js',
@@ -17,6 +16,8 @@ module.exports = function (config) {
       'node_modules/foundation-sites/dist/js/foundation.min.js',
       'src/tests/**/*.test.jsx'
     ],
+    autoWatch: true,
+    autoWatchBatchDelay: 750,
     preprocessors: {
       'src/tests/**/*.test.jsx': ['webpack', 'sourcemap']
     },
