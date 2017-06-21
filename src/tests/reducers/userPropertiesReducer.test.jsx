@@ -3,7 +3,7 @@ var df = require('deep-freeze-strict');
 import {userPropertiesReducer} from 'userPropertiesReducer'
 
 
-describe.only('userPropertiesReducer', () => {
+describe('userPropertiesReducer', () => {
   it('should exist', () => {
     expect(userPropertiesReducer).toExist()
   });

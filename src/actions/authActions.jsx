@@ -43,7 +43,7 @@ export var assocUser = (uid, propCode) => {
         var assocFanOut = {};
         //populate fanout
         assocFanOut[`/property-users/${propertyKey}/${uid}`] = uid;
-
+        assocFanOut[`/user-properties/${uid}/${propertyKey}`] =  property;
         return firebaseRef.update(assocFanOut).then(() => {
           //dispath addProperty and render
           dispatch(addProperty({
@@ -53,7 +53,5 @@ export var assocUser = (uid, propCode) => {
         })
       })
     })
-
-
   }
 }
