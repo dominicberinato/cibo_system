@@ -16,15 +16,14 @@ module.exports = function (config) {
       'node_modules/foundation-sites/dist/js/foundation.min.js',
       'src/tests/**/*.test.jsx'
     ],
-    autoWatch: true,
-    autoWatchBatchDelay: 750,
+    singleRun: true,
     preprocessors: {
       'src/tests/**/*.test.jsx': ['webpack', 'sourcemap']
     },
     reporters: ['mocha'],
     client: {
       mocha: {
-        timeout: 30000
+        timeout: 300000
       }
     },
     webpack: webpackConfig,

@@ -4,6 +4,9 @@ import firebase,{firebaseRef} from 'src/firebase'
 import configureMockStore from 'redux-mock-store'
 import thunk from 'redux-thunk'
 
+//use this to mock a store
+var createMockStore = configureMockStore([thunk]);
+
 describe.only('userPropertiesActions', () => {
   it('should exist', () => {
     expect(actions).toExist();
@@ -42,8 +45,7 @@ describe.only('userPropertiesActions', () => {
       const res =  actions.removeUserProperty(prop.key);
 
       expect(res).toEqual(action);
-    })
-
+    });
   })
 
   describe('async', () => {
@@ -52,13 +54,15 @@ describe.only('userPropertiesActions', () => {
       key: 123
     };
 
+    var uid;
+
     let propRef;
     //do some set up
     beforeEach(done => {
       const beforeFanout = {};
       firebase.auth().signInAnonymously().then((user) => {
         //get user id
-        const uid = user.uid;
+        uid = user.uid;
         //get prop key
         const pkey =  sampleProp.key;
         //add user and property to firebase
@@ -79,8 +83,23 @@ describe.only('userPropertiesActions', () => {
     })
 
     it('should collect userproperties', done => {
-      expect(1).toEqual(2);
-      done();
-    })
+
+      //make a store to record actions
+      //store contains uid that collect user properties uses
+      const store = createMockStore({auth:{uid}})
+
+      const action = actions.collectUserProperties();
+
+      store.dispatch(action).then(() => {
+        //get fired actions
+        const mockActions = store.getActions();
+
+        expect(mockActions[0].type).toEqual('ADD_USER_PROPERTY');
+        expect(mockActions[0].prop).toEqual(sampleProp);
+        done();
+      }, done());
+    });
+
+
   });
 });
