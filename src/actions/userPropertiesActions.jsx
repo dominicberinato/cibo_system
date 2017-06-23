@@ -21,7 +21,7 @@ export const collectUserProperties = () => {
     const uid =  getState().auth.uid;
     //collect properties
     return firebaseRef.child(`/user-properties/${uid}`).once('value',(userProps) =>{
-      if(userProps.length > 0) {
+      if(userProps.val() !== null) {
         //add each to state
         userProps.forEach((userProp) => {
           dispatch(addUserProperty({

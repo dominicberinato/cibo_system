@@ -1,6 +1,7 @@
-import firebase, {firebaseRef, googleAuthProvider, storageRef} from 'src/firebase/index'
-import {resert} from 'redux-form'
-import { addProperty } from 'propertyActions'
+import firebase, {firebaseRef, googleAuthProvider, storageRef} from 'src/firebase/index';
+import {reset} from 'redux-form';
+import { addProperty } from 'propertyActions';
+import {collectUserProperties} from 'userPropertiesActions';
 //add login action
 export var login = (user) => {
   return {
@@ -46,7 +47,7 @@ export var assocUser = (values) => {
         var assocFanOut = {};
         //populate fanout
         assocFanOut[`/property-users/${propertyKey}/${uid}`] = uid;
-        assocFanOut[`/user-properties/${uid}/${propertyKey}`] =  property;
+        assocFanOut[`/user-properties/${uid}/${propertyKey}`] =  property.val();
         return firebaseRef.update(assocFanOut).then(() => {
           //dispath addProperty and render
           dispatch(addProperty({
@@ -54,7 +55,9 @@ export var assocUser = (values) => {
             propKey: propertyKey
           }));
           //clear the propcode form
-          dispatch(reset('assoc'))
+          dispatch(reset('assoc'));
+          //get properties
+          dispatch(collectUserProperties());
         })
       })
     })

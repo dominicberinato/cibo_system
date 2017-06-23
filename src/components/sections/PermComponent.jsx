@@ -4,6 +4,7 @@ import Dialog from 'material-ui/Dialog';
 import FlatButton from 'material-ui/FlatButton';
 import {collectUserProperties} from 'userPropertiesActions';
 import AssocForm from 'AssocForm';
+import {assocUser} from 'authActions';
 
 export class PermComponent extends Component {
   constructor(props) {
@@ -15,6 +16,7 @@ export class PermComponent extends Component {
 
   }
   assocProduct(values) {
+    var {dispatch} = this.props;
     //dispatch assoc action
     dispatch(assocUser(values));
   }
@@ -24,7 +26,6 @@ export class PermComponent extends Component {
   }
   render() {
     var {userProps} = this.props;
-
     var renderDialogContent = () => {
       //no props check database
       if(userProps.length ==  0) {
@@ -33,8 +34,16 @@ export class PermComponent extends Component {
         //one prop named none so we need to show form
         if(userProps.length == 1 && userProps[0].name == 'none') {
           return(
-            <AssocForm/>
+            <AssocForm onSubmit={this.assocProduct}/>
           )
+        }
+        else {
+          //render a list with the properties
+          userProps.map((p) => {
+            return(
+              <p key={p.name}>p.name</p>
+            )
+          })
         }
       }
     }

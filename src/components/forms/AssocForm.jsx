@@ -8,7 +8,7 @@ export class AssocForm extends Component {
     var {handleSubmit} = this.props;
     return (
       <div className="text-center">
-        <form ref='form' onSubmit={this.assocProduct}>
+        <form ref='form' onSubmit={handleSubmit}>
           <label className="property-message"> ENTER PROPERTY CODE</label>
           <div>
             <Field
