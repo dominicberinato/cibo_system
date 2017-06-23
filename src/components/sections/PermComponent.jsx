@@ -39,9 +39,9 @@ export class PermComponent extends Component {
         }
         else {
           //render a list with the properties
-          userProps.map((p) => {
+          return userProps.map((p) => {
             return(
-              <p key={p.name}>p.name</p>
+              <p key={p.key}>{p.propName}</p>
             )
           })
         }
