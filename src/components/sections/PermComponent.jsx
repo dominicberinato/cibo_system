@@ -5,6 +5,10 @@ import FlatButton from 'material-ui/FlatButton';
 import {collectUserProperties} from 'userPropertiesActions';
 import AssocForm from 'AssocForm';
 import {assocUser} from 'authActions';
+import {RadioButton, RadioButtonGroup} from 'material-ui/RadioButton';
+import {addProperty} from 'propertyActions';
+import {hashHistory} from 'react-router'
+
 
 export class PermComponent extends Component {
   constructor(props) {
@@ -25,12 +29,16 @@ export class PermComponent extends Component {
     dispatch(collectUserProperties())
   }
   render() {
-    var {userProps} = this.props;
+    var {userProps, dispatch} = this.props;
+    var radios = [];
     var renderDialogContent = () => {
       //no props check database
-      if(userProps.length ==  0) {
-        return <p> Checking Database for Properties</p>
-      } else {
+      if(userProps.length ==  0)
+      {
+        return (<p> Checking Database for Properties</p>)
+      }
+      else
+      {
         //one prop named none so we need to show form
         if(userProps.length == 1 && userProps[0].name == 'none') {
           return(
@@ -38,12 +46,31 @@ export class PermComponent extends Component {
           )
         }
         else {
-          //render a list with the properties
-          return userProps.map((p) => {
-            return(
-              <p key={p.key}>{p.propName}</p>
-            )
-          })
+          return (
+            <RadioButtonGroup
+              name="chosenProp"
+              onChange={(e, value) => {
+                const selected =  userProps.find((item) => {
+                  return item.key == value;
+                });
+                //dispatch
+                dispatch(addProperty(selected))
+                hashHistory.push('/app')
+              }}
+              >
+              {
+                userProps.map((p) => {
+                  return (
+                    <RadioButton
+                      label={p.propName}
+                      value={p.key}
+                      key={p.key}
+                      />
+                  );
+                })
+              }
+            </RadioButtonGroup>
+          )
         }
       }
     }
