@@ -1,79 +1,53 @@
-import React, {Component} from 'react'
-import {connect} from 'react-redux'
-import {startAddTable} from 'src/actions/tableActions'
+import React, {Component} from 'react';
+import {connect} from 'react-redux';
+import {required, isnumber} from 'validation';
+import {TextField} from 'redux-form-material-ui';
+import {Field, reduxForm} from 'redux-form';
+
+
 
 export class AddTable extends Component {
   //class constructor
   constructor(props) {
     super(props);
-    this.saveTable = this.saveTable.bind(this);
-  }
-  saveTable(Event) {
-    Event.preventDefault();
-    var {dispatch} = this.props;
-    //validate all data we need is present
-    var tbname = this.refs.tableName.value;
-    var tbcapacity = this.refs.tableSeats.value;
-    var tbProp =  this.refs.tableProperty.value;
-
-    if(tbname.length == 0 || tbcapacity.length ==  0 || tbProp.length == 0) {
-
-    } else
-    {
-      //call start addtable
-      //curate data
-      var tbObject = {
-        propId:tbProp,
-        tbname,
-        tbcapacity
-      }
-      //uploadData
-      dispatch(startAddTable(tbObject))
-    }
-  }
-  //when mounted load ..
-  ComponentDidMount(){
-
   }
   //draw
   render() {
-    var {property} =  this.props;
-    var renderForm =  () => {
-      if(property.propKey != undefined) {
-        return(
-          <div>
-            <form ref='form' onSubmit={this.saveTable}>
-              <div>
-                <label>Name / Number</label>
-                <input ref='tableName' type='text'/>
-              </div>
-              <div>
-                <label>Table Capacity</label>
-                <input ref='tableSeats' type='number'/>
-              </div>
-              <input ref='tableProperty' type="hidden" defaultValue={property.propKey}/>
-              <div className="text-center">
-                <input type='submit' className='button' value='Add Table'/>
-              </div>
-            </form>
-          </div>
-        )
-      } else {
-        return(
-          <p>Please upload a property, to add a Table</p>
-        )
-      }
-    }
+    var {property, handleSubmit} =  this.props;
     return(
       <div>
-        {renderForm()}
-    </div>)
+        <form ref='form' onSubmit={handleSubmit}>
+          <div>
+            <label>Name / Number</label>
+            <div>
+              <Field
+                name="tbname"
+                type="text"
+                component={TextField}
+                validate={[required]}/>
+            </div>
+          </div>
+          <div>
+            <label>Table Capacity</label>
+              <div>
+                <Field
+                  name="tbcapacity"
+                  type="text"
+                  component={TextField}
+                  validate={[required, isnumber]}/>
+              </div>
+          </div>
+          <div className="text-center">
+            <input type='submit' className='button' value='Add Table'/>
+          </div>
+        </form>
+      </div>
+    )
   }
 };
 
-export default connect((state) => {
-  return{
-    auth: state.auth,
-    property: state.property
-  }
-})(AddTable)
+AddTable = reduxForm({
+  form: 'table'
+})(AddTable);
+
+export default AddTable;

@@ -1,4 +1,5 @@
-import {firebaseRef} from 'src/firebase/index'
+import {firebaseRef} from 'src/firebase/index';
+import {reset} from 'redux-form';
 //export async action to delete table
 export var startDeleteTable = (tbKey) => {
   return(dispatch, getState) => {
@@ -77,7 +78,7 @@ export var updateTable = (id, updates) => {
 //export async action to start add table
 export var startAddTable =  (table) => {
   return(dispatch, getState) => {
-    var propId = table.propId;
+    var propId = getState().property.key;
     //get propid
     var tableFanOut =  {};
     var tableKey = firebaseRef.child('tables').push().key;
@@ -89,7 +90,8 @@ export var startAddTable =  (table) => {
       dispatch(addTable({
         ...table,
         tbKey: tableKey
-      }))
+      }));
+      dispatch(reset('table'))
     })
   }
 }
