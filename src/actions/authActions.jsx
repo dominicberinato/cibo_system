@@ -1,4 +1,5 @@
 import firebase, {firebaseRef, googleAuthProvider, storageRef} from 'src/firebase/index'
+import {resert} from 'redux-form'
 import { addProperty } from 'propertyActions'
 //add login action
 export var login = (user) => {
@@ -32,9 +33,11 @@ export var startLogin = () => {
 }
 
 //export property assoc
-export var assocUser = (uid, propCode) => {
-  return(dispatch, state) => {
+export var assocUser = (values) => {
+  return(dispatch, getState) => {
+    const propCode = values.propCode;
     var propertyKey;
+    var uid =  getState().auth.uid;
     //find product with code
     return firebaseRef.child('properties').orderByChild('propCode').equalTo(propCode).once('value').then((propList) => {
       propList.forEach((property) => {
@@ -50,6 +53,8 @@ export var assocUser = (uid, propCode) => {
             ...property.val(),
             propKey: propertyKey
           }));
+          //clear the propcode form
+          dispatch(reset('assoc'))
         })
       })
     })

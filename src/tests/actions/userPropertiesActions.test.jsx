@@ -7,7 +7,7 @@ import thunk from 'redux-thunk'
 //use this to mock a store
 var createMockStore = configureMockStore([thunk]);
 
-describe.only('userPropertiesActions', () => {
+describe('userPropertiesActions', () => {
   it('should exist', () => {
     expect(actions).toExist();
   });
