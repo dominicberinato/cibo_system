@@ -10,14 +10,18 @@ export class AssocForm extends Component {
       <div className="text-center">
         <form ref='form' onSubmit={this.assocProduct}>
           <label className="property-message"> ENTER PROPERTY CODE</label>
-          <Field
-            className="text-center prop-code"
-            name="propCode"
-            type="text"
-            placeholder="5GT-HTG"
-            component={TextField}
-            validate={[required]}/>
-          <input ref="submit" className="button" type="submit" value="CONNECT"/>
+          <div>
+            <Field
+              className="text-center prop-code"
+              name="propCode"
+              type="text"
+              placeholder="5GT-HTG"
+              component={TextField}
+              validate={[required]}/>
+          </div>
+          <div>
+            <input ref="submit" className="button" type="submit" value="CONNECT"/>
+          </div>
         </form>
       </div>
     )

@@ -1,42 +1,60 @@
-import React,{Component} from 'react'
+import React, {Component} from 'react'
 import {connect} from 'react-redux'
-import firebase,{firebaseRef} from 'src/firebase/index'
-import {hashHistory} from 'react-router'
-import {addProperty} from 'propertyActions'
+import Dialog from 'material-ui/Dialog';
+import FlatButton from 'material-ui/FlatButton';
+import {collectUserProperties} from 'userPropertiesActions';
+import AssocForm from 'AssocForm';
 
 export class PermComponent extends Component {
   constructor(props) {
     super(props);
     this.assocProduct = this.assocProduct.bind(this);
+    this.state = {
+      open: true,
+    };
 
   }
   assocProduct(values) {
-    //collect user id from state
-    var {dispatch, auth} = this.props;
-    //check that user exists
-    if(auth != undefined) {
-      //check that form has value
-
-      //check that code is valid
-      if(pcode.length > 0) {
-        //dispatch assoc action
-        dispatch(assocUser(values));
-      }
-    }
+    //dispatch assoc action
+    dispatch(assocUser(values));
   }
   componentDidMount() {
     var {auth, dispatch} = this.props;
+    dispatch(collectUserProperties())
   }
   render() {
+    var {userProps} = this.props;
+
+    var renderDialogContent = () => {
+      //no props check database
+      if(userProps.length ==  0) {
+        return <p> Checking Database for Properties</p>
+      } else {
+        //one prop named none so we need to show form
+        if(userProps.length == 1 && userProps[0].name == 'none') {
+          return(
+            <AssocForm/>
+          )
+        }
+      }
+    }
     return(
       <div>
-        <p>perms</p>
+        <Dialog
+          title="Loading Properties"
+          modal={false}
+          open={this.state.open}
+          onRequestClose={this.handleClose}
+        >
+          {renderDialogContent()}
+        </Dialog>
       </div>
     )
   }
 }
 export default connect((state) => {
   return {
-    auth: state.auth
+    auth: state.auth,
+    userProps: state.userProperties
   }
 })(PermComponent);
