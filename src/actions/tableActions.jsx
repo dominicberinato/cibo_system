@@ -45,7 +45,7 @@ export var startUpdateTable = (id, updates) => {
 export var collectTables = () => {
   return(dispatch, getState) => {
     //get the id of the property so we can use a lookup table
-    var propKey = getState().property.propKey;
+    var propKey = getState().property.key;
 
     var tablesRef = firebaseRef.child(`property-tables/${propKey}`);
 

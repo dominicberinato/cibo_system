@@ -20,7 +20,7 @@ export class CiboTabs extends Component {
   componentDidMount() {
     var{property, dispatch} = this.props;
     //check that we have a property key
-    if(property.propKey  != undefined) {
+    if(property.key  != undefined) {
       dispatch(collectTables());
       dispatch(fetchReservations());
     }
