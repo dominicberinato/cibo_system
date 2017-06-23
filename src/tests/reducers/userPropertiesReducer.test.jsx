@@ -8,6 +8,8 @@ describe('userPropertiesReducer', () => {
     expect(userPropertiesReducer).toExist()
   });
 
+
+
   it('should add a userProperty', () => {
     //mock a prop
     const prop = {
@@ -43,5 +45,26 @@ describe('userPropertiesReducer', () => {
     const res = userPropertiesReducer(df(props), df(action));
 
     expect(res).toExclude(props[1]);
+  })
+
+  it.only('should clear user properties', () => {
+
+    const props =  [{
+      key: 1,
+      name: 'one'
+    },
+    {
+      key: 2,
+      name: 'two'
+    }];
+
+    const action = {
+      type: 'CLEAR_USER_PROPERTIES'
+    };
+
+    const res =  userPropertiesReducer(df(props), df(action));
+
+    expect(res).toEqual([]);
+
   })
 })
