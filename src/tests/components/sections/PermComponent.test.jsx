@@ -8,7 +8,7 @@ import {mount} from 'enzyme'
 import {PermComponent} from 'PermComponent'
 
 
-describe.only('PermComponent',() => {
+describe('PermComponent',() => {
   it('should exist', () => {
     expect(PermComponent).toExist();
   });

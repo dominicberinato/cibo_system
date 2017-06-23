@@ -47,7 +47,7 @@ describe('userPropertiesReducer', () => {
     expect(res).toExclude(props[1]);
   })
 
-  it.only('should clear user properties', () => {
+  it('should clear user properties', () => {
 
     const props =  [{
       key: 1,

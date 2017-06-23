@@ -47,7 +47,7 @@ describe('userPropertiesActions', () => {
       expect(res).toEqual(action);
     });
 
-    it.only('should generate clearUserProperties action',  () => {
+    it('should generate clearUserProperties action',  () => {
       const action = {
         type: 'CLEAR_USER_PROPERTIES'
       };
