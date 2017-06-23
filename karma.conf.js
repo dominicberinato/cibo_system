@@ -9,21 +9,21 @@ module.exports = function (config) {
                 flags: ['--no-sandbox']
             }
         },
-    singleRun: true,
     frameworks: ['mocha'],
     files: [
       'node_modules/sinon/pkg/sinon.js',
       'node_modules/jquery/dist/jquery.min.js',
-      'node_modules/foundation-sites/dist/foundation.min.js',
+      'node_modules/foundation-sites/dist/js/foundation.min.js',
       'src/tests/**/*.test.jsx'
     ],
+    singleRun: true,
     preprocessors: {
       'src/tests/**/*.test.jsx': ['webpack', 'sourcemap']
     },
     reporters: ['mocha'],
     client: {
       mocha: {
-        timeout: 30000
+        timeout: 300000
       }
     },
     webpack: webpackConfig,

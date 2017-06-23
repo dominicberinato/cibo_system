@@ -1,94 +1,96 @@
-import React,{Component} from 'react'
+import React, {Component} from 'react'
 import {connect} from 'react-redux'
-import firebase,{firebaseRef} from 'src/firebase/index'
+import Dialog from 'material-ui/Dialog';
+import FlatButton from 'material-ui/FlatButton';
+import {collectUserProperties} from 'userPropertiesActions';
+import AssocForm from 'AssocForm';
+import {assocUser} from 'authActions';
+import {RadioButton, RadioButtonGroup} from 'material-ui/RadioButton';
+import {addProperty} from 'propertyActions';
 import {hashHistory} from 'react-router'
-import {addProperty} from 'propertyActions'
+
 
 export class PermComponent extends Component {
   constructor(props) {
-    super(props)
+    super(props);
+    this.assocProduct = this.assocProduct.bind(this);
+    this.state = {
+      open: true,
+    };
+
+  }
+  assocProduct(values) {
+    var {dispatch} = this.props;
+    //dispatch assoc action
+    dispatch(assocUser(values));
   }
   componentDidMount() {
     var {auth, dispatch} = this.props;
-    if(auth != undefined)
-    {
-      //check that user doesnt exist
-      firebaseRef.child(`users/${auth.uid}`).once('value').then((userShot) => {
-        if(userShot.val() == null) {
-          var userFanOut = {}
-          userFanOut[`/users/${auth.uid}`] = auth;
-          return firebaseRef.update(userFanOut).then(() => {
-            hashHistory.push('/app');
-          })
-        }
-        else {
-          //check if user is admin and accord more perms
-          //select user
-          firebaseRef.child(`users/${auth.uid}`).once('value').then((userShot) => {
-            //check if user has a propCode
-            var user = userShot.val();
-            //console.log('this is the user', user);
-            if(user.propCode) {
-              //user has prop code download property and send to admin
-              //download a the property
-              firebaseRef.child(`properties/${user.propCode}`).once('value').then((propShot) => {
-                var property = propShot.val();
-                dispatch(addProperty({
-                  ...property,
-                  propKey: propShot.key
-                }));
-                hashHistory.push('/app');
-              })
-            } else {
-              //TODO collect user property list from firebase
-              var lastPropertyKey;
-              firebaseRef.child('property-users').orderByValue()
-              .once('value', (userprops) => {
-                userprops.forEach((propUsersList) => {
-                  propUsersList.forEach((propUser) => {
-                    var lastProperty = propUsersList.key;
-                  })
-                })
-              })
-
-              //dispatch prop action
-              //collect this property from db
-              firebaseRef.child(`properties/${propUsersList.key}`).once('value').then((propSnapShot) => {
-                dispatch(addProperty({
-                  ...propSnapShot.val(),
-                  propKey: propUsersList.key
-                }));
-                hashHistory.push('/app')
-              })
-            }
-          })
-
-        }
-      })
-    }
+    dispatch(collectUserProperties())
   }
   render() {
-    //get user object from state
-    var {auth, dispatch} = this.props;
-    var welcomeMessage = () => {
-      if(auth != undefined) {
-        var uname = auth.name;
-        return(
-          <div className="text-center permissions-text>">
-            <p>{`Hello ${uname}!`}</p>
-            <p>Please wait as we load your property</p>
-          </div>
-        )
+    var {userProps, dispatch} = this.props;
+    var radios = [];
+    var renderDialogContent = () => {
+      //no props check database
+      if(userProps.length ==  0)
+      {
+        return (<p> Checking Database for Properties</p>)
+      }
+      else
+      {
+        //one prop named none so we need to show form
+        if(userProps.length == 1 && userProps[0].name == 'none') {
+          return(
+            <AssocForm onSubmit={this.assocProduct}/>
+          )
+        }
+        else {
+          return (
+            <RadioButtonGroup
+              name="chosenProp"
+              onChange={(e, value) => {
+                const selected =  userProps.find((item) => {
+                  return item.key == value;
+                });
+                //dispatch
+                dispatch(addProperty(selected))
+                hashHistory.push('/app')
+              }}
+              >
+              {
+                userProps.map((p) => {
+                  return (
+                    <RadioButton
+                      label={p.propName}
+                      value={p.key}
+                      key={p.key}
+                      />
+                  );
+                })
+              }
+            </RadioButtonGroup>
+          )
+        }
       }
     }
     return(
       <div>
-      {welcomeMessage()}
-    </div>)
+        <Dialog
+          title="Loading Properties"
+          modal={false}
+          open={this.state.open}
+          onRequestClose={this.handleClose}
+        >
+          {renderDialogContent()}
+        </Dialog>
+      </div>
+    )
   }
 }
 export default connect((state) => {
   return {
-    auth: state.auth
+    auth: state.auth,
+    userProps: state.userProperties
   }
 })(PermComponent);
