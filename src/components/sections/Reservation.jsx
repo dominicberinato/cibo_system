@@ -9,8 +9,6 @@ export class Reservation extends  Component {
     super(props)
 
   };
-
-
   render() {
     const {resOwner, resTime, resDate, resTable, tables} = this.props;
     var renderRes = () => {
