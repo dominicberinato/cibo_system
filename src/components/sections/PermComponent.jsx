@@ -8,6 +8,9 @@ import {assocUser} from 'authActions';
 import {RadioButton, RadioButtonGroup} from 'material-ui/RadioButton';
 import {addProperty} from 'propertyActions';
 import {hashHistory} from 'react-router'
+import {fetchReservations} from 'reservationActions'
+import {collectTables} from 'src/actions/tableActions'
+
 
 
 export class PermComponent extends Component {
@@ -53,9 +56,11 @@ export class PermComponent extends Component {
                 const selected =  userProps.find((item) => {
                   return item.key == value;
                 });
-                //dispatch
-                dispatch(addProperty(selected))
-                hashHistory.push('/app')
+                //success let's collect the necessary data
+                dispatch(addProperty(selected));
+                dispatch(collectTables());
+                dispatch(fetchReservations());
+                hashHistory.push('/app');
               }}
               >
               {

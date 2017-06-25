@@ -1,16 +1,13 @@
 import React,{Component} from 'react'
 import {connect} from 'react-redux'
-import {collectTables} from 'src/actions/tableActions'
 import Chip from 'material-ui/Chip';
+
+
 
 
 export class Availability extends Component {
   constructor(props){
     super(props);
-  }
-  componentDidMount() {
-    //todo implement collectReservations
-    var {dispatch} = this.props;
   }
   render() {
     var {tables, reservations} = this.props;

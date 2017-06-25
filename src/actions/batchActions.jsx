@@ -11,7 +11,7 @@ export var startAddBatch =  (batch) => {
   return(dispatch, getState) => {
     //get a  key
     const batchKey = firebaseRef.child('batches').push().key;
-    const prop = getState().property.propKey;
+    const prop = getState().property.key;
     //lets add a fanOut Update object
     var batchFanOut = {};
     batchFanOut[`/batches/${batchKey}`] = batch;
@@ -58,7 +58,7 @@ export var deleteBatch = (id) => {
 
 export var startDeleteBatch = (id) =>  {
   return(dispatch, getState) => {
-    const prop = getState().property.propKey;
+    const prop = getState().property.key;
     var batchDeleteFanOut = {};
 
     //populate

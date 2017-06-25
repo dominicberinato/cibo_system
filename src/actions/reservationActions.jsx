@@ -7,10 +7,7 @@ export var startAddReservation  = (reservation) => {
     //table id
     var tableID = reservation.resTable;
     //prop id
-    var propID = getState().property.propKey;
-
-
-
+    var propID = getState().property.key;
     //lets make a reservations fan out
     var reservationFanOut = {};
     //get a ref key for out reservation
@@ -85,16 +82,23 @@ export var removeReservation = (id) => {
   }
 }
 
+export const clearReservations = () => {
+  return {
+    type: 'CLEAR_RESERVATIONS',
+  };
+};
+
 //fetch all reservations from db
 export var fetchReservations = () => {
   return(dispatch, getState) => {
-    const propKey = getState().property.propKey;
-    return firebaseRef.child(`/property-reservations/${propKey}`).once('value', (snapshot) => {
-      snapshot.forEach((childShot) => {
-        firebaseRef.child(`/reservations/${childShot.val()}`).once('value', (resShot) => {
-          dispatch(addReservation(resShot.val()));
-        });
-      })
+    const propKey = getState().property.key;
+    return firebaseRef.child(`/property-reservations/${propKey}`).on('child_added', (snapshot) => {
+      firebaseRef.child(`/reservations/${snapshot.val()}`).once('value', (resShot) => {
+        dispatch(addReservation({
+          resKey: snapshot.val(),
+          ...resShot.val()
+        }));
+      });
     })
   };
 };

@@ -20,7 +20,7 @@ export var startAddIngredient = (ingredient) => {
   return(dispatch, getState) => {
     //collect data
     const IngKey =  firebaseRef.child('ingredients').push().key;
-    const prop = getState().property.propKey;
+    const prop = getState().property.key;
     var IngFanOut = {};
     IngFanOut[`/ingredients/${IngKey}`] = ingredient;
     IngFanOut[`/property-ingredients/${prop}/${IngKey}`] = IngKey;
@@ -70,7 +70,7 @@ export var deleteIngredient = (id) => {
 
 export var startDeleteIngredient = (id) => {
   return(dispatch, getState) => {
-    const prop = getState().property.propKey
+    const prop = getState().property.key
     //lets create a fanout
     var IngDeleteFanOut =  {};
 

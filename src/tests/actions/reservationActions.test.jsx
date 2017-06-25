@@ -9,7 +9,7 @@ import shortid from 'shortid'
 //use this to mock a store
 var createMockStore = configureMockStore([thunk]);
 
-describe('reservationActions', () => {
+describe.only('reservationActions', () => {
   describe('sync', () => {
     it('should generate addReservation Action', () => {
       //mock data
@@ -18,7 +18,7 @@ describe('reservationActions', () => {
         name: 'Isaac',
         number: 6,
         tbKey: 7,
-        propKey: 9
+        key: 9
       };
       var addReservationAction = {
         type: 'ADD_RESERVATION',
@@ -60,6 +60,16 @@ describe('reservationActions', () => {
       var result = actions.updateReservation(resKey, updates);
       //assertion
       expect(result).toEqual(updateReservationAction);
+    });
+
+    it('should generate a clear Reservations action', () => {
+      var action = {
+        type: 'CLEAR_RESERVATIONS'
+      };
+
+      var result = actions.clearReservations();
+
+      expect(result).toEqual(action);
     })
 
   });

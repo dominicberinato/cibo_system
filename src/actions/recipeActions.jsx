@@ -25,7 +25,7 @@ export var updateRecipe = (id, updates) => {
 export var startAddRecipe = (recipe) => {
   return(dispatch, getState) => {
     //lets get property id
-    const prop = getState().property.propKey;
+    const prop = getState().property.key;
 
     const recipeKey = firebaseRef.child('recipes').push().key;
 
@@ -48,7 +48,7 @@ export var startAddRecipe = (recipe) => {
 
 export var startUpdateRecipe = (id, updates) => {
   return(dispatch, getState) => {
-    const prop = getState().property.propKey;
+    const prop = getState().property.key;
 
     //now make a fanout update
     var recipeFanOut = {};
@@ -66,7 +66,7 @@ export var startUpdateRecipe = (id, updates) => {
 
 export var startDeleteRecipe =  (id) => {
   return(dispatch, getState) => {
-    const prop = getState().property.propKey;
+    const prop = getState().property.key;
 
     var delRecipeFanOut =  {};
 

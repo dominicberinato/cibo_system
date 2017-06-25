@@ -24,7 +24,7 @@ export var updateMenu = (id, updates) => {
 export var startAddMenu = (menu) => {
   return(dispatch, getState) => {
     //get our property
-    const prop = getState().property.propKey;
+    const prop = getState().property.key;
 
     //lets make a ref
     const menuKey = firebaseRef.child('menus').push().key;
@@ -48,7 +48,7 @@ export var startAddMenu = (menu) => {
 export var startDeleteMenu = (id) => {
   return (dispatch, getState) => {
     //get our property
-    const prop = getState().property.propKey;
+    const prop = getState().property.key;
 
     var deleteMenuFanout   =  {};
     deleteMenuFanout[`/menus/${id}`] = null;
@@ -64,7 +64,7 @@ export var startDeleteMenu = (id) => {
 export var startUpdateMenu =  (id, updates) => {
   return(dispatch, getState) => {
     //get our property
-    const prop = getState().property.propKey;
+    const prop = getState().property.key;
 
     var updateMenuFanOut = {};
 

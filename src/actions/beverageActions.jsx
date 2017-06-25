@@ -11,7 +11,7 @@ export var addBeverage = (beverage) => {
 export var startAddBeverage = (beverage) => {
   return(dispatch, getState) => {
     const beverageKey  = firebaseRef.child('beverages').push().key;
-    const propKey = getState().property.propKey;
+    const propKey = getState().property.key;
 
     //lets make a fanout
     const beverageFanOut = {};
@@ -39,7 +39,7 @@ export var deleteBeverage = (id) => {
 export var startDeleteBeverage = (id) => {
   return(dispatch, getState) => {
     const beverageKey  = id;
-    const propKey = getState().property.propKey;
+    const propKey = getState().property.key;
 
     //lets make a fanout
     const beverageFanOut = {};
@@ -67,7 +67,7 @@ export var updateBeverage = (id, updates) => {
 export var startUpdateBeverage = (id, updates) => {
   return (dispatch, getState) => {
     const beverageKey  = id;
-    const propKey = getState().property.propKey;
+    const propKey = getState().property.key;
 
     //lets make a fanout
     const beverageFanOut = {};

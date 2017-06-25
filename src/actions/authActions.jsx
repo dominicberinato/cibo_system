@@ -52,7 +52,7 @@ export var assocUser = (values) => {
           //dispath addProperty and render
           dispatch(addProperty({
             ...property.val(),
-            propKey: propertyKey
+            key: propertyKey
           }));
           //clear the propcode form
           dispatch(reset('assoc'));

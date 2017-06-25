@@ -8,23 +8,10 @@ import Operations from 'Operations'
 import StockManagement from 'StockManagement'
 import HumanResources from 'HumanResources'
 import {connect} from 'react-redux'
-import {collectTables, clearTables} from 'tableActions'
 import {assocUser} from 'authActions'
-import {fetchReservations} from 'reservationActions'
 
 
 export class CiboTabs extends Component {
-  constructor(props){
-    super(props);
-  }
-  componentDidMount() {
-    var{property, dispatch} = this.props;
-    //check that we have a property key
-    if(property.key  != undefined) {
-      dispatch(collectTables());
-      dispatch(fetchReservations());
-    }
-  }
   render() {
     var {property, dispatch} = this.props;
     return(

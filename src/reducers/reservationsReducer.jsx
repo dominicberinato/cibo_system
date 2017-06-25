@@ -21,6 +21,8 @@ export var reservationsReducer = (state = [], action) => {
           return reservation
         }
       });
+    case 'CLEAR_RESERVATIONS':
+        return [];
     default:
       return state;
   }

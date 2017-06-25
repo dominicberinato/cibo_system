@@ -46,25 +46,19 @@ export var startUpdateTable = (id, updates) => {
 export var collectTables = () => {
   return(dispatch, getState) => {
     //get the id of the property so we can use a lookup table
-    var propKey = getState().property.key;
+    const propKey = getState().property.key;
 
-    var tablesRef = firebaseRef.child(`property-tables/${propKey}`);
-
-    return tablesRef.once('value').then((tablesShot) => {
-      var tables = Object.keys(tablesShot.val());
-      dispatch(clearTables());
-      tables.map((table) => {
-        //lets fetch the table from firebase
-        return firebaseRef.child(`tables/${table}`).once('value').then((thisTable) => {
-          dispatch(addTable({
-            tbKey: table,
-            ...thisTable.val()
-          }))
-        })
+    //pull from firebase
+    return firebaseRef.child(`/property-tables/${propKey}`).on('child_added', (snapshot) => {
+      firebaseRef.child(`/tables/${snapshot.val()}`).once('value', (tbShot) => {
+        dispatch(addTable({
+          tbKey: snapshot.val(),
+          ...tbShot.val()
+        }))
       })
-    })
-  }
-}
+    });
+  };
+};
 
 //export updateTableAction =
 export var updateTable = (id, updates) => {
