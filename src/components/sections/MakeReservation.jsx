@@ -10,8 +10,15 @@ export class MakeReservation extends Component {
   }
   submitReservation(values) {
     //get data from state.
-    var {property, auth, tables, dispatch} =  this.props;
-    dispatch(startAddReservation(values));
+    //format date and time
+    var {dispatch} = this.props;
+    const d = values.resDate.toDateString();
+    const t = values.resTime.toTimeString();
+    dispatch(startAddReservation({
+      ...values,
+      resTime: t,
+      resDate: d
+    }));
   }
   render() {
     var {tables} = this.props;

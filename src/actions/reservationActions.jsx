@@ -1,4 +1,5 @@
 import {firebaseRef} from 'src/firebase/index'
+import {reset} from 'redux-form';
 //export startAddReservation async action
 export var startAddReservation  = (reservation) => {
   return(dispatch, getState) => {
@@ -23,7 +24,8 @@ export var startAddReservation  = (reservation) => {
         ...reservation,
         resKey: reservationKey,
         resUser: userID
-      }))
+      }));
+      dispatch(reset('reservation'))
     });
   }
 }
