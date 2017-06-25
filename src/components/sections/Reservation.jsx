@@ -7,7 +7,6 @@ import {Card, CardActions, CardHeader, CardText} from 'material-ui/Card';
 export class Reservation extends  Component {
   constructor(props) {
     super(props)
-
   };
   render() {
     const {resOwner, resTime, resDate, resTable, tables} = this.props;
