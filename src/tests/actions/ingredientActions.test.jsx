@@ -101,35 +101,40 @@ describe('ingridientActions', () => {
 
 
   describe('Async',  () => {
-    //data needed
-    var uid;
-    var propertyRef = firebaseRef.child('properties');
-    var testPropertyKey;
-    var store;
-    var debug = {hello: "world"};
-    var mockImage = new Blob([JSON.stringify(debug, null, 2)], {type : 'application/json'});
-    var testProperty =  {
-      pname: 'folk coffee',
-      address: '3 Bree Street',
-      avatar: mockImage,
-      propKey: 58686816897
+    const sampleProp = {
+      name: 'Azure',
+      key: 123
     };
-
+    const ingredient = {
+      id: 123232,
+      category: 'dairy',
+      description: 'butter',
+      brand: 'Netherend',
+      size: '100kg',
+      cost: 'R32',
+      supplier: 121323,
+      offdate: '03/04/2018'
+    };
+    var uid;
+    let propRef;
     //run this code before each asnyc test (login && set up stuff)
     beforeEach((done) => {
-      store = createMockStore({property:testProperty})
-      //SIGN IN anonymously
-      firebase.auth().signInAnonymously().then((user) => {
+      const beforeFanout = {};
+      firebase.auth().signInAnonymously().then ((user) => {
         uid = user.uid;
-        testProperty.propCreator = uid
+        //get key
+        const pkey = sampleProp.key
+        //set up firebase
+        beforeFanout[`/users/${uid}`] =  uid;
+        beforeFanout[`/properties/${pkey}`] = sampleProp;
+        beforeFanout[`/ingredients/${ingredient.id}`] = ingredient;
+        beforeFanout[`/property-ingredients/${pkey}/${ingredient.id}`] = ingredient.id;
 
-        //remove any existing proprties
-        return firebaseRef.remove();
-      }).then(()=> {
-
-      })
-      .then(() => done())
-      .catch(done);
+        //add to firebase
+        return firebaseRef.update(beforeFanout)
+        .then(() => done())
+        .catch(done);
+      });
     });
 
     ///run this after each tests
@@ -154,6 +159,8 @@ describe('ingridientActions', () => {
       const updates = {
         offdate: '05/08/2018'
       };
+
+      const store = createMockStore({auth:{uid}, property:sampleProp})
 
       //trigger and assert
       const action = actions.startUpdateIngredient(ingredient.id, updates);
@@ -186,6 +193,9 @@ describe('ingridientActions', () => {
         offdate: '03/04/2018'
       };
 
+      const store = createMockStore({auth:{uid}, property:sampleProp})
+
+
       //mock an action
       const action = actions.startDeleteIngredient(ingredient.id);
 
@@ -200,6 +210,17 @@ describe('ingridientActions', () => {
         }));
         done();
       }, done())
+    });
+
+    it('should collect all ingredients for a restaurant', (done) => {
+      const store = createMockStore({auth:{uid}, property:sampleProp})
+      const action = actions.collectPropIngs();
+      store.dispatch(action).then(() => {
+        const mockActions = store.getActions();
+        expect(mockActions[0].type).toEqual('ADD_INGREDIENT');
+        expect(mockActions[0].ingridient).toEqual(ingridient);
+        done();
+      }, done());
     })
 
 
@@ -216,6 +237,9 @@ describe('ingridientActions', () => {
       };
 
       const action = actions.startAddIngredient(ingredient);
+
+      const store = createMockStore({auth:{uid}, property:sampleProp})
+
 
       store.dispatch(action).then(() => {
         //let collect actions

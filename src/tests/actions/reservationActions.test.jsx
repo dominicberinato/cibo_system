@@ -9,7 +9,7 @@ import shortid from 'shortid'
 //use this to mock a store
 var createMockStore = configureMockStore([thunk]);
 
-describe.only('reservationActions', () => {
+describe('reservationActions', () => {
   describe('sync', () => {
     it('should generate addReservation Action', () => {
       //mock data

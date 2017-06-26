@@ -19,7 +19,7 @@ export class StockFormsPane extends Component{
     dispatch(startAddBatch(values));
   }
   render() {
-    var {stockForm, dispatc}  = this.props;
+    var {stockForm}  = this.props;
     var whichForm =  () => {
       switch (stockForm) {
         case 'ingridients':

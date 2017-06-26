@@ -84,7 +84,7 @@ describe('userPropertiesActions', () => {
         return firebaseRef.update(beforeFanout)
         .then(() => done())
         .catch(done);
-      })
+      });
     });
 
     afterEach(done =>  {

@@ -11,8 +11,19 @@ export var addIngredient = (ingredient) => {
 
 //Collect the ingredients for this property from db
 //TODO Collect ingredients owned by this property and add them to state
-export const collectPropIngridients = () => {
-
+export var collectPropIngs = () => {
+  return(dispatch, getState) => {
+    const propKey = getState().property.key;
+    //pull from firebase
+    return firebaseRef.child(`/property-ingredients/${propKey}`).on('child_added', (snapshot) => {
+      firebaseRef.child(`/ingredients/${snapshot.val()}`).once('value', (ingShot) => {
+        dispatch(addIngredient({
+          ...ingShot.val(),
+          id: snapshot.val()
+        }))
+      })
+    })
+  }
 }
 
 //async add ingredient

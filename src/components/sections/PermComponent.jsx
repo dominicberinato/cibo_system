@@ -10,6 +10,7 @@ import {addProperty} from 'propertyActions';
 import {hashHistory} from 'react-router'
 import {fetchReservations} from 'reservationActions'
 import {collectTables} from 'src/actions/tableActions'
+import {collectPropIngs} from 'src/actions/ingridientActions'
 
 
 
@@ -60,6 +61,7 @@ export class PermComponent extends Component {
                 dispatch(addProperty(selected));
                 dispatch(collectTables());
                 dispatch(fetchReservations());
+                dispatch(collectPropIngs());
                 hashHistory.push('/app');
               }}
               >
