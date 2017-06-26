@@ -70,6 +70,15 @@ export class IngridientForm extends Component {
             format={(value, name) => value === '' ? null : value}
             validate={[required]}/>
         </div>
+        <div>
+          <label>Allergens</label>
+          <Field
+            name="ingredientAllergen"
+            type="text"
+            placeholder="Milk, Sugar,Gluten"
+            component={TextField}
+            />
+        </div>
         <div className="text-center">
           <input type="submit" value="Add Ingridient" className="button"/>
         </div>
@@ -80,7 +89,7 @@ export class IngridientForm extends Component {
 };
 
 IngridientForm = reduxForm({
-  form:'ingridient'
+  form:'ingredient'
 })(IngridientForm)
 
 export default IngridientForm;

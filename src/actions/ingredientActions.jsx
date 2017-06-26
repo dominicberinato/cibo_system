@@ -31,7 +31,7 @@ export var startAddIngredient = (ingredient) => {
         ...ingredient,
         id: IngKey
       }));
-      dispatch(reset('ingridient'));
+      dispatch(reset('ingredient'));
     })
   }
 }
@@ -76,7 +76,7 @@ export var startDeleteIngredient = (id) => {
 
     //populate fanout with we want deleted
     IngDeleteFanOut[`/ingredients/${id}`] = null;
-    IngDeleteFanOut[`/ingredients/${prop}/${id}`] =  null;
+    IngDeleteFanOut[`/property-ingredients/${prop}/${id}`] =  null;
 
     //update remote db
     return firebaseRef.update(IngDeleteFanOut).then(() => {
