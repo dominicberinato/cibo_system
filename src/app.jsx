@@ -26,7 +26,7 @@ injectTapEventPlugin();
 //lets make a store
 var store = require('src/store/configureStore').configure();
 //add actions to call login on auth listener!!
-import {login} from 'src/actions/authActions'
+import {login} from 'authActions'
 //do auth work
 import firebase from 'src/firebase/index'
 
