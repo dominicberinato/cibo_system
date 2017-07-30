@@ -1,5 +1,5 @@
 //add the firebase lib
-import firebase from 'firebase';
+var firebase = require('firebase')
 
 try {
   // Initialize Firebase
