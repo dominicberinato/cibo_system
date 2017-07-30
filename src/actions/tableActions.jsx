@@ -1,4 +1,4 @@
-import {firebaseRef} from 'src/firebase/index';
+import {firebaseRef} from 'firebase';
 import {reset} from 'redux-form';
 //export async action to delete table
 export var startDeleteTable = (tbKey) => {

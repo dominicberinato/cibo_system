@@ -1,4 +1,4 @@
-import {firebaseRef} from 'src/firebase/index'
+import {firebaseRef} from 'firebase'
 import {reset} from 'redux-form';
 //export startAddReservation async action
 export var startAddReservation  = (reservation) => {
