@@ -180,7 +180,8 @@ module.exports =  {
       './src/reducers',
       './src/actions',
       './src/reducers',
-      './src/utils'
+      './src/utils',
+      './src/firebase'
     ],
     alias: {
       src: path.resolve(__dirname, "src/"),
