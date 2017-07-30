@@ -9,7 +9,7 @@
   "main": "index.js",
   "scripts": {
     "dev": "NODE_ENV=development webpack-dev-server --hot",
-    "test": "NODE_ENV=test jest --watch",
+    "test": "NODE_ENV=test jest",
     "build": "webpack",
     "start": "node server.js",
     "postinstall": "NODE_ENV=production webpack"
