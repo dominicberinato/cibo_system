@@ -9,10 +9,22 @@
   "main": "index.js",
   "scripts": {
     "dev": "NODE_ENV=development webpack-dev-server --hot",
-    "test": "NODE_ENV=test jest",
+    "test": "NODE_ENV=test jest --watch",
     "build": "webpack",
     "start": "node server.js",
     "postinstall": "NODE_ENV=production webpack"
+  },
+  "jest": {
+    "automock": true,
+    "collectCoverageFrom": [
+      "**/src/**",
+      "!**/src/tests/**",
+      "!**/src/styles/**"
+    ],
+    "moduleNameMapper": {
+      "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/__mocks__/fileMock.js",
+      "\\.(css|less)$": "<rootDir>/__mocks__/styleMock.js"
+    }
   },
   "repository": {
     "type": "git",
@@ -42,7 +54,7 @@
     "express": "^4.14.0",
     "extract-text-webpack-plugin": "^2.1.0",
     "file-loader": "^0.9.0",
-    "firebase": "^3.6.8",
+    "firebase": "^4.2.0",
     "foundation-sites": "^6.3.1",
     "html-webpack-plugin": "^2.28.0",
     "jquery": "^1.12.4",
@@ -69,6 +81,7 @@
   },
   "devDependencies": {
     "babel-jest": "^20.0.3",
+    "babel-preset-env": "^1.6.0",
     "babel-preset-react-hmre": "^1.1.1",
     "deep-freeze-strict": "^1.1.1",
     "enzyme": "^2.7.1",
