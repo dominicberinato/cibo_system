@@ -7,7 +7,7 @@ import sinon from 'sinon'
 
 
 describe('<MakeReservation/>', () =>{
-  it('should exist', () => {
+  test('should exist', () => {
     expect(MakeReservation).toExist();
   })
 
