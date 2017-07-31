@@ -1,10 +1,8 @@
 import configureMockStore from 'redux-mock-store'
 import expect from 'expect'
 import thunk from 'redux-thunk'
-import firebase,{firebaseRef} from 'src/firebase/index'
 import * as actions from 'tableActions'
 import shortid from 'shortid'
-import {login} from 'authActions'
 
 
 //use this to mock a store
