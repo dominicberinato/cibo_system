@@ -9,6 +9,7 @@ export class CurrentBill extends Component {
     this.clearBill  = this.clearBill.bind(this);
   };
   addItem(e){
+    e.preventDefault();
     //lets get props from connect
     var {dispatch, currBill} = this.props;
 
