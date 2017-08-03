@@ -1,0 +1,155 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<IngridientForm/> <IngridientForm/> to render form correctly 1`] = `
+<div>
+  <p>
+    Add Ingredient
+  </p>
+  <form>
+    <div>
+      <label>
+        Category
+      </label>
+      <Field
+        component={[Function]}
+        name="ingredientCategory"
+        type="text"
+        validate={
+          Array [
+            [Function],
+          ]
+        }
+      />
+    </div>
+    <div>
+      <label>
+        Description
+      </label>
+      <Field
+        component={[Function]}
+        multiLine={true}
+        name="ingredientDescription"
+        rows={4}
+        type="text"
+        validate={
+          Array [
+            [Function],
+          ]
+        }
+      />
+    </div>
+    <div>
+      <label>
+        Brand
+      </label>
+      <Field
+        component={[Function]}
+        name="ingredientBrand"
+        type="text"
+        validate={
+          Array [
+            [Function],
+          ]
+        }
+      />
+    </div>
+    <div>
+      <label>
+        Pack Units
+      </label>
+      <Field
+        component={[Function]}
+        name="ingredientPUnits"
+        placeholder="kgs, g, lts, mls, spoons"
+        type="text"
+        validate={
+          Array [
+            [Function],
+          ]
+        }
+      />
+    </div>
+    <div>
+      <label>
+        Pack Size
+      </label>
+      <Field
+        component={[Function]}
+        name="ingredientPSize"
+        type="text"
+        validate={
+          Array [
+            [Function],
+          ]
+        }
+      />
+    </div>
+    <div>
+      <label>
+        Pack Cost
+      </label>
+      <Field
+        component={[Function]}
+        name="ingredientPackCost"
+        type="text"
+        validate={
+          Array [
+            [Function],
+          ]
+        }
+      />
+    </div>
+    <div>
+      <label>
+        Supplier
+      </label>
+      <Field
+        component={[Function]}
+        name="ingredientSupplier"
+        type="text"
+        validate={
+          Array [
+            [Function],
+          ]
+        }
+      />
+    </div>
+    <div>
+      <label>
+        Estimate Life Span
+      </label>
+      <Field
+        component={[Function]}
+        format={[Function]}
+        name="ingredientElife"
+        type="text"
+        validate={
+          Array [
+            [Function],
+          ]
+        }
+      />
+    </div>
+    <div>
+      <label>
+        Allergens
+      </label>
+      <Field
+        component={[Function]}
+        name="ingredientAllergen"
+        placeholder="Milk, Sugar,Gluten"
+        type="text"
+      />
+    </div>
+    <div
+      className="text-center"
+    >
+      <input
+        className="button"
+        type="submit"
+        value="Add Ingridient"
+      />
+    </div>
+  </form>
+</div>
+`;
