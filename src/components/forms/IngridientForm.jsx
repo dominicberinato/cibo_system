@@ -38,6 +38,7 @@ export const IngridientForm = (handleSubmit) =>(
         <label>Pack Units</label>
         <Field
           name="ingredientPUnits"
+          placeholder="kgs, g, lts, mls, spoons"
           type="text"
           component={TextField}
           validate={[required]}/>
