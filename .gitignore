@@ -3,4 +3,6 @@ config/development.env
 dist/index.html
 dist/*.js
 dist/*.map
+dist/*.*.gz
+dist/*.css
 npm-debug.log
