@@ -35,6 +35,14 @@ export const IngridientForm = (handleSubmit) =>(
           validate={[required]}/>
       </div>
       <div>
+        <label>Pack Units</label>
+        <Field
+          name="ingredientPUnits"
+          type="text"
+          component={TextField}
+          validate={[required]}/>
+      </div>
+      <div>
         <label>Pack Size</label>
         <Field
           name="ingredientPSize"
