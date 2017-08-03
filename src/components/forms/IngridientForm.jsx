@@ -4,7 +4,7 @@ import {required} from 'validation'
 import {TextField, DatePicker, SelectField} from 'redux-form-material-ui'
 
 
-export const IngridientForm = (handleSubmit) =>(
+export const IngridientForm = ({handleSubmit}) =>(
     <div>
       <p>Add Ingredient</p>
       <form ref="form" onSubmit={handleSubmit}>
