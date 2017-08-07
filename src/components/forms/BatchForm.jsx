@@ -7,10 +7,6 @@ import MenuItem from 'material-ui/MenuItem'
 import {SelectField} from 'redux-form-material-ui'
 
 
-const ings = [
-  {id: 1, name:'milk'},
-  {id: 2, name:'coffee'}
-]
 
 const renderIngredients = ({fields, ingredients}) => (
   <ul>
@@ -29,8 +25,8 @@ const renderIngredients = ({fields, ingredients}) => (
         </button>
         <h4>Ingredient #{index + 1}</h4>
           <Field name={`${ingredient}.name`} component={SelectField} validate={[required]} hintText="Pick An Ingredient">
-            {ingredients.map((table) =>{
-              return(<MenuItem key={table.id} value={table.name} primaryText={table.name}/>)
+            {ingredients.map((ing) =>{
+              return(<MenuItem key={ing.id} value={ing.id} primaryText={ing.ingredientDescription}/>)
             })}
           </Field>
         <Field
@@ -46,7 +42,7 @@ const renderIngredients = ({fields, ingredients}) => (
 
 export class BatchForm extends Component {
   render(){
-    var {handleSubmit} = this.props;
+    var {handleSubmit, ingredients} = this.props;
     return(
       <div>
         <div>
@@ -70,7 +66,7 @@ export class BatchForm extends Component {
             <Field name="batchSize" type="text" component={renderField} validate={[required]}/>
           </div>
           <div>
-            <FieldArray name="ingredients" ingredients={ings} component={renderIngredients}/>
+            <FieldArray name="ingredients" ingredients={ingredients} component={renderIngredients}/>
           </div>
           <div>
             <label>Calculated Batch Cost</label>
