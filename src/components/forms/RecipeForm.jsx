@@ -1,9 +1,12 @@
 import React,{Component} from 'react'
-import {Field, reduxForm} from 'redux-form'
+import {Field, reduxForm, FieldArray} from 'redux-form'
+import renderIngredients from 'renderIngredients'
+import renderBatches from 'renderBatches'
+import {connect} from 'react-redux'
 
 export class RecipeForm extends Component {
   render() {
-    var {handleSubmit} = this.props;
+    var {handleSubmit, ingredients, batches} = this.props;
     return(
       <div>
         <div>
@@ -26,6 +29,12 @@ export class RecipeForm extends Component {
           <Field component="input" name="recipeCalcPrice" type="text"/>
         </div>
         <div>
+          <FieldArray name="ingredients" ingredients={ingredients} component={renderIngredients}/>
+        </div>
+        <div>
+          <FieldArray name="batches" batches={batches} component={renderBatches}/>
+        </div>
+        <div>
           <label>Desired Cost Price</label>
           <Field component="input" name="recipeDesiredCost" type="text"/>
         </div>
@@ -44,5 +53,13 @@ export class RecipeForm extends Component {
 RecipeForm = reduxForm({
   form:'recipe'
 })(RecipeForm)
+
+RecipeForm = connect((state) => {
+  return{
+    ingredients: state.ingredients,
+    batches: state.batches
+  }
+})(RecipeForm)
+
 
 export default RecipeForm;
