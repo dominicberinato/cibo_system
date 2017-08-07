@@ -14,6 +14,7 @@ export var startAddBatch =  ({batchCategory,batchDescription,batchUnits,batchSiz
     const prop = getState().property.key;
     //lets add a fanOut Update object
     const batchFanOut = {};
+    
     batchFanOut[`/batches/${batchKey}`] = {batchCategory,batchDescription,batchUnits,batchSize};
     batchFanOut[`/property-batches/${prop}/${batchKey}`] = batchKey;
     ingredients.map((ing) => {
