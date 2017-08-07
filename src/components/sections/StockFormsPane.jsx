@@ -16,6 +16,7 @@ export class StockFormsPane extends Component{
   }
   handleBatch = (values) => {
     var {dispatch} = this.props;
+    //console.log(values)
     dispatch(startAddBatch(values));
   }
   render() {
