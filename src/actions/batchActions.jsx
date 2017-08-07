@@ -7,18 +7,35 @@ export var addBatch = (batch) => {
   };
 };
 
-export var startAddBatch =  ({batchCategory,batchDescription,batchUnits,batchSize, ingredients}) => {
+export var collectPropBatches = () => {
+  return(dispatch, getState) => {
+    const propKey = getState().property.key;
+    //pull from firebase
+    return firebaseRef.child(`/property-batches/${propKey}`).on('child_added', (snapshot) => {
+      firebaseRef.child(`/batches/${snapshot.val()}`).once('value', (bShot) => {
+        dispatch(addBatch({
+          ...bShot.val(),
+          id: snapshot.val()
+        }))
+      })
+    })
+  }
+}
+
+export var startAddBatch =  ({batchCategory,batchDescription,batchUnits,batchSize, ingredients=[], batches=[]}) => {
   return(dispatch, getState) => {
     //get a  key
     const batchKey = firebaseRef.child('batches').push().key;
     const prop = getState().property.key;
     //lets add a fanOut Update object
     const batchFanOut = {};
-    
     batchFanOut[`/batches/${batchKey}`] = {batchCategory,batchDescription,batchUnits,batchSize};
     batchFanOut[`/property-batches/${prop}/${batchKey}`] = batchKey;
     ingredients.map((ing) => {
       return batchFanOut[`/batch-ingredients/${batchKey}/${ing.name}`] = {id: ing.name, amount: ing.amount}
+    })
+    batches.map((bat) => {
+      return batchFanOut[`batch-batches/${batchKey}/${bat.name}`] = {id: bat.name, amount: bat.amount}
     })
 
     return firebaseRef.update(batchFanOut).then(() => {
