@@ -11,6 +11,7 @@ import {hashHistory} from 'react-router'
 import {fetchReservations} from 'reservationActions'
 import {collectTables} from 'tableActions'
 import {collectPropIngs} from 'ingredientActions'
+import {collectPropBatches} from 'batchActions'
 
 
 
@@ -62,6 +63,7 @@ export class PermComponent extends Component {
                 dispatch(collectTables());
                 dispatch(fetchReservations());
                 dispatch(collectPropIngs());
+                dispatch(collectPropBatches())
                 hashHistory.push('/app');
               }}
               >
