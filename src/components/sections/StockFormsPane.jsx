@@ -4,6 +4,7 @@ import IngridientForm from 'IngridientForm'
 import BatchForm from 'BatchForm'
 import RecipeForm from 'RecipeForm'
 import MenuForm from 'MenuForm'
+import BeverageForm from 'BeverageForm'
 import {startAddIngredient} from 'ingredientActions'
 import {startAddBatch} from 'batchActions'
 import {startAddRecipe} from 'recipeActions'
@@ -30,6 +31,10 @@ export class StockFormsPane extends Component{
     const {dispatch} = this.props
     dispatch(startAddMenu(menu))
   }
+  handleBeverage = (bev) => {
+    const {dispatch} = this.props
+    console.log(bev)
+  }
   render() {
     const {stockForm}  = this.props;
     var whichForm =  () => {
@@ -48,7 +53,7 @@ export class StockFormsPane extends Component{
           );
         case 'beverages':
           return (
-            <p>Beverages Form</p>
+            <BeverageForm onSubmit={this.handleBeverage}/>
           );
         case 'menus':
           return (
@@ -56,7 +61,7 @@ export class StockFormsPane extends Component{
           );
         case 'archive':
           return (
-            <p>archive form</p>
+            <p>Beverages Form</p>
           );
         case 'cocktails':
           return (
