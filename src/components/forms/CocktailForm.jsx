@@ -4,7 +4,8 @@ import {TextField, DatePicker, SelectField} from 'redux-form-material-ui'
 import {required} from 'validation'
 import renderBeverage from 'renderBeverage'
 import renderIngredients from 'renderIngredients'
-export class BeverageForm extends Component {
+import {connect} from 'react-redux'
+export class CocktailForm extends Component {
   render(){
     var {handleSubmit, beverages, ingredients} = this.props;
     return(
