@@ -6,6 +6,21 @@ export var addRecipe = (recipe) => {
   };
 };
 
+export var collectPropRecipes = () => {
+  return(dispatch, getState) => {
+    const propKey = getState().property.key;
+    //pull from firebase
+    return firebaseRef.child(`/property-recipes/${propKey}`).on('child_added', (snapshot) => {
+      firebaseRef.child(`/recipes/${snapshot.val()}`).once('value', (rShot) => {
+        dispatch(addRecipe({
+          ...rShot.val(),
+          id: snapshot.val()
+        }))
+      })
+    })
+  }
+}
+
 export var deleteRecipe = (id) => {
   return {
     type: 'DELETE_RECIPE',
@@ -22,7 +37,8 @@ export var updateRecipe = (id, updates) => {
 };
 
 
-export var startAddRecipe = (recipe) => {
+export var startAddRecipe = ({recipeCategory, recipeDesiredCost, recipeSuggestedPrice,
+   recipeCalcPrice, ingredients=[], batches=[], recipePortions, recipeDescription }) => {
   return(dispatch, getState) => {
     //lets get property id
     const prop = getState().property.key;
@@ -32,15 +48,28 @@ export var startAddRecipe = (recipe) => {
     //now make a fanout update
     var recipeFanOut = {};
 
-    recipeFanOut[`/recipes/${recipeKey}`] = recipe;
+    recipeFanOut[`/recipes/${recipeKey}`] = {recipeCategory, recipeDesiredCost, recipeSuggestedPrice,
+       recipeCalcPrice, recipePortions, recipeDescription};
     recipeFanOut[`/property-recipes/${prop}/${recipeKey}`] = recipe;
+    ingredients.map((ing) => {
+      return recipeFanOut[`/recipe-ingredients/${recipeKey}/${ing.name}`] = {id: ing.name, amount: ing.amount}
+    })
+    batches.map((bat) => {
+      return recipeFanOut[`recipe-batches/${recipeKey}/${bat.name}`] = {id: bat.name, amount: bat.amount}
+    })
+
 
     //update
     return firebaseRef.update(recipeFanOut).then(() => {
       //dispatch local action
       dispatch(addRecipe({
         id: recipeKey,
-        ...recipe
+        recipeCategory,
+        recipeDesiredCost,
+        recipeSuggestedPrice,
+        recipeCalcPrice,
+        recipePortions,
+        recipeDescription
       }));
     });
   }
