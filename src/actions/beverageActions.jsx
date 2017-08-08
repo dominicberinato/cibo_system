@@ -7,8 +7,23 @@ export var addBeverage = (beverage) => {
   };
 };
 
+export var collectPropBeverages = () => {
+  return(dispatch, getState) => {
+    const propKey = getState().property.key;
+    //pull from firebase
+    return firebaseRef.child(`/property-beverages/${propKey}`).on('child_added', (snapshot) => {
+      firebaseRef.child(`/beverages/${snapshot.val()}`).once('value', (bShot) => {
+        dispatch(addBeverage({
+          ...bShot.val(),
+          id: snapshot.val()
+        }))
+      })
+    })
+  }
+}
 
-export var startAddBeverage = (beverage) => {
+
+export var startAddBeverage = ({}) => {
   return(dispatch, getState) => {
     const beverageKey  = firebaseRef.child('beverages').push().key;
     const propKey = getState().property.key;
