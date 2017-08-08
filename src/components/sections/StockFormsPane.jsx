@@ -7,6 +7,7 @@ import MenuForm from 'MenuForm'
 import {startAddIngredient} from 'ingredientActions'
 import {startAddBatch} from 'batchActions'
 import {startAddRecipe} from 'recipeActions'
+import {startAddMenu} from 'menuActions'
 export class StockFormsPane extends Component{
   constructor(props) {
     super(props)
@@ -24,6 +25,10 @@ export class StockFormsPane extends Component{
     const {dispatch} = this.props;
     //console.log(values)
     dispatch(startAddRecipe(recipe))
+  }
+  handleMenu = (menu) => {
+    const {dispatch} = this.props
+    dispatch(startAddMenu(menu))
   }
   render() {
     const {stockForm}  = this.props;
@@ -47,7 +52,7 @@ export class StockFormsPane extends Component{
           );
         case 'menus':
           return (
-            <MenuForm/>
+            <MenuForm onSubmit={this.handleMenu}/>
           );
         case 'archive':
           return (
