@@ -1,6 +1,7 @@
 import React,{Component, PropTypes} from 'react'
 import {connect} from 'react-redux'
 import {currBill} from 'billActions'
+import {Card, CardActions, CardHeader, CardText} from 'material-ui/Card';
 
 export class ActiveTableItem extends Component {
   constructor(props){
@@ -23,11 +24,11 @@ export class ActiveTableItem extends Component {
       return tableItem.tbKey == tbKey
     })
     return(
-      <div className="bill-item" onClick={this.setBill}>
-        <div className="columns large-4 small-4 medium-4"><p ref="bill-table" className="bill-table">Table: {tb.tbname}</p></div>
-        <div className="columns large-4 small-4 medium-4"><p ref="bill-owner" className="bill-owner">Owner: {resOwner}</p></div>
-        <div className="columns large-4 small-4 medium-4"><p ref="bill-tot" className="bill-tot">Amount: {bill}</p></div>
-      </div>
+      <Card className="res-item" onClick={this.setBill}>
+        <CardHeader title={`Table: ${tb.tbname}`}/>
+        <CardText>{`Owner: ${resOwner}`}</CardText>
+        <CardText>{`Amount: ${bill}`}</CardText>
+      </Card>
     )
   }
 
