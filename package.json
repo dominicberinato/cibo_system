@@ -8,7 +8,7 @@
   "description": "This is the property management system for cibo by Launch Design",
   "main": "index.js",
   "scripts": {
-    "dev": "NODE_ENV=development webpack-dev-server --hot",
+    "dev": "NODE_ENV=development webpack-dev-server",
     "test": "NODE_ENV=test jest --verbose",
     "build": "webpack",
     "start": "node server.js",
