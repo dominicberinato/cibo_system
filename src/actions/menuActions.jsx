@@ -31,6 +31,9 @@ export var collectPropMenus = () => {
           ...mShot.val(),
           id: snapshot.val()
         }))
+        firebaseRef.child(`/menu-items/${snapshot.val()}`).on('value', (mItemShot) => {
+          dispatch(updateMenu(snapshot.val(), {menuItems: mItemShot.val()}))
+        })
       })
     })
   }
@@ -63,7 +66,8 @@ export var startAddMenu = ({menuName, menuCategory, menuItems=[],
         menuCategory,
         menuSuggestedPrice,
         menuSellingPrice,
-        menuCostPrice
+        menuCostPrice,
+        menuItems
       }));
     });
   };
