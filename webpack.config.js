@@ -84,6 +84,8 @@ var plugins = PRODUCTION
             template:'index-template.html'
           }),
           new webpack.NamedModulesPlugin(),
+          new webpack.HotModuleReplacementPlugin()
+
         ];
 
 //add universal plugins
