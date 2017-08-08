@@ -21,7 +21,24 @@ export var updateMenu = (id, updates) => {
   };
 };
 
-export var startAddMenu = (menu) => {
+export var collectPropMenus = () => {
+  return(dispatch, getState) => {
+    const propKey = getState().property.key;
+    //pull from firebase
+    return firebaseRef.child(`/property-menus/${propKey}`).on('child_added', (snapshot) => {
+      firebaseRef.child(`/menus/${snapshot.val()}`).once('value', (mShot) => {
+        dispatch(addMenu({
+          ...mShot.val(),
+          id: snapshot.val()
+        }))
+      })
+    })
+  }
+}
+
+
+export var startAddMenu = ({menuName, menuCategory, menuItems=[],
+  menuSuggestedPrice, menuSellingPrice, menuCostPrice}) => {
   return(dispatch, getState) => {
     //get our property
     const prop = getState().property.key;
@@ -31,15 +48,22 @@ export var startAddMenu = (menu) => {
 
     var addMenuFanOut = {};
 
-    addMenuFanOut[`/menus/${menuKey}`] = menu;
-    addMenuFanOut[`/property-menus/${prop}/${menuKey}`] = menu;
+    addMenuFanOut[`/menus/${menuKey}`] = {menuName, menuCategory, menuSuggestedPrice, menuSellingPrice, menuCostPrice};
+    addMenuFanOut[`/property-menus/${prop}/${menuKey}`] = menuKey;
+    menuItems.map((item) => {
+      return addMenuFanOut[`/menu-items/${menuKey}/${item.name}`] = item.name
+    })
 
     //update out fanout
     return firebaseRef.update(addMenuFanOut).then(() => {
       //dispatch local action
       dispatch(addMenu({
         id:menuKey,
-        ...menu
+        menuName,
+        menuCategory,
+        menuSuggestedPrice,
+        menuSellingPrice,
+        menuCostPrice
       }));
     });
   };
