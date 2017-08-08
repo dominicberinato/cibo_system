@@ -13,6 +13,7 @@ import {collectTables} from 'tableActions'
 import {collectPropIngs} from 'ingredientActions'
 import {collectPropBatches} from 'batchActions'
 import {collectPropRecipes} from 'recipeActions'
+import {collectPropMenus} from 'menuActions'
 
 
 export class PermComponent extends Component {
@@ -65,6 +66,7 @@ export class PermComponent extends Component {
                 dispatch(collectPropIngs());
                 dispatch(collectPropBatches())
                 dispatch(collectPropRecipes())
+                dispatch(collectPropMenus())
                 hashHistory.push('/app');
               }}
               >
