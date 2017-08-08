@@ -1,4 +1,4 @@
-import firebase, {firebaseRef, googleAuthProvider, storageRef} from 'src/firebase/index';
+import firebase, {firebaseRef, googleAuthProvider, storageRef} from '../firebase';
 import {reset} from 'redux-form';
 import { addProperty } from 'propertyActions';
 import {collectUserProperties} from 'userPropertiesActions';

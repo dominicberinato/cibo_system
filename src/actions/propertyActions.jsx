@@ -1,5 +1,5 @@
 import shortid from 'shortid'
-import firebase, {firebaseRef, storageRef} from 'src/firebase/index'
+import firebase, {firebaseRef, storageRef} from '../firebase'
 
 //export sync addProperty
 export var addProperty = (property) => {

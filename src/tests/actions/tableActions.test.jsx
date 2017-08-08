@@ -133,27 +133,6 @@ describe('tableActions', () => {
       firebaseRef.remove().then(() => done());
     });
 
-    it('should update table and dispatch updateTable', (done) => {
-      //mock a store
-      const store =  createMockStore({auth:{uid}});
-
-      //mock data updatew
-      var updates: {
-        tbname: 6
-      };
-
-      //mock our action
-      const action = actions.startUpdateTable(testTableKey, updates);
-      //dispatch mockaction
-      store.dispatch(action).then(() => {
-        //get actions
-        const mockActions = store.getActions();
-        //asert
-        expect(mockActions[0].type).toEqual('UPDATE_TABLE');
-        done();
-      }, done());
-
-    });
 
     it('should delete table and dispatch deleteTable', (done) => {
       //mock a store with our table

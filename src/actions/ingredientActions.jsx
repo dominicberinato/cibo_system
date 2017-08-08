@@ -1,4 +1,4 @@
-import firebase, {firebaseRef} from 'src/firebase/index'
+import firebase, {firebaseRef} from '../firebase'
 import {reset} from 'redux-form'
 //local add ingredient
 export var addIngredient = (ingredient) => {

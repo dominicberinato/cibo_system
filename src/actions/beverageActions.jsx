@@ -1,4 +1,4 @@
-import {firebaseRef} from 'src/firebase'
+import {firebaseRef} from '../firebase'
 
 export var addBeverage = (beverage) => {
   return {

@@ -1,4 +1,4 @@
-import {firebaseRef} from 'src/firebase/index'
+import {firebaseRef} from '../firebase'
 
 //action to add bill
 export var addBill = (bill) => {
