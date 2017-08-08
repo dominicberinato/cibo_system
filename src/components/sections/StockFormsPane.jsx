@@ -33,7 +33,7 @@ export class StockFormsPane extends Component{
   }
   handleBeverage = (bev) => {
     const {dispatch} = this.props
-    console.log(bev)
+    dispatch(startAddBeverage(bev))
   }
   render() {
     const {stockForm}  = this.props;
