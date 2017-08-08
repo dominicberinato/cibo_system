@@ -1,15 +1,17 @@
 import React, {Component} from 'react'
-import {Field, reduxForm} from 'redux-form'
+import {Field, reduxForm, FieldArray} from 'redux-form'
+import {connect} from 'react-redux'
+import renderRecipes from 'renderRecipes'
 
 export class MenuForm extends Component {
   render() {
-    var {handleSubmit} = this.props
+    var {handleSubmit,items} = this.props
     return(
       <div>
         <div>
           <p>Add Menu</p>
         </div>
-        <form>
+        <form onSubmit={handleSubmit}>
           <div>
             <label>Menu Name</label>
             <Field component="input" type="text" name="menuName"/>
@@ -19,8 +21,7 @@ export class MenuForm extends Component {
             <Field component="input" type="text" name="menuCategory"/>
           </div>
           <div>
-            <label>Menu Item</label>
-            <Field component="input" type="text" name="menuName"/>
+            <FieldArray name="menuItems" recipes={items} component={renderRecipes}/>
           </div>
           <div>
             <label>Suggested Selling Price</label>
@@ -35,7 +36,7 @@ export class MenuForm extends Component {
             <Field component="input" type="text" name="menuCostPrice"/>
           </div>
           <div className="text-center">
-            <input type="submit" className="button" value="Add Menu"/>
+            <input type="submit" className="button" value="Save Menu"/>
           </div>
         </form>
       </div>
@@ -45,6 +46,11 @@ export class MenuForm extends Component {
 
 MenuForm = reduxForm({
   form:'menu'
+})(MenuForm)
+MenuForm = connect((state) => {
+  return{
+    items: state.recipes
+  }
 })(MenuForm)
 
 export default MenuForm;
