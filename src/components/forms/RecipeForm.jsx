@@ -40,7 +40,7 @@ export class RecipeForm extends Component {
         </div>
         <div>
           <label>Suggested Selling Price</label>
-          <Field component="input" name="recipeCategory" type="text"/>
+          <Field component="input" name="recipeSuggestedPrice" type="text"/>
         </div>
         <div className="text-center">
           <input type="submit" value="Add Recipe" className="button"/>
