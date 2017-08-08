@@ -12,6 +12,7 @@ export class RecipeForm extends Component {
         <div>
           <p>Add Recipe</p>
         </div>
+        <form onSubmit={handleSubmit}>
         <div>
           <label>Category</label>
           <Field component="input" name="recipeCategory" type="text"/>
@@ -45,6 +46,7 @@ export class RecipeForm extends Component {
         <div className="text-center">
           <input type="submit" value="Add Recipe" className="button"/>
         </div>
+        </form>
       </div>
     )
   }
