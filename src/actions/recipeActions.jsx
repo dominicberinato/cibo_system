@@ -50,7 +50,7 @@ export var startAddRecipe = ({recipeCategory, recipeDesiredCost, recipeSuggested
 
     recipeFanOut[`/recipes/${recipeKey}`] = {recipeCategory, recipeDesiredCost, recipeSuggestedPrice,
        recipeCalcPrice, recipePortions, recipeDescription};
-    recipeFanOut[`/property-recipes/${prop}/${recipeKey}`] = recipe;
+    recipeFanOut[`/property-recipes/${prop}/${recipeKey}`] = recipeKey;
     ingredients.map((ing) => {
       return recipeFanOut[`/recipe-ingredients/${recipeKey}/${ing.name}`] = {id: ing.name, amount: ing.amount}
     })
