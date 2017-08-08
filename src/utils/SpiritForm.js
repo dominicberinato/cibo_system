@@ -7,7 +7,7 @@ import {SelectField} from 'redux-form-material-ui'
 const SpiritForm = ({fields}) => (
   <ul>
     <li>
-      <button type="button" className="button" onClick={() => fields.push({})}>Add Spirit</button>
+      <button type="button" className="button" onClick={() => fields.push({})}>Add Spirit Details</button>
     </li>
     {
       fields.map((spirit, index) =>
