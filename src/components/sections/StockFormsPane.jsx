@@ -11,19 +11,19 @@ export class StockFormsPane extends Component{
   constructor(props) {
     super(props)
   }
-  handleIngridient = (values) => {
+  handleIngridient = (ing) => {
     const {dispatch} = this.props;
-    dispatch(startAddIngredient(values));
+    dispatch(startAddIngredient(ing));
   }
-  handleBatch = (values) => {
+  handleBatch = (batch) => {
     const {dispatch} = this.props;
     //console.log(values)
-    dispatch(startAddBatch(values));
+    dispatch(startAddBatch(batch));
   }
-  handleRecipe = (values) => {
+  handleRecipe = (recipe) => {
     const {dispatch} = this.props;
     //console.log(values)
-    dispatch(startAddRecipe)
+    dispatch(startAddRecipe(recipe))
   }
   render() {
     const {stockForm}  = this.props;
