@@ -32,8 +32,10 @@ export var startAddBeverage = ({beverageMajor, beverageDescription, beverageUnit
     //lets make a fanout
     const beverageFanOut = {};
     beverageFanOut[`/beverages/${beverageKey}`] =  {beverageMajor, beverageDescription, beverageUnit, beverageUnitSize, beveragePurchaseUnit,
-       beveragePurchseUnitSize, beverageCPPU}
+       beveragePurchseUnitSize, beverageCPPU, beverageWines, beverageSpirits}
     beverageFanOut[`/property-beverages/${beverageKey}`] = beverageKey;
+
+
 
     return firebaseRef.update(beverageFanOut).then(() => {
       //dispatch local action
