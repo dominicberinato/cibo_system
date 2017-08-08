@@ -12,7 +12,7 @@ import {fetchReservations} from 'reservationActions'
 import {collectTables} from 'tableActions'
 import {collectPropIngs} from 'ingredientActions'
 import {collectPropBatches} from 'batchActions'
-
+import {collectPropRecipes} from 'recipeActions'
 
 
 export class PermComponent extends Component {
@@ -64,6 +64,7 @@ export class PermComponent extends Component {
                 dispatch(fetchReservations());
                 dispatch(collectPropIngs());
                 dispatch(collectPropBatches())
+                dispatch(collectPropRecipes())
                 hashHistory.push('/app');
               }}
               >
