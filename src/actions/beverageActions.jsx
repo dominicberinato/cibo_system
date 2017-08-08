@@ -23,22 +23,29 @@ export var collectPropBeverages = () => {
 }
 
 
-export var startAddBeverage = ({}) => {
+export var startAddBeverage = ({beverageMajor, beverageDescription, beverageUnit, beverageUnitSize, beveragePurchaseUnit,
+   beveragePurchseUnitSize, beverageCPPU,beverageSpirits=[], beverageWines=[]}) => {
   return(dispatch, getState) => {
     const beverageKey  = firebaseRef.child('beverages').push().key;
     const propKey = getState().property.key;
 
     //lets make a fanout
     const beverageFanOut = {};
-
-    beverageFanOut[`/beverages/${beverageKey}`] =  beverage;
-    beverageFanOut[`/property-beverages/${beverageKey}`] = beverage;
+    beverageFanOut[`/beverages/${beverageKey}`] =  {beverageMajor, beverageDescription, beverageUnit, beverageUnitSize, beveragePurchaseUnit,
+       beveragePurchseUnitSize, beverageCPPU}
+    beverageFanOut[`/property-beverages/${beverageKey}`] = beverageKey;
 
     return firebaseRef.update(beverageFanOut).then(() => {
       //dispatch local action
       dispatch(addBeverage({
         id: beverageKey,
-        ...beverage
+        beverageMajor,
+        beverageDescription,
+        beverageUnit,
+        beverageUnitSize,
+        beveragePurchaseUnit,
+        beveragePurchseUnitSize,
+        beverageCPPU
       }));
     });
   };
