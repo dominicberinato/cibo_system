@@ -9,6 +9,8 @@ import {startAddIngredient} from 'ingredientActions'
 import {startAddBatch} from 'batchActions'
 import {startAddRecipe} from 'recipeActions'
 import {startAddMenu} from 'menuActions'
+import {startAddBeverage} from 'beverageActions'
+
 export class StockFormsPane extends Component{
   constructor(props) {
     super(props)
