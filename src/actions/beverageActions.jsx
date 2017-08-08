@@ -33,7 +33,7 @@ export var startAddBeverage = ({beverageMajor, beverageDescription, beverageUnit
     const beverageFanOut = {};
     beverageFanOut[`/beverages/${beverageKey}`] =  {beverageMajor, beverageDescription, beverageUnit, beverageUnitSize, beveragePurchaseUnit,
        beveragePurchseUnitSize, beverageCPPU, beverageWines, beverageSpirits}
-    beverageFanOut[`/property-beverages/${beverageKey}`] = beverageKey;
+    beverageFanOut[`/property-beverages/${propKey}/${beverageKey}`] = beverageKey;
 
 
 
