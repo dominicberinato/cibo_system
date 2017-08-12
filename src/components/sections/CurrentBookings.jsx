@@ -10,7 +10,7 @@ export class CurrentBookings extends Component {
   }
 
   render(){
-    var {reservations} = this.props;
+    var { reservations, swaptabs } = this.props;
 
     var renderReservations = () => {
       if(reservations.length != 0) {
@@ -18,7 +18,7 @@ export class CurrentBookings extends Component {
           return new Date(a.resDate).getDate() - new Date(b.resDate).getDate();
         });
         return sortedRes.map((res) => {
-          return(<Reservation key={res.resKey} {...res} />);
+          return(<Reservation swaptabs={swaptabs} key={res.resKey} {...res} />);
         })
       } else {
         return(<Chip className="text-center" ref='eResMsg'>No Reservations at the moment</Chip>)
