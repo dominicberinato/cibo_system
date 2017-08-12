@@ -1,12 +1,12 @@
 //load module
-var express = require('express');
-var path = require('path');
+const express = require('express');
+const path = require('path');
 var compression = require('compression');
 
 //serverside rendering
 
 //create our app
-var app = express();
+const app = express()
 const PORT = process.env.PORT || 3000;
 
 //HTTPS TO HTTP
