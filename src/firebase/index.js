@@ -12,7 +12,7 @@ try {
     };
     firebase.initializeApp(config);
 } catch (e) {
-
+  console.log(e)
 }
 
 //add a provider for for google sign in
