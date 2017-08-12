@@ -8,9 +8,6 @@ export class ActiveTableItem extends Component {
     super(props)
     this.setBill = this.setBill.bind(this)
   }
-  componentDidMount(){
-
-  }
   setBill(Event) {
     Event.preventDefault();
     var {id, dispatch} = this.props;
@@ -19,15 +16,23 @@ export class ActiveTableItem extends Component {
   }
   render() {
     // TODO TEST that active table shows correctly
-    var {tbKey, resOwner, bill, tables} = this.props
+    var {tbKey, resOwner, items, tables} = this.props
     const tb = tables.find((tableItem) => {
       return tableItem.tbKey == tbKey
     })
+    
+    const billCosts = items.map((item) => {
+      return item.price;
+    })
+
+    const totalBillCost = billCosts.reduce((prev,curr) => {
+      return prev + curr;
+    }, 0)
     return(
       <Card className="res-item" onClick={this.setBill}>
         <CardHeader title={`Table: ${tb.tbname}`}/>
         <CardText>{`Owner: ${resOwner}`}</CardText>
-        <CardText>{`Amount: ${bill}`}</CardText>
+        <CardText>{`Amount: ${totalBillCost}`}</CardText>
       </Card>
     )
   }
@@ -37,7 +42,7 @@ export class ActiveTableItem extends Component {
 //define props for this compon
 ActiveTableItem.propTypes = {
   resOwner: PropTypes.string,
-  bill: PropTypes.number,
+  items: PropTypes.array,
   tbKey: PropTypes.string,
   tables: PropTypes.array
 }
@@ -49,7 +54,7 @@ ActiveTableItem.propTypes = {
 */
 ActiveTableItem.defaultProps = {
   resOwner: 'Stranger',
-  bill: 0,
+  items: [],
   tbKey: '',
   tables: []
 }
