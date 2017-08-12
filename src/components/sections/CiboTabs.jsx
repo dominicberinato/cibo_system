@@ -30,7 +30,7 @@ export class CiboTabs extends Component {
       <div>
         <Tabs 
 	  value={this.state.value}
-	  onChange={this.handleChange}
+	  onChange={this.handleTabChange}
 	>
           <Tab value="reservations" label="Reservations">
             <Reservations swaptabs={this.handleTabChange}/>

@@ -16,10 +16,14 @@ export class ActiveTableItem extends Component {
   }
   render() {
     // TODO TEST that active table shows correctly
-    var {tbKey, resOwner, items, tables} = this.props
+    const { reservations, tbKey, resOwner, items, tables} = this.props
     const tb = tables.find((tableItem) => {
       return tableItem.tbKey == tbKey
     })
+
+	const tableRes = reservations.find((resItem) => {
+		return resItem.resTable	== tbKey;
+	})
     
     const billCosts = items.map((item) => {
       return item.price;
@@ -31,7 +35,7 @@ export class ActiveTableItem extends Component {
     return(
       <Card className="res-item" onClick={this.setBill}>
         <CardHeader title={`Table: ${tb.tbname}`}/>
-        <CardText>{`Owner: ${resOwner}`}</CardText>
+        <CardText>{`Owner: ${tableRes ? tableRes.resOwner : resOwner}`}</CardText>
         <CardText>{`Amount: ${totalBillCost}`}</CardText>
       </Card>
     )
@@ -63,6 +67,7 @@ ActiveTableItem.defaultProps = {
 
 export default connect((state) => {
   return {
-    tables: state.tables
+    tables: state.tables,
+	reservations: state.reservations
   }
 })(ActiveTableItem);
