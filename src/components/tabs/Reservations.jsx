@@ -11,6 +11,7 @@ export class Reservations extends Component {
   }
 
   render() {
+    const { swaptabs } = this.props;
     return(
       <div className="row">
         <div className="columns small-12 large-6 medium-6">
@@ -21,7 +22,7 @@ export class Reservations extends Component {
             <Availability/>
           </div>
           <div className="row">
-            <CurrentBookings/>
+            <CurrentBookings swaptabs={swaptabs}/>
           </div>
         </div>
       </div>
