@@ -12,30 +12,45 @@ import {assocUser} from 'authActions'
 
 
 export class CiboTabs extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      value: 'reservations'
+    };
+
+    this.handleTabChange = this.handleTabChange.bind(this)
+  }
+
+  handleTabChange(value) {
+    this.setState({ value })
+  }
   render() {
     var {property, dispatch} = this.props;
     return(
       <div>
-        <Tabs>
-          <Tab label="Reservations">
-            <Reservations/>
+        <Tabs 
+	  value={this.state.value}
+	  onChange={this.handleChange}
+	>
+          <Tab value="reservations" label="Reservations">
+            <Reservations swaptabs={this.handleTabChange}/>
           </Tab>
-          <Tab label="Billing">
+          <Tab value="billing" label="Billing">
             <Billing/>
           </Tab>
-          <Tab label="Operations">
+          <Tab value="operations" label="Operations">
             <Operations/>
           </Tab>
-          <Tab label="Stock">
+          <Tab value="stock" label="Stock">
             <StockManagement/>
           </Tab>
-          <Tab label="Finance">
+          <Tab value="finance" label="Finance">
             <Finance/>
           </Tab>
-          <Tab label="HR">
+          <Tab value="hr" label="HR">
             <HumanResources/>
           </Tab>
-          <Tab label="Marketing">
+          <Tab value="marketing" label="Marketing">
             <Marketing/>
           </Tab>
         </Tabs>
