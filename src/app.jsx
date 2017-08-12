@@ -1,8 +1,8 @@
 
- import React from 'react'
- import ReactDOM from 'react-dom'
- import {Provider} from 'react-redux'
- import {hashHistory} from 'react-router'
+import React from 'react'
+import ReactDOM from 'react-dom'
+import {Provider} from 'react-redux'
+import {hashHistory} from 'react-router'
 
 
 // load jquery and foundation in the window scope
