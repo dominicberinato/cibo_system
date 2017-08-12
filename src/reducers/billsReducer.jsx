@@ -11,11 +11,21 @@ export var billsReducer  = (state = [], action) => {
       return state.map((bill) => {
         if(bill.id === action.id) {
           //if correct bill we can update it
+	  //check if bill has items 
+	 if(bill.items) {
+          const existingItems = bill.items
+	  const newItems = action.updates.items.concat(existingItems)
           return {
             ...bill,
-            ...action.updates
+            items: newItems
           }
-        }
+        } 
+	else {
+	return {
+	  ...bill,
+	  ...action.updates
+	}
+      	}}
       });
       case 'REMOVE_ITEM':
         //map over all our state items
