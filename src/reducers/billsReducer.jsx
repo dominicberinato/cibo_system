@@ -15,8 +15,6 @@ export var billsReducer  = (state = [], action) => {
             ...bill,
             ...action.updates
           }
-        } else {
-          return bill;
         }
       });
       case 'REMOVE_ITEM':
@@ -28,8 +26,6 @@ export var billsReducer  = (state = [], action) => {
               ...bill,
               ...action.updates
             }
-          } else {
-            return bill;
           }
         });
     case 'DELETE_BILL':
