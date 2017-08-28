@@ -34,7 +34,7 @@ export var startAddBatch =  (batchDetails) => {
     batchDetails.ingredients.map((ing) => {
       return batchFanOut[`/batch-ingredients/${batchKey}/${ing.name}`] = {id: ing.name, amount: ing.amount}
     })
-    batches.map((bat) => {
+    batchDetails.batches.map((bat) => {
       return batchFanOut[`batch-batches/${batchKey}/${bat.name}`] = {id: bat.name, amount: bat.amount}
     })
 
