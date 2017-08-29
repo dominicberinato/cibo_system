@@ -25,8 +25,4 @@ describe('<Billing/>', () => {
     expect(wrapper.find(ActiveTables).length).toEqual(1, 'ActiveTables not rendered');
   });
 
-  it('should allow users to end shift by closing tables for the day',  () => {
-    expect(89).toEqual(9);
-  });
-
-})
+  })
